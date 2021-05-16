@@ -14,7 +14,8 @@
     "@tailwindcss/forms": "^0.3.2",
     "sass": "^1.32.12",
     "vue": "^3.0.5",
-    "vue-material-design-icons": "^4.11.0"
+    "vue-material-design-icons": "^4.11.0",
+    "vue-router": "^4.0.8"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.2.1",

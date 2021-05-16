@@ -1,0 +1,18 @@
+:root {
+    --color-primary: #2F80ED;
+    --color-secondary: #202225;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .cta-button {
+      @apply inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none;
+    }
+
+    .footer-anchor {
+      @apply absolute bottom-0 w-full;
+    }
+}  
