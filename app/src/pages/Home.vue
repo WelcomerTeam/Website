@@ -130,24 +130,6 @@
   .hero-accompany {
     @apply relative w-full h-64 sm:h-72 md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 lg:h-full;
   }
-
-  .hero-preview {
-    @apply mx-auto max-w-7xl px-12 md:px-24 py-8;
-  }
-  .hero-preview-item {
-    @apply grid grid-cols-1 sm:grid-cols-2 my-4 space-y-4;
-  }
-
-  .hero-features {
-    @apply mx-auto text-white max-w-7xl px-12 md:px-24 py-8;
-  }
-  .hero-features-item {
-    @apply mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
-  }
-
-  .section-title {
-    @apply font-bold flex text-3xl text-center justify-center;
-  }
 }
 </style>
 

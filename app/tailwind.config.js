@@ -24,6 +24,11 @@ module.exports = {
           DEFAULT: '#D96BCE',
           dark: '#AD55A4',
         },
+        'patreon': {
+          light: '#F66870',
+          DEFAULT: '#FF424D',
+          dark: '#E82E39',
+        },
         'dace': '#72DACE',
       },
     },

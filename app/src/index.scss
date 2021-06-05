@@ -8,11 +8,32 @@
 @tailwind utilities;
 
 @layer components {
-    .cta-button {
-      @apply inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none;
-    }
+  .cta-button {
+    @apply inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none;
+  }
 
-    .footer-anchor {
-      @apply absolute bottom-0 w-full;
-    }
+  .footer-anchor {
+    @apply absolute bottom-0 w-full;
+  }
+
+  .hero-preview {
+    @apply mx-auto max-w-7xl px-12 md:px-24 py-8;
+  }
+  .hero-preview-item {
+    @apply grid grid-cols-1 sm:grid-cols-2 my-4 space-y-4;
+  }
+
+  .hero-features {
+    @apply mx-auto text-white max-w-7xl px-12 md:px-24 py-8;
+  }
+  .hero-features-item {
+    @apply mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+  }
+
+  .section-title {
+    @apply font-bold flex text-3xl text-center justify-center;
+  }
+  .section-subtitle {
+    @apply flex text-center justify-center;
+  }
 }  

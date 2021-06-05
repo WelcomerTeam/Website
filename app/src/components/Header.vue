@@ -26,12 +26,14 @@
             </div>
 
             <div class="inline-flex text-base">
-              <button
-                type="button"
-                class="cta-button bg-donate hover:bg-donate-dark"
-              >
-                Premium
-              </button>
+              <router-link to="/premium">
+                <button
+                  type="button"
+                  class="cta-button bg-donate hover:bg-donate-dark"
+                >
+                  Premium
+                </button>
+              </router-link>
             </div>
 
             <div class="my-auto inline-flex space-x-6">
