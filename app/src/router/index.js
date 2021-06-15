@@ -21,6 +21,23 @@ const routes = [
     }
 ];
 
+// const routes = [
+//     {
+//         path: "/",
+//         name: "Home",
+//         component: () => import("../pages/Home.vue"),
+//     },
+//     {
+//         path: "/premium",
+//         name: "Premium",
+//         component: () => import("../pages/Premium.vue"),
+//     },
+//     {
+//         path: "/:catchAll(.*)",
+//         component: () => import("../pages/NotFound.vue"),
+//     }
+// ];
+
 const router = createRouter({
     history: createWebHistory(),
     routes,

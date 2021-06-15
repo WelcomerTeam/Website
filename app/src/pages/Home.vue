@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="hero-accompany">
-        <div class="flex absolute inset-0 w-full h-full object-cover">
+        <div class="absolute inset-0 flex object-cover w-full h-full">
           <svg class="mx-auto my-auto rounded-lg">
             <rect x="0" y="0" width="1000" height="1000" fill="#2F80ED"></rect>
             <text x="120" y="80" fill="#ffffff" font-size="10">Embed here</text>
@@ -47,24 +47,24 @@
             class="hero-preview-item"
           >
             <div class="my-auto text-center sm:text-left">
-              <span class="font-bold text-2xl">
+              <span class="text-2xl font-bold">
                 {{ item.name }}
               </span>
               <p class="text-lg">{{ item.description }}</p>
               <a
                 :href="item.href"
                 v-if="item.href"
-                class="cta-button bg-primary hover:bg-primary-dark mt-4"
+                class="mt-4 cta-button bg-primary hover:bg-primary-dark"
               >
                 {{ item.label }}
               </a>
             </div>
             <div class="my-auto">
-              <img :src="item.src" class="mt-4 px-4 sm:mt-0" />
+              <img :src="item.src" class="px-4 mt-4 sm:mt-0" />
             </div>
           </div>
-          <div class="text-center mt-12">
-            <p class="font-bold text-2xl mb-2">Ready to get started?</p>
+          <div class="mt-12 text-center">
+            <p class="mb-2 text-2xl font-bold">Ready to get started?</p>
             <a href="#" class="cta-button bg-primary hover:bg-primary-dark">
               Invite Welcomer
             </a>
@@ -81,9 +81,9 @@
             <div
               v-for="item in features"
               :key="item.name"
-              class="text-center sm:text-left my-3 mx-0 sm:mx-2"
+              class="mx-0 my-3 text-center sm:text-left sm:mx-2"
             >
-              <span class="font-bold text-2xl">{{ item.name }}</span>
+              <span class="text-2xl font-bold">{{ item.name }}</span>
               <p class="mt-1">{{ item.description }}</p>
             </div>
           </div>
@@ -98,29 +98,29 @@
 <style lang="scss" scoped>
 @layer components {
   .hero {
-    @apply mx-auto max-w-7xl w-full py-16 text-center lg:py-48 lg:text-left;
+    @apply lg:py-48 lg:text-left max-w-7xl mx-auto py-16 text-center w-full;
   }
   .hero-title {
-    @apply text-3xl pb-1 font-extrabold bg-clip-text text-transparent bg-gradient-to-br from-primary to-dace sm:text-5xl md:text-6xl lg:text-6xl xl:text-6xl;
+    @apply bg-clip-text bg-gradient-to-br font-extrabold from-primary lg:text-6xl md:text-6xl pb-1 sm:text-5xl text-3xl text-transparent to-dace xl:text-6xl;
   }
   .hero-subtitle {
-    @apply mt-3 max-w-md mx-auto text-lg text-white sm:text-xl md:mt-5 md:max-w-3xl;
+    @apply max-w-md md:max-w-3xl md:mt-5 mt-3 mx-auto sm:text-xl text-lg text-white;
   }
 
   .hero-buttons {
-    @apply mt-5 sm:flex sm:justify-center sm:space-x-6 lg:justify-start;
+    @apply lg:justify-start mt-5 sm:flex sm:justify-center sm:space-x-6;
   }
   .hero-primary {
-    @apply rounded-md shadow my-auto;
+    @apply my-auto rounded-md shadow;
   }
   .hero-primary > a {
-    @apply w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-primary-dark md:py-4 md:text-lg md:px-10;
+    @apply bg-primary border border-transparent flex font-medium hover:bg-primary-dark items-center justify-center md:px-10 md:py-4 md:text-lg px-8 py-3 rounded-md text-base text-white w-full;
   }
   .hero-secondary {
     @apply my-auto py-4;
   }
   .hero-secondary > a {
-    @apply text-white underline text-lg hover:text-gray-200;
+    @apply hover:text-gray-200 text-lg text-white underline;
   }
 
   .hero-copytext {
@@ -128,7 +128,7 @@
   }
 
   .hero-accompany {
-    @apply relative w-full h-64 sm:h-72 md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 lg:h-full;
+    @apply h-64 lg:absolute lg:h-full lg:inset-y-0 lg:right-0 lg:w-1/2 md:h-96 relative sm:h-72 w-full;
   }
 }
 </style>

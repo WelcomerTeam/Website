@@ -4,11 +4,9 @@
 
 <script>
 export default {
-  components: {
-  },
+  components: {},
   setup() {
-    return {
-    };
+    return {};
   },
 };
 </script>
