@@ -3,26 +3,28 @@
     <Popover class="relative shadow bg-secondary-dark">
       <div class="px-4 mx-auto max-w-10xl sm:px-6">
         <div class="navbar-container">
-          <div class="flex justify-start">
-            <router-link to="/">
-              <span class="sr-only">Welcomer</span>
-              <img class="w-auto h-8" src="/src/assets/logo.svg" alt="" />
-            </router-link>
-          </div>
+          <router-link to="/">
+            <div class="flex justify-start">
+              <img class="w-auto h-8" src="/assets/logo.svg" alt="" />
+              <span class="my-auto ml-2 text-xl font-bold text-white">Welcomer</span>
+            </div>
+          </router-link>
           <div class="-my-2 -mr-2 md:hidden">
             <PopoverButton class="navbar-open-menu">
               <span class="sr-only">Open menu</span>
               <MenuIcon class="w-6 h-6" aria-hidden="true" />
             </PopoverButton>
           </div>
-          <PopoverGroup as="nav" class="hidden space-x-5 md:flex">
+          <PopoverGroup as="nav" class="hidden space-x-4 md:flex">
             <div class="inline-flex text-base">
-              <button
-                type="button"
-                class="cta-button bg-primary hover:bg-primary-dark"
-              >
-                Invite Welcomer
-              </button>
+              <router-link to="/invite">
+                <button
+                  type="button"
+                  class="cta-button bg-primary hover:bg-primary-dark"
+                >
+                  Invite
+                </button>
+              </router-link>
             </div>
 
             <div class="inline-flex text-base">
@@ -36,7 +38,7 @@
               </router-link>
             </div>
 
-            <div class="inline-flex my-auto space-x-6">
+            <div class="inline-flex my-auto space-x-4">
               <Popover class="relative" v-slot="{ open }">
                 <PopoverButton
                   :class="[
@@ -92,7 +94,7 @@
                         </router-link>
                         <a
                           class="text-white underline hover:text-gray-300"
-                          href="#"
+                          href="/features"
                           >View all features</a
                         >
                       </div>
@@ -162,7 +164,7 @@
             </div>
           </PopoverGroup>
           <div class="navbar-login-container">
-            <a href="#" class="navbar-login-button"> Login with Discord </a>
+            <a href="/login" class="navbar-login-button"> Login with Discord </a>
           </div>
         </div>
       </div>
@@ -182,7 +184,7 @@
                 <div>
                   <img
                     class="w-auto h-8"
-                    src="/src/assets/logo.svg"
+                    src="/assets/logo.svg"
                     alt="Workflow"
                   />
                 </div>
@@ -195,7 +197,7 @@
               </div>
               <div class="mt-6">
                 <a
-                  href="#"
+                  href="/login"
                   class="w-full cta-button bg-primary hover:bg-primary-dark"
                 >
                   Login with Discord
@@ -205,10 +207,13 @@
 
             <div class="px-4 py-4">
               <div class="grid grid-cols-2 gap-x-8">
-                <a href="#" class="cta-button bg-primary hover:bg-primary-dark">
+                <a href="/invite" class="cta-button bg-primary hover:bg-primary-dark">
                   Invite Welcomer
                 </a>
-                <router-link to="#" class="cta-button bg-donate hover:bg-donate-dark">
+                <router-link
+                  to="/premium"
+                  class="cta-button bg-donate hover:bg-donate-dark"
+                >
                   Premium
                 </router-link>
               </div>
@@ -297,45 +302,45 @@ import SvgIcon from "@jamescoyle/vue-icon";
 const navfeatures = [
   {
     name: "Welcome Images",
-    href: "#",
+    href: "/features#welcomer",
     description: "Welcome users to your servers with customizable images",
     icon: mdiTooltipImage,
   },
   {
     name: "Reaction Roles",
-    href: "#",
+    href: "/features#reactionroles",
     description: "Allow users to control what roles they receive",
     icon: mdiEmoticon,
   },
   {
     name: "Moderation",
-    href: "#",
+    href: "/features#moderation",
     description:
       "Easily moderate your guilds and have easy access to who has done what",
     icon: mdiGavel,
   },
   {
     name: "Logging",
-    href: "#",
+    href: "/features#logging",
     description:
       "Have easy access to all interactions with your guild both online and in guilds",
     icon: mdiArchive,
   },
   {
     name: "Temporary Channels",
-    href: "#",
+    href: "/features#tempchannels",
     description: "Allow users to make temporary voice channels in your server",
     icon: mdiMicrophoneSettings,
   },
   {
     name: "Guild Analytics",
-    href: "#",
+    href: "/features#analytics",
     description: "View information about your server such as user joins",
     icon: mdiChartTimelineVariantShimmer,
   },
   {
     name: "Borderwall",
-    href: "#",
+    href: "/features#borderwall",
     description:
       "Secure your server by making them manually verify their identity",
     icon: mdiCastle,
@@ -345,46 +350,46 @@ const navfeatures = [
 const navresources = [
   {
     name: "Status",
-    href: "#",
+    href: "/status",
     description: "View the current status of the bot",
     icon: mdiPulse,
   },
   {
     name: "Support Server",
-    href: "#",
+    href: "/support",
     description:
       "Join our support server for extra support, make new suggestions and more",
     icon: mdiLifebuoy,
   },
   {
     name: "FAQ",
-    href: "#",
+    href: "/faq",
     description: "Check out our FAQ, your question may already be answered",
     icon: mdiHelpRhombus,
   },
   {
     name: "Video Tutorials",
-    href: "#",
+    href: "/tutorials",
     description:
       "View some of our video tutorials to get a better idea of how to setup the bot",
     icon: mdiYoutube,
   },
   {
     name: "Welcome Image Backgrounds",
-    href: "#",
+    href: "/backgrounds",
     description:
       "View our list of image backgrounds you can use with welcome images",
     icon: mdiImageText,
   },
   {
     name: "Custom Embed Builder",
-    href: "#",
+    href: "/builder",
     description: "View our custom embed builder to see how embeds may look",
     icon: mdiCardText,
   },
   {
     name: "Text Formatting",
-    href: "#",
+    href: "/formatting",
     description:
       "View how to format your text with information about the user and more",
     icon: mdiFormatPaint,

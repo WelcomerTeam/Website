@@ -19,15 +19,15 @@
 const footer = [
   {
     name: "Terms",
-    href: "#",
+    href: "/terms",
   },
   {
     name: "Privacy",
-    href: "#",
+    href: "/privacy",
   },
   {
     name: "Status",
-    href: "#",
+    href: "/status",
   },
 ];
 
@@ -35,7 +35,7 @@ export default {
   setup() {
     return {
       footer,
-    }
-  }
-}
+    };
+  },
+};
 </script>

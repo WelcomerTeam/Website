@@ -13,10 +13,10 @@
               <h2 class="text-base font-semibold tracking-wide text-primary">
                 Welcomer Pro
               </h2>
-              <p class="mt-2 text-2xl font-bold text-white sm:text-3xl">
+              <p class="text-3xl font-extrabold text-left text-white section-title">
                 Everything you need to boost your guild's engagement
               </p>
-              <dl class="mt-12 space-y-6">
+              <div class="mt-12 space-y-6">
                 <div
                   v-for="feature in features"
                   :key="feature.name"
@@ -41,14 +41,7 @@
                     {{ feature.description }}
                   </dd>
                 </div>
-                <span class="flex mt-10 text-sm text-gray-500"
-                  >*You will get 30,50,100 thousand actions for each guild
-                  depending on the respective Welcomer Pro plan. 1x = 30,000 per
-                  guild (30,000). 3x = 50,000 per guild (150,000), 5x = 100,000
-                  per guild (500,000). You cannot stack increased automation
-                  actions on one guild.</span
-                >
-              </dl>
+              </div>
             </div>
           </div>
           <div
@@ -69,7 +62,7 @@
                 </p>
               </div>
               <ul
-                class="grid gap-px overflow-hidden rounded gap-y-1 sm:grid-cols-2"
+                class="grid gap-0.5 overflow-hidden rounded sm:grid-cols-2"
               >
                 <li
                   v-for="item in checklist"
@@ -100,168 +93,156 @@
       <div id="plans">
         <div class="bg-white">
           <div class="hero-preview">
-            <div>
-              <div class="px-4 pt-8 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <div class="sm:flex sm:flex-col sm:align-center">
-                  <h1
-                    class="text-5xl font-extrabold text-gray-900 sm:text-center"
-                  >
-                    Choose the plan you want
-                  </h1>
-                  <p class="mt-5 text-xl text-gray-500 sm:text-center">
-                    Get started with Welcomer Pro with no recurring statements.
-                    Own multiple guilds? Save with a multi-guild membership
-                    compared to buying seperately.
-                  </p>
-                  <div
-                    class="
-                      relative
-                      mt-6
-                      bg-gray-100
-                      rounded-lg
-                      p-0.5
-                      flex flex-wrap
-                      self-center
-                      sm:mt-8
-                    "
-                  >
-                    <button
-                      type="button"
-                      @click="selectDuration(durations[0])"
-                      :class="[
-                        durationSelected.name === durations[0].name
-                          ? 'bg-white border-gray-200 text-gray-900 shadow-sm'
-                          : 'border-transparent text-gray-700',
-                        'relative border rounded-md py-2 w-full text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-donate focus:z-10 lg:w-auto lg:px-8',
-                      ]"
-                    >
-                      Monthly billing
-                    </button>
-                    <button
-                      type="button"
-                      @click="selectDuration(durations[1])"
-                      :class="[
-                        'ml-0.5',
-                        durationSelected.name === durations[1].name
-                          ? 'bg-white border-gray-200 text-gray-900 shadow-sm'
-                          : 'border-transparent text-gray-700',
-                        'relative border rounded-md py-2 w-full text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-donate focus:z-10 lg:w-auto lg:px-8',
-                      ]"
-                    >
-                      Yearly billing
-                      <span
-                        class="
-                          inline-flex
-                          items-center
-                          ml-2
-                          px-2.5
-                          py-0.5
-                          rounded-full
-                          text-xs
-                          font-medium
-                          bg-donate
-                          text-white
-                        "
-                      >
-                        20% off
-                      </span>
-                    </button>
-                    <button
-                      type="button"
-                      @click="selectDuration(durations[2])"
-                      :class="[
-                        'ml-0.5',
-                        durationSelected.name === durations[2].name
-                          ? 'bg-white border-gray-200 text-gray-900 shadow-sm'
-                          : 'border-transparent text-gray-700',
-                        'relative border rounded-md py-2 w-full text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-patreon focus:z-10 lg:w-auto lg:px-8',
-                      ]"
-                    >
-                      Patreon
-                      <span
-                        class="
-                          inline-flex
-                          items-center
-                          ml-2
-                          px-2.5
-                          py-0.5
-                          rounded-full
-                          text-xs
-                          font-medium
-                          bg-patreon
-                          text-white
-                        "
-                      >
-                        Recurring
-                      </span>
-                    </button>
-                  </div>
-                </div>
-                <div
-                  class="grid-cols-1 mt-12 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:gap-6 lg:max-w-none lg:mx-0 lg:grid-cols-3"
+            <div class="px-4 pt-8 mx-automax-w-7xl sm:px-6 lg:px-8">
+              <div class="sm:flex sm:flex-col sm:align-center">
+                <h1
+                  class="text-5xl font-extrabold text-gray-900 sm:text-center"
                 >
-                  <div
-                    v-for="plan in plans"
-                    :key="plan.name"
-                    class="border border-gray-200 divide-y divide-gray-200 rounded-lg shadow-sm "
+                  Choose the plan you want
+                </h1>
+                <p class="mt-3 text-xl text-gray-500 md:mx-16 section-subtitle">
+                  Get started with Welcomer Pro with no recurring statements.
+                  Own multiple guilds? Save with a multi-guild membership
+                  compared to buying seperately.
+                </p>
+                <div
+                  class="
+                    relative
+                    mt-6
+                    bg-gray-100
+                    rounded-lg
+                    p-0.5
+                    flex flex-wrap
+                    self-center
+                    sm:mt-8
+                  "
+                >
+                  <button
+                    type="button"
+                    @click="selectDuration(durations[0])"
+                    :class="[
+                      durationSelected.name === durations[0].name
+                        ? 'bg-white border-gray-200 text-gray-900 shadow-sm'
+                        : 'border-transparent text-gray-700',
+                      'relative border rounded-md py-2 w-full text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-donate focus:z-10 lg:w-auto lg:px-8',
+                    ]"
                   >
-                    <div class="p-6">
-                      <h2 class="text-lg font-medium leading-6 text-gray-900">
-                        {{ plan.name }}
-                      </h2>
-                      <p class="mt-4 text-sm text-gray-500">
-                        {{ plan.footer }}
-                      </p>
-                      <p class="mt-8">
-                        <span class="text-4xl font-extrabold text-gray-900"
-                          >{{ currency
-                          }}{{
-                            (durationSelected.isPatreon
-                              ? plan.patreonPrice
-                              : plan.price *
-                                durationSelected.months *
-                                durationSelected.multiplier
-                            ).toFixed(2)
-                          }}</span
-                        >
-                        {{ " " }}
-                        <span
-                          v-if="durationSelected.isPatreon"
-                          class="text-base font-medium text-gray-500"
-                          >/mo</span
-                        >
-                        <span v-else class="text-base font-medium text-gray-500"
-                          >({{ currency
-                          }}{{
-                            (plan.price * durationSelected.multiplier).toFixed(
-                              2
-                            )
-                          }}/mo)</span
-                        >
-                      </p>
-                      <a
+                    Monthly billing
+                  </button>
+                  <button
+                    type="button"
+                    @click="selectDuration(durations[1])"
+                    :class="[
+                      'ml-0.5',
+                      durationSelected.name === durations[1].name
+                        ? 'bg-white border-gray-200 text-gray-900 shadow-sm'
+                        : 'border-transparent text-gray-700',
+                      'relative border rounded-md py-2 w-full text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-donate focus:z-10 lg:w-auto lg:px-8',
+                    ]"
+                  >
+                    Yearly billing
+                    <span
+                      class="
+                        inline-flex
+                        items-center
+                        ml-2
+                        px-2.5
+                        py-0.5
+                        rounded-full
+                        text-xs
+                        font-medium
+                        bg-donate
+                        text-white
+                      "
+                    >
+                      20% off
+                    </span>
+                  </button>
+                  <button
+                    type="button"
+                    @click="selectDuration(durations[2])"
+                    :class="[
+                      'ml-0.5',
+                      durationSelected.name === durations[2].name
+                        ? 'bg-white border-gray-200 text-gray-900 shadow-sm'
+                        : 'border-transparent text-gray-700',
+                      'relative border rounded-md py-2 w-full text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-patreon focus:z-10 lg:w-auto lg:px-8',
+                    ]"
+                  >
+                    Patreon
+                    <span
+                      class="
+                        inline-flex
+                        items-center
+                        ml-2
+                        px-2.5
+                        py-0.5
+                        rounded-full
+                        text-xs
+                        font-medium
+                        bg-patreon
+                        text-white
+                      "
+                    >
+                      Recurring
+                    </span>
+                  </button>
+                </div>
+              </div>
+              <div
+                class="grid-cols-1 mt-8 space-y-4 sm:space-y-0 sm:grid sm:gap-6 lg:max-w-none lg:mx-0 lg:grid-cols-3"
+              >
+                <div
+                  v-for="plan in plans"
+                  :key="plan.name"
+                  class="border border-gray-200 divide-y divide-gray-200 rounded-lg shadow-lg"
+                >
+                  <div class="p-6">
+                    <h2 class="text-lg font-medium leading-6 text-gray-900">
+                      {{ plan.name }}
+                    </h2>
+                    <p class="mt-4 text-sm text-gray-500">
+                      {{ plan.footer }}
+                    </p>
+                    <p class="mt-8">
+                      <span class="text-4xl font-extrabold text-gray-900"
+                        >{{ currency
+                        }}{{
+                          (durationSelected.isPatreon
+                            ? plan.patreonPrice
+                            : plan.price *
+                              durationSelected.months *
+                              durationSelected.multiplier
+                          ).toFixed(2)
+                        }}</span
+                      >
+                      {{ " " }}
+                      <span
                         v-if="durationSelected.isPatreon"
-                        @click.prevent="selectPlan(plan)"
-                        class="block w-full py-2 mt-8 text-sm font-semibold text-center text-white border border-transparent rounded-md cursor-pointer bg-patreon hover:bg-patreon"
-                        >Become a Patreon</a
+                        class="text-base font-medium text-gray-500"
+                        >/mo</span
                       >
-                      <a
-                        v-else
-                        @click.prevent="selectPlan(plan)"
-                        class="block w-full py-2 mt-8 text-sm font-semibold text-center text-white border border-transparent rounded-md cursor-pointer bg-donate hover:bg-donate"
-                        >Get {{ plan.name }}</a
+                      <span v-else class="text-base font-medium text-gray-500"
+                        >({{ currency
+                        }}{{
+                          (plan.price * durationSelected.multiplier).toFixed(
+                            2
+                          )
+                        }}/mo)</span
                       >
-                    </div>
-                    <!-- <div class="px-6 py-6">
-                      <h3 class="text-xs font-medium tracking-wide text-gray-900 uppercase">What's included</h3>
-                      <ul class="mt-6">
-                        <li v-for="feature in tier.features" :key="feature" class="flex space-x-3">
-                        <li class="flex space-x-3">
-                          <CheckIcon class="flex-shrink-0 w-5 h-5 text-green-500" aria-hidden="true" />
-                          <span class="text-sm text-gray-500">{{ plan.footer }}</span>
-                        </li>
-                      </ul>
-                    </div> -->
+                    </p>
+                    <a
+                      v-if="durationSelected.isPatreon"
+                      @click.prevent="selectPlan(plan)"
+                      class="block w-full py-2 mt-8 text-sm font-semibold text-center text-white border border-transparent rounded-md cursor-pointer bg-patreon hover:bg-patreon"
+                      >Become a Patreon</a
+                    >
+                    <a
+                      v-else
+                      @click.prevent="selectPlan(plan)"
+                      class="block w-full py-2 mt-8 text-sm font-semibold text-center text-white border border-transparent rounded-md cursor-pointer bg-donate hover:bg-donate"
+                      >Get {{ plan.name }}</a
+                    >
                   </div>
                 </div>
               </div>
@@ -273,75 +254,79 @@
       <div id="custombackgrounds">
         <div class="bg-white">
           <div class="hero-preview">
-            <span class="text-4xl font-extrabold section-title"
-              >Don't want to pay monthly?</span
-            >
-            <span class="mt-3 text-lg text-gray-500 section-subtitle"
-              >Don't want to do monthly commitments for features you may not
-              use? You can buy just custom backgrounds for a guild of your
-              choosing.</span
-            >
+            <div class="px-4 pt-8 mx-automax-w-7xl sm:px-6 lg:px-8">
+              <span class="section-hero"
+                >Just want backgrounds?</span
+              >
+              <span class="mt-3 text-lg text-gray-500 md:mx-16 section-subtitle"
+                >Don't want to do monthly commitments for features you may not
+                use? You can buy just custom backgrounds for a guild of your
+                choosing.</span
+              >
 
-            <div class="pb-16 mt-8 bg-white sm:mt-12 sm:pb-20 lg:pb-28">
-              <div class="relative">
-                <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                  <div
-                    class="max-w-lg mx-auto overflow-hidden border border-gray-300 rounded-lg shadow-lg lg:max-w-none lg:flex"
-                  >
-                    <div class="flex-1 px-6 py-8 bg-white lg:p-12">
-                      <h3
-                        class="text-2xl font-extrabold text-gray-900 sm:text-3xl"
-                      >
-                        Custom Welcomer Backgrounds
-                      </h3>
-                      <p class="mt-6 text-base text-gray-500">
-                        Get Welcomer Backgrounds for a server of your choosing
-                        without having to pay for monthly Welcomer Pro, forever.
-                        Infact, any guild that you add Welcomer Pro to will get
-                        this automatically even after your membership!
-                      </p>
-                      <div class="mt-8">
-                        <div class="flex items-center">
-                          <div class="flex-1 border-t-2 border-gray-200" />
-                        </div>
-                        <ul class="mt-8 space-y-5 lg:space-y-0">
-                          <li class="flex items-start lg:col-span-1">
-                            <div class="flex-shrink-0">
-                              <CheckIcon
-                                class="w-5 h-5 text-donate"
-                                aria-hidden="true"
-                              />
-                            </div>
-                            <p class="ml-3 text-sm text-gray-700">
-                              Custom Welcomer Backgrounds
-                            </p>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
+              <div class="pb-16 mt-8 bg-white sm:mt-12 sm:pb-20 lg:pb-28">
+                <div class="relative">
+                  <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div
-                      class="px-6 py-8 text-center bg-secondary lg:flex-shrink-0 lg:flex lg:flex-col lg:justify-center lg:p-12"
+                      class="max-w-lg mx-auto overflow-hidden border border-gray-300 rounded-lg shadow-lg lg:max-w-none lg:flex"
                     >
-                      <p class="text-lg font-medium leading-6 text-gray-200">
-                        Pay once, own it forever
-                      </p>
-                      <div
-                        class="flex items-center justify-center mt-4 text-5xl font-extrabold text-white "
-                      >
-                        <span> {{ currency }}{{ customBackgroundPrice }} </span>
-                      </div>
-                      <div class="mt-6">
-                        <div class="rounded-md shadow">
-                          <a
-                            @click.prevent="handleCustomBackgroundClick"
-                            class="flex items-center justify-center px-5 py-3 text-base font-medium text-white border border-transparent rounded-md cursor-pointer bg-secondary-light hover:bg-secondary-dark"
-                          >
-                            Get it now
-                          </a>
+                      <div class="flex-1 px-6 py-8 bg-white lg:p-12">
+                        <h3
+                          class="text-2xl font-extrabold text-gray-900 sm:text-3xl"
+                        >
+                          Custom Welcomer Backgrounds
+                        </h3>
+                        <p class="mt-6 text-base text-gray-500">
+                          Get Custom Backgrounds forever without paying for Welcomer Pro.
+                          Infact, any guild that you add Welcomer Pro to will get
+                          this automatically even after your membership!
+                        </p>
+                        <p>
+                          <b>This does not include animated backgrounds.</b>
+                        </p>
+                        <div class="mt-8">
+                          <div class="flex items-center">
+                            <div class="flex-1 border-t-2 border-gray-200" />
+                          </div>
+                          <ul class="mt-8 space-y-5 lg:space-y-0">
+                            <li class="flex items-start lg:col-span-1">
+                              <div class="flex-shrink-0">
+                                <CheckIcon
+                                  class="w-5 h-5 text-donate"
+                                  aria-hidden="true"
+                                />
+                              </div>
+                              <p class="ml-3 text-sm text-gray-700">
+                                Custom Welcomer Backgrounds
+                              </p>
+                            </li>
+                          </ul>
                         </div>
                       </div>
-                      <div class="mt-4 text-sm text-gray-400">
-                        for one guild, forever.
+                      <div
+                        class="px-6 py-8 text-center shadow-lg bg-secondary lg:flex-shrink-0 lg:flex lg:flex-col lg:justify-center lg:p-12"
+                      >
+                        <p class="text-lg font-medium leading-6 text-gray-200">
+                          Pay once, own it forever
+                        </p>
+                        <div
+                          class="flex items-center justify-center mt-4 text-5xl font-extrabold text-white "
+                        >
+                          <span> {{ currency }}{{ customBackgroundPrice }} </span>
+                        </div>
+                        <div class="mt-6">
+                          <div class="rounded-md shadow">
+                            <a
+                              @click.prevent="handleCustomBackgroundClick"
+                              class="flex items-center justify-center px-5 py-3 text-base font-medium text-white border border-transparent rounded-md cursor-pointer bg-secondary-light hover:bg-secondary-dark"
+                            >
+                              Get it now
+                            </a>
+                          </div>
+                        </div>
+                        <div class="mt-4 text-sm text-gray-400">
+                          for one guild, forever.
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -355,22 +340,22 @@
       <div>
         <div class="bg-donate">
           <div class="hero-features">
-            <span class="section-title"
+            <!-- <span class="section-title"
               >Finally, a colour that isn't pink!</span
             >
             <span class="section-subtitle"
               >We have been able to keep the bot alive and running for the last
               4 years thanks to our wonderful donators.</span
-            >
+            > -->
 
-            <div class="mx-4 mt-16 lg:grid lg:grid-cols-3 lg:gap-8">
-              <div>
+            <div class="mx-4 my-12 lg:grid lg:grid-cols-3 lg:gap-8">
+              <div class="mt-16">
                 <h2 class="text-3xl font-bold text-white">
                   Frequently asked questions
                 </h2>
                 <p class="mt-4 text-lg text-white">
                   Can't find what you are looking for? Reach out to us on our
-                  <a class="text-white underline" href="#">support server</a>.
+                  <a class="text-white underline" href="/support">support server</a>.
                 </p>
               </div>
               <div class="mt-12 lg:mt-0 lg:col-span-2">
@@ -385,10 +370,10 @@
                       <DisclosureButton
                         class="flex items-start justify-between w-full text-left text-donate-dark"
                       >
-                        <span class="font-medium text-white">
+                        <span :class="[open ? 'font-bold' : '', 'text-white']">
                           {{ faq.question }}
                         </span>
-                        <span class="flex items-center ml-6 h-7">
+                        <span class="flex items-center h-6 ml-6">
                           <ChevronDownIcon
                             :class="[
                               open ? '-rotate-180' : 'rotate-0',
@@ -435,33 +420,40 @@ import {
 import { CheckIcon } from "@heroicons/vue/solid";
 import { ChevronDownIcon } from "@heroicons/vue/outline";
 
-import { mdiHelpRhombus, mdiPatreon } from "@mdi/js";
+import {
+  mdiHelpRhombus,
+  mdiPatreon,
+  mdiImageMultiple,
+  mdiAccountStar,
+  mdiProgressClock,
+  mdiFileTree,
+} from "@mdi/js";
 import SvgIcon from "@jamescoyle/vue-icon";
 
 const features = [
   {
     name: "Animated Welcomer Backgrounds",
-    icon: mdiHelpRhombus,
+    icon: mdiImageMultiple,
     description:
       "Along with Custom Welcomer Backgrounds, Welcomer Pro allows you to also have animated backgrounds. Just don't use massive images, mobile users hate them.",
   },
   {
     name: "Invite Rewards and Roles",
-    icon: mdiHelpRhombus,
+    icon: mdiAccountStar,
     description:
       "Reward users for inviting users to your guild and give users specific roles based on the invite that they use.",
   },
   {
     name: "Time Roles",
-    icon: mdiHelpRhombus,
+    icon: mdiProgressClock,
     description:
       "Sometimes you don't want to give users their roles immediately, when using Time Roles you can give users roles automatically after a specific ammount of time such as 10 minutes after they join.",
   },
   {
     name: "Increased Automation Actions",
-    icon: mdiHelpRhombus,
+    icon: mdiFileTree,
     description:
-      "Running out of Automation actions on your guild? You can get up to 100,000* automation actions for your guilds each month for whatever you want.",
+      "Running out of Automation actions on your guild? You can get up to 100,000 automation actions for your guilds each month for anything you could want.",
   },
 ];
 
@@ -629,6 +621,10 @@ export default {
 
       mdiHelpRhombus,
       mdiPatreon,
+      mdiImageMultiple,
+      mdiAccountStar,
+      mdiProgressClock,
+      mdiFileTree,
     };
   },
   methods: {

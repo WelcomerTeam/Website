@@ -1,6 +1,42 @@
 <template>
   <div class="relative min-h-screen bg-secondary">
     <Header />
+<!-- 
+    <div class="p-4 pb-12 text-left text-white from-red-500 to-transparent bg-gradient-to-b section-subtitle">
+      <div class="text-center">
+        <p class="mb-2"><b>22:26 GMT</b> - There is currently an increased number of outages right now affecting most guilds.</p>
+        <a href="/status" class="bg-opacity-50 hover:bg-opacity-70 bg-secondary-dark cta-button">
+          View Status
+        </a>
+      </div>
+    </div>
+
+    <div class="p-4 pb-12 text-left text-white from-donate to-transparent bg-gradient-to-b section-subtitle">
+      <div class="text-center">
+        <p class="mb-2">Get <del>15%</del> <b>25%</b> off all Welcomer Pro plans until <b>June 23rd</b>!</p>
+        <a href="/premium" class="bg-opacity-50 hover:bg-opacity-70 bg-secondary-dark cta-button">
+          View Premium
+        </a>
+      </div>
+    </div>
+  
+    <div class="p-4 pb-12 text-left text-white from-primary to-transparent bg-gradient-to-b section-subtitle">
+      <div class="text-center">
+        <p class="mb-2">Got a minute? Fill out our feedback form to help improve Welcomer!</p>
+        <a href="https://google.com" class="bg-opacity-50 hover:bg-opacity-70 bg-secondary-dark cta-button">
+          Click Here
+        </a>
+      </div>
+    </div>
+
+    <div class="p-4 pb-12 text-left text-white from-yellow-300 to-transparent bg-gradient-to-b section-subtitle">
+      <div class="text-center">
+        <p class="mb-2">Welcomer has made over 10 million images so far this year. Thats one <b>every second</b> or <b>64,000 a day</b>!</p>
+        <a href="/status#analytics" class="bg-opacity-50 hover:bg-opacity-70 bg-secondary-dark cta-button">
+          Statistics
+        </a>
+      </div>
+    </div> -->
 
     <main class="lg:relative">
       <div class="hero">
@@ -12,7 +48,7 @@
           </p>
           <div class="hero-buttons">
             <div class="hero-primary">
-              <a href="#">Invite Welcomer</a>
+              <a href="/invite">Invite Welcomer</a>
             </div>
             <div class="hero-secondary">
               <a href="#features">Features</a>
@@ -40,7 +76,6 @@
     <main id="features">
       <div class="bg-white">
         <div class="hero-preview">
-          <span class="section-title">Tools for your server</span>
           <div
             v-for="item in previews"
             :key="item.name"
@@ -63,9 +98,9 @@
               <img :src="item.src" class="px-4 mt-4 sm:mt-0" />
             </div>
           </div>
-          <div class="mt-12 text-center">
-            <p class="mb-2 text-2xl font-bold">Ready to get started?</p>
-            <a href="#" class="cta-button bg-primary hover:bg-primary-dark">
+          <div class="mt-24 mb-6 text-center rounded-lg">
+            <p class="mb-4 section-title">Ready to get started?</p>
+            <a href="/invite" class="cta-button bg-primary hover:bg-primary-dark">
               Invite Welcomer
             </a>
           </div>
@@ -81,7 +116,7 @@
             <div
               v-for="item in features"
               :key="item.name"
-              class="mx-0 my-3 text-center sm:text-left sm:mx-2"
+              class="p-4 mx-0 my-3 text-center rounded-lg sm:text-left sm:mx-2 hover:bg-primary-light"
             >
               <span class="text-2xl font-bold">{{ item.name }}</span>
               <p class="mt-1">{{ item.description }}</p>
@@ -142,31 +177,31 @@ const previews = [
     name: "Get started in seconds",
     description:
       "In a few clicks you can greet new users to your server, without any previous knowledge.",
-    src: "/placeholder.png",
+    src: "/assets/placeholder.png",
   },
   {
     name: "Secure your server easily",
     description:
       "Ensure only real users are able to send messages by providing a challenge when they join with Borderwall enabled.",
-    src: "/placeholder.png",
+    src: "/assets/placeholder.png",
   },
   {
     name: "Increase user engagement",
     description:
       "Reward users with XP for conversing on your server and let them compete against each other with a public leaderboard.",
-    src: "/placeholder.png",
+    src: "/assets/placeholder.png",
   },
   {
     name: "Reduce moderation burden",
     description:
       "AutoMod scans your users messages for rules that you have defined to reduce the requirements for manual moderation.",
-    src: "/placeholder.png",
+    src: "/assets/placeholder.png",
   },
   {
     name: "Automate your server",
     description:
       "Automation allows you to create tasks that execute on events in a zero-code environment. Want to give roles to anybody who sends “pog”? You can do that without any knowledge of programming.",
-    src: "/placeholder.png",
+    src: "/assets/placeholder.png",
   },
 ];
 
