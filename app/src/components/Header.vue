@@ -1,12 +1,14 @@
 <template>
   <header>
-    <Popover class="relative shadow bg-secondary-dark">
-      <div class="px-4 mx-auto max-w-10xl sm:px-6">
+    <Popover class="relative w-full shadow bg-secondary-dark">
+      <div class="px-4 mx-auto max-w-7xl max-w-10xl sm:px-6">
         <div class="navbar-container">
           <router-link to="/">
             <div class="flex justify-start">
               <img class="w-auto h-8" src="/assets/logo.svg" alt="" />
-              <span class="my-auto ml-2 text-xl font-bold text-white">Welcomer</span>
+              <span class="my-auto ml-2 text-xl font-bold text-white"
+                >Welcomer</span
+              >
             </div>
           </router-link>
           <div class="-my-2 -mr-2 md:hidden">
@@ -15,29 +17,7 @@
               <MenuIcon class="w-6 h-6" aria-hidden="true" />
             </PopoverButton>
           </div>
-          <PopoverGroup as="nav" class="hidden space-x-4 md:flex">
-            <div class="inline-flex text-base">
-              <router-link to="/invite">
-                <button
-                  type="button"
-                  class="cta-button bg-primary hover:bg-primary-dark"
-                >
-                  Invite
-                </button>
-              </router-link>
-            </div>
-
-            <div class="inline-flex text-base">
-              <router-link to="/premium">
-                <button
-                  type="button"
-                  class="cta-button bg-donate hover:bg-donate-dark"
-                >
-                  Premium
-                </button>
-              </router-link>
-            </div>
-
+          <PopoverGroup as="nav" class="hidden space-x-6 md:flex">
             <div class="inline-flex my-auto space-x-4">
               <Popover class="relative" v-slot="{ open }">
                 <PopoverButton
@@ -92,10 +72,10 @@
                             </p>
                           </div>
                         </router-link>
-                        <a
+                        <router-link
                           class="text-white underline hover:text-gray-300"
-                          href="/features"
-                          >View all features</a
+                          to="/features"
+                          >View all features</router-link
                         >
                       </div>
                     </div>
@@ -162,9 +142,28 @@
                 </transition>
               </Popover>
             </div>
+
+            <div class="inline-flex text-base">
+              <router-link to="/premium">
+                <button
+                  type="button"
+                  class="cta-button bg-donate hover:bg-donate-dark"
+                >
+                  Premium
+                </button>
+              </router-link>
+            </div>
           </PopoverGroup>
-          <div class="navbar-login-container">
-            <a href="/login" class="navbar-login-button"> Login with Discord </a>
+          <div class="space-x-4 navbar-login-container">
+            <router-link to="/invite">
+              <button
+                type="button"
+                class="cta-button bg-primary hover:bg-primary-dark"
+              >
+                Invite Welcomer
+              </button>
+            </router-link>
+            <a href="/login" class="navbar-login-button">Log in</a>
           </div>
         </div>
       </div>
@@ -207,7 +206,10 @@
 
             <div class="px-4 py-4">
               <div class="grid grid-cols-2 gap-x-8">
-                <a href="/invite" class="cta-button bg-primary hover:bg-primary-dark">
+                <a
+                  href="/invite"
+                  class="cta-button bg-primary hover:bg-primary-dark"
+                >
                   Invite Welcomer
                 </a>
                 <router-link
@@ -270,6 +272,33 @@
     </Popover>
   </header>
 </template>
+
+<style lang="scss" scoped>
+@layer components {
+  /* Styling for mobile only popover */
+  .navbar-mobile-panel {
+    @apply absolute inset-x-0 md:hidden origin-top-right p-2 top-0 transform transition z-10;
+  }
+  .navbar-mobile-menu {
+    @apply bg-secondary-dark divide-secondary-light divide-y-2 ring-1 ring-black ring-opacity-5 rounded-lg shadow-lg;
+  }
+  .navbar-mobile-menu-item {
+    @apply flex hover:bg-secondary items-center m-1 p-2 rounded-md;
+  }
+  .navbar-mobile-menu-item-icon {
+    @apply flex-shrink-0 h-6 text-white w-6;
+  }
+  .navbar-mobile-menu-item-text {
+    @apply font-medium ml-3 text-base text-white;
+  }
+  .navbar-mobile-close {
+    @apply focus:outline-none focus:ring-2 focus:ring-inset focus:ring-secondary-dark hover:text-gray-400 inline-flex items-center justify-center p-2 rounded-md text-gray-300;
+  }
+  .navbar-mobile-text {
+    @apply font-medium hover:text-gray-200 text-base text-white;
+  }
+}
+</style>
 
 <script>
 import {

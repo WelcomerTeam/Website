@@ -1,7 +1,7 @@
 <template>
   <div class="relative min-h-screen bg-secondary">
     <Header />
-<!-- 
+    <!-- 
     <div class="p-4 pb-12 text-left text-white from-red-500 to-transparent bg-gradient-to-b section-subtitle">
       <div class="text-center">
         <p class="mb-2"><b>22:26 GMT</b> - There is currently an increased number of outages right now affecting most guilds.</p>
@@ -38,90 +38,124 @@
       </div>
     </div> -->
 
-    <main class="lg:relative">
-      <div class="hero">
-        <div class="px-4 lg:w-1/2 sm:px-8 xl:pr-16">
-          <h1 class="hero-title">The go-to bot for your discord server</h1>
-          <p class="hero-subtitle">
-            Providing tools to let you manage your server. Now with a fresh coat
-            of paint.
-          </p>
-          <div class="hero-buttons">
-            <div class="hero-primary">
-              <a href="/invite">Invite Welcomer</a>
-            </div>
-            <div class="hero-secondary">
-              <a href="#features">Features</a>
+    <main>
+      <div class="mx-auto my-4 lg:relative max-w-7xl">
+        <div class="hero">
+          <div class="px-4 my-auto lg:w-1/2 sm:px-8 xl:pr-16">
+            <h1 class="hero-title">The go-to bot for your discord server</h1>
+            <p class="hero-subtitle">
+              Providing tools to let you manage your server. Join the more than
+              <b>277,000</b> Discord guilds using Welcomer.
+            </p>
+            <div class="hero-buttons">
+              <div class="hero-primary">
+                <a href="/invite">Invite Welcomer</a>
+              </div>
+              <div class="hero-secondary">
+                <a href="#features">Features</a>
+              </div>
             </div>
           </div>
-          <div class="hero-copytext">
-            Trusted by
-            <b>263,500</b>
-            guilds with over
-            <b>16,000,000</b>
-            members
+        </div>
+        <div class="hero-accompany">
+          <div class="flex w-full h-full">
+            <DiscordEmbed
+              class="max-w-full m-auto"
+              :authorColour="0xffffff"
+              :isBot="true"
+              :embeds="[
+                {
+                  description:
+                    'Hey **ImRock**, you are the 256th member on **Welcomer Support Guild**',
+                  image: {
+                    url: '/assets/welcomerImage.svg',
+                  },
+                },
+              ]"
+            />
           </div>
         </div>
       </div>
-      <div class="hero-accompany">
-        <div class="absolute inset-0 flex object-cover w-full h-full">
-          <svg class="mx-auto my-auto rounded-lg">
-            <rect x="0" y="0" width="1000" height="1000" fill="#2F80ED"></rect>
-            <text x="120" y="80" fill="#ffffff" font-size="10">Embed here</text>
-          </svg>
-        </div>
-      </div>
-    </main>
 
-    <main id="features">
       <div class="bg-white">
         <div class="hero-preview">
+
+          <div class="pb-12 prose-xl text-center">
+            <h1 class="font-bold leading-8 tracking-tighter text-gray-900"
+              >Improve your user engagement</h1
+            >
+            <span class="mt-3 text-lg text-gray-500 md:mx-16 section-subtitle"
+              >See why others use Welcomer to power their discord guilds. With many features and an easy to use dashboard, you can make whatever changes whenever you want. </span
+            >
+          </div>
+
+
           <div
             v-for="item in previews"
             :key="item.name"
             class="hero-preview-item"
           >
             <div class="my-auto text-center sm:text-left">
-              <span class="text-2xl font-bold">
-                {{ item.name }}
-              </span>
-              <p class="text-lg">{{ item.description }}</p>
-              <a
-                :href="item.href"
+              <div>
+                <h2 class="mb-4 text-3xl font-semibold leading-tight">
+                  {{ item.name }}
+                </h2>
+                <span>{{ item.description }}</span>
+              </div>
+              <router-link
+                :to="item.href"
                 v-if="item.href"
                 class="mt-4 cta-button bg-primary hover:bg-primary-dark"
               >
                 {{ item.label }}
-              </a>
+              </router-link>
             </div>
             <div class="my-auto">
               <img :src="item.src" class="px-4 mt-4 sm:mt-0" />
             </div>
-          </div>
-          <div class="mt-24 mb-6 text-center rounded-lg">
-            <p class="mb-4 section-title">Ready to get started?</p>
-            <a href="/invite" class="cta-button bg-primary hover:bg-primary-dark">
-              Invite Welcomer
-            </a>
           </div>
         </div>
       </div>
 
       <div class="bg-primary">
         <div class="hero-features">
-          <span class="section-title"
-            >Welcomer helps assist moderation and improve user engagement</span
-          >
           <div class="hero-features-item">
             <div
               v-for="item in features"
               :key="item.name"
               class="p-4 mx-0 my-3 text-center rounded-lg sm:text-left sm:mx-2 hover:bg-primary-light"
             >
-              <span class="text-2xl font-bold">{{ item.name }}</span>
-              <p class="mt-1">{{ item.description }}</p>
+              <h2 class="text-xl font-medium text-white">{{ item.name }}</h2>
+              <p>{{ item.description }}</p>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div class="bg-secondary">
+        <div
+          class="px-4 py-12 mx-auto text-center max-w-prose sm:px-6 md:py-16 lg:px-7 lg:py-20"
+        >
+          <h2
+            class="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl"
+          >
+            <span class="block text-white">Ready to get started?</span>
+            <span class="block text-primary"
+              >Invite Welcomer today, it's free.</span
+            >
+          </h2>
+          <p class="mt-5 text-lg leading-6 text-gray-400">
+            Welcomer helps assist moderation and improve user engagement, get
+            started today.
+          </p>
+          <router-link to="/invite">
+            <button
+              type="button"
+              class="w-32 mt-4 cta-button bg-primary hover:bg-primary-dark"
+            >
+              Invite
+            </button>
+          </router-link>
         </div>
       </div>
     </main>
@@ -149,7 +183,7 @@
     @apply my-auto rounded-md shadow;
   }
   .hero-primary > a {
-    @apply bg-primary border border-transparent flex font-medium hover:bg-primary-dark items-center justify-center md:px-10 md:py-4 md:text-lg px-8 py-3 rounded-md text-base text-white w-full;
+    @apply bg-primary border border-transparent flex font-medium hover:bg-primary-dark items-center justify-center md:px-10 md:py-3 md:text-lg px-8 py-2 rounded-md text-base text-white w-full;
   }
   .hero-secondary {
     @apply my-auto py-4;
@@ -163,14 +197,14 @@
   }
 
   .hero-accompany {
-    @apply h-64 lg:absolute lg:h-full lg:inset-y-0 lg:right-0 lg:w-1/2 md:h-96 relative sm:h-72 w-full;
+    @apply h-full m-auto lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 relative w-full;
   }
 }
 </style>
-
 <script>
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
+import DiscordEmbed from "../components/DiscordEmbed.vue";
 
 const previews = [
   {
@@ -178,6 +212,8 @@ const previews = [
     description:
       "In a few clicks you can greet new users to your server, without any previous knowledge.",
     src: "/assets/placeholder.png",
+    href: "/",
+    label: "text",
   },
   {
     name: "Secure your server easily",
@@ -263,7 +299,7 @@ const features = [
       "Easily create polls for users that can last for a period of time or last forever",
   },
   {
-    name: "Starboad",
+    name: "Starboard",
     description:
       "Allows users to react to a message with a star (or custom emoji) and showcase these messages in a dedicated channel",
   },
@@ -282,6 +318,7 @@ export default {
   components: {
     Header,
     Footer,
+    DiscordEmbed,
   },
   setup() {
     return {

@@ -13,11 +13,13 @@
     "@jamescoyle/vue-icon": "^0.1.0",
     "@mdi/js": "^5.9.55",
     "@tailwindcss/forms": "^0.3.2",
+    "@tailwindcss/typography": "^0.4.1",
     "babel-runtime": "^6.26.0",
     "discord-markdown": "^2.5.0",
     "hljs": "^6.2.3",
     "marked": "^2.1.1",
     "sass": "^1.32.12",
+    "simple-markdown": "^0.7.3",
     "vue": "^3.0.5",
     "vue-markdown": "git+https://github.com/miaolz123/vue-markdown.git",
     "vue-material-design-icons": "^4.11.0",
@@ -28,7 +30,10 @@
     "@vue/compiler-sfc": "^3.0.5",
     "autoprefixer": "^10.2.5",
     "postcss": "^8.2.12",
+    "purify-css": "^1.2.5",
+    "rollup-plugin-analyzer": "^4.0.0",
     "tailwindcss": "^2.2.2",
-    "vite": "^2.1.5"
+    "vite": "^2.1.5",
+    "webpack-bundle-analyzer": "^4.4.2"
   }
 }

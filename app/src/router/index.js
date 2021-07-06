@@ -16,10 +16,6 @@ const routes = [
     {
         path: "/:catchAll(.*)",
         component: () => import("../pages/NotFound.vue"),
-    },
-    {
-        path: "/embed",
-        component: () => import("../pages/CustomEmbedTest.vue"),
     }
 ];
 

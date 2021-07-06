@@ -1,3 +1,4 @@
+/*! @import */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -40,65 +41,18 @@
     @apply hover:text-gray-300 text-base text-white whitespace-nowrap;
   }
 
-  /* Styling for mobile only popover */
-  .navbar-mobile-panel {
-    @apply absolute inset-x-0 md:hidden origin-top-right p-2 top-0 transform transition z-10;
-  }
-  .navbar-mobile-menu {
-    @apply bg-secondary-dark divide-secondary-light divide-y-2 ring-1 ring-black ring-opacity-5 rounded-lg shadow-lg;
-  }
-  .navbar-mobile-menu-item {
-    @apply flex hover:bg-secondary items-center m-1 p-2 rounded-md;
-  }
-  .navbar-mobile-menu-item-icon {
-    @apply flex-shrink-0 h-6 text-white w-6;
-  }
-  .navbar-mobile-menu-item-text {
-    @apply font-medium ml-3 text-base text-white;
-  }
-  .navbar-mobile-close {
-    @apply focus:outline-none focus:ring-2 focus:ring-inset focus:ring-secondary-dark hover:text-gray-400 inline-flex items-center justify-center p-2 rounded-md text-gray-300;
-  }
-  .navbar-mobile-text {
-    @apply font-medium hover:text-gray-200 text-base text-white;
-  }
-
-  .hero {
-    @apply lg:py-48 lg:text-left max-w-7xl mx-auto py-16 text-center w-full;
-  }
-  .hero-title {
-    @apply bg-clip-text bg-gradient-to-br font-extrabold from-primary lg:text-6xl md:text-6xl pb-1 sm:text-5xl text-3xl text-transparent to-dace xl:text-6xl;
-  }
-  .hero-subtitle {
-    @apply max-w-md md:max-w-3xl md:mt-5 mt-3 mx-auto sm:text-xl text-lg text-white;
-  }
-
   .hero-buttons {
     @apply lg:justify-start mt-5 sm:flex sm:justify-center sm:space-x-6;
   }
   .hero-primary {
     @apply my-auto rounded-md shadow;
   }
-  .hero-primary > a {
-    @apply bg-primary border border-transparent flex font-medium hover:bg-primary-dark items-center justify-center md:px-10 md:py-4 md:text-lg px-8 py-3 rounded-md text-base text-white w-full;
-  }
-  .hero-secondary {
-    @apply my-auto py-4;
-  }
-  .hero-secondary > a {
-    @apply hover:text-gray-200 text-lg text-white underline;
-  }
-
   .hero-copytext {
     @apply mt-5 text-white;
   }
 
-  .hero-accompany {
-    @apply h-64 lg:absolute lg:h-full lg:inset-y-0 lg:right-0 lg:w-1/2 md:h-96 relative sm:h-72 w-full;
-  }
-
   .hero-preview {
-    @apply max-w-7xl md:px-24 mx-auto px-12 py-8;
+    @apply max-w-7xl mx-auto py-16 sm:px-6 lg:px-7 lg:py-20;
   }
   .hero-preview-item {
     @apply grid grid-cols-1 my-4 sm:grid-cols-2 space-y-4;
@@ -107,16 +61,8 @@
   .hero-features {
     @apply max-w-7xl md:px-24 mx-auto px-12 py-16 text-white;
   }
-  .hero-preview-item {
-    @apply grid grid-cols-1 mb-24 sm:mb-8 sm:grid-cols-2 space-y-4;
-  }
-
-  /* Footer */
-  .footer {
-    @apply lg:px-8 max-w-7xl mx-auto overflow-hidden px-4 py-8 sm:px-6;
-  }
-  .footer-container {
-    @apply -mx-5 -my-2 flex flex-wrap;
+  .hero-features-item {
+    @apply grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2;
   }
 
   /* Main */
@@ -130,10 +76,10 @@
   }
 
   .section-hero {
-    @apply flex font-extrabold justify-center text-4xl text-center;
+    @apply flex font-bold justify-center text-4xl text-center;
   }
   .section-title {
-    @apply flex font-extrabold justify-center text-3xl text-center;
+    @apply flex font-medium justify-center text-3xl text-center tracking-tight;
   }
   .section-subtitle {
     @apply flex justify-center text-center;
