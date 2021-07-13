@@ -81,7 +81,7 @@
         <div class="hero-preview">
 
           <div class="pb-12 prose-xl text-center">
-            <h1 class="font-bold leading-8 tracking-tighter text-gray-900"
+            <h1 class="text-lg font-bold leading-8 tracking-tighter text-gray-900"
               >Improve your user engagement</h1
             >
             <span class="mt-3 text-lg text-gray-500 md:mx-16 section-subtitle"

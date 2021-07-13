@@ -14,6 +14,11 @@ const routes = [
         component: () => import("../pages/Premium.vue"),
     },
     {
+        path: "/dashboard",
+        name: "Dashboard",
+        component: () => import("../pages/Dashboard.vue"),
+    },
+    {
         path: "/:catchAll(.*)",
         component: () => import("../pages/NotFound.vue"),
     }
