@@ -120,47 +120,6 @@
                 </a>
               </div>
             </div>
-
-            <div class="px-4 py-4">
-              <div class="grid grid-cols-2 gap-x-8">
-                <a
-                  href="/invite"
-                  class="cta-button bg-primary hover:bg-primary-dark"
-                >
-                  Invite Welcomer
-                </a>
-                <router-link
-                  to="/premium"
-                  class="cta-button bg-donate hover:bg-donate-dark"
-                >
-                  Premium
-                </router-link>
-              </div>
-            </div>
-
-            <div class="px-4 py-4">
-              <nav class="grid grid-cols-2">
-                <router-link
-                  v-for="item in navfeatures"
-                  :key="item.name"
-                  :to="item.href"
-                  class="navbar-mobile-menu-item"
-                >
-                  <div class="popover-panel-icon">
-                    <svg-icon
-                      type="mdi"
-                      :path="item.icon"
-                      class="navbar-mobile-menu-item-icon"
-                      aria-hidden="true"
-                    />
-                  </div>
-                  <span class="navbar-mobile-menu-item-text">
-                    {{ item.name }}
-                  </span>
-                </router-link>
-              </nav>
-            </div>
-
             <div class="px-4 py-4">
               <nav class="grid grid-cols-2">
                 <router-link

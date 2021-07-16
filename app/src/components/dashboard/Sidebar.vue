@@ -1,57 +1,41 @@
 <template>
   <div>
-    <div class="flex items-center flex-shrink-0 px-4">Guild selector</div>
+    <div class="flex items-center flex-shrink-0 px-4">
+      <img class="w-10 h-10 rounded-lg" src="https://cdn.discordapp.com/icons/336642139381301249/3aa641b21acded468308a37eef43d7b3.webp?size=128" />
+      <div class="pl-2 overflow-hidden text-base">
+        <h3 class="leading-tight truncate">discord.py</h3>
+        <!-- <a class="text-xs leading-tight text-gray-500" @click.prevent="selectingGuild = true">Change Guild</a> -->
+        <router-link class="text-xs leading-tight text-gray-500" to="/dashboard/myguilds">Change Guild</router-link>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
     <nav
       class="flex flex-col flex-1 px-3 mt-5 overflow-y-auto divide-y divide-gray-300 "
       aria-label="Sidebar"
     >
-      <div>
-        <a
-          v-for="item in navigation"
-          :key="item.name"
-          :href="item.href"
-          :class="[
-            item.current
-              ? 'bg-second-800 text-primary'
-              : 'text-secondary-light',
-            'hover:bg-gray-200 group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md',
-          ]"
-          :aria-current="item.current ? 'page' : undefined"
-        >
-          <component
-            :is="item.icon"
-            :class="[
-              item.current ? 'text-primary' : 'text-secondary',
-              'flex-shrink-0 w-6 h-6 mr-4',
-            ]"
-            aria-hidden="true"
-          />
-          {{ item.name }}
-        </a>
-      </div>
-      <div class="pt-3 mt-3">
+      <div v-for="(nav, index) in navigation" v-bind:key="index" :class="[index == 0 ? '' : 'pt-3 mt-3']">
         <div>
-          <a
-            v-for="item in secondaryNavigation"
+          <router-link
+            v-for="item in nav"
             :key="item.name"
-            :href="item.href"
+            :to="item.href"
             :class="[
-              item.current
-                ? 'bg-second-800 text-primary'
-                : 'text-secondary-light',
+              $route.path == item.href ? 'bg-second-800 text-primary' : 'text-secondary-light',
               'hover:bg-gray-200 group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md',
             ]"
           >
-            <component
-              :is="item.icon"
+            <svg-icon
+              type="mdi"
+              :path="item.icon"
               :class="[
-                item.current ? 'text-primary' : 'text-secondary',
+                $route.path == item.href ? 'text-primary' : 'text-secondary',
                 'flex-shrink-0 w-6 h-6 mr-4',
               ]"
               aria-hidden="true"
             />
             {{ item.name }}
-          </a>
+          </router-link>
         </div>
       </div>
     </nav>
@@ -59,9 +43,13 @@
 </template>
 
 <script>
+import { ref } from "vue";
+import { XIcon } from '@heroicons/vue/outline';
+
 import {
   Dialog,
   DialogOverlay,
+  DialogTitle,
   Menu,
   MenuButton,
   MenuItem,
@@ -69,51 +57,42 @@ import {
   TransitionChild,
   TransitionRoot,
 } from "@headlessui/vue";
+
 import {
-  BellIcon,
-  ClockIcon,
-  CogIcon,
-  CreditCardIcon,
-  DocumentReportIcon,
-  HomeIcon,
-  MenuAlt1Icon,
-  QuestionMarkCircleIcon,
-  ScaleIcon,
-  ShieldCheckIcon,
-  UserGroupIcon,
-  XIcon,
-} from "@heroicons/vue/outline";
-import {
-  CashIcon,
-  CheckCircleIcon,
-  ChevronDownIcon,
-  ChevronRightIcon,
-  OfficeBuildingIcon,
-  SearchIcon,
-} from "@heroicons/vue/solid";
+  mdiHelpRhombus
+} from "@mdi/js";
+import SvgIcon from "@jamescoyle/vue-icon";
 
 const navigation = [
-  { name: "Home", href: "#", icon: HomeIcon, current: true },
-  { name: "a", href: "#", icon: ClockIcon, current: false },
-  { name: "b", href: "#", icon: ScaleIcon, current: false },
-  { name: "c", href: "#", icon: CreditCardIcon, current: false },
-  { name: "d", href: "#", icon: UserGroupIcon, current: false },
-  { name: "e", href: "#", icon: DocumentReportIcon, current: false },
-];
-const secondaryNavigation = [
-  { name: "f", href: "#", icon: CogIcon },
-  { name: "g", href: "#", icon: QuestionMarkCircleIcon },
-  { name: "h", href: "#", icon: ShieldCheckIcon },
-];
-const cards = [
-  { name: "Members", href: "#", icon: ScaleIcon, amount: "123" },
-  { name: "Messages Today", href: "#", icon: ScaleIcon, amount: "44,725" },
-  { name: "Pogging?", href: "#", icon: ScaleIcon, amount: "yes" },
-  // More items...
+  [
+    { name: "Home", href: "/dashboard", icon: mdiHelpRhombus },
+    { name: "a", href: "/dashboard/myguilds", icon: mdiHelpRhombus },
+    { name: "b", href: "#", icon: mdiHelpRhombus },
+    { name: "c", href: "#", icon: mdiHelpRhombus },
+    { name: "d", href: "#", icon: mdiHelpRhombus },
+    { name: "e", href: "#", icon: mdiHelpRhombus },
+  ],
+  [
+    { name: "Home", href: "#", icon: mdiHelpRhombus },
+    { name: "a", href: "#", icon: mdiHelpRhombus },
+    { name: "b", href: "#", icon: mdiHelpRhombus },
+    { name: "c", href: "#", icon: mdiHelpRhombus },
+    { name: "d", href: "#", icon: mdiHelpRhombus },
+    { name: "e", href: "#", icon: mdiHelpRhombus },
+  ],
+  [
+    { name: "Home", href: "#", icon: mdiHelpRhombus },
+    { name: "a", href: "#", icon: mdiHelpRhombus },
+    { name: "b", href: "#", icon: mdiHelpRhombus },
+    { name: "c", href: "#", icon: mdiHelpRhombus },
+    { name: "d", href: "#", icon: mdiHelpRhombus },
+    { name: "e", href: "#", icon: mdiHelpRhombus },
+  ],
 ];
 
 export default {
   components: {
+    SvgIcon,
     Dialog,
     DialogOverlay,
     Menu,
@@ -122,20 +101,19 @@ export default {
     MenuItems,
     TransitionChild,
     TransitionRoot,
-    BellIcon,
-    CashIcon,
-    CheckCircleIcon,
-    ChevronDownIcon,
-    ChevronRightIcon,
-    MenuAlt1Icon,
-    OfficeBuildingIcon,
-    SearchIcon,
+    DialogTitle,
+    TransitionRoot,
     XIcon,
   },
   setup() {
-    return {
+    const selectingGuild = ref(false)
+
+return {
       navigation,
-      secondaryNavigation,
+
+      selectingGuild,
+
+      mdiHelpRhombus,
     };
   },
 };

@@ -17,6 +17,10 @@ const routes = [
         path: "/dashboard",
         name: "Dashboard",
         component: () => import("../pages/Dashboard.vue"),
+        children: [
+            { path: '', component: () => import("../pages/dashboard/Home.vue") },
+            { path: 'myguilds', component: () => import("../pages/dashboard/MyGuilds.vue") }
+        ],
     },
     {
         path: "/:catchAll(.*)",
