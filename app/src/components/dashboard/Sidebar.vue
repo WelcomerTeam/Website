@@ -5,32 +5,35 @@
       <div class="pl-2 overflow-hidden text-base">
         <h3 class="leading-tight truncate">discord.py</h3>
         <!-- <a class="text-xs leading-tight text-gray-500" @click.prevent="selectingGuild = true">Change Guild</a> -->
-        <router-link class="text-xs leading-tight text-gray-500" to="/dashboard/myguilds">Change Guild</router-link>
+        <router-link class="text-xs leading-tight text-gray-500" to="/dashboard/myguilds" @click="$emit('onChangeGuild')">Change Guild</router-link>
       </div>
     </div>
 
     <!-- Sidebar -->
     <nav
-      class="flex flex-col flex-1 px-3 mt-5 overflow-y-auto divide-y divide-gray-300 "
+      class="flex flex-col flex-1 px-3 mt-5 overflow-y-auto divide-y divide-gray-300"
       aria-label="Sidebar"
     >
-      <div v-for="(nav, index) in navigation" v-bind:key="index" :class="[index == 0 ? '' : 'pt-3 mt-3']">
+      <div v-for="(nav, index) in navigation" v-bind:key="index" :class="[index === 0 ? '' : 'pt-3 mt-3']">
         <div>
+          <span class="text-xs font-bold text-secondary-light" v-if="nav.title">{{ nav.title }}</span>
           <router-link
-            v-for="item in nav"
+            v-for="item in nav.items"
             :key="item.name"
             :to="item.href"
             :class="[
-              $route.path == item.href ? 'bg-second-800 text-primary' : 'text-secondary-light',
+              $route.path === item.href ? 'bg-second-800 text-primary' : 'text-secondary-light',
               'hover:bg-gray-200 group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md',
+              item.extendedClass
             ]"
           >
             <svg-icon
               type="mdi"
               :path="item.icon"
               :class="[
-                $route.path == item.href ? 'text-primary' : 'text-secondary',
+                $route.path === item.href ? 'text-primary' : 'text-secondary-dark',
                 'flex-shrink-0 w-6 h-6 mr-4',
+                item.extendedClass
               ]"
               aria-hidden="true"
             />
@@ -59,35 +62,116 @@ import {
 } from "@headlessui/vue";
 
 import {
-  mdiHelpRhombus
+  mdiPulse,
+  mdiLifebuoy,
+
+  mdiImageText,
+  mdiCardText,
+  mdiFormatPaint,
+
+  mdiCardBulletedOutline,
+  mdiHeartBox,
+  mdiCog,
+
+  mdiTimelinePlus,
+  mdiCastle,
+  mdiAccountDetails,
+  mdiFormatListBulletedSquare,
+  mdiExitToApp,
+
+  mdiPlaylistStar,
+  mdiFormatListNumbered,
+  mdiTimelineClock,
+  mdiChartBox,
+  mdiRayStartVertexEnd,
+  mdiRayStartArrow,
+
+  mdiRobotAngry,
+  mdiProgressClock,
+  mdiPin,
+  mdiMessageTextLock,
+  mdiVolumePlus,
+
+  mdiPail,
+  mdiFileTree,
+  mdiBookshelf,
+  mdiBookSettings,
+
+  mdiAccountGroup,
+  mdiAccountStar,
 } from "@mdi/js";
 import SvgIcon from "@jamescoyle/vue-icon";
 
 const navigation = [
-  [
-    { name: "Home", href: "/dashboard", icon: mdiHelpRhombus },
-    { name: "a", href: "/dashboard/myguilds", icon: mdiHelpRhombus },
-    { name: "b", href: "#", icon: mdiHelpRhombus },
-    { name: "c", href: "#", icon: mdiHelpRhombus },
-    { name: "d", href: "#", icon: mdiHelpRhombus },
-    { name: "e", href: "#", icon: mdiHelpRhombus },
-  ],
-  [
-    { name: "Home", href: "#", icon: mdiHelpRhombus },
-    { name: "a", href: "#", icon: mdiHelpRhombus },
-    { name: "b", href: "#", icon: mdiHelpRhombus },
-    { name: "c", href: "#", icon: mdiHelpRhombus },
-    { name: "d", href: "#", icon: mdiHelpRhombus },
-    { name: "e", href: "#", icon: mdiHelpRhombus },
-  ],
-  [
-    { name: "Home", href: "#", icon: mdiHelpRhombus },
-    { name: "a", href: "#", icon: mdiHelpRhombus },
-    { name: "b", href: "#", icon: mdiHelpRhombus },
-    { name: "c", href: "#", icon: mdiHelpRhombus },
-    { name: "d", href: "#", icon: mdiHelpRhombus },
-    { name: "e", href: "#", icon: mdiHelpRhombus },
-  ],
+  {
+    items: [
+      { name: "Status", href: "/status", icon: mdiPulse },
+      { name: "Support Server", href: "/support", icon: mdiLifebuoy },
+    ]
+  },
+  {
+    title: "Utilities",
+    items: [
+      { name: "Image Backgrounds", href: "/backgrounds", icon: mdiImageText },
+      { name: "Custom Embed Builder", href: "/builder", icon: mdiCardText },
+      { name: "Text Formatting", href: "/formatting", icon: mdiFormatPaint },
+    ]
+  },
+  {
+    title: "Guild",
+    items: [
+      { name: "View Guild Page", href: "/dashboard/guild", icon: mdiCardBulletedOutline },
+      { name: "Guild Membership", href: "/dashboard/memberships", icon: mdiHeartBox, extendedClass: "text-donate-light" },
+      { name: "Welcomer Settings", href: "/dashboard/settings", icon: mdiCog },
+    ]
+  },
+  {
+    title: "Members",
+    items: [
+      { name: "Welcomer", href: "/dashboard/welcomer", icon: mdiTimelinePlus },
+      { name: "Borderwall", href: "/dashboard/borderwall", icon: mdiCastle },
+      { name: "AutoRole", href: "/dashboard/autorole", icon: mdiAccountDetails },
+      { name: "Rules", href: "/dashboard/rules", icon: mdiFormatListBulletedSquare },
+      { name: "Leaver", href: "/dashboard/leaver", icon: mdiExitToApp },
+    ]
+  },
+  {
+    title: "Engagement",
+    items: [
+      { name: "ReactionRoles", href: "/dashboard/reactionroles", icon: mdiPlaylistStar },
+      { name: "FreeRoles", href: "/dashboard/freeroles", icon: mdiFormatListNumbered },
+      { name: "TimeRoles", href: "/dashboard/timeroles", icon: mdiTimelineClock },
+      { name: "Polls", href: "/dashboard/polls", icon: mdiChartBox },
+      { name: "XP", href: "/dashboard/xp", icon: mdiRayStartVertexEnd },
+      { name: "LevelRoles", href: "/dashboard/levelroles", icon: mdiRayStartArrow },
+    ]
+  },
+  {
+    title: "Guild Management",
+    items: [
+      { name: "AutoMod", href: "/dashboard/automod", icon: mdiRobotAngry },
+      { name: "AutoReminders", href: "/dashboard/autoreminders", icon: mdiProgressClock },
+      { name: "StickyRoles", href: "/dashboard/stickyroles", icon: mdiPin },
+      { name: "Lockdown", href: "/dashboard/lockdown", icon: mdiMessageTextLock },
+      { name: "TempChannels", href: "/dashboard/tempchannels", icon: mdiVolumePlus },
+    ]
+  },
+  {
+    title: "Automation",
+    items: [
+      { name: "Usage", href: "/dashboard/automation/usage", icon: mdiPail  },
+      { name: "Rules", href: "/dashboard/automation", icon: mdiFileTree },
+      { name: "Share Rules", href: "/dashboard/automation/library", icon: mdiBookshelf },
+      { name: "Audit Logs", href: "/dashboard/automation/audit", icon: mdiBookSettings },
+    ]
+  },
+  {
+    title: "Invites",
+    items: [
+      { name: "InviteRoles", href: "/dashboard/inviteroles", icon: mdiAccountGroup },
+      { name: "InviteRewards", href: "/dashboard/inviterewards", icon: mdiAccountStar },
+    ]
+  }
 ];
 
 export default {
@@ -108,12 +192,48 @@ export default {
   setup() {
     const selectingGuild = ref(false)
 
-return {
+    return {
       navigation,
 
       selectingGuild,
 
-      mdiHelpRhombus,
+      mdiPulse,
+      mdiLifebuoy,
+
+      mdiImageText,
+      mdiCardText,
+      mdiFormatPaint,
+
+      mdiCardBulletedOutline,
+      mdiHeartBox,
+      mdiCog,
+
+      mdiTimelinePlus,
+      mdiCastle,
+      mdiAccountDetails,
+      mdiFormatListBulletedSquare,
+      mdiExitToApp,
+
+      mdiPlaylistStar,
+      mdiFormatListNumbered,
+      mdiTimelineClock,
+      mdiChartBox,
+      mdiRayStartVertexEnd,
+      mdiRayStartArrow,
+
+      mdiRobotAngry,
+      mdiProgressClock,
+      mdiPin,
+      mdiMessageTextLock,
+      mdiVolumePlus,
+
+      mdiPail,
+      mdiFileTree,
+      mdiBookshelf,
+      mdiBookSettings,
+
+      mdiAccountGroup,
+      mdiAccountStar,
     };
   },
 };

@@ -1,7 +1,7 @@
 <template>
   <header>
     <Popover class="relative w-full shadow bg-secondary-dark">
-      <div class="px-4 mx-auto sm:px-6">
+      <div class="min-h-full px-4 mx-auto sm:px-6">
         <div class="navbar-container">
           <router-link to="/">
             <div class="flex justify-start">
