@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header />
-    <div class="flex h-screen overflow-hidden bg-gray-100">
+    <div class="flex min-h-screen overflow-hidden bg-gray-100">
       <TransitionRoot as="template" :show="sidebarOpen">
         <Dialog as="div" static class="fixed inset-0 z-50 flex lg:hidden" @close="sidebarOpen = false" :open="sidebarOpen">
           <TransitionChild as="template" enter="transition-opacity ease-linear duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="transition-opacity ease-linear duration-300" leave-from="opacity-100" leave-to="opacity-0">
@@ -45,7 +45,7 @@
             <MenuAlt1Icon class="w-6 h-6" aria-hidden="true" />
           </button>
         </div>
-        <main class="relative z-0 flex-1 pb-8 overflow-y-auto">
+        <main class="relative z-0 flex-1 min-h-full pb-8">
           <div class="mt-8">
             <router-view />
           </div>

@@ -4,7 +4,6 @@
       <img class="w-10 h-10 rounded-lg" src="https://cdn.discordapp.com/icons/336642139381301249/3aa641b21acded468308a37eef43d7b3.webp?size=128" />
       <div class="pl-2 overflow-hidden text-base">
         <h3 class="leading-tight truncate">discord.py</h3>
-        <!-- <a class="text-xs leading-tight text-gray-500" @click.prevent="selectingGuild = true">Change Guild</a> -->
         <router-link class="text-xs leading-tight text-gray-500" to="/dashboard/myguilds" @click="$emit('onChangeGuild')">Change Guild</router-link>
       </div>
     </div>
@@ -16,7 +15,7 @@
     >
       <div v-for="(nav, index) in navigation" v-bind:key="index" :class="[index === 0 ? '' : 'pt-3 mt-3']">
         <div>
-          <span class="text-xs font-bold text-secondary-light" v-if="nav.title">{{ nav.title }}</span>
+          <span class="text-xs font-bold uppercase text-secondary-light" v-if="nav.title">{{ nav.title }}</span>
           <router-link
             v-for="item in nav.items"
             :key="item.name"
@@ -99,10 +98,18 @@ import {
 
   mdiAccountGroup,
   mdiAccountStar,
+  mdiHelpRhombus,
 } from "@mdi/js";
 import SvgIcon from "@jamescoyle/vue-icon";
 
 const navigation = [
+  {
+    title: "Debug",
+    items: [
+      { name: "Field Test", href: "/dashboard/fieldtest", icon: mdiHelpRhombus },
+      { name: "Example", href: "/dashboard/example", icon: mdiHelpRhombus },
+    ]
+  },
   {
     items: [
       { name: "Status", href: "/status", icon: mdiPulse },
@@ -190,12 +197,8 @@ export default {
     XIcon,
   },
   setup() {
-    const selectingGuild = ref(false)
-
     return {
       navigation,
-
-      selectingGuild,
 
       mdiPulse,
       mdiLifebuoy,

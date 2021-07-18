@@ -20,7 +20,7 @@
             aria-expanded="false"
             role="button"
             tabindex="0"
-            :style="`color: #${authorColour.toString(16).slice(-6)}`"
+            :style="{ color: `#${rgbIntToRGB(authorColour)}` }"
             >{{ author }}</span
           ><span
             v-if="isBot"
@@ -55,7 +55,7 @@
       <div
         class="embedWrapper-lXpS3L embedFull-2tM8-- embed-IeVjo6 markup-2BOw-j"
         aria-hidden="false"
-        :style="`color: #${(embed?.color || 2450411).toString(16).slice(-6)}`"
+        :style="{ color: `${rgbIntToRGB(embed?.color, 2450411)}` }"
       >
         <div
           :class="[
@@ -1142,6 +1142,9 @@ export default {
         });
       }
       return "";
+    },
+    rgbIntToRGB(rgbInt, defaultValue) {
+      return "#" + (rgbInt | defaultValue).toString(16).slice(-6).padStart(6, "0");
     },
   },
   setup(props) {

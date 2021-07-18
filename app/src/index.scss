@@ -84,4 +84,18 @@
   .section-subtitle {
     @apply flex justify-center text-center;
   }
+
+  /* Dashboard page styling */
+  .dashboard-container {
+    @apply max-w-6xl px-4 mx-auto sm:px-6 lg:px-8;
+  }
+  .dashboard-title-container {
+    @apply mb-8;
+  }
+  .dashboard-title {
+    @apply text-2xl font-medium leading-6 text-gray-900;
+  }
+  .dashboard-content {
+
+  }
 }

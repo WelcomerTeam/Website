@@ -19,7 +19,11 @@ const routes = [
         component: () => import("../pages/Dashboard.vue"),
         children: [
             { path: '', component: () => import("../pages/dashboard/Home.vue") },
-            { path: 'myguilds', component: () => import("../pages/dashboard/MyGuilds.vue") }
+
+            { path: 'fieldtest', component: () => import("../pages/dashboard/FieldTest.vue") },
+            { path: 'example', component: () => import("../pages/dashboard/DashboardExample.vue") },
+
+            { path: 'myguilds', component: () => import("../pages/dashboard/MyGuilds.vue") },
         ],
     },
     {
