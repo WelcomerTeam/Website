@@ -1,4 +1,4 @@
-<template>
+  <template>
   <div class="max-w-6xl px-4 mx-auto sm:px-6 lg:px-8">
     <div class="mb-8">
       <h1 class="text-2xl font-medium leading-6 text-gray-900">Page Title</h1>
@@ -167,7 +167,7 @@
                 class="relative w-full py-2 pl-3 pr-10 text-left bg-white border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
               >
                 <div
-                  class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none "
+                  class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
                 >
                   <svg-icon
                     type="mdi"
@@ -178,7 +178,7 @@
                 </div>
                 <span class="block pl-10 truncate">{{ selected.name }}</span>
                 <span
-                  class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none "
+                  class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none"
                 >
                   <SelectorIcon
                     class="w-5 h-5 text-gray-400"
@@ -217,7 +217,10 @@
                         <svg-icon
                           type="mdi"
                           :path="mdiPound"
-                          :class="[active ? 'text-white' : 'text-gray-400', 'inline w-4 h-4 mr-1']"
+                          :class="[
+                            active ? 'text-white' : 'text-gray-400',
+                            'inline w-4 h-4 mr-1',
+                          ]"
                         />
                         {{ channel.name }}
                       </span>
@@ -259,7 +262,7 @@
                 class="relative w-full py-2 pl-3 pr-10 text-left bg-white border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
               >
                 <div
-                  class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none "
+                  class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
                 >
                   <svg-icon
                     type="mdi"
@@ -272,7 +275,7 @@
                   {{ selectedB.name }}
                 </span>
                 <span
-                  class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none "
+                  class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none"
                 >
                   <SelectorIcon
                     class="w-5 h-5 text-gray-400"
@@ -293,8 +296,13 @@
                     v-for="category in channelsWithCategories"
                     :key="category"
                   >
-                    <div class="py-3" v-if="category.name && category.channels.length !== 0">
-                      <span class="pl-2 text-xs font-bold uppercase">{{ category.name }}</span>
+                    <div
+                      class="py-3"
+                      v-if="category.name && category.channels.length !== 0"
+                    >
+                      <span class="pl-2 text-xs font-bold uppercase">{{
+                        category.name
+                      }}</span>
                     </div>
                     <ListboxOption
                       as="template"
@@ -318,7 +326,10 @@
                           <svg-icon
                             type="mdi"
                             :path="channel.type == 2 ? mdiVolumeHigh : mdiPound"
-                            :class="[active ? 'text-white' : 'text-gray-400', 'inline w-4 h-4 mr-1']"
+                            :class="[
+                              active ? 'text-white' : 'text-gray-400',
+                              'inline w-4 h-4 mr-1',
+                            ]"
                           />
                           {{ channel.name }}
                         </span>
@@ -361,7 +372,7 @@
                 class="relative w-full py-2 pl-3 pr-10 text-left bg-white border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
               >
                 <div
-                  class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none "
+                  class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
                 >
                   <svg-icon
                     type="mdi"
@@ -372,7 +383,7 @@
                 </div>
                 <span class="block pl-10 truncate">{{ selectedC.name }}</span>
                 <span
-                  class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none "
+                  class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none"
                 >
                   <SelectorIcon
                     class="w-5 h-5 text-gray-400"
@@ -413,7 +424,10 @@
                         <svg-icon
                           type="mdi"
                           :path="mdiCheckboxBlank"
-                          :class="[active ? 'text-white' : 'text-gray-400', 'inline w-4 h-4 mr-1 border-primary']"
+                          :class="[
+                            active ? 'text-white' : 'text-gray-400',
+                            'inline w-4 h-4 mr-1 border-primary',
+                          ]"
                           :style="{ color: `${rgbIntToRGB(role?.colour, 0)}` }"
                         />
                         {{ role.name }}
@@ -456,7 +470,7 @@
                 class="relative w-full py-2 pl-3 pr-10 text-left bg-white border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
               >
                 <div
-                  class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none "
+                  class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
                 >
                   <svg-icon
                     type="mdi"
@@ -465,9 +479,11 @@
                     aria-hidden="true"
                   />
                 </div>
-                <span class="block pl-10 truncate">{{ selectedD.name }}#{{ selectedD.discriminator }}</span>
+                <span class="block pl-10 truncate"
+                  >{{ selectedD.name }}#{{ selectedD.discriminator }}</span
+                >
                 <span
-                  class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none "
+                  class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none"
                 >
                   <SelectorIcon
                     class="w-5 h-5 text-gray-400"
@@ -485,7 +501,11 @@
                   class="absolute z-10 w-full mt-1 text-base bg-white rounded-md shadow-lg ring-1 ring-primary ring-opacity-5 focus:outline-none sm:text-sm"
                 >
                   <div class="w-full p-2">
-                    <input type="text" class="w-full border-gray-300 rounded-md sm:text-sm " placeholder="Start typing a name or user id..."/>
+                    <input
+                      type="text"
+                      class="w-full border-gray-300 rounded-md sm:text-sm"
+                      placeholder="Start typing a name or user id..."
+                    />
                   </div>
                   <div class="overflow-auto max-h-60">
                     <ListboxOption
@@ -507,7 +527,13 @@
                             'block truncate',
                           ]"
                         >
-                          <img alt="" v-lazy="`https://cdn.discordapp.com/avatars/${member.id}/${member.avatar}.webp?size=32`" class="flex-shrink-0 inline w-4 h-4 mr-1 rounded-full" />
+                          <img
+                            alt=""
+                            v-lazy="
+                              `https://cdn.discordapp.com/avatars/${member.id}/${member.avatar}.webp?size=32`
+                            "
+                            class="flex-shrink-0 inline w-4 h-4 mr-1 rounded-full"
+                          />
                           {{ member.name }}#{{ member.discriminator }}
                         </span>
 
@@ -549,13 +575,18 @@
                 class="relative w-full py-2 pl-3 pr-10 text-left bg-white border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
               >
                 <div
-                  class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none "
+                  class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
                 >
-                  <img v-lazy="`https://cdn.discordapp.com/emojis/${selectedE.id}.png`" class="w-5 h-5"/>
+                  <img
+                    v-lazy="
+                      `https://cdn.discordapp.com/emojis/${selectedE.id}.png`
+                    "
+                    class="w-5 h-5"
+                  />
                 </div>
                 <span class="block pl-10 truncate">{{ selectedE.name }}</span>
                 <span
-                  class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none "
+                  class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none"
                 >
                   <SelectorIcon
                     class="w-5 h-5 text-gray-400"
@@ -573,7 +604,11 @@
                   class="absolute z-10 w-full mt-1 text-base bg-white rounded-md shadow-lg ring-1 ring-primary ring-opacity-5 focus:outline-none sm:text-sm"
                 >
                   <div class="w-full p-2">
-                    <input type="text" class="w-full border-gray-300 rounded-md sm:text-sm " placeholder="Start typing a name or emoji id..."/>
+                    <input
+                      type="text"
+                      class="w-full border-gray-300 rounded-md sm:text-sm"
+                      placeholder="Start typing a name or emoji id..."
+                    />
                   </div>
                   <div class="overflow-auto max-h-60">
                     <ListboxOption
@@ -595,7 +630,15 @@
                             'block truncate',
                           ]"
                         >
-                          <img alt="" v-lazy="`https://cdn.discordapp.com/emojis/${emoji.id}.${emoji.is_animated ? 'gif' : 'png'}`" class="flex-shrink-0 inline w-4 h-4 mr-1 rounded-full" />
+                          <img
+                            alt=""
+                            v-lazy="
+                              `https://cdn.discordapp.com/emojis/${emoji.id}.${
+                                emoji.is_animated ? 'gif' : 'png'
+                              }`
+                            "
+                            class="flex-shrink-0 inline w-4 h-4 mr-1 rounded-full"
+                          />
                           {{ emoji.name }}
                         </span>
 
@@ -637,7 +680,7 @@
                 class="relative w-full py-2 pl-3 pr-10 text-left bg-white border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
               >
                 <div
-                  class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none "
+                  class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
                 >
                   <svg-icon
                     type="mdi"
@@ -646,9 +689,11 @@
                     :style="{ color: `${rgbIntToRGB(selectedF, 0)}` }"
                   />
                 </div>
-                <span class="block pl-10 truncate">{{ rgbIntToRGB(selectedF) }}</span>
+                <span class="block pl-10 truncate">{{
+                  rgbIntToRGB(selectedF)
+                }}</span>
                 <span
-                  class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none "
+                  class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none"
                 >
                   <SelectorIcon
                     class="w-5 h-5 text-gray-400"
@@ -662,10 +707,13 @@
                 leave-from-class="opacity-100"
                 leave-to-class="opacity-0"
               >
-                <ListboxOptions
-                  class="absolute z-10 mt-1"
-                >
-                  <ColorPicker theme="light" :color="rgbIntToRGB(selectedF)" @changeColor="changeColour" :sucker-hide="true" />
+                <ListboxOptions class="absolute z-10 mt-1">
+                  <ColorPicker
+                    theme="light"
+                    :color="rgbIntToRGB(selectedF)"
+                    @changeColor="changeColour"
+                    :sucker-hide="true"
+                  />
                 </ListboxOptions>
               </transition>
             </div>
@@ -698,7 +746,7 @@
       </div>
     </div>
 
-        <!-- Number Selection -->
+    <!-- Number Selection -->
     <div class="space-y-8">
       <div
         class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-gray-200 sm:pt-5"
@@ -765,7 +813,10 @@
             class="block w-full min-w-0 mr-4 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
             placeholder="Enter text here..."
           />
-          <label class="block mr-4 font-medium text-secondary-light sm:mt-px sm:pt-2">INLINE</label>
+          <label
+            class="block mr-4 font-medium text-secondary-light sm:mt-px sm:pt-2"
+            >INLINE</label
+          >
           <input
             type="checkbox"
             name="username"
@@ -799,7 +850,8 @@
             placeholder="Enter text here..."
           />
           <button
-            class="block h-10 min-w-0 bg-red-500 border-gray-300 rounded-md w-11 focus:ring-primary focus:border-primary sm:text-sm">
+            class="block h-10 min-w-0 bg-red-500 border-gray-300 rounded-md w-11 focus:ring-primary focus:border-primary sm:text-sm"
+          >
             <XIcon class="w-6 h-6 mx-auto text-white" aria-hidden="true" />
           </button>
         </div>
@@ -825,12 +877,19 @@ import {
   Switch,
 } from "@headlessui/vue";
 import { CheckIcon, SelectorIcon } from "@heroicons/vue/solid";
-import { XIcon } from '@heroicons/vue/outline';
-import { mdiPound, mdiBullhorn, mdiVolumeHigh, mdiAt, mdiCheckboxBlank, mdiAccount } from "@mdi/js";
+import { XIcon } from "@heroicons/vue/outline";
+import {
+  mdiPound,
+  mdiBullhorn,
+  mdiVolumeHigh,
+  mdiAt,
+  mdiCheckboxBlank,
+  mdiAccount,
+} from "@mdi/js";
 import SvgIcon from "@jamescoyle/vue-icon";
 
-import { ColorPicker } from 'vue-color-kit'
-import 'vue-color-kit/dist/vue-color-kit.css'
+import { ColorPicker } from "vue-color-kit";
+import "vue-color-kit/dist/vue-color-kit.css";
 
 const channels = [
   { id: "1", name: "rules", type: 0 },
@@ -890,26 +949,81 @@ const roles = [
   { id: "1", name: "members", is_assignable: true, colour: 15485081 },
   { id: "2", name: "muted", is_assignable: true, colour: 16777215 },
   { id: "3", name: "admins", is_assignable: false },
-]
+];
 
 const members = [
-  { id: "143090142360371200", name: "ImRock", discriminator: "0001", avatar: "a_70444022ea3e5d73dd00d59c5578b07e" },
-  { id: "435026857801416705", name: 'pilonpl', discriminator: "4015", avatar: '7890143d83d6a770d8490123d3ab130b'},
-  { id: "252420180704100352", name: 'Ganso Foda', discriminator: "9747", avatar: 'a_0247a112cc65db3b73d92d9a73659b55'},
-  { id: "367402349234356235", name: 'KOALA-SAN', discriminator: "7147", avatar: '90397e2155dd98e5f4aa212a5ee370bf'},
-  { id: "272825056323960844", name: 'Jo3ker', discriminator: "8985", avatar: '4201083637533f15905d79343aca0445'},
-  { id: "318218758365773824", name: 'Andy', discriminator: "5104", avatar: '4434e5641e7ad6d175b5dac979b1ef07'},
-  { id: "243590632180809728", name: 'phily', discriminator: "6360", avatar: 'de60ffcd47ac35ec6a81139effddbab7'},
-  { id: "338785644186959875", name: 'Deep Manatee', discriminator: "1412", avatar: 'a_b205b077b78d0eb2881b3b0f2d51ed40'},
-  { id: "111054778309619712", name: 'Risu', discriminator: "4860", avatar: 'fcd29b92578ae75ec0dc85db580101ad'},
-  { id: "198313047129849866", name: 'Soldier', discriminator: "7676", avatar: 'a_6f45f81d512e11397261a60b43824001'},
-  { id: "371568397575651339", name: 'm1scy', discriminator: "7772", avatar: 'b1f74c24dd30c5aef2583dccd5ab8a32'}
-]
+  {
+    id: "143090142360371200",
+    name: "ImRock",
+    discriminator: "0001",
+    avatar: "a_70444022ea3e5d73dd00d59c5578b07e",
+  },
+  {
+    id: "435026857801416705",
+    name: "pilonpl",
+    discriminator: "4015",
+    avatar: "7890143d83d6a770d8490123d3ab130b",
+  },
+  {
+    id: "252420180704100352",
+    name: "Ganso Foda",
+    discriminator: "9747",
+    avatar: "a_0247a112cc65db3b73d92d9a73659b55",
+  },
+  {
+    id: "367402349234356235",
+    name: "KOALA-SAN",
+    discriminator: "7147",
+    avatar: "90397e2155dd98e5f4aa212a5ee370bf",
+  },
+  {
+    id: "272825056323960844",
+    name: "Jo3ker",
+    discriminator: "8985",
+    avatar: "4201083637533f15905d79343aca0445",
+  },
+  {
+    id: "318218758365773824",
+    name: "Andy",
+    discriminator: "5104",
+    avatar: "4434e5641e7ad6d175b5dac979b1ef07",
+  },
+  {
+    id: "243590632180809728",
+    name: "phily",
+    discriminator: "6360",
+    avatar: "de60ffcd47ac35ec6a81139effddbab7",
+  },
+  {
+    id: "338785644186959875",
+    name: "Deep Manatee",
+    discriminator: "1412",
+    avatar: "a_b205b077b78d0eb2881b3b0f2d51ed40",
+  },
+  {
+    id: "111054778309619712",
+    name: "Risu",
+    discriminator: "4860",
+    avatar: "fcd29b92578ae75ec0dc85db580101ad",
+  },
+  {
+    id: "198313047129849866",
+    name: "Soldier",
+    discriminator: "7676",
+    avatar: "a_6f45f81d512e11397261a60b43824001",
+  },
+  {
+    id: "371568397575651339",
+    name: "m1scy",
+    discriminator: "7772",
+    avatar: "b1f74c24dd30c5aef2583dccd5ab8a32",
+  },
+];
 
 const emojis = [
   { id: "739614945045643447", name: "blobpain", is_animated: false },
   { id: "621100584375812128", name: "comfyfast", is_animated: true },
-]
+];
 
 export default {
   components: {
@@ -957,12 +1071,14 @@ export default {
   },
   methods: {
     rgbIntToRGB(rgbInt, defaultValue) {
-      return "#" + (rgbInt | defaultValue).toString(16).slice(-6).padStart(6, "0");
+      return (
+        "#" + (rgbInt | defaultValue).toString(16).slice(-6).padStart(6, "0")
+      );
     },
     changeColour(color) {
       const { r, g, b } = color.rgba;
       this.selectedF = (r << 16) + (g << 8) + b;
-    }
-  }
+    },
+  },
 };
 </script>
