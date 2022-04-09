@@ -3,6 +3,7 @@
     <Popover class="relative w-full shadow bg-secondary-dark">
       <div class="min-h-full px-4 mx-auto sm:px-6">
         <div class="navbar-container">
+          <slot />
           <router-link to="/">
             <div class="flex justify-start">
               <img class="w-auto h-8" src="/assets/logo.svg" alt="" />
@@ -55,8 +56,8 @@
                         >
                           <div class="flex-shrink-0">
                             <div class="popover-panel-icon">
-                              <svg-icon
-                                type="mdi"
+                              <font-awesome-icon
+                                :icon="item.icon"
                                 :path="item.icon"
                                 class="w-6 h-6"
                                 aria-hidden="true"
@@ -129,9 +130,8 @@
                   class="navbar-mobile-menu-item"
                 >
                   <div class="popover-panel-icon">
-                    <svg-icon
-                      type="mdi"
-                      :path="item.icon"
+                    <font-awesome-icon
+                      :icon="item.icon"
                       class="navbar-mobile-menu-item-icon"
                       aria-hidden="true"
                     />
@@ -186,76 +186,57 @@ import {
 import { MenuIcon, XIcon } from "@heroicons/vue/outline";
 import { ChevronDownIcon } from "@heroicons/vue/solid";
 
-import {
-  mdiTooltipImage,
-  mdiEmoticon,
-  mdiGavel,
-  mdiArchive,
-  mdiMicrophoneSettings,
-  mdiChartTimelineVariantShimmer,
-  mdiCastle,
-  mdiPulse,
-  mdiLifebuoy,
-  mdiHelpRhombus,
-  mdiYoutube,
-  mdiImageText,
-  mdiCardText,
-  mdiFormatPaint,
-} from "@mdi/js";
-import SvgIcon from "@jamescoyle/vue-icon";
-
 const navresources = [
   {
     name: "Status",
     href: "/status",
     description: "View the current status of the bot",
-    icon: mdiPulse,
+    icon: "wave-pulse",
   },
   {
     name: "Support Server",
     href: "/support",
     description:
       "Join our support server for extra support, make new suggestions and more",
-    icon: mdiLifebuoy,
+    icon: "life-ring",
   },
   {
     name: "FAQ",
     href: "/faq",
     description: "Check out our FAQ, your question may already be answered",
-    icon: mdiHelpRhombus,
+    icon: "person-circle-question",
   },
   {
     name: "Video Tutorials",
     href: "/tutorials",
     description:
       "View some of our video tutorials to get a better idea of how to setup the bot",
-    icon: mdiYoutube,
+    icon: ["fab", "youtube"],
   },
   {
     name: "Welcome Image Backgrounds",
     href: "/backgrounds",
     description:
       "View our list of image backgrounds you can use with welcome images",
-    icon: mdiImageText,
+    icon: "images",
   },
   {
     name: "Custom Embed Builder",
     href: "/builder",
     description: "View our custom embed builder to see how embeds may look",
-    icon: mdiCardText,
+    icon: "tachograph-digital",
   },
   {
     name: "Text Formatting",
     href: "/formatting",
     description:
       "View how to format your text with information about the user and more",
-    icon: mdiFormatPaint,
+    icon: "paint-roller",
   },
 ];
 
 export default {
   components: {
-    SvgIcon,
     Popover,
     PopoverButton,
     PopoverGroup,
@@ -267,22 +248,6 @@ export default {
   setup() {
     return {
       navresources,
-
-      mdiTooltipImage,
-      mdiEmoticon,
-      mdiGavel,
-      mdiArchive,
-      mdiMicrophoneSettings,
-      mdiChartTimelineVariantShimmer,
-      mdiCastle,
-
-      mdiPulse,
-      mdiLifebuoy,
-      mdiHelpRhombus,
-      mdiYoutube,
-      mdiImageText,
-      mdiCardText,
-      mdiFormatPaint,
     };
   },
 };

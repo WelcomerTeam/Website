@@ -1,6 +1,16 @@
 <template>
   <div>
-    <Header />
+    <Header>
+      <div class="lg:hidden">
+        <button
+          class="text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset"
+          @click="sidebarOpen = true"
+        >
+          <span class="sr-only">Open sidebar</span>
+          <MenuAlt1Icon class="w-6 h-6" aria-hidden="true" />
+        </button>
+      </div>
+    </Header>
     <div class="flex min-h-screen overflow-hidden bg-gray-100">
       <TransitionRoot as="template" :show="sidebarOpen">
         <Dialog
@@ -44,7 +54,7 @@
               >
                 <div class="absolute top-0 right-0 pt-2 -mr-12">
                   <button
-                    class="flex items-center justify-center w-10 h-10 ml-1 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                    class="flex items-center justify-center w-10 h-10 ml-1 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white bg-secondary-dark"
                     @click="sidebarOpen = false"
                   >
                     <span class="sr-only">Close sidebar</span>
@@ -63,10 +73,8 @@
         </Dialog>
       </TransitionRoot>
 
-      <!-- Static sidebar for desktop -->
       <div class="hidden lg:flex lg:flex-shrink-0">
         <div class="flex flex-col w-64">
-          <!-- Sidebar component, swap this element with another sidebar if you like -->
           <div
             class="flex flex-col flex-grow pt-5 pb-4 overflow-y-auto bg-gray-100 border-r shadow-inner"
           >
@@ -76,19 +84,8 @@
       </div>
 
       <div class="flex-1 bg-white focus:outline-none">
-        <div
-          class="relative flex flex-shrink-0 h-16 border-gray-200 z-1 lg:border-none lg:hidden"
-        >
-          <button
-            class="px-4 text-gray-400 bg-white border-b border-r border-gray-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-200"
-            @click="sidebarOpen = true"
-          >
-            <span class="sr-only">Open sidebar</span>
-            <MenuAlt1Icon class="w-6 h-6" aria-hidden="true" />
-          </button>
-        </div>
         <main class="relative z-0 flex-1 min-h-full pb-8">
-          <div class="mt-8">
+          <div class="mt-8 font-medium">
             <router-view />
           </div>
         </main>

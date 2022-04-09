@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Rubik", ...defaultTheme.fontFamily.sans],
+        sans: ["Montserrat", ...defaultTheme.fontFamily.sans],
       },
       colors: {
         primary: {
@@ -20,10 +20,20 @@ module.exports = {
           dark: "#1C1E21",
         },
         donate: {
-          light: "#E088D7",
-          DEFAULT: "#D96BCE",
-          dark: "#AD55A4",
+          light: "#448DEF",
+          DEFAULT: "#2F80ED",
+          dark: "#2A73D5",
         },
+        // donate: {
+        //   light: "#E088D7",
+        //   DEFAULT: "#D96BCE",
+        //   dark: "#AD55A4",
+        // },
+        // donate: {
+        //   light: "#FCCC4B",
+        //   DEFAULT: "#FBBD17",
+        //   dark: "#D89E04",
+        // },
         patreon: {
           light: "#F66870",
           DEFAULT: "#FF424D",

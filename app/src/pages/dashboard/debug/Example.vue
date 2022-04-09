@@ -5,55 +5,65 @@
     </div>
     <div class="dashboard-content">
       <form-value
-        title="FormTypeToggle"
+        title="Form Type Toggle"
         v-model="config.enabled"
         :type="FormTypeToggle"
+        :nullable="true"
       />
 
       <form-value
-        title="FormTypeChannelList"
+        title="Form Type Channel List"
         v-model="config.channel"
         :type="FormTypeChannelList"
+        :nullable="true"
       />
       <form-value
-        title="FormTypeChannelListCategories"
+        title="Form Type Channel List Categories"
         v-model="config.channelTwo"
         :type="FormTypeChannelListCategories"
+        :nullable="true"
       />
       <form-value
-        title="FormTypeRoleList"
+        title="Form Type Role List"
         v-model="config.role"
         :type="FormTypeRoleList"
+        :nullable="true"
       />
       <form-value
-        title="FormTypeMemberList"
+        title="Form Type Member List"
         v-model="config.member"
         :type="FormTypeMemberList"
+        :nullable="true"
       />
       <form-value
-        title="FormTypeEmojiList"
+        title="Form Type Emoji List"
         v-model="config.emoji"
         :type="FormTypeEmojiList"
+        :nullable="true"
       />
       <form-value
-        title="FormTypeColour"
+        title="Form Type Colour"
         v-model="config.colour"
         :type="FormTypeColour"
+        :nullable="true"
       />
       <form-value
-        title="FormTypeText"
+        title="Form Type Text"
         v-model="config.message"
         :type="FormTypeText"
+        :nullable="true"
       />
       <form-value
-        title="FormTypeNumber"
+        title="Form Type Number"
         v-model="config.count"
         :type="FormTypeNumber"
+        :nullable="true"
       />
       <form-value
-        title="FormTypeTextArea"
+        title="Form Type TextArea"
         v-model="config.rules"
         :type="FormTypeTextArea"
+        :nullable="true"
       />
     </div>
 
@@ -63,8 +73,8 @@
 
 <script>
 import { ref } from "vue";
-import FormValue from "../../components/dashboard/FormValue.vue";
-import store from "../../store/index";
+import FormValue from "../../../components/dashboard/FormValue.vue";
+import store from "../../../store/index";
 
 import {
   FormTypeToggle,
@@ -77,7 +87,7 @@ import {
   FormTypeText,
   FormTypeNumber,
   FormTypeTextArea,
-} from "../../components/dashboard/FormValueEnum";
+} from "../../../components/dashboard/FormValueEnum";
 
 var config = ref({
   enabled: true,

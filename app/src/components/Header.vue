@@ -55,10 +55,9 @@
                         >
                           <div class="flex-shrink-0">
                             <div class="popover-panel-icon">
-                              <svg-icon
-                                type="mdi"
-                                :path="item.icon"
-                                class="w-8 h-8"
+                              <font-awesome-icon
+                                :icon="item.icon"
+                                class="w-6 h-6"
                                 aria-hidden="true"
                               />
                             </div>
@@ -119,9 +118,8 @@
                         >
                           <div class="flex-shrink-0">
                             <div class="popover-panel-icon">
-                              <svg-icon
-                                type="mdi"
-                                :path="item.icon"
+                              <font-awesome-icon
+                                :icon="item.icon"
                                 class="w-6 h-6"
                                 aria-hidden="true"
                               />
@@ -143,15 +141,10 @@
               </Popover>
             </div>
 
-            <div class="inline-flex text-base">
-              <router-link to="/premium">
-                <button
-                  type="button"
-                  class="cta-button bg-donate hover:bg-donate-dark"
-                >
-                  Premium
-                </button>
-              </router-link>
+            <div
+              class="inline-flex text-base font-semibold text-primary hover:text-primary-dark navbar-drop-button"
+            >
+              <router-link to="/premium"> Welcomer Pro </router-link>
             </div>
           </PopoverGroup>
           <div class="space-x-4 navbar-login-container">
@@ -205,23 +198,37 @@
             </div>
 
             <div class="px-4 py-4">
-              <div class="grid grid-cols-2 gap-x-8">
-                <a
-                  href="/invite"
-                  class="cta-button bg-primary hover:bg-primary-dark"
-                >
-                  Invite Welcomer
+              <div class="grid grid-cols-2">
+                <a class="navbar-mobile-menu-item">
+                  <div class="popover-panel-icon bg-primary">
+                    <font-awesome-icon
+                      icon="plus"
+                      class="navbar-mobile-menu-item-icon"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <span class="navbar-mobile-menu-item-text">
+                    Invite Welcomer
+                  </span>
                 </a>
-                <router-link
-                  to="/premium"
-                  class="cta-button bg-donate hover:bg-donate-dark"
-                >
-                  Premium
-                </router-link>
+
+                <a class="navbar-mobile-menu-item">
+                  <div class="popover-panel-icon bg-donate">
+                    <font-awesome-icon
+                      icon="hand-holding-heart"
+                      class="navbar-mobile-menu-item-icon"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <span class="navbar-mobile-menu-item-text"> Premium </span>
+                </a>
               </div>
             </div>
 
             <div class="px-4 py-4">
+              <span class="pl-3 font-bold uppercase text-gray-200"
+                >Features</span
+              >
               <nav class="grid grid-cols-2">
                 <router-link
                   v-for="item in navfeatures"
@@ -230,9 +237,8 @@
                   class="navbar-mobile-menu-item"
                 >
                   <div class="popover-panel-icon">
-                    <svg-icon
-                      type="mdi"
-                      :path="item.icon"
+                    <font-awesome-icon
+                      :icon="item.icon"
                       class="navbar-mobile-menu-item-icon"
                       aria-hidden="true"
                     />
@@ -245,6 +251,7 @@
             </div>
 
             <div class="px-4 py-4">
+              <span class="pl-3 font-bold uppercase text-gray-200">Help</span>
               <nav class="grid grid-cols-2">
                 <router-link
                   v-for="item in navresources"
@@ -253,9 +260,8 @@
                   class="navbar-mobile-menu-item"
                 >
                   <div class="popover-panel-icon">
-                    <svg-icon
-                      type="mdi"
-                      :path="item.icon"
+                    <font-awesome-icon
+                      :icon="item.icon"
                       class="navbar-mobile-menu-item-icon"
                       aria-hidden="true"
                     />
@@ -310,22 +316,6 @@ import {
 import { MenuIcon, XIcon } from "@heroicons/vue/outline";
 import { ChevronDownIcon } from "@heroicons/vue/solid";
 
-import {
-  mdiTooltipImage,
-  mdiEmoticon,
-  mdiGavel,
-  mdiArchive,
-  mdiMicrophoneSettings,
-  mdiChartTimelineVariantShimmer,
-  mdiCastle,
-  mdiPulse,
-  mdiLifebuoy,
-  mdiHelpRhombus,
-  mdiYoutube,
-  mdiImageText,
-  mdiCardText,
-  mdiFormatPaint,
-} from "@mdi/js";
 import SvgIcon from "@jamescoyle/vue-icon";
 
 const navfeatures = [
@@ -333,46 +323,46 @@ const navfeatures = [
     name: "Welcome Images",
     href: "/features#welcomer",
     description: "Welcome users to your servers with customizable images",
-    icon: mdiTooltipImage,
+    icon: "image",
   },
   {
     name: "Reaction Roles",
     href: "/features#reactionroles",
     description: "Allow users to control what roles they receive",
-    icon: mdiEmoticon,
+    icon: "face-laugh",
   },
   {
     name: "Moderation",
     href: "/features#moderation",
     description:
       "Easily moderate your guilds and have easy access to who has done what",
-    icon: mdiGavel,
+    icon: "user-shield",
   },
   {
     name: "Logging",
     href: "/features#logging",
     description:
       "Have easy access to all interactions with your guild both online and in guilds",
-    icon: mdiArchive,
+    icon: "boxes-packing",
   },
   {
     name: "Temporary Channels",
     href: "/features#tempchannels",
     description: "Allow users to make temporary voice channels in your server",
-    icon: mdiMicrophoneSettings,
+    icon: "microphone-lines",
   },
   {
     name: "Guild Analytics",
     href: "/features#analytics",
     description: "View information about your server such as user joins",
-    icon: mdiChartTimelineVariantShimmer,
+    icon: "chart-line",
   },
   {
     name: "Borderwall",
     href: "/features#borderwall",
     description:
       "Secure your server by making them manually verify their identity",
-    icon: mdiCastle,
+    icon: "door-open",
   },
 ];
 
@@ -381,47 +371,47 @@ const navresources = [
     name: "Status",
     href: "/status",
     description: "View the current status of the bot",
-    icon: mdiPulse,
+    icon: "heart-pulse",
   },
   {
     name: "Support Server",
     href: "/support",
     description:
       "Join our support server for extra support, make new suggestions and more",
-    icon: mdiLifebuoy,
+    icon: "life-ring",
   },
   {
     name: "FAQ",
     href: "/faq",
     description: "Check out our FAQ, your question may already be answered",
-    icon: mdiHelpRhombus,
+    icon: "person-circle-question",
   },
   {
     name: "Video Tutorials",
     href: "/tutorials",
     description:
       "View some of our video tutorials to get a better idea of how to setup the bot",
-    icon: mdiYoutube,
+    icon: ["fab", "youtube"],
   },
   {
     name: "Welcome Image Backgrounds",
     href: "/backgrounds",
     description:
       "View our list of image backgrounds you can use with welcome images",
-    icon: mdiImageText,
+    icon: "images",
   },
   {
     name: "Custom Embed Builder",
     href: "/builder",
     description: "View our custom embed builder to see how embeds may look",
-    icon: mdiCardText,
+    icon: "tachograph-digital",
   },
   {
     name: "Text Formatting",
     href: "/formatting",
     description:
       "View how to format your text with information about the user and more",
-    icon: mdiFormatPaint,
+    icon: "paint-roller",
   },
 ];
 
@@ -440,22 +430,6 @@ export default {
     return {
       navfeatures,
       navresources,
-
-      mdiTooltipImage,
-      mdiEmoticon,
-      mdiGavel,
-      mdiArchive,
-      mdiMicrophoneSettings,
-      mdiChartTimelineVariantShimmer,
-      mdiCastle,
-
-      mdiPulse,
-      mdiLifebuoy,
-      mdiHelpRhombus,
-      mdiYoutube,
-      mdiImageText,
-      mdiCardText,
-      mdiFormatPaint,
     };
   },
 };

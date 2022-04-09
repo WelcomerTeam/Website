@@ -63,6 +63,7 @@
               class="max-w-full m-auto"
               :authorColour="0xffffff"
               :isBot="true"
+              :showTimestamp="true"
               :embeds="[
                 {
                   description:
@@ -79,16 +80,19 @@
 
       <div class="bg-white">
         <div class="hero-preview">
-
-          <div class="pb-12 prose-xl text-center">
-            <h1 class="text-lg font-bold leading-8 tracking-tighter text-gray-900"
-              >Improve your user engagement</h1
+          <div class="pb-12 prose-lg text-center">
+            <h1
+              class="text-lg font-black leading-8 tracking-tighter text-gray-900"
             >
-            <span class="mt-3 text-lg text-gray-500 md:mx-16 section-subtitle"
-              >See why others use Welcomer to power their discord guilds. With many features and an easy to use dashboard, you can make whatever changes whenever you want. </span
-            >
+              Improve your user engagement
+            </h1>
+            <span
+              class="text-lg text-gray-500 max-w-3xl mx-auto section-subtitle"
+              >See why others use Welcomer to power their discord guilds. With
+              many features and an easy to use dashboard, you can make whatever
+              changes whenever you want.
+            </span>
           </div>
-
 
           <div
             v-for="item in previews"
@@ -97,18 +101,20 @@
           >
             <div class="my-auto text-center sm:text-left">
               <div>
-                <h2 class="mb-4 text-3xl font-semibold leading-tight">
+                <h2 class="mb-4 text-3xl font-black leading-tight">
                   {{ item.name }}
                 </h2>
-                <span>{{ item.description }}</span>
+                <span
+                  >{{ item.description }}
+                  <router-link
+                    :to="item.href"
+                    v-if="item.href"
+                    class="text-primary font-semibold"
+                  >
+                    {{ item.label }}
+                  </router-link>
+                </span>
               </div>
-              <router-link
-                :to="item.href"
-                v-if="item.href"
-                class="mt-4 cta-button bg-primary hover:bg-primary-dark"
-              >
-                {{ item.label }}
-              </router-link>
             </div>
             <div class="my-auto">
               <img :src="item.src" class="px-4 mt-4 sm:mt-0" />
@@ -170,14 +176,14 @@
     @apply lg:py-48 lg:text-left max-w-7xl mx-auto py-16 text-center w-full;
   }
   .hero-title {
-    @apply bg-clip-text bg-gradient-to-br font-extrabold from-primary lg:text-6xl md:text-6xl pb-1 sm:text-5xl text-3xl text-transparent to-dace xl:text-6xl;
+    @apply bg-clip-text bg-gradient-to-br font-black from-primary lg:text-6xl md:text-6xl pb-1 sm:text-5xl text-3xl text-transparent to-dace xl:text-6xl;
   }
   .hero-subtitle {
     @apply max-w-md md:max-w-3xl md:mt-5 mt-3 mx-auto sm:text-xl text-lg text-white;
   }
 
   .hero-buttons {
-    @apply lg:justify-start mt-5 sm:flex sm:justify-center sm:space-x-6;
+    @apply lg:justify-start mt-5 sm:flex sm:justify-center sm:space-x-10;
   }
   .hero-primary {
     @apply my-auto rounded-md shadow;

@@ -7,24 +7,18 @@
     role="listitem"
   >
     <div class="contents-2mQqc9" role="document">
-      <img
-        :src="avatar"
-        aria-hidden="true"
-        class="avatar-1BDn8e clickable-1bVtEA"
-        alt=" "
-      />
+      <img :src="avatar" aria-hidden="true" class="avatar-1BDn8e" alt=" " />
       <h2 class="header-23xsNx">
         <span class="headerText-3Uvj1Y"
           ><span
-            class="username-1A8OIy desaturateUserColors-1gar-1 clickable-1bVtEA"
+            class="username-1A8OIy desaturateUserColors-1gar-1"
             aria-expanded="false"
-            role="button"
             tabindex="0"
             :style="{ color: `#${rgbIntToRGB(authorColour)}` }"
             >{{ author }}</span
           ><span
             v-if="isBot"
-            class=" botTagCozy-1fFsZk botTag-1un5a6 botTagRegular-2HEhHi botTag-2WPJ74 rem-2m9HGf"
+            class="botTagCozy-1fFsZk botTag-1un5a6 botTagRegular-2HEhHi botTag-2WPJ74 rem-2m9HGf"
             ><svg
               aria-label="Verified Bot"
               class="botTagVerified-1klIIt"
@@ -39,7 +33,9 @@
               ></path></svg
             ><span class="botText-1526X_">BOT</span></span
           ></span
-        ><span class="timestamp-3ZCmNB timestampInline-yHQ6fX"
+        ><span
+          class="timestamp-3ZCmNB timestampInline-yHQ6fX"
+          v-if="showTimestamp"
           ><time :aria-label="timestamp" :datetime="now"
             ><i class="separator-2nZzUB" aria-hidden="true"> — </i
             >{{ timestamp }}</time
@@ -55,7 +51,7 @@
       <div
         class="embedWrapper-lXpS3L embedFull-2tM8-- embed-IeVjo6 markup-2BOw-j"
         aria-hidden="false"
-        :style="{ color: `${rgbIntToRGB(embed?.color, 2450411)}` }"
+        :style="{ 'border-color': `${rgbIntToRGB(embed?.color, 2450411)}` }"
       >
         <div
           :class="[
@@ -74,7 +70,7 @@
               v-if="embed?.author?.icon_url"
             /><a
               v-if="embed?.author?.url"
-              class=" anchor-3Z-8Bb anchorUnderlineOnHover-2ESHQB embedAuthorNameLink-1gVryT embedLink-1G1K1D embedAuthorName-3mnTWj"
+              class="anchor-3Z-8Bb anchorUnderlineOnHover-2ESHQB embedAuthorNameLink-1gVryT embedLink-1G1K1D embedAuthorName-3mnTWj"
               tabindex="0"
               href="#"
               rel="noreferrer noopener"
@@ -86,11 +82,11 @@
           </div>
           <div class="embedTitle-3OXDkz embedMargin-UO5XwE" v-if="embed?.title">
             <a
-              class=" anchor-3Z-8Bb anchorUnderlineOnHover-2ESHQB embedTitleLink-1Zla9e embedLink-1G1K1D embedTitle-3OXDkz"
+              class="anchor-3Z-8Bb anchorUnderlineOnHover-2ESHQB embedTitleLink-1Zla9e embedLink-1G1K1D embedTitle-3OXDkz"
               tabindex="0"
-              :href="embed?.url"
+              :href="enableURLs ? embed?.url : '#'"
               rel="noreferrer noopener"
-              role="button"
+              :role="embed?.url ? 'button' : ''"
               v-html="marked(embed?.title, true)"
             />
           </div>
@@ -123,7 +119,7 @@
             </div>
           </div>
           <a
-            class=" anchor-3Z-8Bb anchorUnderlineOnHover-2ESHQB imageWrapper-2p5ogY imageZoom-1n-ADA clickable-3Ya1ho embedWrapper-lXpS3L embedMedia-1guQoW embedImage-2W1cML"
+            class="anchor-3Z-8Bb anchorUnderlineOnHover-2ESHQB imageWrapper-2p5ogY imageZoom-1n-ADA clickable-3Ya1ho embedWrapper-lXpS3L embedMedia-1guQoW embedImage-2W1cML"
             tabindex="0"
             href="#"
             rel="noreferrer noopener"
@@ -132,7 +128,7 @@
             ><img alt="" :src="embed?.image?.url"
           /></a>
           <a
-            class=" anchor-3Z-8Bb anchorUnderlineOnHover-2ESHQB imageWrapper-2p5ogY imageZoom-1n-ADA clickable-3Ya1ho embedThumbnail-2Y84-K"
+            class="anchor-3Z-8Bb anchorUnderlineOnHover-2ESHQB imageWrapper-2p5ogY imageZoom-1n-ADA clickable-3Ya1ho embedThumbnail-2Y84-K"
             tabindex="0"
             href="#"
             rel="noreferrer noopener"
@@ -145,11 +141,18 @@
               style="width: 80px; height: 80px"
           /></a>
           <div class="embedFooter-3yVop- embedMargin-UO5XwE">
+            <img
+              class="embedFooterIcon-3klTIQ"
+              :src="embed?.footer?.icon_url"
+              v-if="embed?.footer?.icon_url"
+            />
             <span class="embedFooterText-28V_Wb"
-              >{{ embed?.footer
-              }}<span class="embedFooterSeparator-3klTIQ" v-if="embed?.footer"
+              >{{ embed?.footer?.text
+              }}<span
+                class="embedFooterSeparator-3klTIQ"
+                v-if="embed?.footer?.text && showTimestamp"
                 >•</span
-              >{{ timestamp }}</span
+              ><span v-if="showTimestamp">{{ timestamp }}</span></span
             >
           </div>
         </div>
@@ -232,7 +235,8 @@
 
 <style lang="scss">
 @layer components {
-  .light .messageContent-2qWWxC {
+  .light .messageContent-2qWWxC,
+  .light .username-1A8OIy {
     @apply text-secondary;
   }
 
@@ -432,6 +436,14 @@
   unicode-bidi: plaintext;
   text-align: left;
 }
+.embedFooterIcon-3klTIQ {
+  margin-right: 8px;
+  width: 20px;
+  height: 20px;
+  -o-object-fit: contain;
+  object-fit: contain;
+  border-radius: 50%;
+}
 .embedFieldValue-nELq2s {
   font-size: 0.875rem;
   line-height: 1.125rem;
@@ -504,9 +516,6 @@
 .embedTitle-3OXDkz {
   color: var(--header-primary);
 }
-.clickable-3Ya1ho {
-  cursor: pointer;
-}
 .embedAuthorName-3mnTWj,
 .embedAuthorNameLink-1gVryT,
 .embedDescription-1Cuq9a,
@@ -531,13 +540,8 @@
 .avatar-1BDn8e.clickable-1bVtEA:active {
   transform: translateY(1px);
 }
-.username-1A8OIy.clickable-1bVtEA:hover {
-  cursor: pointer;
-  text-decoration: underline;
-}
 .emojiContainer-3X8SvE {
   display: inline-block;
-  cursor: pointer;
 }
 .anchorUnderlineOnHover-2ESHQB:hover {
   text-decoration: underline;
@@ -561,10 +565,6 @@
   max-width: 520px;
   box-sizing: border-box;
   border-radius: 4px;
-}
-.embed-IeVjo6 .emoji {
-  width: 18px;
-  height: 18px;
 }
 .embed-IeVjo6 pre {
   max-width: 100%;
@@ -653,7 +653,6 @@
   height: 40px;
   border-radius: 50%;
   overflow: hidden;
-  cursor: pointer;
   user-select: none;
   -webkit-box-flex: 0;
   flex: 0 0 auto;
@@ -692,20 +691,15 @@
   width: 1.375em;
   height: 1.375em;
   vertical-align: bottom;
-}
-.emoji {
-  object-fit: contain;
-  width: 1.375em;
-  height: 1.375em;
-  vertical-align: bottom;
+  display: inline;
 }
 .emojiContainer-3X8SvE {
   display: inline-block;
-  cursor: pointer;
 }
 .embed-IeVjo6 .emoji {
   width: 18px;
   height: 18px;
+  display: inline;
 }
 .emoji-3C344l {
   margin-right: 8px;
@@ -791,9 +785,8 @@
   overflow: hidden;
   flex-shrink: 0;
 }
-.username-1A8OIy.clickable-1bVtEA:hover {
-  cursor: pointer;
-  text-decoration: underline;
+.username-1A8OIy {
+  pointer-events: none;
 }
 .cozy-3raOZG .contents-2mQqc9 {
   position: static;
@@ -1123,6 +1116,12 @@ export default {
     embeds: {
       type: Object,
     },
+    showTimestamp: {
+      type: Boolean,
+    },
+    enableURLs: {
+      type: Boolean,
+    },
   },
   methods: {
     marked(input, embed) {
@@ -1144,9 +1143,16 @@ export default {
       return "";
     },
     rgbIntToRGB(rgbInt, defaultValue) {
-      return "#" + (rgbInt | defaultValue).toString(16).slice(-6).padStart(6, "0");
+      return (
+        "#" +
+        (rgbInt == undefined ? defaultValue : rgbInt)
+          .toString(16)
+          .slice(-6)
+          .padStart(6, "0")
+      );
     },
   },
+
   setup(props) {
     let now = new Date();
 
