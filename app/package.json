@@ -26,7 +26,7 @@
     "fuse.js": "^6.4.6",
     "hljs": "^6.2.3",
     "lodash": "^4.17.21",
-    "marked": "^2.1.1",
+    "marked": "^4.0.10",
     "one-colorpicker": "^1.0.12",
     "sass": "^1.32.12",
     "simple-markdown": "^0.7.3",
