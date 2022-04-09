@@ -113,12 +113,10 @@ import {
 import { BellIcon, MenuAlt1Icon, XIcon } from "@heroicons/vue/outline";
 
 import { mdiHelpRhombus } from "@mdi/js";
-import SvgIcon from "@jamescoyle/vue-icon";
 import store from "../store/index";
 
 export default {
   components: {
-    SvgIcon,
     Dialog,
     DialogOverlay,
     Menu,

@@ -316,8 +316,6 @@ import {
 import { MenuIcon, XIcon } from "@heroicons/vue/outline";
 import { ChevronDownIcon } from "@heroicons/vue/solid";
 
-import SvgIcon from "@jamescoyle/vue-icon";
-
 const navfeatures = [
   {
     name: "Welcome Images",
@@ -417,7 +415,6 @@ const navresources = [
 
 export default {
   components: {
-    SvgIcon,
     Popover,
     PopoverButton,
     PopoverGroup,

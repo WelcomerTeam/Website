@@ -8,14 +8,7 @@
 </template>
 
 <script>
-import { mdiHelpRhombus } from "@mdi/js";
-import SvgIcon from "@jamescoyle/vue-icon";
-
 export default {
-  components: {
-    SvgIcon,
-    mdiHelpRhombus,
-  },
   setup() {
     return {};
   },
