@@ -1,44 +1,12 @@
 /*! @import */
 @tailwind base;
-@tailwind components;
 @tailwind utilities;
+@tailwind components;
 
 @layer components {
   /* Header */
-  .cta-button {
-    @apply border border-transparent focus:outline-none font-medium inline-flex items-center justify-center px-4 py-2 rounded-md text-sm text-white;
-  }
-  .popover-panel {
-    @apply -translate-x-1/2 absolute bg-secondary-dark left-1/2 lg:max-w-lg max-w-md mt-3 px-2 rounded-md sm:px-0 transform w-screen z-10;
-  }
-  .popover-panel-grid {
-    @apply bg-secondary-dark gap-6 grid px-5 py-6 relative rounded-lg sm:gap-8 sm:p-8;
-  }
-  .popover-panel-grid-item {
-    @apply -m-3 flex hover:bg-secondary items-start p-2 rounded-lg;
-  }
   .popover-panel-icon {
     @apply bg-secondary-light flex-shrink-0 group-hover:bg-primary h-10 inline-flex items-center justify-center rounded-md sm:h-12 sm:w-12 text-white w-10;
-  }
-
-  .navbar-container {
-    @apply flex items-center justify-between md:justify-start md:space-x-10 py-6;
-  }
-  .navbar-open-menu {
-    @apply focus:outline-none hover:text-gray-400 inline-flex items-center justify-center p-2 rounded-md text-gray-300;
-  }
-  .navbar-drop-button {
-    @apply focus:outline-none hover:text-gray-300 inline-flex items-center rounded-md text-base;
-  }
-  .navbar-drop-arrow {
-    @apply group-hover:text-gray-300 h-5 ml-1 w-5;
-  }
-
-  .navbar-login-container {
-    @apply hidden items-center justify-end lg:w-0 md:flex md:flex-1;
-  }
-  .navbar-login-button {
-    @apply hover:text-gray-300 text-base text-white whitespace-nowrap;
   }
 
   .hero-buttons {
@@ -78,9 +46,6 @@
   .section-hero {
     @apply flex font-bold justify-center text-4xl text-center;
   }
-  .section-title {
-    @apply flex font-medium justify-center text-3xl text-center tracking-tight;
-  }
   .section-subtitle {
     @apply flex justify-center text-center;
   }
@@ -96,5 +61,61 @@
     @apply text-2xl font-bold leading-6 text-gray-900;
   }
   .dashboard-content {
+  }
+
+  /* Hero */
+  .hero {
+    @apply lg:py-48 lg:text-left max-w-7xl mx-auto py-16 text-center w-full;
+  }
+  .hero-title {
+    @apply bg-clip-text bg-gradient-to-br font-black from-primary lg:text-6xl md:text-6xl pb-1 sm:text-5xl text-3xl text-transparent to-dace xl:text-6xl;
+  }
+  .hero-subtitle {
+    @apply max-w-md md:max-w-3xl md:mt-5 mt-3 mx-auto sm:text-xl text-lg text-white;
+  }
+
+  .hero-buttons {
+    @apply lg:justify-start mt-5 sm:flex sm:justify-center sm:space-x-10;
+  }
+  .hero-primary {
+    @apply my-auto rounded-md shadow;
+  }
+  .hero-primary > a {
+    @apply bg-primary border border-transparent flex font-medium hover:bg-primary-dark items-center justify-center md:px-10 md:py-3 md:text-lg px-8 py-2 rounded-md text-base text-white w-full;
+  }
+  .hero-secondary {
+    @apply my-auto py-4;
+  }
+  .hero-secondary > a {
+    @apply hover:text-gray-200 text-lg text-white underline;
+  }
+  .hero-copytext {
+    @apply mt-5 text-white;
+  }
+  .hero-accompany {
+    @apply h-full m-auto lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 relative w-full;
+  }
+
+  /* Styling for mobile only popover */
+  .navbar-mobile-panel {
+    @apply absolute inset-x-0 md:hidden origin-top-right p-2 top-0 transform transition z-10;
+  }
+  .navbar-mobile-menu {
+    @apply bg-secondary-dark divide-secondary-light divide-y-2 ring-1 ring-black ring-opacity-5 rounded-lg shadow-lg;
+  }
+  .navbar-mobile-menu-item {
+    @apply flex hover:bg-secondary items-center m-1 p-2 rounded-md;
+  }
+  .navbar-mobile-menu-item-icon {
+    @apply flex-shrink-0 h-6 text-white w-6;
+  }
+  .navbar-mobile-menu-item-text {
+    @apply font-medium ml-3 text-base text-white;
+  }
+  .navbar-mobile-close {
+    @apply focus:outline-none focus:ring-2 focus:ring-inset focus:ring-secondary-dark hover:text-gray-400 inline-flex items-center justify-center p-2 rounded-md text-gray-300;
+  }
+  .navbar-mobile-text {
+    @apply font-medium hover:text-gray-200 text-base text-white;
   }
 }

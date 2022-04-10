@@ -72,11 +72,17 @@
             <!-- Embed Builder -->
             <div class="space-y-1" v-if="this.page == 1">
               <!-- Content -->
-              <div class="eb-container pb-7">
-                <div class="eb-title-container">
-                  <span class="eb-title">Content</span>
+              <div
+                class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0 pb-7"
+              >
+                <div
+                  class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
+                >
+                  <span class="font-bold text-sm sm:block text-gray-800"
+                    >Content</span
+                  >
                 </div>
-                <div class="eb-input-container">
+                <div class="mt-1 sm:mt-0 sm:col-span-7">
                   <textarea
                     type="text"
                     class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
@@ -89,11 +95,17 @@
               </div>
 
               <!-- Title -->
-              <div class="eb-container">
-                <div class="eb-title-container">
-                  <span class="eb-title">Title</span>
+              <div
+                class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
+              >
+                <div
+                  class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
+                >
+                  <span class="font-bold text-sm sm:block text-gray-800"
+                    >Title</span
+                  >
                 </div>
-                <div class="eb-input-container">
+                <div class="mt-1 sm:mt-0 sm:col-span-7">
                   <input
                     type="text"
                     class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
@@ -105,11 +117,17 @@
               </div>
 
               <!-- URL -->
-              <div class="eb-container">
-                <div class="eb-title-container">
-                  <span class="eb-title">Title URL</span>
+              <div
+                class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
+              >
+                <div
+                  class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
+                >
+                  <span class="font-bold text-sm sm:block text-gray-800"
+                    >Title URL</span
+                  >
                 </div>
-                <div class="eb-input-container">
+                <div class="mt-1 sm:mt-0 sm:col-span-7">
                   <input
                     type="text"
                     class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
@@ -121,11 +139,17 @@
               </div>
 
               <!-- Description -->
-              <div class="eb-container">
-                <div class="eb-title-container">
-                  <span class="eb-title">Description</span>
+              <div
+                class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
+              >
+                <div
+                  class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
+                >
+                  <span class="font-bold text-sm sm:block text-gray-800"
+                    >Description</span
+                  >
                 </div>
-                <div class="eb-input-container">
+                <div class="mt-1 sm:mt-0 sm:col-span-7">
                   <textarea
                     class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
                     placeholder="Embed description"
@@ -136,11 +160,17 @@
               </div>
 
               <!-- Colour -->
-              <div class="eb-container">
-                <div class="eb-title-container">
-                  <span class="eb-title">Colour</span>
+              <div
+                class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
+              >
+                <div
+                  class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
+                >
+                  <span class="font-bold text-sm sm:block text-gray-800"
+                    >Colour</span
+                  >
                 </div>
-                <div class="eb-input-container flex items-center">
+                <div class="mt-1 sm:mt-0 sm:col-span-7 flex items-center">
                   <input
                     id="comments"
                     aria-describedby="comments-description"
@@ -201,11 +231,17 @@
               </div>
 
               <!-- fields -->
-              <div class="eb-container">
-                <div class="eb-title-container">
-                  <span class="eb-title">Fields</span>
+              <div
+                class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
+              >
+                <div
+                  class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
+                >
+                  <span class="font-bold text-sm sm:block text-gray-800"
+                    >Fields</span
+                  >
                 </div>
-                <div class="eb-input-container space-y-2">
+                <div class="mt-1 sm:mt-0 sm:col-span-7 space-y-2">
                   <div
                     class="p-3 border rounded-md border-gray-300 shadow-sm space-y-1"
                     :key="index"
@@ -262,11 +298,17 @@
               </div>
 
               <!-- Image URL -->
-              <div class="eb-container">
-                <div class="eb-title-container">
-                  <span class="eb-title">Embed Image URL</span>
+              <div
+                class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
+              >
+                <div
+                  class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
+                >
+                  <span class="font-bold text-sm sm:block text-gray-800"
+                    >Embed Image URL</span
+                  >
                 </div>
-                <div class="eb-input-container">
+                <div class="mt-1 sm:mt-0 sm:col-span-7">
                   <input
                     type="text"
                     class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
@@ -278,11 +320,17 @@
               </div>
 
               <!-- Thumbnail URL -->
-              <div class="eb-container">
-                <div class="eb-title-container">
-                  <span class="eb-title">Thumbnail Image URL</span>
+              <div
+                class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
+              >
+                <div
+                  class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
+                >
+                  <span class="font-bold text-sm sm:block text-gray-800"
+                    >Thumbnail Image URL</span
+                  >
                 </div>
-                <div class="eb-input-container">
+                <div class="mt-1 sm:mt-0 sm:col-span-7">
                   <input
                     type="text"
                     class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
@@ -294,11 +342,17 @@
               </div>
 
               <!-- Footer Text -->
-              <div class="eb-container">
-                <div class="eb-title-container">
-                  <span class="eb-title">Footer Text</span>
+              <div
+                class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
+              >
+                <div
+                  class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
+                >
+                  <span class="font-bold text-sm sm:block text-gray-800"
+                    >Footer Text</span
+                  >
                 </div>
-                <div class="eb-input-container">
+                <div class="mt-1 sm:mt-0 sm:col-span-7">
                   <input
                     type="text"
                     class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
@@ -310,11 +364,17 @@
               </div>
 
               <!-- Footer Icon -->
-              <div class="eb-container">
-                <div class="eb-title-container">
-                  <span class="eb-title">Footer Icon URL</span>
+              <div
+                class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
+              >
+                <div
+                  class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
+                >
+                  <span class="font-bold text-sm sm:block text-gray-800"
+                    >Footer Icon URL</span
+                  >
                 </div>
-                <div class="eb-input-container">
+                <div class="mt-1 sm:mt-0 sm:col-span-7">
                   <input
                     type="text"
                     class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
@@ -326,11 +386,17 @@
               </div>
 
               <!-- Author Name -->
-              <div class="eb-container">
-                <div class="eb-title-container">
-                  <span class="eb-title">Author Name</span>
+              <div
+                class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
+              >
+                <div
+                  class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
+                >
+                  <span class="font-bold text-sm sm:block text-gray-800"
+                    >Author Name</span
+                  >
                 </div>
-                <div class="eb-input-container">
+                <div class="mt-1 sm:mt-0 sm:col-span-7">
                   <input
                     type="text"
                     class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
@@ -342,11 +408,17 @@
               </div>
 
               <!-- Author URL -->
-              <div class="eb-container">
-                <div class="eb-title-container">
-                  <span class="eb-title">Author URL</span>
+              <div
+                class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
+              >
+                <div
+                  class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
+                >
+                  <span class="font-bold text-sm sm:block text-gray-800"
+                    >Author URL</span
+                  >
                 </div>
-                <div class="eb-input-container">
+                <div class="mt-1 sm:mt-0 sm:col-span-7">
                   <input
                     type="text"
                     class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
@@ -358,11 +430,17 @@
               </div>
 
               <!-- Author Icon URL -->
-              <div class="eb-container">
-                <div class="eb-title-container">
-                  <span class="eb-title">Author Icon URL</span>
+              <div
+                class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
+              >
+                <div
+                  class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
+                >
+                  <span class="font-bold text-sm sm:block text-gray-800"
+                    >Author Icon URL</span
+                  >
                 </div>
-                <div class="eb-input-container">
+                <div class="mt-1 sm:mt-0 sm:col-span-7">
                   <input
                     type="text"
                     class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
@@ -391,28 +469,7 @@
   </Popover>
 </template>
 
-<style>
-@layer components {
-  .eb-container {
-    @apply sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0;
-  }
-
-  .eb-title-container {
-    @apply block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none;
-  }
-
-  .eb-title {
-    @apply font-bold text-sm sm:block text-gray-800;
-  }
-
-  .eb-title-remaining {
-    @apply pl-3 sm:pl-0 text-sm text-gray-500;
-  }
-
-  .eb-input-container {
-    @apply mt-1 sm:mt-0 sm:col-span-7;
-  }
-}
+<style lang="css">
 .hu-color-picker {
   width: 218px !important;
 }
@@ -550,6 +607,7 @@ export default {
         this.title = modelValue?.title || "";
         this.description = modelValue?.description || "";
         this.url = modelValue?.url || "";
+        this.use_color = modelValue?.color !== undefined;
         this.color = modelValue?.color || 2450411;
 
         this.footer_text = modelValue?.footer?.text || "";

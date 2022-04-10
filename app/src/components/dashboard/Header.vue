@@ -2,7 +2,9 @@
   <header>
     <Popover class="relative w-full shadow bg-secondary-dark">
       <div class="min-h-full px-4 mx-auto sm:px-6">
-        <div class="navbar-container">
+        <div
+          class="flex items-center justify-between md:justify-start md:space-x-10 py-6"
+        >
           <slot />
           <router-link to="/">
             <div class="flex justify-start">
@@ -13,7 +15,9 @@
             </div>
           </router-link>
           <div class="-my-2 -mr-2 md:hidden">
-            <PopoverButton class="navbar-open-menu">
+            <PopoverButton
+              class="focus:outline-none hover:text-gray-400 inline-flex items-center justify-center p-2 rounded-md text-gray-300"
+            >
               <span class="sr-only">Open menu</span>
               <MenuIcon class="w-6 h-6" aria-hidden="true" />
             </PopoverButton>
@@ -24,14 +28,14 @@
                 <PopoverButton
                   :class="[
                     open ? 'text-gray-300' : 'text-white',
-                    'group navbar-drop-button',
+                    'group focus:outline-none hover:text-gray-300 inline-flex items-center rounded-md text-base',
                   ]"
                 >
                   <span>Help</span>
                   <ChevronDownIcon
                     :class="[
                       open ? 'text-gray-300' : 'text-white',
-                      'navbar-drop-arrow',
+                      'group-hover:text-gray-300 h-5 ml-1 w-5',
                     ]"
                     aria-hidden="true"
                   />
@@ -45,14 +49,18 @@
                   leave-from-class="translate-y-0 opacity-100"
                   leave-to-class="translate-y-1 opacity-0"
                 >
-                  <PopoverPanel class="popover-panel">
+                  <PopoverPanel
+                    class="absolute bg-secondary-dark lg:max-w-lg max-w-md mt-3 px-2 rounded-md sm:px-0 transform w-screen z-10 left-1/2 -translate-x-1/2"
+                  >
                     <div class="popover-container">
-                      <div class="popover-panel-grid">
+                      <div
+                        class="gap-6 grid px-5 py-6 relative rounded-lg sm:gap-8 sm:p-8 bg-secondary-dark"
+                      >
                         <router-link
                           v-for="item in navresources"
                           :key="item.name"
                           :to="item.href"
-                          class="group popover-panel-grid-item"
+                          class="group -m-3 flex hover:bg-secondary items-start p-2 rounded-lg"
                         >
                           <div class="flex-shrink-0">
                             <div class="popover-panel-icon">
@@ -80,9 +88,7 @@
               </Popover>
             </div>
           </PopoverGroup>
-          <div class="space-x-4 navbar-login-container">
-            <a href="/login" class="navbar-login-button">ImRock#0001</a>
-          </div>
+          <UserProfile />
         </div>
       </div>
 
@@ -149,33 +155,6 @@
   </header>
 </template>
 
-<style lang="scss" scoped>
-@layer components {
-  /* Styling for mobile only popover */
-  .navbar-mobile-panel {
-    @apply absolute inset-x-0 md:hidden origin-top-right p-2 top-0 transform transition z-10;
-  }
-  .navbar-mobile-menu {
-    @apply bg-secondary-dark divide-secondary-light divide-y-2 ring-1 ring-black ring-opacity-5 rounded-lg shadow-lg;
-  }
-  .navbar-mobile-menu-item {
-    @apply flex hover:bg-secondary items-center m-1 p-2 rounded-md;
-  }
-  .navbar-mobile-menu-item-icon {
-    @apply flex-shrink-0 h-6 text-white w-6;
-  }
-  .navbar-mobile-menu-item-text {
-    @apply font-medium ml-3 text-base text-white;
-  }
-  .navbar-mobile-close {
-    @apply focus:outline-none focus:ring-2 focus:ring-inset focus:ring-secondary-dark hover:text-gray-400 inline-flex items-center justify-center p-2 rounded-md text-gray-300;
-  }
-  .navbar-mobile-text {
-    @apply font-medium hover:text-gray-200 text-base text-white;
-  }
-}
-</style>
-
 <script>
 import {
   Popover,
@@ -186,12 +165,14 @@ import {
 import { MenuIcon, XIcon } from "@heroicons/vue/outline";
 import { ChevronDownIcon } from "@heroicons/vue/solid";
 
+import UserProfile from "../UserProfile.vue";
+
 const navresources = [
   {
     name: "Status",
     href: "/status",
     description: "View the current status of the bot",
-    icon: "wave-pulse",
+    icon: "heart-pulse",
   },
   {
     name: "Support Server",
@@ -241,6 +222,7 @@ export default {
     PopoverButton,
     PopoverGroup,
     PopoverPanel,
+    UserProfile,
     ChevronDownIcon,
     MenuIcon,
     XIcon,

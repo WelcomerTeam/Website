@@ -17,8 +17,8 @@
     "@heroicons/vue": "^1.0.1",
     "@kevinfaguiar/vue-twemoji-picker": "^5.7.4",
     "@mdi/js": "^5.9.55",
-    "@tailwindcss/forms": "^0.3.3",
-    "@tailwindcss/typography": "^0.4.1",
+    "@tailwindcss/forms": "^0.5.0",
+    "@tailwindcss/typography": "^0.5.2",
     "axios": "^0.21.1",
     "babel-runtime": "^6.26.0",
     "discord-markdown": "^2.5.0",
@@ -27,6 +27,7 @@
     "lodash": "^4.17.21",
     "marked": "^4.0.10",
     "one-colorpicker": "^1.0.12",
+    "postcss-import": "^14.1.0",
     "sass": "^1.32.12",
     "simple-markdown": "^0.7.3",
     "vue": "^3.0.5",
@@ -39,13 +40,14 @@
     "vuex": "^4.0.2"
   },
   "devDependencies": {
+    "@tailwindcss/jit": "^0.1.18",
     "@vitejs/plugin-vue": "^1.2.1",
     "@vue/compiler-sfc": "^3.0.5",
-    "autoprefixer": "^10.2.5",
-    "postcss": "^8.2.12",
+    "autoprefixer": "^10.4.4",
+    "postcss": "^8.4.12",
     "purify-css": "^1.2.5",
     "rollup-plugin-analyzer": "^4.0.0",
-    "tailwindcss": "^2.2.2",
+    "tailwindcss": "^3.0.23",
     "vite": "^2.1.5",
     "webpack-bundle-analyzer": "^4.4.2"
   }

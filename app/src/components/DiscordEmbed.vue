@@ -11,7 +11,7 @@
       <h2 class="header-23xsNx">
         <span class="headerText-3Uvj1Y"
           ><span
-            class="username-1A8OIy desaturateUserColors-1gar-1"
+            :class="[isLight ? 'text-secondary' : 'text-gray-200', 'username-1A8OIy desaturateUserColors-1gar-1']"
             aria-expanded="false"
             tabindex="0"
             :style="{ color: `#${rgbIntToRGB(authorColour)}` }"
@@ -43,7 +43,10 @@
         >
       </h2>
       <div
-        class="markup-2BOw-j messageContent-2qWWxC"
+        :class="[
+          isLight ? 'text-secondary' : 'text-gray-200',
+          'markup-2BOw-j messageContent-2qWWxC',
+        ]"
         v-html="marked(content, true)"
       />
     </div>
@@ -233,17 +236,7 @@
   </div>
 </template>
 
-<style lang="scss">
-@layer components {
-  .light .messageContent-2qWWxC,
-  .light .username-1A8OIy {
-    @apply text-secondary;
-  }
-
-  .dark .messageContent-2qWWxC {
-    @apply text-gray-200;
-  }
-}
+<style lang="css">
 .cozy-3raOZG .headerText-3Uvj1Y {
   margin-right: 0.25rem;
 }

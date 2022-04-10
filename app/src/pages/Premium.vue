@@ -13,7 +13,9 @@
               <h2 class="text-base font-semibold tracking-wide text-primary">
                 Welcomer Pro
               </h2>
-              <p class="text-3xl font-bold text-left text-white section-title">
+              <p
+                class="text-3xl font-bold text-left text-white flex justify-center tracking-tight"
+              >
                 Everything you need to boost your guild's engagement
               </p>
               <div class="mt-12 space-y-8">

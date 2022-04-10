@@ -1,4 +1,3 @@
-import dashboard from "../../api/dashboard";
 import dashboardAPI from "../../api/dashboard";
 
 // initial state
@@ -6,7 +5,7 @@ const state = () => ({
   selectedGuild: null,
   guild: null,
 
-  isLoading: false,
+  isLoadingGuild: false,
 
   guildChannels: [],
   guildChannelsPacked: [],
@@ -18,8 +17,8 @@ const state = () => ({
 
 // getters
 const getters = {
-  isLoading: (state) => {
-    return state.isLoading;
+  isLoadingGuild: (state) => {
+    return state.isLoadingGuild;
   },
 
   getCurrentSelectedGuild: (state) => {
@@ -71,7 +70,7 @@ const getters = {
 // actions
 const actions = {
   fetchGuild({ commit, state }) {
-    commit("loading", true);
+    commit("loadingGuild");
     dashboardAPI.getGuild(
       state.selectedGuild,
       (guild) => {
@@ -83,7 +82,7 @@ const actions = {
 
   fetchGuildMembersByQuery({ commit, state }, query) {
     if (query !== state.previousGuildMembersQuery) {
-      dashboard.fetchGuildMembers(
+      dashboardAPI.fetchGuildMembers(
         query,
         state.selectedGuild,
         (guildMembers) => {
@@ -112,7 +111,7 @@ const mutations = {
     state.guildChannelsPacked = packGuildChannels(state.guildChannels);
     state.guildRoles = guildObject?.roles;
     state.guildEmojis = guildObject?.emojis;
-    state.isLoading = false;
+    state.isLoadingGuild = false;
   },
 
   setSelectedGuild(state, guildID) {
@@ -124,8 +123,8 @@ const mutations = {
     state.guildMemberResults = guildMembers;
   },
 
-  loading(state) {
-    state.isLoading = true;
+  loadingGuild(state) {
+    state.isLoadingGuild = true;
   },
 };
 

@@ -1,12 +1,14 @@
 <template>
-  <div class="field-container align-middle">
-    <label class="field-title">
+  <div
+    class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-gray-200 sm:pt-5 mb-4 sm:mb-0 align-middle"
+  >
+    <label class="block font-semibold text-gray-700 sm:mt-px sm:pt-2">
       {{ title }}
     </label>
-    <div v-if="type == FormTypeBlank" class="field-input-container">
+    <div v-if="type == FormTypeBlank" class="mt-1 sm:mt-0 sm:col-span-2">
       <slot />
     </div>
-    <div v-else-if="type == FormTypeToggle" class="field-input-container">
+    <div v-else-if="type == FormTypeToggle" class="mt-1 sm:mt-0 sm:col-span-2">
       <Switch
         :modelValue="modelValue"
         @update:modelValue="updateValue($event)"
@@ -64,7 +66,10 @@
       <slot />
     </div>
 
-    <div v-else-if="type == FormTypeChannelList" class="field-input-container">
+    <div
+      v-else-if="type == FormTypeChannelList"
+      class="mt-1 sm:mt-0 sm:col-span-2"
+    >
       <Listbox
         as="div"
         v-model="modelValue"
@@ -84,7 +89,7 @@
               />
             </div>
             <div
-              v-if="$store.getters.isLoading"
+              v-if="$store.getters.isLoadingGuild"
               class="block ml-10 h-6 sm:h-5 animate-pulse bg-gray-200 w-48 rounded-md"
             ></div>
             <span v-else class="block pl-10 truncate">{{
@@ -109,7 +114,7 @@
               class="absolute z-10 w-full mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
             >
               <div
-                v-if="$store.getters.isLoading"
+                v-if="$store.getters.isLoadingGuild"
                 class="flex py-5 w-full justify-center"
               >
                 <LoadingIcon />
@@ -200,7 +205,7 @@
 
     <div
       v-else-if="type == FormTypeChannelListCategories"
-      class="field-input-container"
+      class="mt-1 sm:mt-0 sm:col-span-2"
     >
       <Listbox
         as="div"
@@ -221,7 +226,7 @@
               />
             </div>
             <div
-              v-if="$store.getters.isLoading"
+              v-if="$store.getters.isLoadingGuild"
               class="block ml-10 h-6 sm:h-5 animate-pulse bg-gray-200 w-48 rounded-md"
             ></div>
             <span v-else class="block pl-10 truncate">{{
@@ -246,7 +251,7 @@
               class="absolute z-10 w-full mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
             >
               <div
-                v-if="$store.getters.isLoading"
+                v-if="$store.getters.isLoadingGuild"
                 class="flex py-5 w-full justify-center"
               >
                 <LoadingIcon />
@@ -345,7 +350,10 @@
       <slot />
     </div>
 
-    <div v-else-if="type == FormTypeRoleList" class="field-input-container">
+    <div
+      v-else-if="type == FormTypeRoleList"
+      class="mt-1 sm:mt-0 sm:col-span-2"
+    >
       <Listbox
         as="div"
         v-model="modelValue"
@@ -365,7 +373,7 @@
               />
             </div>
             <div
-              v-if="$store.getters.isLoading"
+              v-if="$store.getters.isLoadingGuild"
               class="block ml-10 h-6 sm:h-5 animate-pulse bg-gray-200 w-48 rounded-md"
             ></div>
             <span v-else class="block pl-10 truncate">{{
@@ -390,7 +398,7 @@
               class="absolute z-10 w-full mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
             >
               <div
-                v-if="$store.getters.isLoading"
+                v-if="$store.getters.isLoadingGuild"
                 class="flex py-5 w-full justify-center"
               >
                 <LoadingIcon />
@@ -479,7 +487,10 @@
       <slot />
     </div>
 
-    <div v-else-if="type == FormTypeMemberList" class="field-input-container">
+    <div
+      v-else-if="type == FormTypeMemberList"
+      class="mt-1 sm:mt-0 sm:col-span-2"
+    >
       <Listbox
         as="div"
         v-model="modelValue"
@@ -499,7 +510,7 @@
               />
             </div>
             <div
-              v-if="$store.getters.isLoading"
+              v-if="$store.getters.isLoadingGuild"
               class="block ml-10 h-6 sm:h-5 animate-pulse bg-gray-200 w-48 rounded-md"
             ></div>
             <span v-else class="block pl-10 truncate">
@@ -526,7 +537,7 @@
               class="absolute z-10 w-full mt-1 text-base bg-white rounded-md shadow-lg ring-1 ring-primary ring-opacity-5 focus:outline-none sm:text-sm"
             >
               <div
-                v-if="$store.getters.isLoading"
+                v-if="$store.getters.isLoadingGuild"
                 class="flex py-5 w-full justify-center"
               >
                 <LoadingIcon />
@@ -654,7 +665,10 @@
       <slot />
     </div>
 
-    <div v-else-if="type == FormTypeEmojiList" class="field-input-container">
+    <div
+      v-else-if="type == FormTypeEmojiList"
+      class="mt-1 sm:mt-0 sm:col-span-2"
+    >
       <Listbox
         as="div"
         v-model="modelValue"
@@ -788,7 +802,7 @@
       <slot />
     </div>
 
-    <div v-else-if="type == FormTypeColour" class="field-input-container">
+    <div v-else-if="type == FormTypeColour" class="mt-1 sm:mt-0 sm:col-span-2">
       <Listbox
         as="div"
         v-model="modelValue"
@@ -835,7 +849,7 @@
       </Listbox>
     </div>
 
-    <div v-else-if="type == FormTypeText" class="field-input-container">
+    <div v-else-if="type == FormTypeText" class="mt-1 sm:mt-0 sm:col-span-2">
       <input
         type="text"
         class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
@@ -846,7 +860,7 @@
       <slot />
     </div>
 
-    <div v-else-if="type == FormTypeNumber" class="field-input-container">
+    <div v-else-if="type == FormTypeNumber" class="mt-1 sm:mt-0 sm:col-span-2">
       <input
         type="number"
         class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
@@ -856,7 +870,10 @@
       <slot />
     </div>
 
-    <div v-else-if="type == FormTypeTextArea" class="field-input-container">
+    <div
+      v-else-if="type == FormTypeTextArea"
+      class="mt-1 sm:mt-0 sm:col-span-2"
+    >
       <textarea
         type="text"
         class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
@@ -867,7 +884,10 @@
       <slot />
     </div>
 
-    <div v-else-if="type == FormTypeDropdown" class="field-input-container">
+    <div
+      v-else-if="type == FormTypeDropdown"
+      class="mt-1 sm:mt-0 sm:col-span-2"
+    >
       <Listbox
         as="div"
         v-model="modelValue"
@@ -985,24 +1005,6 @@
     ></span>
   </div>
 </template>
-
-<style lang="scss">
-@layer components {
-  .field-container {
-    @apply sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-gray-200 sm:pt-5 mb-4 sm:mb-0;
-  }
-  .field-title {
-    @apply block font-semibold text-gray-700 sm:mt-px sm:pt-2;
-  }
-  .field-input-container {
-    @apply mt-1 sm:mt-0 sm:col-span-2;
-  }
-}
-
-.hu-color-picker {
-  width: 218px !important;
-}
-</style>
 
 <script>
 import LoadingIcon from "../LoadingIcon.vue";
@@ -1174,7 +1176,7 @@ export default {
     },
 
     fetchGuildMemberByQuery: debounce((self) => {
-      // convert to all in component and use isLoading.
+      // TODO: Move into component.
       self.$store.dispatch("fetchGuildMembersByQuery", self.query);
     }, 500),
   },

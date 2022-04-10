@@ -1,12 +1,28 @@
 <template>
   <div>
-    <router-link to="/dashboard" class="flex items-center flex-shrink-0 px-4">
+    <div
+      v-if="$store.getters.isLoadingGuild"
+      class="justify-center flex h-10 items-center"
+    >
+      <LoadingIcon />
+    </div>
+    <div v-else class="flex items-center flex-shrink-0 px-4">
       <img
         class="w-10 h-10 rounded-lg"
-        src="https://cdn.discordapp.com/icons/336642139381301249/3aa641b21acded468308a37eef43d7b3.webp?size=128"
+        :src="
+          'https://cdn.discordapp.com/icons/' +
+          $store.getters.getCurrentSelectedGuild?.id +
+          '/' +
+          $store.getters.getCurrentSelectedGuild?.icon +
+          '.webp?size=128'
+        "
       />
       <div class="pl-2 overflow-hidden">
-        <h3 class="truncate font-bold leading-none">discord.py</h3>
+        <router-link to="/dashboard">
+          <h3 class="truncate font-bold leading-none">
+            {{ $store.getters.getCurrentSelectedGuild?.name }}
+          </h3>
+        </router-link>
         <router-link
           class="text-xs leading-none font-semibold text-gray-600"
           to="/dashboard/myguilds"
@@ -14,7 +30,7 @@
           >Change Guild</router-link
         >
       </div>
-    </router-link>
+    </div>
 
     <!-- Sidebar -->
     <nav
@@ -78,6 +94,7 @@ import {
   TransitionChild,
   TransitionRoot,
 } from "@headlessui/vue";
+import LoadingIcon from "../LoadingIcon.vue";
 
 const navigation = [
   {
@@ -170,6 +187,7 @@ export default {
     DialogTitle,
     TransitionRoot,
     XIcon,
+    LoadingIcon,
   },
   setup() {
     return {

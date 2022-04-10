@@ -1,8 +1,7 @@
 <template>
   <div class="relative min-h-screen bg-secondary">
     <Header />
-    <!-- 
-    <div class="p-4 pb-12 text-left text-white from-red-500 to-transparent bg-gradient-to-b section-subtitle">
+    <!-- <div class="p-4 pb-12 text-left text-white from-red-500 to-transparent bg-gradient-to-b section-subtitle">
       <div class="text-center">
         <p class="mb-2"><b>22:26 GMT</b> - There is currently an increased number of outages right now affecting most guilds.</p>
         <a href="/status" class="bg-opacity-50 hover:bg-opacity-70 bg-secondary-dark cta-button">
@@ -170,43 +169,6 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
-@layer components {
-  .hero {
-    @apply lg:py-48 lg:text-left max-w-7xl mx-auto py-16 text-center w-full;
-  }
-  .hero-title {
-    @apply bg-clip-text bg-gradient-to-br font-black from-primary lg:text-6xl md:text-6xl pb-1 sm:text-5xl text-3xl text-transparent to-dace xl:text-6xl;
-  }
-  .hero-subtitle {
-    @apply max-w-md md:max-w-3xl md:mt-5 mt-3 mx-auto sm:text-xl text-lg text-white;
-  }
-
-  .hero-buttons {
-    @apply lg:justify-start mt-5 sm:flex sm:justify-center sm:space-x-10;
-  }
-  .hero-primary {
-    @apply my-auto rounded-md shadow;
-  }
-  .hero-primary > a {
-    @apply bg-primary border border-transparent flex font-medium hover:bg-primary-dark items-center justify-center md:px-10 md:py-3 md:text-lg px-8 py-2 rounded-md text-base text-white w-full;
-  }
-  .hero-secondary {
-    @apply my-auto py-4;
-  }
-  .hero-secondary > a {
-    @apply hover:text-gray-200 text-lg text-white underline;
-  }
-
-  .hero-copytext {
-    @apply mt-5 text-white;
-  }
-
-  .hero-accompany {
-    @apply h-full m-auto lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 relative w-full;
-  }
-}
-</style>
 <script>
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
