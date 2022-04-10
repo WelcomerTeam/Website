@@ -10,11 +10,90 @@ import "./index.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { fas } from "@fortawesome/free-solid-svg-icons";
-import { far } from "@fortawesome/free-regular-svg-icons";
-import { fab } from "@fortawesome/free-brands-svg-icons";
 
-library.add(fas, far, fab);
+import { faYoutube } from "@fortawesome/free-brands-svg-icons";
+library.add(faYoutube);
+
+import {
+  faHandHoldingHeart,
+  faPlus,
+  faHeart,
+  faPenToSquare,
+  faSquare,
+  faHashtag,
+  faAt,
+  faCircle,
+  faUser,
+  faImage,
+  faCog,
+  faFaceLaugh,
+  faUserShield,
+  faBoxesPacking,
+  faMicrophoneLines,
+  faChartLine,
+  faDoorOpen,
+  faHeartPulse,
+  faLifeRing,
+  faPersonCircleQuestion,
+  faImages,
+  faTachographDigital,
+  faPaintRoller,
+  faWrench,
+  faUserPlus,
+  faListOl,
+  faDoorClosed,
+  faUserCheck,
+  faUserMinus,
+  faListCheck,
+  faUserClock,
+  faPhotoFilm,
+  faPlugCircleBolt,
+  faPlugCirclePlus,
+  faCircleQuestion,
+  faShield,
+} from "@fortawesome/free-solid-svg-icons";
+library.add(
+  faHandHoldingHeart,
+  faPlus,
+  faHeart,
+  faPenToSquare,
+  faSquare,
+  faHashtag,
+  faAt,
+  faCircle,
+  faUser,
+  faFaceLaugh,
+  faImage,
+  faFaceLaugh,
+  faHeart,
+  faCog,
+  faImage,
+  faFaceLaugh,
+  faUserShield,
+  faBoxesPacking,
+  faMicrophoneLines,
+  faChartLine,
+  faDoorOpen,
+  faHeartPulse,
+  faLifeRing,
+  faPersonCircleQuestion,
+  faImages,
+  faTachographDigital,
+  faPaintRoller,
+  faWrench,
+  faUserPlus,
+  faListOl,
+  faDoorClosed,
+  faUserCheck,
+  faUserMinus,
+  faListCheck,
+  faUserClock,
+  faPhotoFilm,
+  faPlugCircleBolt,
+  faPlugCirclePlus,
+  faCircleQuestion,
+  faShield
+);
 
 createApp(App)
   .component("font-awesome-icon", FontAwesomeIcon)

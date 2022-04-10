@@ -102,7 +102,7 @@ const navigation = [
       {
         name: "Memberships",
         href: "/dashboard/memberships",
-        icon: ["fas", "heart"],
+        icon: "heart",
         extendedClass: "text-donate-light",
       },
     ],

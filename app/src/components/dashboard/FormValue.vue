@@ -1008,7 +1008,7 @@
 
 <script>
 import LoadingIcon from "../LoadingIcon.vue";
-import { debounce } from "lodash";
+import debounce from "lodash/debounce";
 
 import {
   Listbox,
