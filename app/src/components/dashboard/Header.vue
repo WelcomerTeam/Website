@@ -110,6 +110,9 @@
                     src="/assets/logo.svg"
                     alt="Workflow"
                   />
+                  <span class="my-auto ml-2 text-xl font-bold text-white"
+                    >Welcomer</span
+                  >
                 </div>
                 <div class="-mr-2">
                   <PopoverButton class="navbar-mobile-close">

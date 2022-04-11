@@ -15,7 +15,6 @@ import { faYoutube } from "@fortawesome/free-brands-svg-icons";
 library.add(faYoutube);
 
 import {
-  faHandHoldingHeart,
   faPlus,
   faHeart,
   faPenToSquare,
@@ -53,7 +52,6 @@ import {
   faShield,
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
-  faHandHoldingHeart,
   faPlus,
   faHeart,
   faPenToSquare,

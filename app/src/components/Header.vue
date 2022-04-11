@@ -159,8 +159,7 @@
               <router-link to="/premium"> Welcomer Pro </router-link>
             </div>
           </PopoverGroup>
-          <UserProfile
-          />
+          <UserProfile />
         </div>
       </div>
 
@@ -176,12 +175,15 @@
           <div class="navbar-mobile-menu">
             <div class="px-5 pt-5 pb-6">
               <div class="flex items-center justify-between">
-                <div>
+                <div class="flex">
                   <img
                     class="w-auto h-8"
                     src="/assets/logo.svg"
                     alt="Workflow"
                   />
+                  <span class="my-auto ml-2 text-xl font-bold text-white"
+                    >Welcomer</span
+                  >
                 </div>
                 <div class="-mr-2">
                   <PopoverButton class="navbar-mobile-close">
@@ -191,12 +193,7 @@
                 </div>
               </div>
               <div class="mt-6">
-                <a
-                  href="/login"
-                  class="w-full cta-button bg-primary hover:bg-primary-dark"
-                >
-                  Login with Discord
-                </a>
+                <UserProfileCompact />
               </div>
             </div>
 
@@ -218,7 +215,7 @@
                 <a class="navbar-mobile-menu-item">
                   <div class="popover-panel-icon bg-donate">
                     <font-awesome-icon
-                      icon="hand-holding-heart"
+                      icon="heart"
                       class="navbar-mobile-menu-item-icon"
                       aria-hidden="true"
                     />
@@ -293,6 +290,7 @@ import { MenuIcon, XIcon } from "@heroicons/vue/outline";
 import { ChevronDownIcon } from "@heroicons/vue/solid";
 
 import UserProfile from "../components/UserProfile.vue";
+import UserProfileCompact from "../components/UserProfileCompact.vue";
 
 const navfeatures = [
   {
@@ -398,6 +396,7 @@ export default {
     PopoverGroup,
     PopoverPanel,
     UserProfile,
+    UserProfileCompact,
     ChevronDownIcon,
     MenuIcon,
     XIcon,
