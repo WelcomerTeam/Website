@@ -10,6 +10,7 @@ const FormTypeText = 7;
 const FormTypeTextArea = 8;
 const FormTypeNumber = 9;
 const FormTypeDropdown = 10;
+const FormTypeEmbed = 11;
 
 export {
   FormTypeBlank,
@@ -24,4 +25,5 @@ export {
   FormTypeTextArea,
   FormTypeNumber,
   FormTypeDropdown,
+  FormTypeEmbed,
 };

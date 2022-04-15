@@ -12,9 +12,14 @@
       <Switch
         :modelValue="modelValue"
         @update:modelValue="updateValue($event)"
+        :disabled="$props.disabled"
         :class="[
-          modelValue ? 'bg-green-500' : 'bg-gray-400',
-          'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary',
+          $props.disabled
+            ? 'bg-gray-100'
+            : modelValue
+            ? 'bg-green-500 focus:ring-green-500'
+            : 'bg-gray-400 focus:ring-gray-400',
+          'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2',
         ]"
       >
         <span
@@ -74,10 +79,14 @@
         as="div"
         v-model="modelValue"
         @update:modelValue="updateValue($event)"
+        :disabled="$props.disabled"
       >
         <div class="relative">
           <ListboxButton
-            class="relative w-full py-2 pl-3 pr-10 text-left bg-white border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
+            :class="[
+              $props.disabled ? 'bg-gray-100' : 'bg-white',
+              'relative w-full py-2 pl-3 pr-10 text-left border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
+            ]"
           >
             <div
               class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
@@ -111,7 +120,7 @@
             leave-to-class="opacity-0"
           >
             <ListboxOptions
-              class="absolute z-10 w-full mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+              class="absolute z-10 w-full mt-1 overflow-auto text-base bg-white rounded-md shadow-sm max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
             >
               <div
                 v-if="$store.getters.isLoadingGuild"
@@ -210,11 +219,15 @@
       <Listbox
         as="div"
         v-model="modelValue"
+        :disabled="$props.disabled"
         @update:modelValue="updateValue($event)"
       >
         <div class="relative mt-1">
           <ListboxButton
-            class="relative w-full py-2 pl-3 pr-10 text-left bg-white border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
+            :class="[
+              $props.disabled ? 'bg-gray-100' : 'bg-white',
+              'relative w-full py-2 pl-3 pr-10 text-left border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
+            ]"
           >
             <div
               class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
@@ -248,7 +261,7 @@
             leave-to-class="opacity-0"
           >
             <ListboxOptions
-              class="absolute z-10 w-full mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+              class="absolute z-10 w-full mt-1 overflow-auto text-base bg-white rounded-md shadow-sm max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
             >
               <div
                 v-if="$store.getters.isLoadingGuild"
@@ -358,10 +371,14 @@
         as="div"
         v-model="modelValue"
         @update:modelValue="updateValue($event)"
+        :disabled="$props.disabled"
       >
         <div class="relative mt-1">
           <ListboxButton
-            class="relative w-full py-2 pl-3 pr-10 text-left bg-white border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
+            :class="[
+              $props.disabled ? 'bg-gray-100' : 'bg-white',
+              'relative w-full py-2 pl-3 pr-10 text-left border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
+            ]"
           >
             <div
               class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
@@ -395,7 +412,7 @@
             leave-to-class="opacity-0"
           >
             <ListboxOptions
-              class="absolute z-10 w-full mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+              class="absolute z-10 w-full mt-1 overflow-auto text-base bg-white rounded-md shadow-sm max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
             >
               <div
                 v-if="$store.getters.isLoadingGuild"
@@ -495,10 +512,14 @@
         as="div"
         v-model="modelValue"
         @update:modelValue="updateValue($event)"
+        :disabled="$props.disabled"
       >
         <div class="relative mt-1">
           <ListboxButton
-            class="relative w-full py-2 pl-3 pr-10 text-left bg-white border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
+            :class="[
+              $props.disabled ? 'bg-gray-100' : 'bg-white',
+              'relative w-full py-2 pl-3 pr-10 text-left border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
+            ]"
           >
             <div
               class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
@@ -534,7 +555,7 @@
             leave-to-class="opacity-0"
           >
             <ListboxOptions
-              class="absolute z-10 w-full mt-1 text-base bg-white rounded-md shadow-lg ring-1 ring-primary ring-opacity-5 focus:outline-none sm:text-sm"
+              class="absolute z-10 w-full mt-1 text-base bg-white rounded-md shadow-sm ring-1 ring-primary ring-opacity-5 focus:outline-none sm:text-sm"
             >
               <div
                 v-if="$store.getters.isLoadingGuild"
@@ -673,10 +694,14 @@
         as="div"
         v-model="modelValue"
         @update:modelValue="updateValue($event)"
+        :disabled="$props.disabled"
       >
         <div class="relative mt-1">
           <ListboxButton
-            class="relative w-full py-2 pl-3 pr-10 text-left bg-white border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
+            :class="[
+              $props.disabled ? 'bg-gray-100' : 'bg-white',
+              'relative w-full py-2 pl-3 pr-10 text-left border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
+            ]"
           >
             <div
               class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
@@ -711,7 +736,7 @@
             leave-to-class="opacity-0"
           >
             <ListboxOptions
-              class="absolute z-10 w-full mt-1 text-base bg-white rounded-md shadow-lg ring-1 ring-primary ring-opacity-5 focus:outline-none sm:text-sm"
+              class="absolute z-10 w-full mt-1 text-base bg-white rounded-md shadow-sm ring-1 ring-primary ring-opacity-5 focus:outline-none sm:text-sm"
             >
               <div class="w-full p-2">
                 <input
@@ -807,10 +832,14 @@
         as="div"
         v-model="modelValue"
         @update:modelValue="updateValue($event)"
+        :disabled="$props.disabled"
       >
         <div class="relative mt-1">
           <ListboxButton
-            class="relative w-full py-2 pl-3 pr-10 text-left bg-white border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
+            :class="[
+              $props.disabled ? 'bg-gray-100' : 'bg-white',
+              'relative w-full py-2 pl-3 pr-10 text-left border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
+            ]"
           >
             <div
               class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
@@ -852,7 +881,11 @@
     <div v-else-if="type == FormTypeText" class="mt-1 sm:mt-0 sm:col-span-2">
       <input
         type="text"
-        class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
+        :class="[
+          $props.disabled ? 'bg-gray-100' : 'bg-white',
+          'flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm',
+        ]"
+        :disabled="$props.disabled"
         placeholder="Enter text here..."
         v-model="modelValue"
         @update:modelValue="updateValue($event)"
@@ -863,7 +896,11 @@
     <div v-else-if="type == FormTypeNumber" class="mt-1 sm:mt-0 sm:col-span-2">
       <input
         type="number"
-        class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
+        :class="[
+          $props.disabled ? 'bg-gray-100' : 'bg-white',
+          'flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm',
+        ]"
+        :disabled="$props.disabled"
         v-model="modelValue"
         @update:modelValue="updateValue($event)"
       />
@@ -876,7 +913,11 @@
     >
       <textarea
         type="text"
-        class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
+        :class="[
+          $props.disabled ? 'bg-gray-100' : 'bg-white',
+          'flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm',
+        ]"
+        :disabled="$props.disabled"
         placeholder="Enter text here..."
         v-model="modelValue"
         @update:modelValue="updateValue($event)"
@@ -891,11 +932,15 @@
       <Listbox
         as="div"
         v-model="modelValue"
+        :disabled="$props.disabled"
         @update:modelValue="updateValue($event)"
       >
         <div class="relative mt-1">
           <ListboxButton
-            class="relative w-full py-2 pl-3 pr-10 text-left bg-white border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
+            :class="[
+              $props.disabled ? 'bg-gray-100' : 'bg-white',
+              'relative w-full py-2 pl-3 pr-10 text-left border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
+            ]"
           >
             <div
               v-if="$props.isLoading"
@@ -917,7 +962,7 @@
             leave-to-class="opacity-0"
           >
             <ListboxOptions
-              class="absolute z-10 w-full mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+              class="absolute z-10 w-full mt-1 overflow-auto text-base bg-white rounded-md shadow-sm max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
             >
               <div
                 v-if="$props.isLoading"
@@ -999,12 +1044,25 @@
       <slot />
     </div>
 
+    <div v-else-if="FormTypeEmbed" class="mt-1 sm:mt-0 sm:col-span-2">
+      <embed-builder
+        v-model="modelValue"
+        @update:modelValue="updateValue($event)"
+      />
+    </div>
+
     <span v-else
       ><span>Unknown type {{ type }}</span>
       <div><slot /></div
     ></span>
   </div>
 </template>
+
+<style>
+.code_editor > .code_area > pre {
+  display: flex;
+}
+</style>
 
 <script>
 import LoadingIcon from "../LoadingIcon.vue";
@@ -1037,7 +1095,9 @@ import {
   FormTypeTextArea,
   FormTypeNumber,
   FormTypeDropdown,
+  FormTypeEmbed,
 } from "./FormValueEnum";
+import EmbedBuilder from "./EmbedBuilder.vue";
 
 export default {
   components: {
@@ -1052,6 +1112,7 @@ export default {
     XIcon,
     ColorPicker,
     LoadingIcon,
+    EmbedBuilder,
   },
 
   props: {
@@ -1080,8 +1141,13 @@ export default {
           FormTypeTextArea,
           FormTypeNumber,
           FormTypeDropdown,
+          FormTypeEmbed,
         ].includes(value);
       },
+    },
+    disabled: {
+      type: Boolean,
+      required: false,
     },
     modelValue: {
       type: null,
@@ -1121,6 +1187,7 @@ export default {
       FormTypeTextArea,
       FormTypeNumber,
       FormTypeDropdown,
+      FormTypeEmbed,
 
       idRegex,
 
@@ -1161,6 +1228,9 @@ export default {
     },
 
     updateValue(value) {
+      if (this.$props.disabled) {
+        return;
+      }
       this.$emit("update:modelValue", value);
     },
 

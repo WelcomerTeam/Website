@@ -11,7 +11,10 @@
       <h2 class="header-23xsNx">
         <span class="headerText-3Uvj1Y"
           ><span
-            :class="[isLight ? 'text-secondary' : 'text-gray-200', 'username-1A8OIy desaturateUserColors-1gar-1']"
+            :class="[
+              isLight ? 'text-secondary' : 'text-gray-200',
+              'username-1A8OIy desaturateUserColors-1gar-1',
+            ]"
             aria-expanded="false"
             tabindex="0"
             :style="{ color: `#${rgbIntToRGB(authorColour)}` }"

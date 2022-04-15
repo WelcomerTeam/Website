@@ -115,7 +115,7 @@
                   </span>
                 </div>
                 <div
-                  class="relative mt-6 bg-gray-100 rounded-lg p-0.5 flex flex-wrap self-center sm:mt-8"
+                  class="relative mt-6 bg-gray-100 rounded-lg p-0.5 flex flex-wrap self-center sm:mt-8 shadow-sm"
                 >
                   <button
                     type="button"
@@ -173,7 +173,7 @@
                 <div
                   v-for="plan in plans"
                   :key="plan.name"
-                  class="border border-gray-200 divide-y divide-gray-200 rounded-lg shadow-lg"
+                  class="border border-gray-200 divide-y divide-gray-200 rounded-lg shadow-sm"
                 >
                   <div class="p-6">
                     <h2 class="text-lg font-bold leading-6 text-gray-900">
@@ -243,7 +243,7 @@
                 <div class="relative">
                   <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div
-                      class="max-w-lg mx-auto overflow-hidden border border-gray-300 rounded-lg shadow-lg lg:max-w-none lg:flex"
+                      class="max-w-lg mx-auto overflow-hidden border border-gray-300 rounded-lg shadow-sm lg:max-w-none lg:flex"
                     >
                       <div class="flex-1 px-6 py-8 my-auto bg-white lg:p-12">
                         <h3
@@ -258,7 +258,7 @@
                         </p>
                       </div>
                       <div
-                        class="px-6 py-8 text-center shadow-lg bg-secondary lg:flex-shrink-0 lg:flex lg:flex-col lg:justify-center lg:p-12"
+                        class="px-6 py-8 text-center shadow-sm bg-secondary lg:flex-shrink-0 lg:flex lg:flex-col lg:justify-center lg:p-12"
                       >
                         <p class="text-lg font-medium leading-6 text-gray-100">
                           Pay once, own it forever
