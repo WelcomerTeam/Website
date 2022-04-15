@@ -1,6 +1,6 @@
 <template>
   <Popover as="div" v-slot="{ open }" class="relative">
-    <div class="border border-gray-300 p-4 rounded-md flex">
+    <div class="border border-gray-300 p-4 rounded-md flex shadow-sm">
       <discord-embed
         class="flex-1"
         :embeds="parseDict(modelValue).embeds"
@@ -42,7 +42,7 @@
       leave-to-class="opacity-0"
     >
       <PopoverPanel
-        class="absolute w-full z-10 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+        class="absolute w-full z-10 mt-1 overflow-auto text-base bg-white rounded-md shadow-sm ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
       >
         <div class="border-gray-300 rounded-md border shadow-sm">
           <div>
@@ -274,7 +274,8 @@
                           v-model="field.inline"
                           @update:modelValue="updateEmbed()"
                         />
-                        <span class="ml-3 text-sm font-medium text-gray-900"
+                        <span
+                          class="ml-3 text-sm font-medium text-gray-900 shadow-sm"
                           >Inline</span
                         >
                       </div>
@@ -454,12 +455,12 @@
 
             <div v-if="this.page == 2">
               <!-- Embed Code -->
-              <textarea
+              <CodeEditor
                 v-model="modelValue"
                 @update:modelValue="updateValue($event)"
-                class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
-                placeholder="Paste embed JSON here..."
-                rows="8"
+                :languages="[['json', 'JSON']]"
+                :wrap_code="true"
+                width="100%"
               />
             </div>
           </div>
@@ -476,8 +477,8 @@
 </style>
 
 <script>
-import FormValue from "./FormValue.vue";
 import LoadingIcon from "../LoadingIcon.vue";
+import CodeEditor from "../simple-code-editor/CodeEditor.vue";
 
 import {
   Listbox,
@@ -507,7 +508,6 @@ const tabs = [
 
 export default {
   components: {
-    FormValue,
     Listbox,
     ListboxButton,
     ListboxLabel,
@@ -526,6 +526,8 @@ export default {
     Popover,
     PopoverButton,
     PopoverPanel,
+
+    CodeEditor,
   },
 
   props: {
@@ -755,7 +757,6 @@ export default {
     },
 
     updateValue(value) {
-      console.log(value);
       this.$emit("update:modelValue", value);
     },
 
