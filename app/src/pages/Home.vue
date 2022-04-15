@@ -48,7 +48,7 @@
             </p>
             <div class="hero-buttons">
               <div class="hero-primary">
-                <a href="/invite">Invite Welcomer</a>
+                <router-link to="/invite">Invite Welcomer</router-link>
               </div>
               <div class="hero-secondary">
                 <a href="#features">Features</a>

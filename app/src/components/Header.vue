@@ -175,7 +175,7 @@
           <div class="navbar-mobile-menu">
             <div class="px-5 pt-5 pb-6">
               <div class="flex items-center justify-between">
-                <div class="flex">
+                <div class="flex justify-start">
                   <img
                     class="w-auto h-8"
                     src="/assets/logo.svg"
@@ -199,7 +199,7 @@
 
             <div class="px-4 py-4">
               <div class="grid grid-cols-2">
-                <a class="navbar-mobile-menu-item">
+                <router-link to="/invite" class="navbar-mobile-menu-item">
                   <div class="popover-panel-icon bg-primary">
                     <font-awesome-icon
                       icon="plus"
@@ -210,18 +210,20 @@
                   <span class="navbar-mobile-menu-item-text">
                     Invite Welcomer
                   </span>
-                </a>
+                </router-link>
 
-                <a class="navbar-mobile-menu-item">
-                  <div class="popover-panel-icon bg-donate">
+                <router-link to="/premium" class="navbar-mobile-menu-item">
+                  <div class="popover-panel-icon">
                     <font-awesome-icon
                       icon="heart"
                       class="navbar-mobile-menu-item-icon"
                       aria-hidden="true"
                     />
                   </div>
-                  <span class="navbar-mobile-menu-item-text"> Premium </span>
-                </a>
+                  <span class="navbar-mobile-menu-item-text">
+                    Get Welcomer Pro
+                  </span>
+                </router-link>
               </div>
             </div>
 

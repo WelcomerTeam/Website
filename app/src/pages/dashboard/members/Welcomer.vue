@@ -4,10 +4,13 @@
       <div class="dashboard-title">Welcomer</div>
     </div>
     <div class="dashboard-content">
-      <div class="font-bold uppercase py-4 mt-8 border-b">
+      <div class="font-bold uppercase py-4 mt-8 border-b mb-4">
         <a>Welcomer Text</a>
       </div>
-      <form-value title="Enable Welcomer Text" :type="FormTypeToggle"
+      <form-value
+        title="Enable Welcomer Text"
+        :type="FormTypeToggle"
+        v-model="welcomerConfig.text.enabled"
         ><div class="text-gray-600 text-sm mt-2">
           This is the description for the form value.
           <a href="#" class="text-primary">Find out more</a>.
@@ -16,75 +19,112 @@
       <form-value
         title="Welcomer Channel"
         :type="FormTypeChannelListCategories"
+        disabled
+        v-model="welcomerConfig.text.channel"
       />
+
       <form-value title="Welcomer Text Message" :type="FormTypeBlank">
-        <embed-builder v-model="embedData" />
+        <embed-builder v-model="welcomerConfig.text.message_json" />
+      </form-value>
+      <form-value
+        title="Welcomer Text Message"
+        :type="FormTypeEmbed"
+        v-model="welcomerConfig.text.message_json"
+      >
       </form-value>
 
-      <div class="my-8" />
-
-      <form-value title="Enable Welcomer DMs" :type="FormTypeToggle"
-        ><div>Hello</div></form-value
-      >
-      <form-value title="Include Welcomer Image" :type="FormTypeToggle"
-        ><div>Hello</div></form-value
-      >
-      <form-value
-        title="Use same formatting as Welcomer Text"
-        :type="FormTypeToggle"
-      />
-      <form-value title="Welcomer DM Message" :type="FormTypeTextArea"
-        >TODO: Embed builder</form-value
-      >
-
-      <div class="font-bold uppercase py-4 mt-8 border-b">
-        <a>Welcomer Images</a>
-      </div>
-
-      <form-value title="Enable Welcomer Images" :type="FormTypeToggle"
-        ><div>Hello</div></form-value
-      >
-      <form-value title="Enable Image Border" :type="FormTypeToggle"
-        ><div>Hello</div></form-value
-      >
-      <form-value title="Image Border Colour" :type="FormTypeColour"
-        ><div>Hello</div></form-value
-      >
-
-      <div class="font-bold uppercase py-4 mt-8 border-b">
+      <div class="font-bold uppercase py-4 mt-8 border-b mb-4">
         <a>Welcomer DMs</a>
       </div>
 
-      <form-value title="Image Background" :type="FormTypeText"
-        ><div>Hello</div></form-value
-      >
-      <form-value title="Text Colour" :type="FormTypeColour"
-        ><div>Hello</div></form-value
-      >
-      <form-value title="Text Border Colour" :type="FormTypeColour"
-        ><div>Hello</div></form-value
-      >
-      <form-value title="Profile Border Colour" :type="FormTypeColour"
-        ><div>Hello</div></form-value
-      >
+      <form-value
+        title="Enable Welcomer DMs"
+        :type="FormTypeToggle"
+        v-model="welcomerConfig.dms.enabled"
+      ></form-value>
+      <form-value
+        title="Include Welcomer Image"
+        :type="FormTypeToggle"
+        v-model="welcomerConfig.dms.include_image"
+      ></form-value>
+      <form-value
+        title="Use same formatting as Welcomer Text"
+        v-model="welcomerConfig.dms.reuse_message"
+        :type="FormTypeToggle"
+      />
+      <form-value title="Welcomer DM Message" :type="FormTypeBlank"
+        ><embed-builder v-model="welcomerConfig.dms.message_json"
+      /></form-value>
+
+      <div class="font-bold uppercase py-4 mt-8 border-b mb-4">
+        <a>Welcomer Images</a>
+      </div>
+
+      <form-value
+        title="Enable Welcomer Images"
+        :type="FormTypeToggle"
+        v-model="welcomerConfig.images.enabled"
+      ></form-value>
+
+      <form-value
+        title="Image Background"
+        :type="FormTypeText"
+        v-model="welcomerConfig.images.background"
+      ></form-value>
+
+      <form-value
+        title="Image Message"
+        :type="FormTypeTextArea"
+        v-model="welcomerConfig.images.message"
+      />
+
+      <form-value
+        title="Enable Image Border"
+        :type="FormTypeToggle"
+        v-model="welcomerConfig.images.enable_border"
+      ></form-value>
+      <form-value
+        title="Image Border Colour"
+        :type="FormTypeColour"
+        v-model="welcomerConfig.images.border_colour"
+        :disabled="!welcomerConfig.images.enable_border"
+      ></form-value>
+
+      <form-value
+        title="Text Colour"
+        :type="FormTypeColour"
+        v-model="welcomerConfig.images.text_colour"
+      ></form-value>
+      <form-value
+        title="Text Border Colour"
+        :type="FormTypeColour"
+        v-model="welcomerConfig.images.text_border_colour"
+      ></form-value>
+      <form-value
+        title="Profile Border Colour"
+        :type="FormTypeColour"
+        v-model="welcomerConfig.images.profile_border_colour"
+      ></form-value>
       <form-value
         title="Profile Border Type"
         :type="FormTypeDropdown"
         :values="profileBorderTypes"
         :nullable="true"
+        v-model="welcomerConfig.images.profile_border_type"
+      ></form-value>
+
+      <form-value
+        title="Image Alignment"
+        :type="FormTypeText"
+        v-model="welcomerConfig.images.image_alignment"
         >TODO: Dropdown</form-value
       >
-
-      <div class="my-8" />
-
-      <form-value title="Image Alignment" :type="FormTypeText"
+      <form-value
+        title="Image Theme"
+        :type="FormTypeText"
+        v-model="welcomerConfig.images.image_theme"
         >TODO: Dropdown</form-value
       >
-      <form-value title="Image Theme" :type="FormTypeText"
-        >TODO: Dropdown</form-value
-      >
-
-      <form-value title="Image Message" :type="FormTypeTextArea" />
     </div>
   </div>
 </template>
@@ -107,10 +147,11 @@ import {
   FormTypeNumber,
   FormTypeTextArea,
   FormTypeDropdown,
+  FormTypeEmbed,
 } from "../../../components/dashboard/FormValueEnum";
 import EmbedBuilder from "../../../components/dashboard/EmbedBuilder.vue";
 
-var profileBorderTypes = ["a", "b", "c"];
+var profileBorderTypes = ["Rounded", "Squared", "Hexagonal", "Circular"];
 
 export default {
   components: {
@@ -118,10 +159,35 @@ export default {
     EmbedBuilder,
   },
   setup() {
-    let embedData = ref("");
+    let welcomerConfig = ref({
+      text: {
+        enabled: false,
+        channel: null,
+        message_json: "",
+      },
+      images: {
+        enabled: true,
+        enable_border: true,
+        border_colour: 0,
+        background: "default",
+        text_colour: 0,
+        text_border_colour: 0,
+        profile_border_colour: 0,
+        profile_border_type: "Rounded",
+        image_alignment: "Center",
+        image_theme: "Legacy",
+        message: "",
+      },
+      dms: {
+        enabled: false,
+        include_image: false,
+        reuse_message: false,
+        message_json: "",
+      },
+    });
 
     return {
-      embedData,
+      welcomerConfig,
 
       FormTypeBlank,
       FormTypeToggle,
@@ -135,6 +201,7 @@ export default {
       FormTypeNumber,
       FormTypeTextArea,
       FormTypeDropdown,
+      FormTypeEmbed,
 
       store,
       profileBorderTypes,

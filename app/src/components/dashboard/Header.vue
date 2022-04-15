@@ -104,7 +104,7 @@
           <div class="navbar-mobile-menu">
             <div class="px-5 pt-5 pb-6">
               <div class="flex items-center justify-between">
-                <div>
+                <div class="flex justify-start">
                   <img
                     class="w-auto h-8"
                     src="/assets/logo.svg"
@@ -122,15 +122,42 @@
                 </div>
               </div>
               <div class="mt-6">
-                <a
-                  href="/login"
-                  class="w-full cta-button bg-primary hover:bg-primary-dark"
-                >
-                  Login with Discord
-                </a>
+                <UserProfileCompact />
               </div>
             </div>
+
             <div class="px-4 py-4">
+              <div class="grid grid-cols-2">
+                <router-link to="/invite" class="navbar-mobile-menu-item">
+                  <div class="popover-panel-icon bg-primary">
+                    <font-awesome-icon
+                      icon="plus"
+                      class="navbar-mobile-menu-item-icon"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <span class="navbar-mobile-menu-item-text">
+                    Invite Welcomer
+                  </span>
+                </router-link>
+
+                <router-link to="/premium" class="navbar-mobile-menu-item">
+                  <div class="popover-panel-icon">
+                    <font-awesome-icon
+                      icon="heart"
+                      class="navbar-mobile-menu-item-icon"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <span class="navbar-mobile-menu-item-text">
+                    Get Welcomer Pro
+                  </span>
+                </router-link>
+              </div>
+            </div>
+
+            <div class="px-4 py-4">
+              <span class="pl-3 font-bold uppercase text-gray-200">Help</span>
               <nav class="grid grid-cols-2">
                 <router-link
                   v-for="item in navresources"
@@ -169,6 +196,7 @@ import { MenuIcon, XIcon } from "@heroicons/vue/outline";
 import { ChevronDownIcon } from "@heroicons/vue/solid";
 
 import UserProfile from "../UserProfile.vue";
+import UserProfileCompact from "../UserProfileCompact.vue";
 
 const navresources = [
   {
@@ -226,6 +254,7 @@ export default {
     PopoverGroup,
     PopoverPanel,
     UserProfile,
+    UserProfileCompact,
     ChevronDownIcon,
     MenuIcon,
     XIcon,
