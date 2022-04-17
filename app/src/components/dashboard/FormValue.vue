@@ -14,6 +14,7 @@
         @update:modelValue="updateValue($event)"
         :disabled="$props.disabled"
         :class="[
+          $props.invalid ? 'ring-red-500 border-red-500' : '',
           $props.disabled
             ? 'bg-gray-100'
             : modelValue
@@ -84,6 +85,7 @@
         <div class="relative">
           <ListboxButton
             :class="[
+              $props.invalid ? 'border-red-500 ring-red-500' : '',
               $props.disabled ? 'bg-gray-100' : 'bg-white',
               'relative w-full py-2 pl-3 pr-10 text-left border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
             ]"
@@ -225,6 +227,7 @@
         <div class="relative mt-1">
           <ListboxButton
             :class="[
+              $props.invalid ? 'ring-red-500 border-red-500' : '',
               $props.disabled ? 'bg-gray-100' : 'bg-white',
               'relative w-full py-2 pl-3 pr-10 text-left border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
             ]"
@@ -376,6 +379,7 @@
         <div class="relative mt-1">
           <ListboxButton
             :class="[
+              $props.invalid ? 'ring-red-500 border-red-500' : '',
               $props.disabled ? 'bg-gray-100' : 'bg-white',
               'relative w-full py-2 pl-3 pr-10 text-left border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
             ]"
@@ -517,6 +521,7 @@
         <div class="relative mt-1">
           <ListboxButton
             :class="[
+              $props.invalid ? 'ring-red-500 border-red-500' : '',
               $props.disabled ? 'bg-gray-100' : 'bg-white',
               'relative w-full py-2 pl-3 pr-10 text-left border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
             ]"
@@ -699,6 +704,7 @@
         <div class="relative mt-1">
           <ListboxButton
             :class="[
+              $props.invalid ? 'ring-red-500 border-red-500' : '',
               $props.disabled ? 'bg-gray-100' : 'bg-white',
               'relative w-full py-2 pl-3 pr-10 text-left border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
             ]"
@@ -708,10 +714,11 @@
             >
               <img
                 v-if="modelValue != undefined"
-                v-lazy="`https://cdn.discordapp.com/emojis/${modelValue}.png`"
+                :src="`https://cdn.discordapp.com/emojis/${modelValue}.png`"
                 class="w-5 h-5 object-contain"
               />
               <font-awesome-icon
+                v-else
                 icon="face-laugh"
                 class="w-5 h-5 text-gray-400"
                 aria-hidden="true"
@@ -750,6 +757,7 @@
                   as="template"
                   :value="null"
                   v-slot="{ active, selected }"
+                  v-if="nullable"
                 >
                   <li
                     :class="[
@@ -837,6 +845,7 @@
         <div class="relative mt-1">
           <ListboxButton
             :class="[
+              $props.invalid ? 'ring-red-500 border-red-500' : '',
               $props.disabled ? 'bg-gray-100' : 'bg-white',
               'relative w-full py-2 pl-3 pr-10 text-left border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
             ]"
@@ -882,6 +891,7 @@
       <input
         type="text"
         :class="[
+          $props.invalid ? 'ring-red-500 border-red-500' : '',
           $props.disabled ? 'bg-gray-100' : 'bg-white',
           'flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm',
         ]"
@@ -897,6 +907,7 @@
       <input
         type="number"
         :class="[
+          $props.invalid ? 'ring-red-500 border-red-500' : '',
           $props.disabled ? 'bg-gray-100' : 'bg-white',
           'flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm',
         ]"
@@ -914,6 +925,7 @@
       <textarea
         type="text"
         :class="[
+          $props.invalid ? 'ring-red-500 border-red-500' : '',
           $props.disabled ? 'bg-gray-100' : 'bg-white',
           'flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm',
         ]"
@@ -938,6 +950,7 @@
         <div class="relative mt-1">
           <ListboxButton
             :class="[
+              $props.invalid ? 'ring-red-500 border-red-500' : '',
               $props.disabled ? 'bg-gray-100' : 'bg-white',
               'relative w-full py-2 pl-3 pr-10 text-left border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
             ]"
@@ -1048,6 +1061,8 @@
       <embed-builder
         v-model="modelValue"
         @update:modelValue="updateValue($event)"
+        :disabled="$props.disabled"
+        :invalid="$props.invalid"
       />
     </div>
 
@@ -1156,6 +1171,9 @@ export default {
     nullable: {
       type: Boolean,
       required: false,
+    },
+    invalid: {
+      type: Boolean,
     },
     isLoading: {
       type: Boolean,

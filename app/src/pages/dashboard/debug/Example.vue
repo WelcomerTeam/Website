@@ -4,66 +4,115 @@
       <div class="dashboard-title">Dashboard example</div>
     </div>
     <div class="dashboard-content">
+      <form-value title="Nullable" v-model="nullable" :type="FormTypeToggle" />
+
+      <form-value title="Disabled" v-model="disabled" :type="FormTypeToggle" />
+
+      <form-value title="Invalid" v-model="invalid" :type="FormTypeToggle" />
+
+      <div class="font-bold uppercase py-4 mt-8 border-b mb-4">
+        <a>Form Types</a>
+      </div>
+
       <form-value
         title="Form Type Toggle"
         v-model="config.enabled"
         :type="FormTypeToggle"
-        :nullable="true"
+        :nullable="nullable"
+        :disabled="disabled"
+        :invalid="invalid"
       />
 
       <form-value
         title="Form Type Channel List"
         v-model="config.channel"
         :type="FormTypeChannelList"
-        :nullable="true"
+        :nullable="nullable"
+        :disabled="disabled"
+        :invalid="invalid"
       />
       <form-value
         title="Form Type Channel List Categories"
         v-model="config.channelTwo"
         :type="FormTypeChannelListCategories"
-        :nullable="true"
+        :nullable="nullable"
+        :disabled="disabled"
+        :invalid="invalid"
       />
       <form-value
         title="Form Type Role List"
         v-model="config.role"
         :type="FormTypeRoleList"
-        :nullable="true"
+        :nullable="nullable"
+        :disabled="disabled"
+        :invalid="invalid"
       />
       <form-value
         title="Form Type Member List"
         v-model="config.member"
         :type="FormTypeMemberList"
-        :nullable="true"
+        :nullable="nullable"
+        :disabled="disabled"
+        :invalid="invalid"
       />
       <form-value
         title="Form Type Emoji List"
         v-model="config.emoji"
         :type="FormTypeEmojiList"
-        :nullable="true"
+        :nullable="nullable"
+        :disabled="disabled"
+        :invalid="invalid"
       />
       <form-value
         title="Form Type Colour"
         v-model="config.colour"
         :type="FormTypeColour"
-        :nullable="true"
+        :nullable="nullable"
+        :disabled="disabled"
+        :invalid="invalid"
       />
       <form-value
         title="Form Type Text"
         v-model="config.message"
         :type="FormTypeText"
-        :nullable="true"
+        :nullable="nullable"
+        :disabled="disabled"
+        :invalid="invalid"
       />
       <form-value
         title="Form Type Number"
         v-model="config.count"
         :type="FormTypeNumber"
-        :nullable="true"
+        :nullable="nullable"
+        :disabled="disabled"
+        :invalid="invalid"
       />
       <form-value
         title="Form Type TextArea"
         v-model="config.rules"
         :type="FormTypeTextArea"
-        :nullable="true"
+        :nullable="nullable"
+        :disabled="disabled"
+        :invalid="invalid"
+      />
+
+      <form-value
+        title="Form Type Dropdown"
+        v-model="config.select"
+        :type="FormTypeDropdown"
+        :values="['a', 'b', 'c']"
+        :nullable="nullable"
+        :disabled="disabled"
+        :invalid="invalid"
+      />
+
+      <form-value
+        title="Form Type Embed"
+        v-model="config.rich_message"
+        :type="FormTypeEmbed"
+        :nullable="nullable"
+        :disabled="disabled"
+        :invalid="invalid"
       />
     </div>
 
@@ -87,6 +136,8 @@ import {
   FormTypeText,
   FormTypeNumber,
   FormTypeTextArea,
+  FormTypeDropdown,
+  FormTypeEmbed,
 } from "../../../components/dashboard/FormValueEnum";
 
 var config = ref({
@@ -100,6 +151,8 @@ var config = ref({
   message: "",
   count: 0,
   rules: "",
+  select: "a",
+  rich_message: "{}",
 });
 
 export default {
@@ -107,7 +160,14 @@ export default {
     FormValue,
   },
   setup() {
+    let nullable = ref(false);
+    let disabled = ref(false);
+    let invalid = ref(false);
+
     return {
+      nullable,
+      disabled,
+      invalid,
       config,
 
       FormTypeToggle,
@@ -120,6 +180,8 @@ export default {
       FormTypeText,
       FormTypeNumber,
       FormTypeTextArea,
+      FormTypeDropdown,
+      FormTypeEmbed,
 
       store,
     };

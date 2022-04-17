@@ -85,8 +85,40 @@
 
       <div class="flex-1 bg-white focus:outline-none">
         <main class="relative z-0 flex-1 min-h-full pb-8">
-          <div class="mt-8 font-medium">
+          <div class="mt-8 font-medium pb-20">
             <router-view />
+            <div class="fixed inset-x-0 bottom-0 z-50">
+              <div class="bg-primary">
+                <div class="max-w-xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
+                  <div class="flex items-center justify-between flex-wrap">
+                    <div class="w-0 flex-1 flex items-center">
+                      <p class="ml-3 font-medium text-white truncate">
+                        <span class="inline"> You have unsaved changes! </span>
+                      </p>
+                    </div>
+                    <div
+                      class="order-3 mt-2 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto"
+                    >
+                      <a
+                        href="#"
+                        class="flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-primary bg-white hover:bg-gray-200"
+                      >
+                        Save Changes
+                      </a>
+                    </div>
+                    <div class="order-2 flex-shrink-0 sm:order-3 sm:ml-3">
+                      <button
+                        type="button"
+                        class="-mr-1 flex p-2 rounded-md hover:bg-primary-light text-white focus:outline-none focus:ring-2 focus:ring-white sm:-mr-2"
+                      >
+                        <span class="sr-only">Dismiss</span>
+                        <XIcon class="h-6 w-6" aria-hidden="true" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </main>
       </div>

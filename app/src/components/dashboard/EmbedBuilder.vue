@@ -1,6 +1,11 @@
 <template>
   <Popover as="div" v-slot="{ open }" class="relative">
-    <div class="border border-gray-300 p-4 rounded-md flex shadow-sm">
+    <div
+      :class="[
+        $props.invalid ? 'ring-red-500 border-red-500' : '',
+        'border border-gray-300 p-4 rounded-md flex shadow-sm',
+      ]"
+    >
       <discord-embed
         class="flex-1"
         :embeds="parseDict(modelValue).embeds"
@@ -12,7 +17,11 @@
       <div class="flex items-end">
         <div class="relative">
           <PopoverButton
-            class="relative py-2 pl-3 pr-10 text-left bg-white border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
+            :class="[
+              $props.disabled ? 'bg-gray-100' : 'bg-white',
+              'relative py-2 pl-3 pr-10 text-left border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
+            ]"
+            :disabled="$props.disabled"
           >
             <div class="">
               <font-awesome-icon
@@ -42,7 +51,7 @@
       leave-to-class="opacity-0"
     >
       <PopoverPanel
-        class="absolute w-full z-10 mt-1 overflow-auto text-base bg-white rounded-md shadow-sm ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+        class="block w-full z-10 mt-1 overflow-auto text-base bg-white rounded-md shadow-sm ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
       >
         <div class="border-gray-300 rounded-md border shadow-sm">
           <div>
@@ -534,6 +543,12 @@ export default {
     modelValue: {
       type: null,
       required: false,
+    },
+    disabled: {
+      type: Boolean,
+    },
+    invalid: {
+      type: Boolean,
     },
   },
 

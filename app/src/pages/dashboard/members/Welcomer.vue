@@ -19,13 +19,9 @@
       <form-value
         title="Welcomer Channel"
         :type="FormTypeChannelListCategories"
-        disabled
         v-model="welcomerConfig.text.channel"
       />
 
-      <form-value title="Welcomer Text Message" :type="FormTypeBlank">
-        <embed-builder v-model="welcomerConfig.text.message_json" />
-      </form-value>
       <form-value
         title="Welcomer Text Message"
         :type="FormTypeEmbed"
@@ -43,18 +39,21 @@
         v-model="welcomerConfig.dms.enabled"
       ></form-value>
       <form-value
-        title="Include Welcomer Image"
-        :type="FormTypeToggle"
-        v-model="welcomerConfig.dms.include_image"
-      ></form-value>
-      <form-value
         title="Use same formatting as Welcomer Text"
         v-model="welcomerConfig.dms.reuse_message"
         :type="FormTypeToggle"
       />
-      <form-value title="Welcomer DM Message" :type="FormTypeBlank"
-        ><embed-builder v-model="welcomerConfig.dms.message_json"
-      /></form-value>
+      <form-value
+        title="Welcomer DM Message"
+        :type="FormTypeEmbed"
+        :disabled="welcomerConfig.dms.reuse_message"
+        v-model="welcomerConfig.dms.message_json"
+      />
+      <form-value
+        title="Include Welcomer Image"
+        :type="FormTypeToggle"
+        v-model="welcomerConfig.dms.include_image"
+      ></form-value>
 
       <div class="font-bold uppercase py-4 mt-8 border-b mb-4">
         <a>Welcomer Images</a>
