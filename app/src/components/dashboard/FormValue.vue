@@ -929,6 +929,7 @@
           $props.disabled ? 'bg-gray-100' : 'bg-white',
           'flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm',
         ]"
+        rows="4"
         :disabled="$props.disabled"
         placeholder="Enter text here..."
         v-model="modelValue"
