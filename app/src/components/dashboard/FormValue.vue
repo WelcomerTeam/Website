@@ -1058,7 +1058,7 @@
       <slot />
     </div>
 
-    <div v-else-if="FormTypeEmbed" class="mt-1 sm:mt-0 sm:col-span-2">
+    <div v-else-if="type == FormTypeEmbed" class="mt-1 sm:mt-0 sm:col-span-2">
       <embed-builder
         v-model="modelValue"
         @update:modelValue="updateValue($event)"

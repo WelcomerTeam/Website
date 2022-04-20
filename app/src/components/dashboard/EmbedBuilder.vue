@@ -3,6 +3,7 @@
     <div
       :class="[
         $props.invalid ? 'ring-red-500 border-red-500' : '',
+        open ? 'rounded-b-none ' : '',
         'border border-gray-300 p-4 rounded-md flex shadow-sm',
       ]"
     >
@@ -51,9 +52,11 @@
       leave-to-class="opacity-0"
     >
       <PopoverPanel
-        class="block w-full z-10 mt-1 overflow-auto text-base bg-white rounded-md shadow-sm ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+        class="block w-full overflow-auto text-base bg-white rounded-md shadow-sm sm:text-sm rounded-t-none border-t-0"
       >
-        <div class="border-gray-300 rounded-md border shadow-sm">
+        <div
+          class="border-gray-300 rounded-md border shadow-sm rounded-t-none border-t-0"
+        >
           <div>
             <div class="block">
               <div class="border-b border-gray-200">
