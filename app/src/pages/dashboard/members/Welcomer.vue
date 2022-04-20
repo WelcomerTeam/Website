@@ -261,7 +261,17 @@ export default {
     },
 
     saveConfig() {
-      alert("SAVED");
+      let toastID = Date.now();
+      store.dispatch("createToast", {
+        title: "Changes saved.",
+        icon: "check",
+        class: "text-green-500 bg-green-100",
+        id: toastID,
+      });
+      setTimeout(() => {
+        store.dispatch("removeToast", toastID);
+      }, 5000);
+
       this.unsavedChanges = false;
     },
     resetConfig() {

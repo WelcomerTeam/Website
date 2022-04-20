@@ -6,76 +6,80 @@
     >
       <LoadingIcon />
     </div>
-    <div v-else class="flex items-center flex-shrink-0 px-4">
-      <img
-        class="w-10 h-10 rounded-lg"
-        :src="
-          'https://cdn.discordapp.com/icons/' +
-          $store.getters.getCurrentSelectedGuild?.id +
-          '/' +
-          $store.getters.getCurrentSelectedGuild?.icon +
-          '.webp?size=128'
-        "
-      />
-      <div class="pl-2 overflow-hidden">
-        <router-link to="/dashboard">
-          <h3 class="truncate font-bold leading-none">
-            {{ $store.getters.getCurrentSelectedGuild?.name }}
-          </h3>
-        </router-link>
-        <router-link
-          class="text-xs leading-none font-semibold text-gray-600"
-          to="/dashboard/myguilds"
-          @click="$emit('onChangeGuild')"
-          >Change Guild</router-link
-        >
-      </div>
-    </div>
-
-    <!-- Sidebar -->
-    <nav
-      class="flex flex-col flex-1 px-3 mt-5 overflow-y-auto divide-y divide-gray-300"
-      aria-label="Sidebar"
-    >
-      <div
-        v-for="(nav, index) in navigation"
-        v-bind:key="index"
-        :class="[index === 0 ? '' : 'pt-3 mt-3']"
-      >
-        <div>
-          <span
-            class="text-xs font-bold uppercase text-secondary-light"
-            v-if="nav.title"
-            >{{ nav.title }}</span
-          >
+    <div v-else>
+      <div class="flex items-center flex-shrink-0 px-4">
+        <img
+          v-if="$store.getters.getCurrentSelectedGuild"
+          class="w-10 h-10 rounded-lg"
+          :src="`https://cdn.discordapp.com/icons/${$store.getters.getCurrentSelectedGuild?.id}/${$store.getters.getCurrentSelectedGuild?.icon}.webp?size=128`"
+        />
+        <div class="pl-2 overflow-hidden">
           <router-link
-            v-for="item in nav.items"
-            :key="item.name"
-            :to="item.href"
-            :class="[
-              $route.path === item.href
-                ? 'bg-gray-200 text-primary'
-                : 'text-secondary-light',
-              'hover:bg-gray-200 group flex items-center px-2 py-2 text-sm leading-6 font-semibold rounded-md',
-              item.extendedClass,
-            ]"
+            to="/dashboard"
+            v-if="$store.getters.getCurrentSelectedGuild"
           >
-            <font-awesome-icon
-              :icon="item.icon"
-              :class="[
-                $route.path === item.href
-                  ? 'text-primary'
-                  : 'text-secondary-dark',
-                'flex-shrink-0 w-6 h-6 mr-4',
-                item.extendedClass,
-              ]"
-              aria-hidden="true"
-            />
-            {{ item.name }}
+            <h3 class="truncate font-bold leading-none hover:underline">
+              {{ $store.getters.getCurrentSelectedGuild?.name }}
+            </h3>
           </router-link>
+          <h3 v-else class="truncate font-bold leading-none">
+            No Guild Selected
+          </h3>
+          <router-link
+            class="text-xs leading-none font-semibold text-gray-600 hover:underline"
+            to="/dashboard/myguilds"
+            @click="$emit('onChangeGuild')"
+            >Change Guild</router-link
+          >
         </div>
       </div>
-    </nav>
+
+      <!-- Sidebar -->
+      <nav
+        class="flex flex-col flex-1 px-3 mt-5 overflow-y-auto divide-y divide-gray-300"
+        aria-label="Sidebar"
+        v-if="$store.getters.getCurrentSelectedGuild"
+      >
+        <div
+          v-for="(nav, index) in navigation"
+          v-bind:key="index"
+          :class="[index === 0 ? '' : 'pt-3 mt-3']"
+        >
+          <div>
+            <span
+              class="text-xs font-bold uppercase text-secondary-light"
+              v-if="nav.title"
+              >{{ nav.title }}</span
+            >
+            <router-link
+              v-for="item in nav.items"
+              :key="item.name"
+              :to="item.href"
+              :class="[
+                $route.path === item.href
+                  ? 'bg-gray-200 text-primary'
+                  : 'text-secondary-light',
+                'hover:bg-gray-200 group flex items-center px-2 py-2 text-sm leading-6 font-semibold rounded-md',
+                item.extendedClass,
+              ]"
+            >
+              <font-awesome-icon
+                :icon="item.icon"
+                :class="[
+                  $route.path === item.href
+                    ? 'text-primary'
+                    : 'text-secondary-dark',
+                  'flex-shrink-0 w-6 h-6 mr-4',
+                  item.extendedClass,
+                ]"
+                aria-hidden="true"
+              />
+              {{ item.name }}
+            </router-link>
+          </div>
+        </div>
+      </nav>
+    </div>
   </div>
 </template>
 
@@ -103,7 +107,6 @@ const navigation = [
         name: "Memberships",
         href: "/dashboard/memberships",
         icon: "heart",
-        extendedClass: "text-donate-light",
       },
     ],
   },
