@@ -7,12 +7,17 @@ const state = () => ({
   guilds: [],
 
   isLoadingUser: false,
+  isLoadingGuilds: false,
 });
 
 // getters
 const getters = {
   isLoadingUser: (state) => {
     return state.isLoadingUser;
+  },
+
+  isLoadingGuilds: (state) => {
+    return state.isLoadingGuilds;
   },
 
   isLoggedIn: (state) => {
@@ -24,7 +29,7 @@ const getters = {
   },
 
   getGuilds: (state) => {
-    return state.user?.guilds;
+    return state.guilds;
   },
 };
 
@@ -41,6 +46,18 @@ const actions = {
       }
     );
   },
+
+  fetchGuilds({ commit }) {
+    commit("loadingGuilds");
+    userAPI.getGuilds(
+      (guilds) => {
+        commit("setGuilds", guilds);
+      },
+      () => {
+        commit("setGuilds", undefined);
+      }
+    );
+  },
 };
 
 // mutations
@@ -51,8 +68,17 @@ const mutations = {
     state.isLoadingUser = false;
   },
 
+  setGuilds(state, guilds) {
+    state.guilds = guilds;
+    state.isLoadingGuilds = false;
+  },
+
   loadingUser(state) {
     state.isLoadingUser = true;
+  },
+
+  loadingGuilds(state) {
+    state.isLoadingGuilds = true;
   },
 };
 
