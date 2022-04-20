@@ -14,7 +14,7 @@
           <div class="p-5">
             <div class="flex items-center">
               <div class="flex-shrink-0">
-                <font-awesome-icon :icon="card.icon" class="h-6" />
+                <font-awesome-icon :icon="card.icon" class="w-6 h-6" />
               </div>
               <div class="flex-1 w-0 ml-5">
                 <dl>

@@ -51,6 +51,11 @@ import {
   faPlugCirclePlus,
   faCircleQuestion,
   faShield,
+  faCheck,
+  faTriangleExclamation,
+  faInfo,
+  faBook,
+  faArrowsRotate,
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
   faClose,
@@ -92,7 +97,12 @@ library.add(
   faPlugCircleBolt,
   faPlugCirclePlus,
   faCircleQuestion,
-  faShield
+  faShield,
+  faCheck,
+  faTriangleExclamation,
+  faInfo,
+  faBook,
+  faArrowsRotate
 );
 
 createApp(App)

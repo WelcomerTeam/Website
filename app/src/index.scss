@@ -55,7 +55,7 @@
     @apply max-w-6xl px-4 mx-auto sm:px-6 lg:px-8;
   }
   .dashboard-title-container {
-    @apply mb-8;
+    @apply mb-8 flex justify-between;
   }
   .dashboard-title {
     @apply text-2xl font-bold leading-6 text-gray-900;
