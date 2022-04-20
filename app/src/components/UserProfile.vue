@@ -21,7 +21,7 @@
     <div v-else>
       <PopoverGroup as="nav" class="hidden space-x-6 md:flex">
         <div class="inline-flex my-auto space-x-4">
-          <Popover class="relative z-40" v-slot="{ open }">
+          <Popover class="relative z-10" v-slot="{ open }">
             <PopoverButton
               :class="[
                 open ? 'text-gray-300' : 'text-white',
@@ -60,17 +60,13 @@
                   >
                     <img
                       class="object-cover col-span-1 aspect-square"
-                      :src="
-                        'https://cdn.discordapp.com/avatars/' +
-                        $store.getters.getCurrentUser.id +
-                        '/' +
-                        $store.getters.getCurrentUser.avatar +
-                        '.' +
-                        ($store.getters.getCurrentUser.avatar.startsWith('a_')
+                      :src="`https://cdn.discordapp.com/avatars/${
+                        $store.getters.getCurrentUser.id
+                      }/${$store.getters.getCurrentUser.avatar}.${
+                        $store.getters.getCurrentUser.avatar.startsWith('a_')
                           ? 'gif'
-                          : 'webp') +
-                        '?size=128'
-                      "
+                          : 'webp'
+                      }?size=128`"
                     />
                     <div class="col-span-3 flex items-center">
                       <div>
