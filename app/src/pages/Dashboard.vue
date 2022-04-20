@@ -16,7 +16,7 @@
         <Dialog
           as="div"
           static
-          class="fixed inset-0 z-50 flex lg:hidden"
+          class="fixed inset-0 z-40 flex lg:hidden"
           @close="sidebarOpen = false"
           :open="sidebarOpen"
         >
@@ -90,6 +90,8 @@
           </div>
         </main>
       </div>
+
+      <Toast />
     </div>
   </div>
 </template>
@@ -97,6 +99,7 @@
 <script>
 import Header from "../components/dashboard/Header.vue";
 import DashboardSidebar from "../components/dashboard/Sidebar.vue";
+import Toast from "../components/dashboard/Toast.vue";
 
 import { ref } from "vue";
 import {
@@ -125,6 +128,7 @@ export default {
     MenuItems,
     TransitionChild,
     TransitionRoot,
+    Toast,
     BellIcon,
     MenuAlt1Icon,
     XIcon,
@@ -144,7 +148,10 @@ export default {
       }
     );
 
-    store.commit("setSelectedGuild", "341685098468343822");
+    let selectedGuildID = localStorage.getItem("selectedGuildID");
+    if (selectedGuildID != undefined) {
+      store.commit("setSelectedGuild", selectedGuildID);
+    }
 
     return {
       sidebarOpen,

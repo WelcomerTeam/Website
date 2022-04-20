@@ -107,15 +107,16 @@ const actions = {
 const mutations = {
   setGuild(state, guildObject) {
     state.guild = guildObject?.guild;
-    state.guildChannels = guildObject?.channels;
+    state.guildChannels = guildObject?.channels || [];
     state.guildChannelsPacked = packGuildChannels(state.guildChannels);
-    state.guildRoles = guildObject?.roles;
-    state.guildEmojis = guildObject?.emojis;
+    state.guildRoles = guildObject?.roles || [];
+    state.guildEmojis = guildObject?.emojis || [];
     state.isLoadingGuild = false;
   },
 
   setSelectedGuild(state, guildID) {
     state.selectedGuild = guildID;
+    localStorage.setItem("selectedGuildID", guildID);
   },
 
   setGuildMemberResults(state, { query, guildMembers }) {
