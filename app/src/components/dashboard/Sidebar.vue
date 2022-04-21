@@ -15,7 +15,7 @@
         />
         <div class="pl-2 overflow-hidden">
           <router-link
-            to="/dashboard"
+            :to="{ name: 'dashboard.guild.overview', params: $route.params }"
             v-if="$store.getters.getCurrentSelectedGuild"
           >
             <h3 class="truncate font-bold leading-none hover:underline">
@@ -27,7 +27,7 @@
           </h3>
           <router-link
             class="text-xs leading-none font-semibold text-gray-600 hover:underline"
-            to="/dashboard"
+            :to="{ name: 'dashboard.guilds', params: $route.params }"
             @click="$emit('onChangeGuild')"
             >Change Guild</router-link
           >
@@ -54,9 +54,9 @@
             <router-link
               v-for="item in nav.items"
               :key="item.name"
-              :to="item.href"
+              :to="{ name: item.linkname, params: $route.params }"
               :class="[
-                $route.path === item.href
+                $route.name === item.linkname
                   ? 'bg-gray-200 text-primary'
                   : 'text-secondary-light',
                 'hover:bg-gray-200 group flex items-center px-2 py-2 text-sm leading-6 font-semibold rounded-md',
@@ -66,7 +66,7 @@
               <font-awesome-icon
                 :icon="item.icon"
                 :class="[
-                  $route.path === item.href
+                  $route.name === item.linkname
                     ? 'text-primary'
                     : 'text-secondary-dark',
                   'flex-shrink-0 w-6 h-6 mr-4',
@@ -105,7 +105,7 @@ const navigation = [
     items: [
       {
         name: "Memberships",
-        href: "/dashboard/memberships",
+        linkname: "dashboard.guild.memberships",
         icon: "heart",
       },
     ],
@@ -114,12 +114,12 @@ const navigation = [
     items: [
       {
         name: "Guild Overview",
-        href: "/dashboard",
+        linkname: "dashboard.guild.overview",
         icon: "chart-line",
       },
       {
         name: "Bot Settings",
-        href: "/dashboard/settings",
+        linkname: "dashboard.guild.settings",
         icon: "wrench",
       },
     ],
@@ -128,27 +128,27 @@ const navigation = [
     items: [
       {
         name: "Welcomer",
-        href: "/dashboard/welcomer",
+        linkname: "dashboard.guild.welcomer",
         icon: "user-plus",
       },
       {
         name: "Rules",
-        href: "/dashboard/rules",
+        linkname: "dashboard.guild.rules",
         icon: "list-ol",
       },
       {
         name: "Borderwall",
-        href: "/dashboard/borderwall",
+        linkname: "dashboard.guild.borderwall",
         icon: "door-closed",
       },
       {
         name: "AutoRoles",
-        href: "/dashboard/autorole",
+        linkname: "dashboard.guild.autoroles",
         icon: "user-check",
       },
       {
         name: "Leaver",
-        href: "/dashboard/leaver",
+        linkname: "dashboard.guild.leaver",
         icon: "user-minus",
       },
     ],
@@ -157,23 +157,29 @@ const navigation = [
     items: [
       {
         name: "FreeRoles",
-        href: "/dashboard/freeroles",
+        linkname: "dashboard.guild.freeroles",
         icon: "list-check",
       },
       {
         name: "TimeRoles",
-        href: "/dashboard/timeroles",
+        linkname: "dashboard.guild.timeroles",
         icon: "user-clock",
       },
       {
         name: "TempChannels",
-        href: "/dashboard/tempchannels",
+        linkname: "dashboard.guild.tempchannels",
         icon: "microphone-lines",
       },
     ],
   },
   {
-    items: [{ name: "AutoMod", href: "/dashboard/automod", icon: "shield" }],
+    items: [
+      {
+        name: "AutoMod",
+        linkname: "dashboard.guild.automod",
+        icon: "shield",
+      },
+    ],
   },
 ];
 
