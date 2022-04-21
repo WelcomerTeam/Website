@@ -96,7 +96,7 @@ const actions = {
     }
   },
 
-  fillGuild({ dispatch, commit, state }) {
+  fillGuild({ dispatch, state }) {
     if (state.selectedGuild != state.guild?.id) {
       dispatch("fetchGuild");
     }
@@ -116,7 +116,7 @@ const mutations = {
 
   setSelectedGuild(state, guildID) {
     state.selectedGuild = guildID;
-    localStorage.setItem("selectedGuildID", guildID);
+    this.dispatch("fetchGuilds");
   },
 
   setGuildMemberResults(state, { query, guildMembers }) {

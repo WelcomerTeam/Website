@@ -27,7 +27,7 @@
           </h3>
           <router-link
             class="text-xs leading-none font-semibold text-gray-600 hover:underline"
-            to="/dashboard/myguilds"
+            to="/dashboard"
             @click="$emit('onChangeGuild')"
             >Change Guild</router-link
           >

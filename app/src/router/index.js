@@ -18,18 +18,24 @@ const routes = [
     name: "Dashboard",
     component: () => import("../pages/Dashboard.vue"),
     children: [
-      { path: "", component: () => import("../pages/dashboard/Home.vue") },
       {
-        path: "example",
-        component: () => import("../pages/dashboard/debug/Example.vue"),
+        path: "",
+        component: () => import("../pages/dashboard/GuildSelector.vue"),
       },
       {
-        path: "myguilds",
-        component: () => import("../pages/dashboard/MyGuilds.vue"),
-      },
-      {
-        path: "welcomer",
-        component: () => import("../pages/dashboard/members/Welcomer.vue"),
+        path: "guild/:guildID",
+        component: () => import("../pages/DashboardGuild.vue"),
+        children: [
+          { path: "", component: () => import("../pages/dashboard/Home.vue") },
+          {
+            path: "example",
+            component: () => import("../pages/dashboard/debug/Example.vue"),
+          },
+          {
+            path: "welcomer",
+            component: () => import("../pages/dashboard/members/Welcomer.vue"),
+          },
+        ],
       },
     ],
   },

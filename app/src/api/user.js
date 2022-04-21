@@ -235,6 +235,6 @@ export default {
   getGuilds(callback, errorCallback) {
     setTimeout(() => {
       callback(dummyUser.guilds);
-    }, 5000);
+    }, 500);
   },
 };
