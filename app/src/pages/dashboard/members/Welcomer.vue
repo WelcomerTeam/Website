@@ -274,16 +274,7 @@ export default {
 
       this.unsavedChanges = false;
     },
-    resetConfig() {
-      console.log(this.welcomerConfig, this.originalWelcomerConfig);
-      this.welcomerConfig = this.originalWelcomerConfig;
-      this.unsavedChanges = false;
-      console.log(
-        this.welcomerConfig,
-        this.originalWelcomerConfig,
-        this.unsavedChanges
-      );
-    },
+    resetConfig() {},
     showUnsavedChanges() {
       this.unsavedChanges = true;
     },
