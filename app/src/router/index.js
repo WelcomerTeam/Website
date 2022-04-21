@@ -24,7 +24,7 @@ const routes = [
         component: () => import("../pages/dashboard/GuildSelector.vue"),
       },
       {
-        path: "guild/:guildID",
+        path: ":guildID",
         component: () => import("../pages/DashboardGuild.vue"),
         children: [
           {

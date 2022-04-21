@@ -123,7 +123,12 @@ export default {
     },
     setSelectedGuild(guildID) {
       store.commit("setSelectedGuild", guildID);
-      this.$router.push(`/dashboard/guild/${guildID}`);
+      this.$router.push({
+        name: "dashboard.guild.overview",
+        params: {
+          guildID: guildID,
+        },
+      });
     },
   },
 };
