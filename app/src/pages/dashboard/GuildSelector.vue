@@ -48,7 +48,7 @@
                   :key="guild.id"
                   @click="setSelectedGuild(guild.id)"
                 >
-                  <a href="#" class="block hover:bg-gray-50">
+                  <button class="block hover:bg-gray-50 w-full">
                     <div class="px-4 py-4 flex items-center space-x-5 group">
                       <div class="flex-shrink-0">
                         <div class="flex overflow-hidden -space-x-1">
@@ -96,7 +96,7 @@
                         </button>
                       </div>
                     </div>
-                  </a>
+                  </button>
                 </li>
               </ul>
             </div>
@@ -123,12 +123,13 @@ export default {
     },
     setSelectedGuild(guildID) {
       store.commit("setSelectedGuild", guildID);
-      this.$router.push({
+      let a = this.$router.push({
         name: "dashboard.guild.overview",
         params: {
           guildID: guildID,
         },
       });
+      console.log(a);
     },
   },
 };

@@ -116,7 +116,7 @@ const mutations = {
 
   setSelectedGuild(state, guildID) {
     state.selectedGuild = guildID;
-    this.dispatch("fetchGuilds");
+    this.dispatch("fillGuild");
   },
 
   setGuildMemberResults(state, { query, guildMembers }) {
