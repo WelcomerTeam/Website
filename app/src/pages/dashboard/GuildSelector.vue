@@ -115,7 +115,7 @@ import store from "../../store/index";
 export default {
   components: { FormValue, ChevronRightIcon, LoadingIcon, PlusIcon },
   setup() {
-    return {};
+    store.dispatch("fetchGuilds");
   },
   methods: {
     refreshGuildList() {

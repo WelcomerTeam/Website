@@ -9,7 +9,7 @@
         <div
           v-for="card in cards"
           :key="card.name"
-          class="overflow-hidden bg-white rounded-lg shadow"
+          class="overflow-hidden bg-white rounded-lg shadow-sm border border-gray-200"
         >
           <div class="p-5">
             <div class="flex items-center">

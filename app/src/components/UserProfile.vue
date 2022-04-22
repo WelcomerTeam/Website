@@ -2,23 +2,33 @@
   <div
     class="space-x-4 hidden items-center justify-end lg:w-0 md:flex md:flex-1"
   >
-    <router-link to="/invite">
-      <button type="button" class="cta-button bg-primary hover:bg-primary-dark">
-        Invite Welcomer
-      </button>
-    </router-link>
-
     <div v-if="$store.getters.isLoadingUser" class="px-10">
       <LoadingIcon class="text-white" />
     </div>
-    <div v-else-if="!$store.getters.isLoggedIn">
+    <div v-else-if="!$store.getters.isLoggedIn" class="space-x-4 flex">
+      <router-link to="/invite">
+        <button
+          type="button"
+          class="cta-button bg-primary hover:bg-primary-dark"
+        >
+          Invite Welcomer
+        </button>
+      </router-link>
       <a
         href="/login"
         class="hover:text-gray-300 text-base text-white whitespace-nowrap"
         >Log in</a
       >
     </div>
-    <div v-else>
+    <div v-else class="space-x-4 flex">
+      <router-link :to="{ name: 'dashboard.guilds' }">
+        <button
+          type="button"
+          class="cta-button bg-primary hover:bg-primary-dark"
+        >
+          Dashboard
+        </button>
+      </router-link>
       <PopoverGroup as="nav" class="hidden space-x-6 md:flex">
         <div class="inline-flex my-auto space-x-4">
           <Popover class="relative z-10" v-slot="{ open }">

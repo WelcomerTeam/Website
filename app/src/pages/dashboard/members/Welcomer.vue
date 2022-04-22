@@ -170,6 +170,8 @@ import EmbedBuilder from "../../../components/dashboard/EmbedBuilder.vue";
 import UnsavedChanges from "../../../components/dashboard/UnsavedChanges.vue";
 
 var profileBorderTypes = ["Rounded", "Squared", "Hexagonal", "Circular"];
+var imageAlignment = ["Left", "Center", "Right"];
+var imageTheme = [];
 
 export default {
   components: {
