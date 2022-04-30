@@ -1,12 +1,12 @@
 <template>
   <div class="flex min-h-screen overflow-hidden bg-gray-100">
-    <TransitionRoot as="template" :show="sidebarOpen">
+    <TransitionRoot as="template" :show="$props.sidebarOpen">
       <Dialog
         as="div"
         static
         class="fixed inset-0 z-40 flex lg:hidden"
-        @close="sidebarOpen = false"
-        :open="sidebarOpen"
+        @close="this.$emit('closeSidebar')"
+        :open="$props.sidebarOpen"
       >
         <TransitionChild
           as="template"
@@ -43,7 +43,7 @@
               <div class="absolute top-0 right-0 pt-2 -mr-12">
                 <button
                   class="flex items-center justify-center w-10 h-10 ml-1 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white bg-secondary-dark"
-                  @click="sidebarOpen = false"
+                  @click="this.$emit('closeSidebar')"
                 >
                   <span class="sr-only">Close sidebar</span>
                   <XIcon class="w-6 h-6 text-white" aria-hidden="true" />
@@ -51,7 +51,7 @@
               </div>
             </TransitionChild>
             <div class="pt-5 pb-4 overflow-hidden overflow-y-auto">
-              <DashboardSidebar @onChangeGuild="sidebarOpen = false" />
+              <DashboardSidebar @onChangeGuild="this.$emit('closeSidebar')" />
             </div>
           </div>
         </TransitionChild>
@@ -106,6 +106,11 @@ import { mdiHelpRhombus } from "@mdi/js";
 import store from "../store/index";
 
 export default {
+  props: {
+    sidebarOpen: {
+      type: Boolean,
+    },
+  },
   components: {
     Dialog,
     DialogOverlay,
@@ -124,12 +129,6 @@ export default {
     DashboardSidebar,
 
     mdiHelpRhombus,
-  },
-  setup() {
-    const sidebarOpen = ref(false);
-    return {
-      sidebarOpen,
-    };
   },
 };
 </script>

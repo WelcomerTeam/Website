@@ -128,7 +128,11 @@
 
             <div class="px-4 py-4">
               <div class="grid grid-cols-2">
-                <router-link to="/invite" class="navbar-mobile-menu-item">
+                <router-link
+                  to="/invite"
+                  v-if="!$store.getters.isLoggedIn"
+                  class="navbar-mobile-menu-item"
+                >
                   <div class="popover-panel-icon bg-primary">
                     <font-awesome-icon
                       icon="plus"
@@ -139,6 +143,20 @@
                   <span class="navbar-mobile-menu-item-text">
                     Invite Welcomer
                   </span>
+                </router-link>
+                <router-link
+                  :to="{ name: 'dashboard.guilds' }"
+                  v-else
+                  class="navbar-mobile-menu-item"
+                >
+                  <div class="popover-panel-icon bg-primary">
+                    <font-awesome-icon
+                      icon="toolbox"
+                      class="navbar-mobile-menu-item-icon"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <span class="navbar-mobile-menu-item-text"> Dashboard </span>
                 </router-link>
 
                 <router-link to="/premium" class="navbar-mobile-menu-item">

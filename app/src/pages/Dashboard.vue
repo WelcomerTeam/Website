@@ -3,6 +3,7 @@
     <Header>
       <div class="lg:hidden">
         <button
+          v-if="$route.name != 'dashboard.guilds'"
           class="text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset"
           @click="sidebarOpen = true"
         >
@@ -11,7 +12,7 @@
         </button>
       </div>
     </Header>
-    <router-view />
+    <router-view :sidebarOpen="sidebarOpen" v-on:closeSidebar="closeSidebar" />
   </div>
 </template>
 
@@ -20,6 +21,7 @@ import Header from "../components/dashboard/Header.vue";
 import { MenuAlt1Icon } from "@heroicons/vue/outline";
 import { useRoute } from "vue-router";
 import store from "../store/index";
+import { ref } from "vue";
 
 export default {
   components: {
@@ -29,6 +31,11 @@ export default {
   watch: {
     "$route.params.guildID"(to) {
       store.commit("setSelectedGuild", to);
+    },
+  },
+  methods: {
+    closeSidebar() {
+      this.sidebarOpen = false;
     },
   },
   setup() {
@@ -45,6 +52,12 @@ export default {
     if (guildID !== undefined) {
       store.commit("setSelectedGuild", guildID);
     }
+
+    let sidebarOpen = ref(false);
+
+    return {
+      sidebarOpen,
+    };
   },
 };
 </script>

@@ -1,8 +1,8 @@
 <template>
   <div
-    class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-gray-200 sm:pt-5 mb-4 sm:mb-0 align-middle"
+    class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-gray-200 mb-6 sm:mb-4 align-middle"
   >
-    <label class="block font-semibold text-gray-700 sm:mt-px sm:pt-2">
+    <label class="block font-semibold text-gray-700">
       {{ title }}
     </label>
     <div v-if="type == FormTypeBlank" class="mt-1 sm:mt-0 sm:col-span-2">

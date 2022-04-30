@@ -56,6 +56,7 @@ import {
   faInfo,
   faBook,
   faArrowsRotate,
+  faToolbox,
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
   faClose,
@@ -102,7 +103,8 @@ library.add(
   faTriangleExclamation,
   faInfo,
   faBook,
-  faArrowsRotate
+  faArrowsRotate,
+  faToolbox
 );
 
 createApp(App)
