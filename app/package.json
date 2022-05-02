@@ -26,7 +26,7 @@
     "highlight.js": "^11.5.1",
     "hljs": "^6.2.3",
     "lodash": "^4.17.21",
-    "marked": "^4.0.10",
+    "marked": "^4.0.14",
     "one-colorpicker": "^1.0.12",
     "postcss-import": "^14.1.0",
     "sass": "^1.32.12",
