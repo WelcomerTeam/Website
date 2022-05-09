@@ -1067,6 +1067,18 @@
       />
     </div>
 
+    <div
+      v-else-if="type == FormTypeBackground"
+      class="mt-1 sm:mt-0 sm:col-span-2"
+    >
+      <background-selector
+        v-model="modelValue"
+        @update:modelValue="updateValue($event)"
+        :disabled="$props.disabled"
+        :invalid="$props.invalid"
+      />
+    </div>
+
     <span v-else
       ><span>Unknown type {{ type }}</span>
       <div><slot /></div
@@ -1112,8 +1124,10 @@ import {
   FormTypeNumber,
   FormTypeDropdown,
   FormTypeEmbed,
+  FormTypeBackground,
 } from "./FormValueEnum";
 import EmbedBuilder from "./EmbedBuilder.vue";
+import BackgroundSelector from "./BackgroundSelector.vue";
 
 export default {
   components: {
@@ -1129,6 +1143,7 @@ export default {
     ColorPicker,
     LoadingIcon,
     EmbedBuilder,
+    BackgroundSelector,
   },
 
   props: {
@@ -1158,6 +1173,7 @@ export default {
           FormTypeNumber,
           FormTypeDropdown,
           FormTypeEmbed,
+          FormTypeBackground,
         ].includes(value);
       },
     },
@@ -1207,6 +1223,7 @@ export default {
       FormTypeNumber,
       FormTypeDropdown,
       FormTypeEmbed,
+      FormTypeBackground,
 
       idRegex,
 

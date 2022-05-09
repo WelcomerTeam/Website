@@ -3,7 +3,7 @@
     <div
       :class="[
         $props.invalid ? 'ring-red-500 border-red-500' : '',
-        open ? 'rounded-b-none ' : '',
+        open ? 'rounded-b-none' : '',
         'border border-gray-300 p-4 rounded-md flex shadow-sm',
       ]"
     >
@@ -57,26 +57,24 @@
         <div
           class="border-gray-300 rounded-md border shadow-sm rounded-t-none border-t-0"
         >
-          <div>
-            <div class="block">
-              <div class="border-b border-gray-200">
-                <nav class="flex display-flex justify-evenly" aria-label="Tabs">
-                  <a
-                    v-for="tab in tabs"
-                    :key="tab.name"
-                    @click="this.page = tab.value"
-                    :class="[
-                      tab.value == this.page
-                        ? 'border-primary text-primary'
-                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-200',
-                      'whitespace-nowrap flex py-4 px-1 border-b-2 font-medium text-sm cursor-pointer w-full justify-center',
-                    ]"
-                    :aria-current="tab.value == this.page ? 'page' : undefined"
-                  >
-                    {{ tab.name }}
-                  </a>
-                </nav>
-              </div>
+          <div class="block">
+            <div class="border-b border-gray-200">
+              <nav class="flex display-flex justify-evenly" aria-label="Tabs">
+                <a
+                  v-for="tab in tabs"
+                  :key="tab.name"
+                  @click="this.page = tab.value"
+                  :class="[
+                    tab.value == this.page
+                      ? 'border-primary text-primary'
+                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-200',
+                    'whitespace-nowrap flex py-4 px-1 border-b-2 font-medium text-sm cursor-pointer w-full justify-center',
+                  ]"
+                  :aria-current="tab.value == this.page ? 'page' : undefined"
+                >
+                  {{ tab.name }}
+                </a>
+              </nav>
             </div>
           </div>
 

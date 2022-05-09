@@ -81,7 +81,7 @@
 
     <form-value
       title="Image Background"
-      :type="FormTypeText"
+      :type="FormTypeBackground"
       v-model="welcomerConfig.images.background"
       @update:modelValue="showUnsavedChanges"
     />
@@ -165,6 +165,7 @@ import {
   FormTypeTextArea,
   FormTypeDropdown,
   FormTypeEmbed,
+  FormTypeBackground,
 } from "../../../components/dashboard/FormValueEnum";
 import EmbedBuilder from "../../../components/dashboard/EmbedBuilder.vue";
 import UnsavedChanges from "../../../components/dashboard/UnsavedChanges.vue";
@@ -192,7 +193,7 @@ export default {
         enabled: true,
         enable_border: true,
         border_colour: 0,
-        background: "default",
+        background: "1",
         text_colour: 0,
         text_border_colour: 0,
         profile_border_colour: 0,
@@ -223,6 +224,7 @@ export default {
       FormTypeTextArea,
       FormTypeDropdown,
       FormTypeEmbed,
+      FormTypeBackground,
 
       unsavedChanges,
       welcomerConfig,
