@@ -482,7 +482,7 @@
 
 <style lang="css">
 .hu-color-picker {
-  width: 218px !important;
+  min-width: 218px;
 }
 </style>
 

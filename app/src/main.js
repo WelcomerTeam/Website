@@ -11,8 +11,8 @@ import "./index.scss";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 
-import { faYoutube } from "@fortawesome/free-brands-svg-icons";
-library.add(faYoutube);
+import { faYoutube, faUnsplash } from "@fortawesome/free-brands-svg-icons";
+library.add(faYoutube, faUnsplash);
 
 import {
   faClose,
@@ -57,6 +57,7 @@ import {
   faBook,
   faArrowsRotate,
   faToolbox,
+  faFileImage,
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
   faClose,
@@ -104,7 +105,8 @@ library.add(
   faInfo,
   faBook,
   faArrowsRotate,
-  faToolbox
+  faToolbox,
+  faFileImage
 );
 
 createApp(App)
