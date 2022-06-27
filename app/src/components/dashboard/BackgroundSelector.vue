@@ -113,14 +113,25 @@
               </div>
               <div class="max-h-72 p-4" v-if="this.page == 2">
                 <div
-                  class="bg-gray-50 sm:w-8/12 w-full h-32 mx-auto border-gray-300 border-2 rounded-md border-dashed flex"
+                  class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md relative mx-auto"
                 >
-                  <div class="m-auto text-gray-500 text-center">
-                    <font-awesome-icon
-                      icon="file-image"
-                      class="block mx-auto w-5 h-5 mb-1"
-                    />
-                    Upload here. Max file size of 8mb.
+                  <input
+                    id="file-upload"
+                    name="file-upload"
+                    type="file"
+                    class="absolute top-0 left-0 w-full h-full opacity-0"
+                  />
+                  <div class="space-y-1 text-center">
+                    <div class="flex text-sm text-gray-600">
+                      <label
+                        for="file-upload"
+                        class="relative cursor-pointer bg-white rounded-md font-medium text-primary hover:text-primary focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary"
+                      >
+                        <span>Upload a file</span>
+                      </label>
+                      <p class="pl-1">or drag and drop</p>
+                    </div>
+                    <p class="text-xs text-gray-500">an image up to 8MB</p>
                   </div>
                 </div>
               </div>
@@ -330,6 +341,11 @@ const solidColourPrefix = "solid:";
 const solidColourProfileBased = "profile";
 const unsplashPrefix = "unsplash:";
 
+const uploadStatusInitial = 0,
+  uploadStatusSaving = 1,
+  uploadStatusSuccess = 2,
+  uploadStatusFailed = 3;
+
 export default {
   components: {
     Listbox,
@@ -377,6 +393,9 @@ export default {
       ],
     });
 
+    let files = [];
+    let fileStatus = uploadStatusInitial;
+
     let solidColourIsProfileBased = ref(
       props.modelValue == solidColourPrefix + solidColourProfileBased
     );
@@ -392,6 +411,9 @@ export default {
       solidColourPrefix,
       solidColourProfileBased,
       unsplashPrefix,
+
+      files,
+      fileStatus,
 
       imageRoot,
       imageExampleRoot,
