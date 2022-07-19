@@ -63,7 +63,7 @@ const actions = {
 // mutations
 const mutations = {
   setCurrentUser(state, userObject) {
-    state.isLoggedIn = userObject !== undefined;
+    state.isLoggedIn = userObject != undefined;
     state.user = userObject;
     state.isLoadingUser = false;
   },

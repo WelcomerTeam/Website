@@ -23,7 +23,10 @@
           </div>
           <div class="dashboard-content">
             <div
-              v-if="$store.getters.isLoadingGuilds"
+              v-if="
+                $store.getters.isLoadingGuilds &&
+                $store.getters.getGuilds.length === 0
+              "
               class="mt-4 p-6 justify-center flex items-center"
             >
               <LoadingIcon />
@@ -46,7 +49,7 @@
                   v-else
                   v-for="guild in $store.getters.getGuilds"
                   :key="guild.id"
-                  @click="setSelectedGuild(guild.id)"
+                  @click="setSelectedGuild(guild)"
                 >
                   <button class="block hover:bg-gray-50 w-full">
                     <div class="px-4 py-4 flex items-center space-x-5 group">
@@ -121,14 +124,18 @@ export default {
     refreshGuildList() {
       store.dispatch("fetchGuilds");
     },
-    setSelectedGuild(guildID) {
-      store.commit("setSelectedGuild", guildID);
-      this.$router.push({
-        name: "dashboard.guild.overview",
-        params: {
-          guildID: guildID,
-        },
-      });
+    setSelectedGuild(guild) {
+      if (guild.has_welcomer) {
+        store.commit("setSelectedGuild", guild);
+        this.$router.push({
+          name: "dashboard.guild.overview",
+          params: {
+            guildID: guild.id,
+          },
+        });
+      } else {
+        alert("Invite prompt for " + guild.id);
+      }
     },
   },
 };

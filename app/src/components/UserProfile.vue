@@ -16,7 +16,7 @@
       </router-link>
       <a
         href="/login"
-        class="hover:text-gray-300 text-base text-white whitespace-nowrap"
+        class="hover:text-gray-300 text-base text-white whitespace-nowrap my-auto"
         >Log in</a
       >
     </div>
@@ -39,7 +39,7 @@
               ]"
             >
               <span
-                >{{ $store.getters.getCurrentUser.name }}#{{
+                >{{ $store.getters.getCurrentUser.username }}#{{
                   $store.getters.getCurrentUser.discriminator
                 }}</span
               >
@@ -81,7 +81,7 @@
                     <div class="col-span-3 flex items-center">
                       <div>
                         <h2 class="font-bold text-xl">
-                          {{ $store.getters.getCurrentUser.name }}#{{
+                          {{ $store.getters.getCurrentUser.username }}#{{
                             $store.getters.getCurrentUser.discriminator
                           }}
                         </h2>

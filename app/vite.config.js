@@ -10,4 +10,17 @@ export default defineConfig({
   //   },
   // },
   plugins: [vue()],
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:1000/api",
+        rewrite: (path) => path.replace(/^\/api/, ""),
+        changeOrigin: true,
+      },
+      "/(login|logout|callback)": {
+        target: "http://localhost:1000",
+        changeOrigin: true,
+      },
+    },
+  },
 });

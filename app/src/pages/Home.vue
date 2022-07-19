@@ -65,8 +65,7 @@
               :showTimestamp="true"
               :embeds="[
                 {
-                  description:
-                    'Hey **ImRock**, you are the 256th member on **Welcomer Support Guild**',
+                  description: `Hey **ImRock**, you are the 256th member on **Welcomer Support Guild**`,
                   image: {
                     url: '/assets/welcomerImage.svg',
                   },

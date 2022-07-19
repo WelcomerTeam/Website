@@ -18,16 +18,18 @@
       >
         <img
           class="object-cover col-span-1 aspect-square"
-          :src="
-            `https://cdn.discordapp.com/avatars/${$store.getters.getCurrentUser.id}/${$store.getters.getCurrentUser.avatar}.${($store.getters.getCurrentUser.avatar.startsWith('a_')
+          :src="`https://cdn.discordapp.com/avatars/${
+            $store.getters.getCurrentUser.id
+          }/${$store.getters.getCurrentUser.avatar}.${
+            $store.getters.getCurrentUser.avatar.startsWith('a_')
               ? 'gif'
-              : 'webp')}?size=128`
-          "
+              : 'webp'
+          }?size=128`"
         />
         <div class="col-span-3 flex items-center">
           <div>
             <h2 class="font-bold text-xl">
-              {{ $store.getters.getCurrentUser.name }}#{{
+              {{ $store.getters.getCurrentUser.username }}#{{
                 $store.getters.getCurrentUser.discriminator
               }}
             </h2>
