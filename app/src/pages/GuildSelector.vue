@@ -61,8 +61,11 @@
                               'w-10 h-10 rounded-lg',
                             ]"
                             v-lazy="{
-                              src: `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.webp?size=256`,
-                              error: '/assets/brokenImage.webp',
+                              src:
+                                guild.icon !== ''
+                                  ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.webp?size=256`
+                                  : '/assets/discordServer.svg',
+                              error: '/assets/discordServer.svg',
                             }"
                           />
                         </div>
@@ -111,10 +114,10 @@
 </template>
 
 <script>
-import FormValue from "../../components/dashboard/FormValue.vue";
+import FormValue from "../components/dashboard/FormValue.vue";
 import { ChevronRightIcon, PlusIcon } from "@heroicons/vue/outline";
-import LoadingIcon from "../../components/LoadingIcon.vue";
-import store from "../../store/index";
+import LoadingIcon from "../components/LoadingIcon.vue";
+import store from "../store/index";
 export default {
   components: { FormValue, ChevronRightIcon, LoadingIcon, PlusIcon },
   setup() {
@@ -126,7 +129,7 @@ export default {
     },
     setSelectedGuild(guild) {
       if (guild.has_welcomer) {
-        store.commit("setSelectedGuild", guild);
+        store.commit("setSelectedGuild", guild.id);
         this.$router.push({
           name: "dashboard.guild.overview",
           params: {

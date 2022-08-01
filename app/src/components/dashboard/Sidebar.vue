@@ -11,7 +11,11 @@
         <img
           v-if="$store.getters.getCurrentSelectedGuild"
           class="w-10 h-10 rounded-lg"
-          :src="`https://cdn.discordapp.com/icons/${$store.getters.getCurrentSelectedGuild?.id}/${$store.getters.getCurrentSelectedGuild?.icon}.webp?size=128`"
+          :src="
+            $store.getters.getCurrentSelectedGuild?.icon !== ''
+              ? `https://cdn.discordapp.com/icons/${$store.getters.getCurrentSelectedGuild?.id}/${$store.getters.getCurrentSelectedGuild?.icon}.webp?size=128`
+              : '/assets/discordServer.svg'
+          "
         />
         <div class="pl-2 overflow-hidden">
           <router-link
