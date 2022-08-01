@@ -1,6 +1,8 @@
 import { createWebHistory, createRouter } from "vue-router";
 
 import Home from "../pages/Home.vue";
+import Premium from "../pages/Premium.vue";
+import Dashboard from "../pages/Dashboard.vue";
 
 const routes = [
   {
@@ -11,17 +13,17 @@ const routes = [
   {
     path: "/premium",
     name: "Premium",
-    component: () => import("../pages/Premium.vue"),
+    component: Premium,
   },
   {
     path: "/dashboard",
     name: "dashboard",
-    component: () => import("../pages/Dashboard.vue"),
+    component: Dashboard,
     children: [
       {
         path: "",
         name: "dashboard.guilds",
-        component: () => import("../pages/dashboard/GuildSelector.vue"),
+        component: () => import("../pages/GuildSelector.vue"),
       },
       {
         path: ":guildID",

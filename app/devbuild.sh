@@ -1,1 +1,1 @@
-yarn build --mode development --watch --sourcemap --outDir distdev
+yarn build --mode development --watch --outDir distdev
