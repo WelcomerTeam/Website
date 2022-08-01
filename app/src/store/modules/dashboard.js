@@ -4,6 +4,7 @@ import dashboardAPI from "../../api/dashboard";
 const state = () => ({
   selectedGuild: null,
   guild: null,
+  guildHasWelcomer: false,
 
   isLoadingGuild: false,
 
@@ -12,13 +13,22 @@ const state = () => ({
   guildRoles: [],
   guildEmojis: [],
 
-  guildMemberResults: [],
+  isLoadingGuildMembers: false,
+  guildMemberResults: {},
 });
 
 // getters
 const getters = {
   isLoadingGuild: (state) => {
     return state.isLoadingGuild;
+  },
+
+  isLoadingGuildMembers: (state) => {
+    return state.isLoadingGuildMembers;
+  },
+
+  guildHasWelcomer: (state) => {
+    return state.guildHasWelcomer;
   },
 
   getCurrentSelectedGuild: (state) => {
@@ -62,56 +72,54 @@ const getters = {
   },
 
   getGuildMemberById: (state) => (guildMemberID) => {
-    // TODO
-    return null;
+    return state.guildMemberResults[guildMemberID];
   },
 };
 
 // actions
 const actions = {
-  fetchGuild({ commit, state }) {
-    commit("loadingGuild");
-    dashboardAPI.getGuild(
-      state.selectedGuild,
-      (guild) => {
-        commit("setGuild", guild);
-      },
-      () => commit("setGuild", null)
-    );
-  },
-
-  fetchGuildMembersByQuery({ commit, state }, query) {
-    if (query !== state.previousGuildMembersQuery) {
-      dashboardAPI.fetchGuildMembers(
-        query,
-        state.selectedGuild,
-        (guildMembers) => {
-          commit("setGuildMemberResults", { query, guildMembers });
-        },
-        () => {
-          guildMembers = [];
-          commit("setGuildMemberResults", { query, guildMembers });
-        }
-      );
-    }
-  },
-
   fillGuild({ dispatch, state }) {
     if (state.selectedGuild != state.guild?.id) {
       dispatch("fetchGuild");
     }
   },
+
+  fetchGuild({ commit, state }) {
+    commit("loadingGuild");
+    dashboardAPI.getGuild(
+      state.selectedGuild,
+      ({ guild, hasWelcomer }) => {
+        commit("setGuild", { guild, hasWelcomer });
+      },
+      () => commit("setGuild", { guild: null, hasWelcomer: false })
+    );
+  },
+
+  fetchGuildMembersByQuery({ commit, state }, query) {
+    commit("loadingGuildMembers");
+    dashboardAPI.fetchGuildMembers(
+      query,
+      state.selectedGuild,
+      (guildMembers) => {
+        commit("setGuildMemberResults", guildMembers);
+      },
+      () => {
+        commit("setGuildMemberResults", []);
+      }
+    );
+  },
 };
 
 // mutations
 const mutations = {
-  setGuild(state, guildObject) {
-    state.guild = guildObject?.guild;
-    state.guildChannels = guildObject?.channels || [];
+  setGuild(state, { guild, hasWelcomer }) {
+    state.guild = guild;
+    state.guildChannels = guild?.channels || [];
     state.guildChannelsPacked = packGuildChannels(state.guildChannels);
-    state.guildRoles = guildObject?.roles || [];
-    state.guildEmojis = guildObject?.emojis || [];
+    state.guildRoles = guild?.roles || [];
+    state.guildEmojis = guild?.emojis || [];
     state.isLoadingGuild = false;
+    state.guildHasWelcomer = hasWelcomer;
   },
 
   setSelectedGuild(state, guildID) {
@@ -119,13 +127,22 @@ const mutations = {
     this.dispatch("fillGuild");
   },
 
-  setGuildMemberResults(state, { query, guildMembers }) {
-    state.previousGuildMembersQuery = query;
-    state.guildMemberResults = guildMembers;
+  setGuildMemberResults(state, guildMembers) {
+    guildMembers.forEach((member) => {
+      state.guildMemberResults[member.id] = member;
+    });
+    state.isLoadingGuildMembers = false;
+  },
+
+  loadingGuildMembers(state) {
+    state.isLoadingGuildMembers = true;
   },
 
   loadingGuild(state) {
     state.isLoadingGuild = true;
+
+    state.guild = {};
+    state.guild.id = state.selectedGuild;
   },
 };
 

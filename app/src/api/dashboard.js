@@ -393,6 +393,7 @@ const dummyMembers = [
 ];
 
 import Fuse from "fuse.js";
+import { doLogin, doRequest } from "./routes";
 
 const dummyMemberSearch = new Fuse(dummyMembers, {
   keys: ["name", "id", "display_name"],
@@ -402,15 +403,31 @@ const dummyMemberSearch = new Fuse(dummyMembers, {
 
 export default {
   getGuild(guildID, callback, errorCallback) {
-    // Gets guild information.
-
-    if (guildID != dummyGuild.guild.id) {
-      return errorCallback();
-    }
-
-    setTimeout(() => {
-      callback(dummyGuild);
-    }, 1000);
+    doRequest(
+      "GET",
+      "/api/guild/" + guildID,
+      null,
+      (response) => {
+        if (response.status === 401) {
+          doLogin();
+          callback({ guild: null, hasWelcomer: false });
+        } else if (response.status == 403) {
+          callback({ guild: null, hasWelcomer: false });
+        } else {
+          response.json().then((guild) => {
+            if (guild.ok) {
+              callback({ guild: guild.data, hasWelcomer: true });
+            } else {
+              callback({ guild: null, hasWelcomer: false });
+            }
+          });
+        }
+      },
+      (error) => {
+        console.log("error", error);
+        errorCallback(error);
+      }
+    );
   },
 
   fetchGuildMembers(query, guildID, callback, errorCallback) {
