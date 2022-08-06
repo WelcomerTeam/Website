@@ -3,7 +3,7 @@
     <div class="dashboard-title-container">
       <div class="dashboard-title">Welcomer</div>
     </div>
-    <div class="font-bold uppercase py-4 mt-8 border-b mb-4">
+    <div class="dashboard-heading">
       <a>Welcomer Text</a>
     </div>
     <form-value
@@ -11,7 +11,7 @@
       :type="FormTypeToggle"
       v-model="welcomerConfig.text.enabled"
       @update:modelValue="showUnsavedChanges"
-      ><div class="text-gray-600 text-sm mt-2">
+      ><div class="text-gray-600 dark:text-gray-400 text-sm mt-2">
         This is the description for the form value.
         <a href="#" class="text-primary">Find out more</a>.
       </div></form-value
@@ -31,7 +31,7 @@
     >
     </form-value>
 
-    <div class="font-bold uppercase py-4 mt-8 border-b mb-4">
+    <div class="dashboard-heading">
       <a>Welcomer DMs</a>
     </div>
 
@@ -61,7 +61,7 @@
       @update:modelValue="showUnsavedChanges"
     />
 
-    <div class="font-bold uppercase py-4 mt-8 border-b mb-4">
+    <div class="dashboard-heading">
       <a>Welcomer Images</a>
     </div>
 

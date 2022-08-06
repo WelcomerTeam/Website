@@ -1,9 +1,6 @@
 <template>
   <div
-    :class="[
-      isLight ? 'light' : 'dark',
-      'message-2qnXI6 cozyMessage-3V1Y8y groupStart-23k01U wrapper-2a6GCs cozy-3raOZG zalgo-jN1Ica',
-    ]"
+    class="message-2qnXI6 cozyMessage-3V1Y8y groupStart-23k01U wrapper-2a6GCs cozy-3raOZG zalgo-jN1Ica"
     role="listitem"
   >
     <div class="contents-2mQqc9" role="document">
@@ -11,13 +8,12 @@
       <h2 class="header-23xsNx">
         <span class="headerText-3Uvj1Y"
           ><span
-            :class="[
-              isLight ? 'text-secondary' : 'text-gray-200',
-              'username-1A8OIy desaturateUserColors-1gar-1',
-            ]"
+            class="text-secondary dark:text-gray-50 username-1A8OIy desaturateUserColors-1gar-1"
             aria-expanded="false"
             tabindex="0"
-            :style="{ color: `#${rgbIntToRGB(authorColour)}` }"
+            :style="
+              authorColour ? { color: `#${rgbIntToRGB(authorColour)}` } : {}
+            "
             >{{ author }}</span
           ><span
             v-if="isBot"
@@ -46,10 +42,7 @@
         >
       </h2>
       <div
-        :class="[
-          isLight ? 'text-secondary' : 'text-gray-200',
-          'markup-2BOw-j messageContent-2qWWxC',
-        ]"
+        class="text-secondary dark:text-gray-50 markup-2BOw-j messageContent-2qWWxC"
         v-html="marked(content, true)"
       />
     </div>
@@ -1090,7 +1083,6 @@ import { toHTML } from "./discord-markdown";
 
 export default {
   props: {
-    isLight: Boolean,
     avatar: {
       type: String,
       default: "/assets/logo.svg",
@@ -1101,7 +1093,6 @@ export default {
     },
     authorColour: {
       type: Number,
-      default: 16777216,
     },
     isBot: {
       type: Boolean,

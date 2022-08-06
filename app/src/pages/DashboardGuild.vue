@@ -29,7 +29,7 @@
           leave-to="-translate-x-full"
         >
           <div
-            class="relative flex flex-col flex-1 w-full max-w-xs bg-gray-100 border-r shadow-inner"
+            class="relative flex flex-col flex-1 w-full max-w-xs bg-gray-100 border-r dark:bg-secondary-dark dark:border-secondary-light shadow-inner"
           >
             <TransitionChild
               as="template"
@@ -50,8 +50,10 @@
                 </button>
               </div>
             </TransitionChild>
-            <div class="pt-5 pb-4 overflow-hidden overflow-y-auto">
-              <DashboardSidebar @onChangeGuild="this.$emit('closeSidebar')" />
+            <div
+              class="pt-5 pb-4 overflow-hidden overflow-y-auto custom-scroll"
+            >
+              <DashboardSidebar @onTabClick="this.$emit('closeSidebar')" />
             </div>
           </div>
         </TransitionChild>
@@ -64,17 +66,25 @@
     <div class="hidden lg:flex lg:flex-shrink-0">
       <div class="flex flex-col w-64">
         <div
-          class="flex flex-col flex-grow pt-5 pb-4 overflow-y-auto bg-gray-100 border-r shadow-inner"
+          class="flex flex-col flex-grow pt-5 pb-4 overflow-y-auto custom-scroll bg-gray-100 border-r dark:border-secondary-light dark:bg-secondary-dark shadow-inner"
         >
           <DashboardSidebar />
         </div>
       </div>
     </div>
 
-    <div class="flex-1 bg-white focus:outline-none">
+    <div class="flex-1 focus:outline-none bg-white dark:bg-secondary">
       <main class="relative z-0 flex-1 min-h-full pb-8">
-        <div class="mt-8 font-medium pb-20">
-          <router-view />
+        <div class="font-medium pb-20">
+          <div v-if="$store.getters.isLoadingGuild">
+            <div class="dashboard-container flex justify-center">
+              <LoadingIcon />
+            </div>
+          </div>
+          <div v-else-if="!$store.getters.guildHasWelcomer">
+            <div class="dashboard-container">Welcomer isnt here!</div>
+          </div>
+          <router-view v-else />
         </div>
       </main>
     </div>
@@ -104,6 +114,7 @@ import { BellIcon, MenuAlt1Icon, XIcon } from "@heroicons/vue/outline";
 
 import { mdiHelpRhombus } from "@mdi/js";
 import store from "../store/index";
+import LoadingIcon from "../components/LoadingIcon.vue";
 
 export default {
   props: {
@@ -127,10 +138,9 @@ export default {
 
     Header,
     DashboardSidebar,
+    LoadingIcon,
 
     mdiHelpRhombus,
   },
 };
 </script>
-
-<style></style>

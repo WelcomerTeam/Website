@@ -9,7 +9,7 @@
       :class="[
         $props.invalid ? 'ring-red-500 border-red-500' : '',
         open ? 'rounded-b-none' : '',
-        'border border-gray-300 p-4 rounded-md flex shadow-sm',
+        'border border-gray-300 dark:border-secondary-light p-4 rounded-md flex shadow-sm',
       ]"
     >
       <discord-embed
@@ -24,8 +24,10 @@
         <div class="relative">
           <PopoverButton
             :class="[
-              $props.disabled ? 'bg-gray-100' : 'bg-white',
-              'relative py-2 pl-3 pr-10 text-left border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
+              $props.disabled
+                ? 'bg-gray-100 dark:bg-secondary-light'
+                : 'bg-white dark:bg-secondary',
+              'relative py-2 pl-3 pr-10 text-left border border-gray-300 dark:border-secondary-light rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
             ]"
             :disabled="$props.disabled"
           >
@@ -57,14 +59,14 @@
       leave-to-class="opacity-0"
     >
       <PopoverPanel
-        class="z-10 w-full overflow-auto text-base bg-white rounded-md ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm border-t-0 rounded-t-none"
+        class="block w-full overflow-auto text-base bg-white dark:bg-secondary rounded-md shadow-sm sm:text-sm rounded-t-none border-t-0"
       >
         <div v-if="$props.isLoading" class="flex py-5 w-full justify-center">
           <LoadingIcon />
         </div>
         <div v-else>
           <div
-            class="block w-full overflow-auto text-base bg-white rounded-md sm:text-sm border-gray-300 border rounded-t-none border-t-0"
+            class="block w-full overflow-auto text-base rounded-md sm:text-sm bg-white border-gray-300 dark:border-secondary-light dark:bg-secondary border rounded-t-none border-t-0"
           >
             <div class="border-b border-gray-200">
               <nav class="flex display-flex justify-evenly" aria-label="Tabs">
@@ -76,7 +78,7 @@
                     tab.enabled ? '' : ' bg-gray-100',
                     tab.value == this.page
                       ? 'border-primary text-primary'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-200',
+                      : 'border-transparent text-gray-500 dark:text-gray-50 hover:text-gray-700 dark:hover:text-primary-light',
                     'whitespace-nowrap flex py-4 px-1 border-b-2 font-medium text-sm cursor-pointer w-full justify-center',
                   ]"
                   :aria-current="tab.value == this.page ? 'page' : undefined"
@@ -113,34 +115,40 @@
               </div>
               <div class="max-h-72 p-4" v-if="this.page == 2">
                 <div
-                  class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md relative mx-auto"
+                  class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-secondary-light border-dashed rounded-md relative mx-auto"
                 >
                   <input
                     id="file-upload"
                     name="file-upload"
                     type="file"
+                    accept="image/*"
                     class="absolute top-0 left-0 w-full h-full opacity-0"
+                    @change="onFileUpdate"
                   />
                   <div class="space-y-1 text-center">
-                    <div class="flex text-sm text-gray-600">
+                    <div class="flex text-sm text-gray-600 dark:text-gray-200">
                       <label
                         for="file-upload"
-                        class="relative cursor-pointer bg-white rounded-md font-medium text-primary hover:text-primary focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary"
+                        class="relative cursor-pointer rounded-md font-medium text-primary hover:text-primary focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary"
                       >
                         <span>Upload a file</span>
                       </label>
                       <p class="pl-1">or drag and drop</p>
                     </div>
-                    <p class="text-xs text-gray-500">an image up to 8MB</p>
+                    <p class="text-xs text-gray-500 dark:text-gray-100">
+                      an image up to 8MB
+                    </p>
                   </div>
                 </div>
               </div>
-              <div class="max-h-72 p-4" v-if="this.page == 3">Unsplash</div>
+              <!-- <div class="max-h-72 p-4" v-if="this.page == 3">Unsplash</div> -->
               <div class="max-h-72 p-4" v-if="this.page == 4">
                 <div
                   class="sm:flex sm:gap-4 sm:border-gray-200 mb-6 sm:mb-4 align-middle"
                 >
-                  <label class="block font-semibold text-gray-700">
+                  <label
+                    class="block font-semibold text-gray-700 dark:text-gray-50"
+                  >
                     Use profile colour for backgrounds
                   </label>
                   <div class="mt-1 sm:mt-0 sm:col-span-2">
@@ -235,9 +243,9 @@
                       :class="[
                         $props.modelValue ==
                         solidColourPrefix + solidColourProfileBased
-                          ? 'bg-gray-100'
-                          : 'bg-white',
-                        'relative w-full py-2 pl-3 pr-10 text-left border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
+                          ? 'bg-gray-100 dark:bg-secondary-light'
+                          : 'bg-white dark:bg-secondary-dark',
+                        'relative w-full py-2 pl-3 pr-10 text-left border border-gray-300 dark:border-secondary-light rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
                       ]"
                     >
                       <div
@@ -269,7 +277,7 @@
                     >
                       <ListboxOptions class="absolute z-10 mt-1">
                         <ColorPicker
-                          theme="light"
+                          theme="dark"
                           :color="RGBIntToRGB(modelValue, 0)"
                           @changeColor="SetRGBIntToRGB"
                           :sucker-hide="true"
@@ -322,20 +330,16 @@ const tabs = [
   { name: "Welcomer", value: 1, enabled: true },
   { name: "Solid Colour", value: 4, enabled: true },
   { name: "Custom", value: 2, enabled: true },
-  { name: "Unsplash", icon: ["fab", "unsplash"], value: 3, enabled: true },
+  // { name: "Unsplash", icon: ["fab", "unsplash"], value: 3, enabled: true },
 ];
 
 const images = [
-  { id: "1", animated: false },
-  { id: "2", animated: false },
-  { id: "3", animated: false },
-  { id: "4", animated: false },
-  { id: "5", animated: false },
-  { id: "6", animated: false },
+  { id: "template", animated: false },
+  { id: "mountains", animated: false },
+  { id: "spots", animated: false },
 ];
 
-const imageRoot = (id) => `/dist/backgrounds/${id}.png`;
-const imageExampleRoot = (id) => `/dist/backgrounds/${id}-example.png`;
+const imageRoot = (id) => `/assets/backgrounds/${id}.png`;
 
 const solidColourPrefix = "solid:";
 const solidColourProfileBased = "profile";
@@ -387,7 +391,7 @@ export default {
       embeds: [
         {
           image: {
-            url: imageExampleRoot(props.modelValue),
+            url: imageRoot(props.modelValue),
           },
         },
       ],
@@ -416,7 +420,6 @@ export default {
       fileStatus,
 
       imageRoot,
-      imageExampleRoot,
     };
   },
 
@@ -424,7 +427,7 @@ export default {
 
   methods: {
     updateValue(value) {
-      this.displayEmbed.embeds[0].image.url = imageExampleRoot(value);
+      this.displayEmbed.embeds[0].image.url = imageRoot(value);
       this.$emit("update:modelValue", value);
     },
 
@@ -446,6 +449,11 @@ export default {
           .slice(-6)
           .padStart(6, "0")
       );
+    },
+
+    onFileUpdate(event) {
+      var files = event.target.files;
+      console.log(files);
     },
 
     SetRGBIntToRGB(color) {

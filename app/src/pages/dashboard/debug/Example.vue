@@ -10,7 +10,7 @@
 
       <form-value title="Invalid" v-model="invalid" :type="FormTypeToggle" />
 
-      <div class="font-bold uppercase py-4 mt-8 border-b mb-4">
+      <div class="dashboard-heading">
         <a>Form Types</a>
       </div>
 

@@ -1,45 +1,43 @@
 <template>
-  <div class="dashboard-container">
-    <div class="dashboard-title-container">
-      <div class="dashboard-title">Dashboard example</div>
+  <div>
+    <div v-if="$store.getters.getCurrentSelectedGuild?.banner !== ''">
+      <img
+        :src="`https://cdn.discordapp.com/banners/${
+          $store.getters.getCurrentSelectedGuild?.id
+        }/${$store.getters.getCurrentSelectedGuild?.banner}.${
+          $store.getters.getCurrentSelectedGuild?.banner.startsWith('a_')
+            ? 'gif'
+            : 'png'
+        }`"
+        class="w-full aspect-video object-cover max-h-64"
+      />
     </div>
-    <div class="dashboard-content">
-      <div class="grid grid-cols-1 gap-5 mt-2 sm:grid-cols-2 lg:grid-cols-3">
-        <!-- Card -->
-        <div
-          v-for="card in cards"
-          :key="card.name"
-          class="overflow-hidden bg-white rounded-lg shadow-sm border border-gray-200"
-        >
-          <div class="p-5">
-            <div class="flex items-center">
-              <div class="flex-shrink-0">
-                <font-awesome-icon :icon="card.icon" class="w-6 h-6" />
-              </div>
-              <div class="flex-1 w-0 ml-5">
-                <dl>
-                  <dt class="text-sm font-medium text-gray-500 truncate">
-                    {{ card.name }}
-                  </dt>
-                  <dd>
-                    <div class="text-lg font-medium text-gray-900">
-                      {{ card.amount }}
-                    </div>
-                  </dd>
-                </dl>
-              </div>
-            </div>
-          </div>
-          <div class="px-5 py-3 bg-gray-50">
-            <div class="text-sm">
-              <a
-                :href="card.href"
-                class="font-medium text-secondary hover:text-secondary-light"
-              >
-                View all
-              </a>
-            </div>
-          </div>
+    <div class="dashboard-container">
+      <div class="dashboard-title-container">
+        <div class="dashboard-title">
+          {{ $store.getters.getCurrentSelectedGuild?.name }}
+        </div>
+      </div>
+      <div class="dashboard-content">
+        <div class="grid grid-cols-1 gap-5 mt-2 sm:grid-cols-2 lg:grid-cols-3">
+          <!-- Card -->
+          <Card
+            name="Guild Members"
+            icon="user-group"
+            :amount="$store.getters.getCurrentSelectedGuild?.member_count"
+          />
+          <Card
+            name="Text Channels"
+            icon="user-group"
+            :amount="filterTextChannels($store.getters.getGuildChannels).length"
+          />
+          <Card
+            name="Voice Channels"
+            icon="user-group"
+            :amount="
+              filterVoiceChannels($store.getters.getGuildChannels).length
+            "
+          />
         </div>
       </div>
     </div>
@@ -47,32 +45,25 @@
 </template>
 
 <script>
-const cards = [
-  {
-    name: "Members",
-    href: "#",
-    icon: "circle-question",
-    amount: "123",
-  },
-  {
-    name: "Messages Today",
-    href: "#",
-    icon: "circle-question",
-    amount: "44,725",
-  },
-  {
-    name: "Pogging?",
-    href: "#",
-    icon: "circle-question",
-    amount: "yes",
-  },
-];
+import Card from "../../components/dashboard/Card.vue";
 
 export default {
+  components: { Card },
   setup() {
-    return {
-      cards,
-    };
+    return {};
+  },
+  methods: {
+    filterTextChannels(channels) {
+      return channels.filter((c) => {
+        return c.type === 0;
+      });
+    },
+
+    filterVoiceChannels(channels) {
+      return channels.filter((c) => {
+        return c.type === 2;
+      });
+    },
   },
 };
 </script>

@@ -4,7 +4,7 @@
       :class="[
         $props.invalid ? 'ring-red-500 border-red-500' : '',
         open ? 'rounded-b-none' : '',
-        'border border-gray-300 p-4 rounded-md flex shadow-sm',
+        'border border-gray-300 dark:border-secondary-light p-4 rounded-md flex shadow-sm',
       ]"
     >
       <discord-embed
@@ -19,8 +19,10 @@
         <div class="relative">
           <PopoverButton
             :class="[
-              $props.disabled ? 'bg-gray-100' : 'bg-white',
-              'relative py-2 pl-3 pr-10 text-left border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
+              $props.disabled
+                ? 'bg-gray-100 dark:bg-secondary-light'
+                : 'bg-white dark:bg-secondary',
+              'relative py-2 pl-3 pr-10 text-left border border-gray-300 dark:border-secondary-light rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
             ]"
             :disabled="$props.disabled"
           >
@@ -52,10 +54,10 @@
       leave-to-class="opacity-0"
     >
       <PopoverPanel
-        class="block w-full overflow-auto text-base bg-white rounded-md shadow-sm sm:text-sm rounded-t-none border-t-0"
+        class="block w-full overflow-auto text-base bg-white dark:bg-secondary rounded-md shadow-sm sm:text-sm rounded-t-none border-t-0"
       >
         <div
-          class="border-gray-300 rounded-md border shadow-sm rounded-t-none border-t-0"
+          class="border-gray-300 dark:border-secondary-light rounded-md border shadow-sm rounded-t-none border-t-0"
         >
           <div class="block">
             <div class="border-b border-gray-200">
@@ -67,7 +69,7 @@
                   :class="[
                     tab.value == this.page
                       ? 'border-primary text-primary'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-200',
+                      : 'border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-primary-light dark:text-gray-50',
                     'whitespace-nowrap flex py-4 px-1 border-b-2 font-medium text-sm cursor-pointer w-full justify-center',
                   ]"
                   :aria-current="tab.value == this.page ? 'page' : undefined"
@@ -88,14 +90,12 @@
                 <div
                   class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
                 >
-                  <span class="font-bold text-sm sm:block text-gray-800"
-                    >Content</span
-                  >
+                  <span class="embed-builder-title">Content</span>
                 </div>
                 <div class="mt-1 sm:mt-0 sm:col-span-7">
                   <textarea
                     type="text"
-                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
+                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
                     placeholder="Message Content"
                     v-model="content"
                     rows="4"
@@ -111,14 +111,12 @@
                 <div
                   class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
                 >
-                  <span class="font-bold text-sm sm:block text-gray-800"
-                    >Title</span
-                  >
+                  <span class="embed-builder-title">Title</span>
                 </div>
                 <div class="mt-1 sm:mt-0 sm:col-span-7">
                   <input
                     type="text"
-                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
+                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
                     placeholder="Embed title"
                     v-model="title"
                     @update:modelValue="updateEmbed()"
@@ -133,14 +131,12 @@
                 <div
                   class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
                 >
-                  <span class="font-bold text-sm sm:block text-gray-800"
-                    >Title URL</span
-                  >
+                  <span class="embed-builder-title">Title URL</span>
                 </div>
                 <div class="mt-1 sm:mt-0 sm:col-span-7">
                   <input
                     type="text"
-                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
+                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
                     placeholder="Title URL"
                     v-model="url"
                     @update:modelValue="updateEmbed()"
@@ -155,13 +151,11 @@
                 <div
                   class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
                 >
-                  <span class="font-bold text-sm sm:block text-gray-800"
-                    >Description</span
-                  >
+                  <span class="embed-builder-title">Description</span>
                 </div>
                 <div class="mt-1 sm:mt-0 sm:col-span-7">
                   <textarea
-                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
+                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
                     placeholder="Embed description"
                     v-model="description"
                     @update:modelValue="updateEmbed()"
@@ -176,26 +170,24 @@
                 <div
                   class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
                 >
-                  <span class="font-bold text-sm sm:block text-gray-800"
-                    >Colour</span
-                  >
+                  <span class="embed-builder-title">Colour</span>
                 </div>
                 <div class="mt-1 sm:mt-0 sm:col-span-7 flex items-center">
                   <input
-                    id="comments"
-                    aria-describedby="comments-description"
-                    name="comments"
+                    id="useColour"
+                    aria-describedby="Use custom embed colour"
+                    name="Use Custom Embed Colour"
                     type="checkbox"
                     :true-value="true"
                     :false-value="false"
-                    class="focus:ring-primary h-4 w-4 text-primary border-gray-300 rounded mr-2"
+                    class="focus:ring-primary h-4 w-4 text-primary border-gray-300 dark:bg-secondary-dark dark:border-secondary-light rounded mr-2"
                     v-model="use_color"
                     @update:modelValue="updateEmbed()"
                   />
                   <Listbox as="div" class="flex-1">
                     <div class="relative">
                       <ListboxButton
-                        class="relative w-full py-2 pl-3 pr-10 text-left bg-white border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
+                        class="relative w-full py-2 pl-3 pr-10 text-left bg-white border border-gray-300 dark:bg-secondary dark:border-secondary-light rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
                       >
                         <div
                           class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
@@ -228,7 +220,7 @@
                       >
                         <ListboxOptions class="absolute z-10 mt-1">
                           <ColorPicker
-                            theme="light"
+                            theme="dark"
                             :color="RGBIntToRGB(color, 2450411)"
                             @changeColor="SetColorRGBIntToRGB"
                             :sucker-hide="true"
@@ -242,31 +234,29 @@
 
               <!-- fields -->
               <div
-                class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
+                class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start border-gray-200 dark:border-secondary-light mb-4 sm:mb-0"
               >
                 <div
                   class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
                 >
-                  <span class="font-bold text-sm sm:block text-gray-800"
-                    >Fields</span
-                  >
+                  <span class="embed-builder-title">Fields</span>
                 </div>
                 <div class="mt-1 sm:mt-0 sm:col-span-7 space-y-2">
                   <div
-                    class="p-3 border rounded-md border-gray-300 shadow-sm space-y-1"
+                    class="p-3 border rounded-md border-gray-300 dark:border-secondary-light shadow-sm space-y-1"
                     :key="index"
                     v-for="(field, index) in fields"
                   >
                     <input
                       type="text"
-                      class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
+                      class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
                       placeholder="Field Name"
                       v-model="field.name"
                       @update:modelValue="updateEmbed()"
                     />
                     <input
                       type="text"
-                      class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
+                      class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
                       placeholder="Field Value"
                       v-model="field.value"
                       @update:modelValue="updateEmbed()"
@@ -274,18 +264,18 @@
                     <div class="flex items-center">
                       <div class="flex-1">
                         <input
-                          id="comments"
-                          aria-describedby="comments-description"
-                          name="comments"
+                          id="useInline"
+                          aria-describedby="Show embed field inline"
+                          name="Use Inline"
                           type="checkbox"
                           :true-value="true"
                           :false-value="false"
-                          class="focus:ring-primary h-4 w-4 text-primary border-gray-300 rounded"
+                          class="focus:ring-primary h-4 w-4 text-primary border-gray-300 dark:bg-secondary-dark dark:border-secondary-light rounded"
                           v-model="field.inline"
                           @update:modelValue="updateEmbed()"
                         />
                         <span
-                          class="ml-3 text-sm font-medium text-gray-900 shadow-sm"
+                          class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-50 shadow-sm"
                           >Inline</span
                         >
                       </div>
@@ -315,14 +305,12 @@
                 <div
                   class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
                 >
-                  <span class="font-bold text-sm sm:block text-gray-800"
-                    >Embed Image URL</span
-                  >
+                  <span class="embed-builder-title">Embed Image URL</span>
                 </div>
                 <div class="mt-1 sm:mt-0 sm:col-span-7">
                   <input
                     type="text"
-                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
+                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
                     placeholder="Embed Image URL"
                     v-model="image_url"
                     @update:modelValue="updateEmbed()"
@@ -337,14 +325,12 @@
                 <div
                   class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
                 >
-                  <span class="font-bold text-sm sm:block text-gray-800"
-                    >Thumbnail Image URL</span
-                  >
+                  <span class="embed-builder-title">Thumbnail Image URL</span>
                 </div>
                 <div class="mt-1 sm:mt-0 sm:col-span-7">
                   <input
                     type="text"
-                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
+                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
                     placeholder="Thumbnail Image URL"
                     v-model="thumbnail_url"
                     @update:modelValue="updateEmbed()"
@@ -359,14 +345,12 @@
                 <div
                   class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
                 >
-                  <span class="font-bold text-sm sm:block text-gray-800"
-                    >Footer Text</span
-                  >
+                  <span class="embed-builder-title">Footer Text</span>
                 </div>
                 <div class="mt-1 sm:mt-0 sm:col-span-7">
                   <input
                     type="text"
-                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
+                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
                     placeholder="Embed title"
                     v-model="footer_text"
                     @update:modelValue="updateEmbed()"
@@ -381,14 +365,12 @@
                 <div
                   class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
                 >
-                  <span class="font-bold text-sm sm:block text-gray-800"
-                    >Footer Icon URL</span
-                  >
+                  <span class="embed-builder-title">Footer Icon URL</span>
                 </div>
                 <div class="mt-1 sm:mt-0 sm:col-span-7">
                   <input
                     type="text"
-                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
+                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
                     placeholder="Footer Icon URL"
                     v-model="footer_icon"
                     @update:modelValue="updateEmbed()"
@@ -403,14 +385,12 @@
                 <div
                   class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
                 >
-                  <span class="font-bold text-sm sm:block text-gray-800"
-                    >Author Name</span
-                  >
+                  <span class="embed-builder-title">Author Name</span>
                 </div>
                 <div class="mt-1 sm:mt-0 sm:col-span-7">
                   <input
                     type="text"
-                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
+                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
                     placeholder="Author Name"
                     v-model="author_name"
                     @update:modelValue="updateEmbed()"
@@ -425,14 +405,12 @@
                 <div
                   class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
                 >
-                  <span class="font-bold text-sm sm:block text-gray-800"
-                    >Author URL</span
-                  >
+                  <span class="embed-builder-title">Author URL</span>
                 </div>
                 <div class="mt-1 sm:mt-0 sm:col-span-7">
                   <input
                     type="text"
-                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
+                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
                     placeholder="Author URL"
                     v-model="author_url"
                     @update:modelValue="updateEmbed()"
@@ -447,14 +425,12 @@
                 <div
                   class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
                 >
-                  <span class="font-bold text-sm sm:block text-gray-800"
-                    >Author Icon URL</span
-                  >
+                  <span class="embed-builder-title">Author Icon URL</span>
                 </div>
                 <div class="mt-1 sm:mt-0 sm:col-span-7">
                   <input
                     type="text"
-                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm"
+                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
                     placeholder="Author Icon URL"
                     v-model="author_icon_url"
                     @update:modelValue="updateEmbed()"

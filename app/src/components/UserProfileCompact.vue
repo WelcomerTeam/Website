@@ -46,16 +46,23 @@
         </div>
       </router-link>
       <div class="gap-6 grid px-5 py-6 relative rounded-lg sm:gap-6 sm:p-8">
-        <a href="/logout" class="text-white hover:text-gray-300 underline"
-          >Logout</a
-        >
+        <div class="flex justify-between items-center">
+          <a href="/logout" class="text-white hover:text-gray-300 underline"
+            >Logout</a
+          >
+          <ThemeToggle />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import ThemeToggle from "./ThemeToggle.vue";
+
+export default {
+  components: { ThemeToggle },
+};
 </script>
 
 <style></style>

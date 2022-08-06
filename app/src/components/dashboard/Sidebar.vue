@@ -17,8 +17,9 @@
               : '/assets/discordServer.svg'
           "
         />
-        <div class="pl-2 overflow-hidden">
+        <div class="pl-2 overflow-hidden dark:text-gray-50">
           <router-link
+            @click="$emit('onTabClick')"
             :to="{ name: 'dashboard.guild.overview', params: $route.params }"
             v-if="$store.getters.getCurrentSelectedGuild"
           >
@@ -30,9 +31,9 @@
             No Guild Selected
           </h3>
           <router-link
-            class="text-xs leading-none font-semibold text-gray-600 hover:underline"
+            @click="$emit('onTabClick')"
+            class="text-xs leading-none font-semibold text-gray-600 dark:text-gray-300 hover:underline"
             :to="{ name: 'dashboard.guilds', params: $route.params }"
-            @click="$emit('onChangeGuild')"
             >Change Guild</router-link
           >
         </div>
@@ -40,7 +41,7 @@
 
       <!-- Sidebar -->
       <nav
-        class="flex flex-col flex-1 px-3 mt-5 overflow-y-auto divide-y divide-gray-300"
+        class="flex flex-col flex-1 px-3 mt-5 overflow-y-auto divide-y divide-gray-300 custom-scroll"
         aria-label="Sidebar"
         v-if="$store.getters.getCurrentSelectedGuild"
       >
@@ -51,19 +52,20 @@
         >
           <div>
             <span
-              class="text-xs font-bold uppercase text-secondary-light"
+              class="text-xs font-bold uppercase text-secondary-light dark:text-gray-50"
               v-if="nav.title"
               >{{ nav.title }}</span
             >
             <router-link
+              @click="$emit('onTabClick')"
               v-for="item in nav.items"
               :key="item.name"
               :to="{ name: item.linkname, params: $route.params }"
               :class="[
                 $route.name === item.linkname
-                  ? 'bg-gray-200 text-primary'
-                  : 'text-secondary-light',
-                'hover:bg-gray-200 group flex items-center px-2 py-2 text-sm leading-6 font-semibold rounded-md',
+                  ? 'bg-gray-200 dark:bg-secondary text-primary'
+                  : 'text-secondary dark:text-gray-200',
+                'hover:bg-gray-200 dark:hover:bg-secondary-light group flex items-center px-2 py-2 text-sm leading-6 font-semibold rounded-md',
                 item.extendedClass,
               ]"
             >
@@ -72,7 +74,7 @@
                 :class="[
                   $route.name === item.linkname
                     ? 'text-primary'
-                    : 'text-secondary-dark',
+                    : 'text-secondary-dark dark:text-gray-300',
                   'flex-shrink-0 w-6 h-6 mr-4',
                   item.extendedClass,
                 ]"

@@ -123,11 +123,14 @@
                         </p>
                       </div>
                     </router-link>
-                    <a
-                      href="/logout"
-                      class="text-white hover:text-gray-300 underline"
-                      >Logout</a
-                    >
+                    <div class="flex justify-between items-center">
+                      <a
+                        href="/logout"
+                        class="text-white hover:text-gray-300 underline"
+                        >Logout</a
+                      >
+                      <ThemeToggle />
+                    </div>
                   </div>
                 </div>
               </PopoverPanel>
@@ -148,6 +151,7 @@ import {
 } from "@headlessui/vue";
 import { ChevronDownIcon } from "@heroicons/vue/solid";
 import LoadingIcon from "./LoadingIcon.vue";
+import ThemeToggle from "./ThemeToggle.vue";
 
 export default {
   components: {
@@ -157,6 +161,7 @@ export default {
     PopoverPanel,
     ChevronDownIcon,
     LoadingIcon,
+    ThemeToggle,
   },
 };
 </script>

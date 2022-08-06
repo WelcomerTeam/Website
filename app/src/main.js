@@ -58,6 +58,9 @@ import {
   faArrowsRotate,
   faToolbox,
   faFileImage,
+  faUserGroup,
+  faSun,
+  faMoon,
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
   faClose,
@@ -69,6 +72,7 @@ library.add(
   faAt,
   faCircle,
   faUser,
+  faUserGroup,
   faFaceLaugh,
   faImage,
   faFaceLaugh,
@@ -106,7 +110,9 @@ library.add(
   faBook,
   faArrowsRotate,
   faToolbox,
-  faFileImage
+  faFileImage,
+  faSun,
+  faMoon
 );
 
 createApp(App)

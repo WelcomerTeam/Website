@@ -60,7 +60,6 @@
           <div class="flex w-full h-full">
             <DiscordEmbed
               class="max-w-full m-auto"
-              :authorColour="0xffffff"
               :isBot="true"
               :showTimestamp="true"
               :embeds="[
@@ -76,7 +75,7 @@
         </div>
       </div>
 
-      <div class="bg-white">
+      <div class="bg-white text-secondary">
         <div class="hero-preview">
           <div class="pb-12 prose-lg text-center">
             <h1
@@ -99,10 +98,12 @@
           >
             <div class="my-auto text-center sm:text-left">
               <div>
-                <h2 class="mb-4 text-3xl font-black leading-tight">
+                <h2
+                  class="mb-4 text-3xl font-black leading-tight text-gray-900"
+                >
                   {{ item.name }}
                 </h2>
-                <span
+                <span class="text-gray-500"
                   >{{ item.description }}
                   <router-link
                     :to="item.href"

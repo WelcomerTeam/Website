@@ -1,8 +1,8 @@
 <template>
   <div
-    class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-gray-200 mb-6 sm:mb-4 align-middle"
+    class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start dark:text-gray-50 sm:border-gray-200 mb-6 sm:mb-4 align-middle"
   >
-    <label class="block font-semibold text-gray-700">
+    <label class="block font-semibold text-gray-700 dark:text-gray-100">
       {{ title }}
     </label>
     <div v-if="type == FormTypeBlank" class="mt-1 sm:mt-0 sm:col-span-2">
@@ -14,9 +14,11 @@
         @update:modelValue="updateValue($event)"
         :disabled="$props.disabled"
         :class="[
-          $props.invalid ? 'ring-red-500 border-red-500' : '',
+          $props.invalid
+            ? 'ring-red-500 border-red-500 dark:ring-red-500 dark:border-red-500'
+            : '',
           $props.disabled
-            ? 'bg-gray-100'
+            ? 'bg-gray-100 dark:bg-secondary-light'
             : modelValue
             ? 'bg-green-500 focus:ring-green-500'
             : 'bg-gray-400 focus:ring-gray-400',
@@ -85,9 +87,13 @@
         <div class="relative">
           <ListboxButton
             :class="[
-              $props.invalid ? 'border-red-500 ring-red-500' : '',
-              $props.disabled ? 'bg-gray-100' : 'bg-white',
-              'relative w-full py-2 pl-3 pr-10 text-left border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
+              $props.invalid
+                ? 'border-red-500 ring-red-500 dark:ring-red-500 dark:border-red-500'
+                : '',
+              $props.disabled
+                ? 'bg-gray-100 dark:bg-secondary-light'
+                : 'bg-white dark:bg-secondary-dark',
+              'relative w-full py-2 pl-3 pr-10 text-left border border-gray-300 dark:border-secondary-light rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
             ]"
           >
             <div
@@ -122,7 +128,7 @@
             leave-to-class="opacity-0"
           >
             <ListboxOptions
-              class="absolute z-10 w-full mt-1 overflow-auto text-base bg-white rounded-md shadow-sm max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+              class="absolute z-10 w-full mt-1 overflow-auto text-base bg-white dark:bg-secondary-dark rounded-md shadow-sm max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
             >
               <div
                 v-if="$store.getters.isLoadingGuild"
@@ -139,7 +145,9 @@
                 >
                   <li
                     :class="[
-                      active ? 'text-white bg-primary' : 'text-gray-900',
+                      active
+                        ? 'text-white bg-primary'
+                        : 'text-gray-900 dark:text-gray-50',
                       'cursor-default select-none relative py-2 pl-3 pr-9',
                     ]"
                   >
@@ -174,7 +182,9 @@
                 >
                   <li
                     :class="[
-                      active ? 'text-white bg-primary' : 'text-gray-900',
+                      active
+                        ? 'text-white bg-primary'
+                        : 'text-gray-900 dark:text-gray-50',
                       'cursor-default select-none relative py-2 pl-3 pr-9',
                     ]"
                   >
@@ -227,9 +237,13 @@
         <div class="relative mt-1">
           <ListboxButton
             :class="[
-              $props.invalid ? 'ring-red-500 border-red-500' : '',
-              $props.disabled ? 'bg-gray-100' : 'bg-white',
-              'relative w-full py-2 pl-3 pr-10 text-left border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
+              $props.invalid
+                ? 'ring-red-500 border-red-500 dark:ring-red-500 dark:border-red-500'
+                : '',
+              $props.disabled
+                ? 'bg-gray-100 dark:bg-secondary-light'
+                : 'bg-white dark:bg-secondary-dark',
+              'relative w-full py-2 pl-3 pr-10 text-left border border-gray-300 dark:border-secondary-light rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
             ]"
           >
             <div
@@ -264,7 +278,7 @@
             leave-to-class="opacity-0"
           >
             <ListboxOptions
-              class="absolute z-10 w-full mt-1 overflow-auto text-base bg-white rounded-md shadow-sm max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+              class="absolute z-10 w-full mt-1 overflow-auto text-base bg-white dark:bg-secondary-dark rounded-md shadow-sm max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
             >
               <div
                 v-if="$store.getters.isLoadingGuild"
@@ -281,7 +295,9 @@
                 >
                   <li
                     :class="[
-                      active ? 'text-white bg-primary' : 'text-gray-900',
+                      active
+                        ? 'text-white bg-primary'
+                        : 'text-gray-900 dark:text-gray-50',
                       'cursor-default select-none relative py-2 pl-3 pr-9',
                     ]"
                   >
@@ -326,7 +342,9 @@
                   >
                     <li
                       :class="[
-                        active ? 'text-white bg-primary' : 'text-gray-900',
+                        active
+                          ? 'text-white bg-primary'
+                          : 'text-gray-900 dark:text-gray-50',
                         'cursor-default select-none relative py-2 pl-3 pr-9',
                       ]"
                     >
@@ -379,9 +397,13 @@
         <div class="relative mt-1">
           <ListboxButton
             :class="[
-              $props.invalid ? 'ring-red-500 border-red-500' : '',
-              $props.disabled ? 'bg-gray-100' : 'bg-white',
-              'relative w-full py-2 pl-3 pr-10 text-left border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
+              $props.invalid
+                ? 'ring-red-500 border-red-500 dark:ring-red-500 dark:border-red-500'
+                : '',
+              $props.disabled
+                ? 'bg-gray-100 dark:bg-secondary-light'
+                : 'bg-white dark:bg-secondary-dark',
+              'relative w-full py-2 pl-3 pr-10 text-left border border-gray-300 dark:border-secondary-light rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
             ]"
           >
             <div
@@ -416,7 +438,7 @@
             leave-to-class="opacity-0"
           >
             <ListboxOptions
-              class="absolute z-10 w-full mt-1 overflow-auto text-base bg-white rounded-md shadow-sm max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+              class="absolute z-10 w-full mt-1 overflow-auto text-base bg-white dark:bg-secondary-dark rounded-md shadow-sm max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
             >
               <div
                 v-if="$store.getters.isLoadingGuild"
@@ -433,7 +455,9 @@
                 >
                   <li
                     :class="[
-                      active ? 'text-white bg-primary' : 'text-gray-900',
+                      active
+                        ? 'text-white bg-primary'
+                        : 'text-gray-900 dark:text-gray-50',
                       'cursor-default select-none relative py-2 pl-3 pr-9',
                     ]"
                   >
@@ -467,8 +491,12 @@
                 >
                   <li
                     :class="[
-                      role.is_assignable ? '' : 'bg-gray-200',
-                      active ? 'text-white bg-primary' : 'text-gray-900',
+                      role.is_assignable
+                        ? ''
+                        : 'bg-gray-200 dark:bg-secondary-light',
+                      active
+                        ? 'text-white bg-primary'
+                        : 'text-gray-900 dark:text-gray-50',
                       'cursor-default select-none relative py-2 pl-3 pr-9',
                     ]"
                   >
@@ -521,9 +549,13 @@
         <div class="relative mt-1">
           <ListboxButton
             :class="[
-              $props.invalid ? 'ring-red-500 border-red-500' : '',
-              $props.disabled ? 'bg-gray-100' : 'bg-white',
-              'relative w-full py-2 pl-3 pr-10 text-left border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
+              $props.invalid
+                ? 'ring-red-500 border-red-500 dark:ring-red-500 dark:border-red-500'
+                : '',
+              $props.disabled
+                ? 'bg-gray-100 dark:bg-secondary-light'
+                : 'bg-white dark:bg-secondary-dark',
+              'relative w-full py-2 pl-3 pr-10 text-left border border-gray-300 dark:border-secondary-light rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
             ]"
           >
             <div
@@ -560,7 +592,7 @@
             leave-to-class="opacity-0"
           >
             <ListboxOptions
-              class="absolute z-10 w-full mt-1 text-base bg-white rounded-md shadow-sm ring-1 ring-primary ring-opacity-5 focus:outline-none sm:text-sm"
+              class="absolute z-10 w-full mt-1 text-base bg-white dark:bg-secondary-dark rounded-md shadow-sm ring-1 ring-primary ring-opacity-5 focus:outline-none sm:text-sm"
             >
               <div
                 v-if="$store.getters.isLoadingGuild"
@@ -577,7 +609,9 @@
                 >
                   <li
                     :class="[
-                      active ? 'text-white bg-primary' : 'text-gray-900',
+                      active
+                        ? 'text-white bg-primary'
+                        : 'text-gray-900 dark:text-gray-50',
                       'cursor-default select-none relative py-2 pl-3 pr-9',
                     ]"
                   >
@@ -604,7 +638,7 @@
                 <div class="w-full p-2">
                   <input
                     type="text"
-                    class="w-full border-gray-300 rounded-md sm:text-sm"
+                    class="w-full border-gray-300 dark:border-secondary-light bg-white dark:bg-secondary-dark rounded-md sm:text-sm"
                     placeholder="Start typing a name or user id..."
                     v-model="query"
                     @update:modelValue="onQueryChange()"
@@ -620,7 +654,9 @@
                   >
                     <li
                       :class="[
-                        active ? 'text-white bg-primary' : 'text-gray-900',
+                        active
+                          ? 'text-white bg-primary'
+                          : 'text-gray-900 dark:text-gray-50',
                         'cursor-default select-none relative py-2 pl-3 pr-9',
                       ]"
                     >
@@ -651,7 +687,9 @@
                   >
                     <li
                       :class="[
-                        active ? 'text-white bg-primary' : 'text-gray-900',
+                        active
+                          ? 'text-white bg-primary'
+                          : 'text-gray-900 dark:text-gray-50',
                         'cursor-default select-none relative py-2 pl-3 pr-9',
                       ]"
                     >
@@ -704,9 +742,13 @@
         <div class="relative mt-1">
           <ListboxButton
             :class="[
-              $props.invalid ? 'ring-red-500 border-red-500' : '',
-              $props.disabled ? 'bg-gray-100' : 'bg-white',
-              'relative w-full py-2 pl-3 pr-10 text-left border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
+              $props.invalid
+                ? 'ring-red-500 border-red-500 dark:ring-red-500 dark:border-red-500'
+                : '',
+              $props.disabled
+                ? 'bg-gray-100 dark:bg-secondary-light'
+                : 'bg-white dark:bg-secondary-dark',
+              'relative w-full py-2 pl-3 pr-10 text-left border border-gray-300 dark:border-secondary-light rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
             ]"
           >
             <div
@@ -743,12 +785,12 @@
             leave-to-class="opacity-0"
           >
             <ListboxOptions
-              class="absolute z-10 w-full mt-1 text-base bg-white rounded-md shadow-sm ring-1 ring-primary ring-opacity-5 focus:outline-none sm:text-sm"
+              class="absolute z-10 w-full mt-1 text-base bg-white dark:bg-secondary-dark rounded-md shadow-sm ring-1 ring-primary ring-opacity-5 focus:outline-none sm:text-sm"
             >
               <div class="w-full p-2">
                 <input
                   type="text"
-                  class="w-full border-gray-300 rounded-md sm:text-sm"
+                  class="w-full border-gray-300 dark:border-secondary-light bg-white dark:bg-secondary-dark rounded-md sm:text-sm"
                   placeholder="Start typing a name or emoji id..."
                 />
               </div>
@@ -761,7 +803,9 @@
                 >
                   <li
                     :class="[
-                      active ? 'text-white bg-primary' : 'text-gray-900',
+                      active
+                        ? 'text-white bg-primary'
+                        : 'text-gray-900 dark:text-gray-50',
                       'cursor-default select-none relative py-2 pl-3 pr-9',
                     ]"
                   >
@@ -794,7 +838,9 @@
                 >
                   <li
                     :class="[
-                      active ? 'text-white bg-primary' : 'text-gray-900',
+                      active
+                        ? 'text-white bg-primary'
+                        : 'text-gray-900 dark:text-gray-50',
                       'cursor-default select-none relative py-2 pl-3 pr-9',
                     ]"
                   >
@@ -845,9 +891,13 @@
         <div class="relative mt-1">
           <ListboxButton
             :class="[
-              $props.invalid ? 'ring-red-500 border-red-500' : '',
-              $props.disabled ? 'bg-gray-100' : 'bg-white',
-              'relative w-full py-2 pl-3 pr-10 text-left border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
+              $props.invalid
+                ? 'ring-red-500 border-red-500 dark:ring-red-500 dark:border-red-500'
+                : '',
+              $props.disabled
+                ? 'bg-gray-100 dark:bg-secondary-light'
+                : 'bg-white dark:bg-secondary-dark',
+              'relative w-full py-2 pl-3 pr-10 text-left border border-gray-300 dark:border-secondary-light rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
             ]"
           >
             <div
@@ -876,7 +926,7 @@
           >
             <ListboxOptions class="absolute z-10 mt-1">
               <ColorPicker
-                theme="light"
+                theme="dark"
                 :color="RGBIntToRGB(modelValue, 0)"
                 @changeColor="SetRGBIntToRGB"
                 :sucker-hide="true"
@@ -891,9 +941,13 @@
       <input
         type="text"
         :class="[
-          $props.invalid ? 'ring-red-500 border-red-500' : '',
-          $props.disabled ? 'bg-gray-100' : 'bg-white',
-          'flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm',
+          $props.invalid
+            ? 'ring-red-500 border-red-500 dark:ring-red-500 dark:border-red-500'
+            : '',
+          $props.disabled
+            ? 'bg-gray-100 dark:bg-secondary-light'
+            : 'bg-white dark:bg-secondary-dark',
+          'flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light rounded-md focus:ring-primary focus:border-primary sm:text-sm',
         ]"
         :disabled="$props.disabled"
         placeholder="Enter text here..."
@@ -907,9 +961,13 @@
       <input
         type="number"
         :class="[
-          $props.invalid ? 'ring-red-500 border-red-500' : '',
-          $props.disabled ? 'bg-gray-100' : 'bg-white',
-          'flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm',
+          $props.invalid
+            ? 'ring-red-500 border-red-500 dark:ring-red-500 dark:border-red-500'
+            : '',
+          $props.disabled
+            ? 'bg-gray-100 dark:bg-secondary-light'
+            : 'bg-white dark:bg-secondary-dark',
+          'flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light rounded-md focus:ring-primary focus:border-primary sm:text-sm',
         ]"
         :disabled="$props.disabled"
         v-model="modelValue"
@@ -925,9 +983,13 @@
       <textarea
         type="text"
         :class="[
-          $props.invalid ? 'ring-red-500 border-red-500' : '',
-          $props.disabled ? 'bg-gray-100' : 'bg-white',
-          'flex-1 shadow-sm block w-full min-w-0 border-gray-300 rounded-md focus:ring-primary focus:border-primary sm:text-sm',
+          $props.invalid
+            ? 'ring-red-500 border-red-500 dark:ring-red-500 dark:border-red-500'
+            : '',
+          $props.disabled
+            ? 'bg-gray-100 dark:bg-secondary-light'
+            : 'bg-white dark:bg-secondary-dark',
+          'flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light rounded-md focus:ring-primary focus:border-primary sm:text-sm',
         ]"
         rows="4"
         :disabled="$props.disabled"
@@ -951,9 +1013,13 @@
         <div class="relative mt-1">
           <ListboxButton
             :class="[
-              $props.invalid ? 'ring-red-500 border-red-500' : '',
-              $props.disabled ? 'bg-gray-100' : 'bg-white',
-              'relative w-full py-2 pl-3 pr-10 text-left border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
+              $props.invalid
+                ? 'ring-red-500 border-red-500 dark:ring-red-500 dark:border-red-500'
+                : '',
+              $props.disabled
+                ? 'bg-gray-100 dark:bg-secondary-light'
+                : 'bg-white dark:bg-secondary-dark',
+              'relative w-full py-2 pl-3 pr-10 text-left border border-gray-300 dark:border-secondary-light rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
             ]"
           >
             <div
@@ -976,7 +1042,7 @@
             leave-to-class="opacity-0"
           >
             <ListboxOptions
-              class="absolute z-10 w-full mt-1 overflow-auto text-base bg-white rounded-md shadow-sm max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+              class="absolute z-10 w-full mt-1 overflow-auto text-base bg-white dark:bg-secondary-dark rounded-md shadow-sm max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
             >
               <div
                 v-if="$props.isLoading"
@@ -993,7 +1059,9 @@
                 >
                   <li
                     :class="[
-                      active ? 'text-white bg-primary' : 'text-gray-900',
+                      active
+                        ? 'text-white bg-primary'
+                        : 'text-gray-900 dark:text-gray-50',
                       'cursor-default select-none relative py-2 pl-3 pr-9',
                     ]"
                   >
@@ -1026,7 +1094,9 @@
                 >
                   <li
                     :class="[
-                      active ? 'text-white bg-primary' : 'text-gray-900',
+                      active
+                        ? 'text-white bg-primary'
+                        : 'text-gray-900 dark:text-gray-50',
                       'cursor-default select-none relative py-2 pl-3 pr-9',
                     ]"
                   >
