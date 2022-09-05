@@ -19,7 +19,7 @@
             </dt>
             <dd>
               <div class="text-lg font-medium text-gray-900 dark:text-gray-50">
-                {{ $props.amount }}
+                {{ Intl.NumberFormat().format($props.amount) }}
               </div>
             </dd>
           </dl>

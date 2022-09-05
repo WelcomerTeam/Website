@@ -74,6 +74,8 @@
     </div>
 
     <div class="flex-1 focus:outline-none bg-white dark:bg-secondary">
+      <HoistHeading />
+
       <main class="relative z-0 flex-1 min-h-full pb-8">
         <div class="font-medium pb-20">
           <div v-if="$store.getters.isLoadingGuild">
@@ -97,6 +99,7 @@
 import Header from "../components/dashboard/Header.vue";
 import DashboardSidebar from "../components/dashboard/Sidebar.vue";
 import Toast from "../components/dashboard/Toast.vue";
+import HoistHeading from "../components/hoist/HoistHeading.vue";
 
 import { ref } from "vue";
 import {
@@ -137,6 +140,7 @@ export default {
     XIcon,
 
     Header,
+    HoistHeading,
     DashboardSidebar,
     LoadingIcon,
 

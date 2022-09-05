@@ -22,11 +22,13 @@ import { MenuAlt1Icon } from "@heroicons/vue/outline";
 import { useRoute } from "vue-router";
 import store from "../store/index";
 import { ref } from "vue";
+import HoistHeading from "../components/hoist/HoistHeading.vue";
 
 export default {
   components: {
     Header,
     MenuAlt1Icon,
+    HoistHeading,
   },
   watch: {
     "$route.params.guildID"(to) {

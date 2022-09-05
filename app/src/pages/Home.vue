@@ -1,42 +1,7 @@
 <template>
   <div class="relative min-h-screen bg-secondary">
     <Header />
-    <!-- <div class="p-4 pb-12 text-left text-white from-red-500 to-transparent bg-gradient-to-b section-subtitle">
-      <div class="text-center">
-        <p class="mb-2"><b>22:26 GMT</b> - There is currently an increased number of outages right now affecting most guilds.</p>
-        <a href="/status" class="bg-opacity-50 hover:bg-opacity-70 bg-secondary-dark cta-button">
-          View Status
-        </a>
-      </div>
-    </div>
-
-    <div class="p-4 pb-12 text-left text-white from-donate to-transparent bg-gradient-to-b section-subtitle">
-      <div class="text-center">
-        <p class="mb-2">Get <del>15%</del> <b>25%</b> off all Welcomer Pro plans until <b>June 23rd</b>!</p>
-        <a href="/premium" class="bg-opacity-50 hover:bg-opacity-70 bg-secondary-dark cta-button">
-          View Premium
-        </a>
-      </div>
-    </div>
-  
-    <div class="p-4 pb-12 text-left text-white from-primary to-transparent bg-gradient-to-b section-subtitle">
-      <div class="text-center">
-        <p class="mb-2">Got a minute? Fill out our feedback form to help improve Welcomer!</p>
-        <a href="https://google.com" class="bg-opacity-50 hover:bg-opacity-70 bg-secondary-dark cta-button">
-          Click Here
-        </a>
-      </div>
-    </div>
-
-    <div class="p-4 pb-12 text-left text-white from-yellow-300 to-transparent bg-gradient-to-b section-subtitle">
-      <div class="text-center">
-        <p class="mb-2">Welcomer has made over 10 million images so far this year. Thats one <b>every second</b> or <b>64,000 a day</b>!</p>
-        <a href="/status#analytics" class="bg-opacity-50 hover:bg-opacity-70 bg-secondary-dark cta-button">
-          Statistics
-        </a>
-      </div>
-    </div> -->
-
+    <HoistHeading />
     <main>
       <div class="mx-auto my-4 lg:relative max-w-7xl">
         <div class="hero">
@@ -62,6 +27,7 @@
               class="max-w-full m-auto"
               :isBot="true"
               :showTimestamp="true"
+              :isDark="true"
               :embeds="[
                 {
                   description: `Hey **ImRock**, you are the 256th member on **Welcomer Support Guild**`,
@@ -173,6 +139,7 @@
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
 import DiscordEmbed from "../components/DiscordEmbed.vue";
+import HoistHeading from "../components/hoist/HoistHeading.vue";
 
 const previews = [
   {
@@ -287,6 +254,7 @@ export default {
     Header,
     Footer,
     DiscordEmbed,
+    HoistHeading,
   },
   setup() {
     return {

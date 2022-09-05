@@ -63,8 +63,8 @@
               :to="{ name: item.linkname, params: $route.params }"
               :class="[
                 $route.name === item.linkname
-                  ? 'bg-gray-200 dark:bg-secondary text-primary'
-                  : 'text-secondary dark:text-gray-200',
+                  ? 'text-primary'
+                  : 'text-secondary dark:text-white',
                 'hover:bg-gray-200 dark:hover:bg-secondary-light group flex items-center px-2 py-2 text-sm leading-6 font-semibold rounded-md',
                 item.extendedClass,
               ]"

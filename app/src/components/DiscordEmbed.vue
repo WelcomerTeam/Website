@@ -8,7 +8,12 @@
       <h2 class="header-23xsNx">
         <span class="headerText-3Uvj1Y"
           ><span
-            class="text-secondary dark:text-gray-50 username-1A8OIy desaturateUserColors-1gar-1"
+            :class="[
+              $props.isDark
+                ? 'text-gray-50'
+                : 'text-secondary dark:text-gray-50',
+              'username-1A8OIy desaturateUserColors-1gar-1',
+            ]"
             aria-expanded="false"
             tabindex="0"
             :style="
@@ -42,7 +47,10 @@
         >
       </h2>
       <div
-        class="text-secondary dark:text-gray-50 markup-2BOw-j messageContent-2qWWxC"
+        :class="[
+          $props.isDark ? 'text-gray-50' : 'text-secondary dark:text-gray-50',
+          'markup-2BOw-j messageContent-2qWWxC',
+        ]"
         v-html="marked(content, true)"
       />
     </div>
@@ -1107,6 +1115,9 @@ export default {
       type: Boolean,
     },
     enableURLs: {
+      type: Boolean,
+    },
+    isDark: {
       type: Boolean,
     },
   },

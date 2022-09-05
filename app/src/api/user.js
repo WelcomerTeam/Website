@@ -40,9 +40,9 @@ export default {
             if (guilds.ok) {
               let sortedGuilds = guilds.data.sort(function (a, b) {
                 return (
-                  a.has_membership +
-                  a.has_welcomer -
-                  (b.has_membership + b.has_welcomer)
+                  (a.has_membership === true) +
+                  (a.has_welcomer === true) -
+                  ((b.has_membership === true) + (b.has_welcomer === true))
                 );
               });
               sortedGuilds.reverse();

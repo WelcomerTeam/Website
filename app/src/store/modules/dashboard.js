@@ -113,11 +113,11 @@ const actions = {
 // mutations
 const mutations = {
   setGuild(state, { guild, hasWelcomer }) {
-    state.guild = guild;
-    state.guildChannels = guild?.channels || [];
+    state.guild = guild?.guild;
+    state.guildChannels = guild?.guild?.channels || [];
     state.guildChannelsPacked = packGuildChannels(state.guildChannels);
-    state.guildRoles = guild?.roles || [];
-    state.guildEmojis = guild?.emojis || [];
+    state.guildRoles = guild?.guild?.roles || [];
+    state.guildEmojis = guild?.guild?.emojis || [];
     state.isLoadingGuild = false;
     state.guildHasWelcomer = hasWelcomer;
   },
