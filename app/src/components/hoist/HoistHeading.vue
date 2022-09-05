@@ -1,5 +1,5 @@
 <template>
-  <div
+  <!-- <div
     class="p-4 pb-12 text-left text-white from-red-500 to-transparent bg-gradient-to-b section-subtitle"
   >
     <div class="text-center">
@@ -14,7 +14,8 @@
         View Status
       </a>
     </div>
-  </div>
+  </div> -->
+  <div />
 </template>
 
 <script>
