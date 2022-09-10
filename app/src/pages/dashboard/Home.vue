@@ -38,6 +38,7 @@
               ? `https://cdn.discordapp.com/icons/${$store.getters.getCurrentSelectedGuild?.id}/${$store.getters.getCurrentSelectedGuild?.icon}.webp?size=128`
               : '/assets/discordServer.svg'
           "
+          alt="Guild icon"
         />
       </div>
       <div class="dashboard-title-container">

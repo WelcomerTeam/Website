@@ -7,7 +7,7 @@
         >
           <router-link to="/">
             <div class="flex justify-start">
-              <img class="w-auto h-8" src="/assets/logo.svg" alt="" />
+              <img class="w-auto h-8" src="/assets/logo.svg" alt="Welcomer Logo" />
               <span class="my-auto ml-2 text-xl font-bold text-white"
                 >Welcomer</span
               >

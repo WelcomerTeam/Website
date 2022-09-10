@@ -4,7 +4,12 @@
     role="listitem"
   >
     <div class="contents-2mQqc9" role="document">
-      <img :src="avatar" aria-hidden="true" class="avatar-1BDn8e" alt=" " />
+      <img
+        :src="avatar"
+        aria-hidden="true"
+        class="avatar-1BDn8e"
+        alt="Message author icon"
+      />
       <h2 class="header-23xsNx">
         <span class="headerText-3Uvj1Y"
           ><span
@@ -71,7 +76,8 @@
             v-if="embed?.author"
           >
             <img
-              alt=""
+              aria-hidden="true"
+              alt="Embed author icon"
               class="embedAuthorIcon--1zR3L"
               :src="embed?.author?.icon_url"
               v-if="embed?.author?.icon_url"
@@ -132,7 +138,7 @@
             rel="noreferrer noopener"
             role="button"
             v-if="embed?.image?.url"
-            ><img alt="" :src="embed?.image?.url"
+            ><img aria-hidden="true" alt="Embed image" :src="embed?.image?.url"
           /></a>
           <a
             class="anchor-3Z-8Bb anchorUnderlineOnHover-2ESHQB imageWrapper-2p5ogY imageZoom-1n-ADA clickable-3Ya1ho embedThumbnail-2Y84-K"
@@ -143,7 +149,8 @@
             style="width: 80px; height: 80px"
             v-if="embed?.thumbnail?.url"
             ><img
-              alt=""
+              aria-hidden="true"
+              alt="Embed thumbnail"
               :src="embed?.thumbnail?.url"
               style="width: 80px; height: 80px"
           /></a>

@@ -61,6 +61,7 @@
                       <div class="flex-shrink-0">
                         <div class="flex overflow-hidden -space-x-1">
                           <img
+                            :alt="`Guild icon for ${guild.name}`"
                             :class="[
                               !guild.has_welcomer ? 'saturate-0' : '',
                               'w-10 h-10 rounded-lg',
