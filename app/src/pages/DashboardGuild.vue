@@ -76,8 +76,8 @@
     <div class="flex-1 focus:outline-none bg-white dark:bg-secondary">
       <HoistHeading />
 
-      <main class="relative z-0 flex-1 min-h-full pb-8">
-        <div class="font-medium pb-20">
+      <main class="relative z-0 flex-1 min-h-full pb-9">
+        <div class="font-medium pb-40">
           <div v-if="$store.getters.isLoadingGuild">
             <div class="dashboard-container flex justify-center">
               <LoadingIcon />
