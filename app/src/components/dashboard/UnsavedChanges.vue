@@ -7,7 +7,7 @@
     leave-from-class="translate-y-0 opacity-100"
     leave-to-class="translate-y-1 opacity-0"
   >
-    <div v-if="unsavedChanges" :class="['fixed inset-x-0 bottom-0 z-50']">
+    <div v-if="unsavedChanges" class="fixed inset-x-0 bottom-0 z-10">
       <div class="bg-primary">
         <div class="max-w-xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
           <div class="flex items-center justify-between space-x-4 flex-nowrap">
