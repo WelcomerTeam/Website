@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed top-6 right-6 space-y-3 z-50">
+  <div class="absolute top-28 right-6 space-y-3 z-50">
     <transition-group
       enter-active-class="transition duration-200 ease-out"
       enter-from-class="translate-x-1 opacity-0"
@@ -11,7 +11,7 @@
       <div v-for="toast in $store.getters.getToasts" v-bind:key="toast.id">
         <div
           id="toast-default"
-          class="flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow-sm"
+          class="flex items-center w-full max-w-xs p-4 text-gray-500 bg-white dark:bg-secondary-dark dark:text-white rounded-lg shadow-sm"
           role="alert"
         >
           <font-awesome-icon
@@ -21,10 +21,10 @@
               'p-2 rounded-lg w-4 h-4',
             ]"
           />
-          <div class="mx-3 text-sm font-normal flex-1">{{ toast.title }}</div>
+          <div class="mx-5 text-sm font-normal flex-1">{{ toast.title }}</div>
           <button
             type="button"
-            class="-mx-1.5 bg-white text-gray-500 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8"
+            class="-mx-1.5 bg-white dark:bg-secondary-light text-gray-500 dark:text-white dark:hover:text-white hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 dark:focus:ring-secondary-light p-1.5 hover:bg-gray-100 dark:hover:bg-primary inline-flex h-8 w-8"
             data-dismiss-target="#toast-default"
             @click="hideToast(toast.id)"
             aria-label="Close"
