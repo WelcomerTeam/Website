@@ -2,9 +2,11 @@
   <Popover as="div" v-slot="{ open }" class="relative">
     <div
       :class="[
-        $props.invalid ? 'ring-red-500 border-red-500' : '',
+        $props.invalid
+          ? 'ring-red-500 border-red-500'
+          : 'border-gray-300 dark:border-secondary-light',
         open ? 'rounded-b-none' : '',
-        'border border-gray-300 dark:border-secondary-light p-4 rounded-md flex shadow-sm',
+        'border p-4 rounded-md flex shadow-sm',
       ]"
     >
       <discord-embed

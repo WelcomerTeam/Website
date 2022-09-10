@@ -6,15 +6,28 @@
       {{ title }}
     </label>
     <div v-if="type == FormTypeBlank" class="mt-1 sm:mt-0 sm:col-span-2">
+      <div v-if="$props.validation.$invalid" class="errors">
+        <span
+          v-bind:key="index"
+          v-for="(message, index) in $props.validation?.$Errors"
+          >{{ message.$message }}</span
+        >
+        <span
+          v-bind:key="index"
+          v-for="(message, index) in $props.validation?.$silentErrors"
+          >{{ message.$message }}</span
+        >
+      </div>
       <slot />
     </div>
     <div v-else-if="type == FormTypeToggle" class="mt-1 sm:mt-0 sm:col-span-2">
       <Switch
         :modelValue="modelValue"
         @update:modelValue="updateValue($event)"
+        @blur="blur"
         :disabled="$props.disabled"
         :class="[
-          $props.invalid
+          $props.validation.$invalid
             ? 'ring-red-500 border-red-500 dark:ring-red-500 dark:border-red-500'
             : '',
           $props.disabled
@@ -71,6 +84,18 @@
           </span>
         </span>
       </Switch>
+      <div v-if="$props.validation.$invalid" class="errors">
+        <span
+          v-bind:key="index"
+          v-for="(message, index) in $props.validation?.$Errors"
+          >{{ message.$message }}</span
+        >
+        <span
+          v-bind:key="index"
+          v-for="(message, index) in $props.validation?.$silentErrors"
+          >{{ message.$message }}</span
+        >
+      </div>
       <slot />
     </div>
 
@@ -82,12 +107,13 @@
         as="div"
         v-model="modelValue"
         @update:modelValue="updateValue($event)"
+        @blur="blur"
         :disabled="$props.disabled"
       >
         <div class="relative">
           <ListboxButton
             :class="[
-              $props.invalid
+              $props.validation.$invalid
                 ? 'border-red-500 ring-red-500 dark:ring-red-500 dark:border-red-500'
                 : '',
               $props.disabled
@@ -128,7 +154,7 @@
             leave-to-class="opacity-0"
           >
             <ListboxOptions
-              class="absolute z-10 w-full mt-1 overflow-auto text-base bg-white dark:bg-secondary-dark rounded-md shadow-sm max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+              class="absolute z-20 w-full mt-1 overflow-auto text-base bg-white dark:bg-secondary-dark rounded-md shadow-sm max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
             >
               <div
                 v-if="$store.getters.isLoadingGuild"
@@ -221,6 +247,18 @@
           </transition>
         </div>
       </Listbox>
+      <div v-if="$props.validation.$invalid" class="errors">
+        <span
+          v-bind:key="index"
+          v-for="(message, index) in $props.validation?.$Errors"
+          >{{ message.$message }}</span
+        >
+        <span
+          v-bind:key="index"
+          v-for="(message, index) in $props.validation?.$silentErrors"
+          >{{ message.$message }}</span
+        >
+      </div>
       <slot />
     </div>
 
@@ -233,11 +271,12 @@
         v-model="modelValue"
         :disabled="$props.disabled"
         @update:modelValue="updateValue($event)"
+        @blur="blur"
       >
         <div class="relative mt-1">
           <ListboxButton
             :class="[
-              $props.invalid
+              $props.validation.$invalid
                 ? 'ring-red-500 border-red-500 dark:ring-red-500 dark:border-red-500'
                 : '',
               $props.disabled
@@ -278,7 +317,7 @@
             leave-to-class="opacity-0"
           >
             <ListboxOptions
-              class="absolute z-10 w-full mt-1 overflow-auto text-base bg-white dark:bg-secondary-dark rounded-md shadow-sm max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+              class="absolute z-20 w-full mt-1 overflow-auto text-base bg-white dark:bg-secondary-dark rounded-md shadow-sm max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
             >
               <div
                 v-if="$store.getters.isLoadingGuild"
@@ -381,6 +420,18 @@
           </transition>
         </div>
       </Listbox>
+      <div v-if="$props.validation.$invalid" class="errors">
+        <span
+          v-bind:key="index"
+          v-for="(message, index) in $props.validation?.$Errors"
+          >{{ message.$message }}</span
+        >
+        <span
+          v-bind:key="index"
+          v-for="(message, index) in $props.validation?.$silentErrors"
+          >{{ message.$message }}</span
+        >
+      </div>
       <slot />
     </div>
 
@@ -392,12 +443,13 @@
         as="div"
         v-model="modelValue"
         @update:modelValue="updateValue($event)"
+        @blur="blur"
         :disabled="$props.disabled"
       >
         <div class="relative mt-1">
           <ListboxButton
             :class="[
-              $props.invalid
+              $props.validation.$invalid
                 ? 'ring-red-500 border-red-500 dark:ring-red-500 dark:border-red-500'
                 : '',
               $props.disabled
@@ -438,7 +490,7 @@
             leave-to-class="opacity-0"
           >
             <ListboxOptions
-              class="absolute z-10 w-full mt-1 overflow-auto text-base bg-white dark:bg-secondary-dark rounded-md shadow-sm max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+              class="absolute z-20 w-full mt-1 overflow-auto text-base bg-white dark:bg-secondary-dark rounded-md shadow-sm max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
             >
               <div
                 v-if="$store.getters.isLoadingGuild"
@@ -512,7 +564,7 @@
                           active ? 'text-white' : 'text-gray-400',
                           'inline w-4 h-4 mr-1 border-primary',
                         ]"
-                        :style="{ color: `${RGBIntToRGB(role?.colour, 0)}` }"
+                        :style="{ color: `${RGBAIntToRGBA(role?.colour, 0)}` }"
                       />
                       {{ role.name }}
                     </span>
@@ -533,6 +585,18 @@
           </transition>
         </div>
       </Listbox>
+      <div v-if="$props.validation.$invalid" class="errors">
+        <span
+          v-bind:key="index"
+          v-for="(message, index) in $props.validation?.$Errors"
+          >{{ message.$message }}</span
+        >
+        <span
+          v-bind:key="index"
+          v-for="(message, index) in $props.validation?.$silentErrors"
+          >{{ message.$message }}</span
+        >
+      </div>
       <slot />
     </div>
 
@@ -544,12 +608,13 @@
         as="div"
         v-model="modelValue"
         @update:modelValue="updateValue($event)"
+        @blur="blur"
         :disabled="$props.disabled"
       >
         <div class="relative mt-1">
           <ListboxButton
             :class="[
-              $props.invalid
+              $props.validation.$invalid
                 ? 'ring-red-500 border-red-500 dark:ring-red-500 dark:border-red-500'
                 : '',
               $props.disabled
@@ -592,7 +657,7 @@
             leave-to-class="opacity-0"
           >
             <ListboxOptions
-              class="absolute z-10 w-full mt-1 text-base bg-white dark:bg-secondary-dark rounded-md shadow-sm ring-1 ring-primary ring-opacity-5 focus:outline-none sm:text-sm"
+              class="absolute z-20 w-full mt-1 text-base bg-white dark:bg-secondary-dark rounded-md shadow-sm ring-1 ring-primary ring-opacity-5 focus:outline-none sm:text-sm"
             >
               <div
                 v-if="$store.getters.isLoadingGuild"
@@ -700,7 +765,7 @@
                         ]"
                       >
                         <img
-                          alt=""
+                          :alt="`Guild member ${member.display_name}`"
                           v-lazy="
                             `https://cdn.discordapp.com/avatars/${member.id}/${member.avatar}.webp?size=32`
                           "
@@ -726,6 +791,18 @@
           </transition>
         </div>
       </Listbox>
+      <div v-if="$props.validation.$invalid" class="errors">
+        <span
+          v-bind:key="index"
+          v-for="(message, index) in $props.validation?.$Errors"
+          >{{ message.$message }}</span
+        >
+        <span
+          v-bind:key="index"
+          v-for="(message, index) in $props.validation?.$silentErrors"
+          >{{ message.$message }}</span
+        >
+      </div>
       <slot />
     </div>
 
@@ -737,12 +814,13 @@
         as="div"
         v-model="modelValue"
         @update:modelValue="updateValue($event)"
+        @blur="blur"
         :disabled="$props.disabled"
       >
         <div class="relative mt-1">
           <ListboxButton
             :class="[
-              $props.invalid
+              $props.validation.$invalid
                 ? 'ring-red-500 border-red-500 dark:ring-red-500 dark:border-red-500'
                 : '',
               $props.disabled
@@ -785,7 +863,7 @@
             leave-to-class="opacity-0"
           >
             <ListboxOptions
-              class="absolute z-10 w-full mt-1 text-base bg-white dark:bg-secondary-dark rounded-md shadow-sm ring-1 ring-primary ring-opacity-5 focus:outline-none sm:text-sm"
+              class="absolute z-20 w-full mt-1 text-base bg-white dark:bg-secondary-dark rounded-md shadow-sm ring-1 ring-primary ring-opacity-5 focus:outline-none sm:text-sm"
             >
               <div class="w-full p-2">
                 <input
@@ -851,7 +929,7 @@
                       ]"
                     >
                       <img
-                        alt=""
+                        :alt="`Guild emoji ${emoji.name}`"
                         v-lazy="
                           `https://cdn.discordapp.com/emojis/${emoji.id}.${
                             emoji.is_animated ? 'gif' : 'png'
@@ -878,6 +956,18 @@
           </transition>
         </div>
       </Listbox>
+      <div v-if="$props.validation.$invalid" class="errors">
+        <span
+          v-bind:key="index"
+          v-for="(message, index) in $props.validation?.$Errors"
+          >{{ message.$message }}</span
+        >
+        <span
+          v-bind:key="index"
+          v-for="(message, index) in $props.validation?.$silentErrors"
+          >{{ message.$message }}</span
+        >
+      </div>
       <slot />
     </div>
 
@@ -886,12 +976,13 @@
         as="div"
         v-model="modelValue"
         @update:modelValue="updateValue($event)"
+        @blur="blur"
         :disabled="$props.disabled"
       >
         <div class="relative mt-1">
           <ListboxButton
             :class="[
-              $props.invalid
+              $props.validation.$invalid
                 ? 'ring-red-500 border-red-500 dark:ring-red-500 dark:border-red-500'
                 : '',
               $props.disabled
@@ -906,11 +997,11 @@
               <font-awesome-icon
                 icon="square"
                 class="inline w-4 h-4 mr-1 border-primary"
-                :style="{ color: `${RGBIntToRGB(modelValue, 0)}` }"
+                :style="{ color: `${parseCSSValue(modelValue, 0)}` }"
               />
             </div>
             <span class="block pl-10 truncate">{{
-              RGBIntToRGB(modelValue, 0).toUpperCase()
+              parseCSSValue(modelValue, 0)
             }}</span>
             <span
               class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none"
@@ -927,8 +1018,8 @@
             <ListboxOptions class="absolute z-10 mt-1">
               <ColorPicker
                 theme="dark"
-                :color="RGBIntToRGB(modelValue, 0)"
-                @changeColor="SetRGBIntToRGB"
+                :color="parseCSSValue(modelValue)"
+                @changeColor="onColorChange"
                 :sucker-hide="true"
               />
             </ListboxOptions>
@@ -941,7 +1032,7 @@
       <input
         type="text"
         :class="[
-          $props.invalid
+          $props.validation.$invalid
             ? 'ring-red-500 border-red-500 dark:ring-red-500 dark:border-red-500'
             : '',
           $props.disabled
@@ -953,7 +1044,20 @@
         placeholder="Enter text here..."
         v-model="modelValue"
         @update:modelValue="updateValue($event)"
+        @blur="blur"
       />
+      <div v-if="$props.validation.$invalid" class="errors">
+        <span
+          v-bind:key="index"
+          v-for="(message, index) in $props.validation?.$Errors"
+          >{{ message.$message }}</span
+        >
+        <span
+          v-bind:key="index"
+          v-for="(message, index) in $props.validation?.$silentErrors"
+          >{{ message.$message }}</span
+        >
+      </div>
       <slot />
     </div>
 
@@ -961,7 +1065,7 @@
       <input
         type="number"
         :class="[
-          $props.invalid
+          $props.validation.$invalid
             ? 'ring-red-500 border-red-500 dark:ring-red-500 dark:border-red-500'
             : '',
           $props.disabled
@@ -972,7 +1076,20 @@
         :disabled="$props.disabled"
         v-model="modelValue"
         @update:modelValue="updateValue($event)"
+        @blur="blur"
       />
+      <div v-if="$props.validation.$invalid" class="errors">
+        <span
+          v-bind:key="index"
+          v-for="(message, index) in $props.validation?.$Errors"
+          >{{ message.$message }}</span
+        >
+        <span
+          v-bind:key="index"
+          v-for="(message, index) in $props.validation?.$silentErrors"
+          >{{ message.$message }}</span
+        >
+      </div>
       <slot />
     </div>
 
@@ -983,7 +1100,7 @@
       <textarea
         type="text"
         :class="[
-          $props.invalid
+          $props.validation.$invalid
             ? 'ring-red-500 border-red-500 dark:ring-red-500 dark:border-red-500'
             : '',
           $props.disabled
@@ -996,7 +1113,20 @@
         placeholder="Enter text here..."
         v-model="modelValue"
         @update:modelValue="updateValue($event)"
+        @blur="blur"
       />
+      <div v-if="$props.validation.$invalid" class="errors">
+        <span
+          v-bind:key="index"
+          v-for="(message, index) in $props.validation?.$Errors"
+          >{{ message.$message }}</span
+        >
+        <span
+          v-bind:key="index"
+          v-for="(message, index) in $props.validation?.$silentErrors"
+          >{{ message.$message }}</span
+        >
+      </div>
       <slot />
     </div>
 
@@ -1009,11 +1139,12 @@
         v-model="modelValue"
         :disabled="$props.disabled"
         @update:modelValue="updateValue($event)"
+        @blur="blur"
       >
         <div class="relative mt-1">
           <ListboxButton
             :class="[
-              $props.invalid
+              $props.validation.$invalid
                 ? 'ring-red-500 border-red-500 dark:ring-red-500 dark:border-red-500'
                 : '',
               $props.disabled
@@ -1042,7 +1173,7 @@
             leave-to-class="opacity-0"
           >
             <ListboxOptions
-              class="absolute z-10 w-full mt-1 overflow-auto text-base bg-white dark:bg-secondary-dark rounded-md shadow-sm max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+              class="absolute z-20 w-full mt-1 overflow-auto text-base bg-white dark:bg-secondary-dark rounded-md shadow-sm max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
             >
               <div
                 v-if="$props.isLoading"
@@ -1125,6 +1256,18 @@
           </transition>
         </div>
       </Listbox>
+      <div v-if="$props.validation.$invalid" class="errors">
+        <span
+          v-bind:key="index"
+          v-for="(message, index) in $props.validation?.$Errors"
+          >{{ message.$message }}</span
+        >
+        <span
+          v-bind:key="index"
+          v-for="(message, index) in $props.validation?.$silentErrors"
+          >{{ message.$message }}</span
+        >
+      </div>
       <slot />
     </div>
 
@@ -1132,8 +1275,9 @@
       <embed-builder
         v-model="modelValue"
         @update:modelValue="updateValue($event)"
+        @blur="blur"
         :disabled="$props.disabled"
-        :invalid="$props.invalid"
+        :invalid="$props.validation.$invalid"
       />
     </div>
 
@@ -1144,15 +1288,30 @@
       <background-selector
         v-model="modelValue"
         @update:modelValue="updateValue($event)"
+        @blur="blur"
         :disabled="$props.disabled"
-        :invalid="$props.invalid"
+        :invalid="$props.validation.$invalid"
       />
     </div>
 
     <span v-else
       ><span>Unknown type {{ type }}</span>
-      <div><slot /></div
-    ></span>
+      <div>
+        <div v-if="$props.validation.$invalid" class="errors">
+          <span
+            v-bind:key="index"
+            v-for="(message, index) in $props.validation?.$Errors"
+            >{{ message.$message }}</span
+          >
+          <span
+            v-bind:key="index"
+            v-for="(message, index) in $props.validation?.$silentErrors"
+            >{{ message.$message }}</span
+          >
+        </div>
+      </div>
+      <slot />
+    </span>
   </div>
 </template>
 
@@ -1176,6 +1335,7 @@ import {
 } from "@headlessui/vue";
 import { CheckIcon, SelectorIcon } from "@heroicons/vue/solid";
 import { XIcon } from "@heroicons/vue/outline";
+import parse from "parse-css-color";
 
 import { ColorPicker } from "vue-color-kit";
 import "vue-color-kit/dist/vue-color-kit.css";
@@ -1269,9 +1429,15 @@ export default {
     values: {
       required: false,
     },
+    errors: {
+      type: Array,
+    },
+    validation: {
+      type: Object,
+    },
   },
 
-  emits: ["update:modelValue"],
+  emits: ["update:modelValue", "blur"],
 
   setup() {
     let query = "";
@@ -1318,19 +1484,46 @@ export default {
       }
     },
 
-    RGBIntToRGB(rgbInt, defaultValue) {
-      return (
-        "#" +
-        (rgbInt == undefined ? defaultValue : rgbInt)
+    parseCSSValue(value, defaultValue) {
+      var result;
+
+      result = parse(value);
+
+      if (result == null) {
+        result = parse(defaultValue);
+      }
+
+      if (result == null) {
+        result = parse("#FFFFFF");
+      }
+
+      var [r, g, b] = result.values;
+      var a = result.alpha;
+
+      if (a == 1) {
+        return `#${r.toString(16).toUpperCase().padStart(2, "0")}${g
           .toString(16)
-          .slice(-6)
-          .padStart(6, "0")
-      );
+          .toUpperCase()
+          .padStart(2, "0")}${b.toString(16).toUpperCase().padStart(2, "0")}`;
+      } else {
+        a = Math.round(a * 100) / 100;
+
+        return `rgba(${r}, ${g}, ${b}, ${a})`;
+      }
     },
 
-    SetRGBIntToRGB(color) {
-      const { r, g, b } = color.rgba;
-      this.updateValue((r << 16) + (g << 8) + b);
+    onColorChange(color) {
+      var { r, g, b, a } = color.rgba;
+
+      console.log(a, a == 1);
+
+      if (a == 1) {
+        this.updateValue(color.hex);
+      } else {
+        a = Math.round(a * 100) / 100;
+
+        this.updateValue(`rgba(${r}, ${g}, ${b}, ${a})`);
+      }
     },
 
     updateValue(value) {
@@ -1338,6 +1531,10 @@ export default {
         return;
       }
       this.$emit("update:modelValue", value);
+    },
+
+    blur() {
+      this.$props.validation.$touch();
     },
 
     filterTextChannels(channels) {

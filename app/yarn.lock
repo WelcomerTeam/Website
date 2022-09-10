@@ -358,6 +358,20 @@
   resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.2.33.tgz#69a8c99ceb37c1b031d5cc4aec2ff1dc77e1161e"
   integrity sha512-UBc1Pg1T3yZ97vsA2ueER0F6GbJebLHYlEi4ou1H5YL4KWvMOOWwpYo9/QpWq93wxKG6Wo13IY74Hcn/f7c7Bg==
 
+"@vuelidate/core@^2.0.0-alpha.44":
+  version "2.0.0-alpha.44"
+  resolved "https://registry.yarnpkg.com/@vuelidate/core/-/core-2.0.0-alpha.44.tgz#2ef61631fef542fb7827a0b0cfd5a4ed9dd5dc6d"
+  integrity sha512-3DlCe3E0RRXbB+OfPacUetKhLmXzmnjeHkzjnbkc03p06mKm6h9pXR5pd6Mv4s4tus4sieuKDb2YWNmKK6rQeA==
+  dependencies:
+    vue-demi "^0.13.4"
+
+"@vuelidate/validators@^2.0.0-alpha.31":
+  version "2.0.0-alpha.31"
+  resolved "https://registry.yarnpkg.com/@vuelidate/validators/-/validators-2.0.0-alpha.31.tgz#04d63307bc0a12db9f7ad94243350b83aacee998"
+  integrity sha512-+MFA9nZ7Y9zCpq383/voPDk/hiAmu6KqiJJhLOYB/FmrUPVoyKnuKnI9Bwiq8ok9GZlVkI8BnIrKPKGj9QpwiQ==
+  dependencies:
+    vue-demi "^0.13.4"
+
 acorn-node@^1.6.1:
   version "1.8.2"
   resolved "https://registry.yarnpkg.com/acorn-node/-/acorn-node-1.8.2.tgz#114c95d64539e53dede23de8b9d96df7c7ae2af8"
@@ -1045,6 +1059,11 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
+hex-rgb@^4.1.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/hex-rgb/-/hex-rgb-4.3.0.tgz#af5e974e83bb2fefe44d55182b004ec818c07776"
+  integrity sha512-Ox1pJVrDCyGHMG9CFg1tmrRUMRPRsAWYc/PinY0XzJU4K7y7vjNoLKIQ7BR5UJMCxNN8EM1MNDmHWA/B3aZUuw==
+
 highlight.js@^11.2.0:
   version "11.5.0"
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-11.5.0.tgz#00abb7ed926491adbdabc93a4f3fd2b88b451b4a"
@@ -1412,10 +1431,10 @@ markdown-it@^6.0.1:
     mdurl "~1.0.1"
     uc.micro "^1.0.1"
 
-marked@^4.0.10:
-  version "4.0.13"
-  resolved "https://registry.yarnpkg.com/marked/-/marked-4.0.13.tgz#4fd46ca93da46448f3d83f054d938c4f905a258d"
-  integrity sha512-lS/ZCa4X0gsRcfWs1eoh6dLnHr9kVH3K1t2X4M/tTtNouhZ7anS1Csb6464VGLQHv8b2Tw1cLeZQs58Jav8Rzw==
+marked@^4.0.14:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-4.1.0.tgz#3fc6e7485f21c1ca5d6ec4a39de820e146954796"
+  integrity sha512-+Z6KDjSPa6/723PQYyc1axYZpYYpDnECDaU6hkaf5gqBieBkMKYReL5hteF2QizhlMbgbo8umXl/clZ67+GlsA==
 
 match-at@^0.1.0:
   version "0.1.1"
@@ -1579,6 +1598,14 @@ parent-module@^1.0.0:
   integrity sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==
   dependencies:
     callsites "^3.0.0"
+
+parse-css-color@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/parse-css-color/-/parse-css-color-0.2.1.tgz#b687a583f2e42e66ffdfce80a570706966e807c9"
+  integrity sha512-bwS/GGIFV3b6KS4uwpzCFj4w297Yl3uqnSgIPsoQkx7GMLROXfMnWvxfNkL0oh8HVhZA4hvJoEoEIqonfJ3BWg==
+  dependencies:
+    color-name "^1.1.4"
+    hex-rgb "^4.1.0"
 
 parse-glob@^3.0.4:
   version "3.0.4"
@@ -2156,6 +2183,11 @@ vue-color-kit@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/vue-color-kit/-/vue-color-kit-1.0.5.tgz#4524be982078d4916756e480d2c9324717169738"
   integrity sha512-PUQzqdpI7672YYuoHdTLENHldieVMis0u9g2n7NAxiLGdiaqCD/QaYtbDOvtASpN5oSIfKxQgPV+i45MOlkKnw==
+
+vue-demi@^0.13.4:
+  version "0.13.11"
+  resolved "https://registry.yarnpkg.com/vue-demi/-/vue-demi-0.13.11.tgz#7d90369bdae8974d87b1973564ad390182410d99"
+  integrity sha512-IR8HoEEGM65YY3ZJYAjMlKygDQn25D5ajNFNoKh9RSDMQtlzCxtfQjdQgv9jjK+m3377SsJXY8ysq8kLCZL25A==
 
 vue-lazyload@^1.3.4:
   version "1.3.4"
