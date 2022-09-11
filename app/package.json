@@ -13,7 +13,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/vue-fontawesome": "^3.0.0-5",
-    "@headlessui/vue": "^1.0.0",
+    "@headlessui/vue": "^1.6.7",
     "@heroicons/vue": "^1.0.1",
     "@kevinfaguiar/vue-twemoji-picker": "^5.7.4",
     "@mdi/js": "^5.9.55",
