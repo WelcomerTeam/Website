@@ -40,7 +40,7 @@
     "vue-markdown": "git+https://github.com/miaolz123/vue-markdown.git",
     "vue-router": "^4.0.8",
     "vue-tailwind-color-picker": "^1.0.6",
-    "vue3-lazyload": "^0.2.2-beta",
+    "vue3-lazyload": "^0.3.6",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
