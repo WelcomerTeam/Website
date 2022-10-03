@@ -1,5 +1,3 @@
-// Handles user specific routes
-
 import { doRequest, doLogin } from "./routes";
 
 export default {
@@ -10,14 +8,16 @@ export default {
       null,
       (response) => {
         if (response.status === 401) {
-          callback(null);
+          callback({ user: null });
         } else {
-          response.json().then((user) => {
-            if (user.ok) {
-              callback(user.data);
+          response.json().then((res) => {
+            if (res.ok) {
+              callback({ user: res.data });
             } else {
-              callback(null);
+              errorCallback(res.error);
             }
+          }).catch((error) => {
+            errorCallback(error);
           });
         }
       },
@@ -26,6 +26,7 @@ export default {
       }
     );
   },
+
   getGuilds(callback, errorCallback) {
     doRequest(
       "GET",
@@ -34,11 +35,11 @@ export default {
       (response) => {
         if (response.status === 401) {
           doLogin();
-          callback(null);
+          callback({ guilds: [] });
         } else {
-          response.json().then((guilds) => {
-            if (guilds.ok) {
-              let sortedGuilds = guilds.data.sort(function (a, b) {
+          response.json().then((res) => {
+            if (res.ok) {
+              let sortedGuilds = res.data.sort(function (a, b) {
                 return (
                   (a.has_membership === true) +
                   (a.has_welcomer === true) -
@@ -46,10 +47,12 @@ export default {
                 );
               });
               sortedGuilds.reverse();
-              callback(sortedGuilds);
+              callback({ guilds: sortedGuilds });
             } else {
-              callback(null);
+              errorCallback(res.error);
             }
+          }).catch((error) => {
+            errorCallback(error);
           });
         }
       },
