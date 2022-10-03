@@ -165,8 +165,8 @@ function packGuildChannels(channels) {
       return channel.type !== 4;
     })
     .map((channel) => {
-      if (categories[channel.category]) {
-        categories[channel.category].channels.push(channel);
+      if (categories[channel.parent_id]) {
+        categories[channel.parent_id].channels.push(channel);
       } else {
         emptyCategory.channels.push(channel);
       }
