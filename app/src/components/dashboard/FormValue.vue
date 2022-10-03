@@ -2,7 +2,7 @@
   <div
     class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start dark:text-gray-50 sm:border-gray-200 mb-6 sm:mb-4 align-middle"
   >
-    <label class="block font-semibold text-gray-700 dark:text-gray-100">
+    <label :for="id" class="block font-medium text-gray-700 dark:text-gray-50">
       {{ title }}
     </label>
     <div v-if="type == FormTypeBlank" class="mt-1 sm:mt-0 sm:col-span-2">
