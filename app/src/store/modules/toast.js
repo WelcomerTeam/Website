@@ -12,8 +12,13 @@ const getters = {
 
 // actions
 const actions = {
-  createToast({ commit, state }, toast) {
+  createToast({ commit }, toast) {
+    toast.id = new Date().getTime();
+
     commit("addToast", toast);
+    setTimeout(() => {
+      commit("removeToast", toast.id);
+    }, toast.expiration || 5000);
   },
   removeToast({ commit }, toastID) {
     commit("removeToast", toastID);

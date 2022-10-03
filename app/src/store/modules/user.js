@@ -38,7 +38,7 @@ const actions = {
   fetchCurrentUser({ commit }) {
     commit("loadingUser");
     userAPI.getUser(
-      (user) => {
+      ({ user }) => {
         commit("setCurrentUser", user);
       },
       () => {
@@ -50,7 +50,7 @@ const actions = {
   fetchGuilds({ commit }) {
     commit("loadingGuilds");
     userAPI.getGuilds(
-      (guilds) => {
+      ({ guilds }) => {
         commit("setGuilds", guilds);
       },
       () => {
