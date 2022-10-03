@@ -42,7 +42,7 @@
 
       <!-- Sidebar -->
       <nav
-        class="flex flex-col flex-1 px-3 mt-5 overflow-y-auto divide-y divide-gray-300 custom-scroll"
+        class="flex flex-col flex-1 px-3 mt-5 overflow-y-auto divide-y divide-gray-300 dark:divide-secondary custom-scroll"
         aria-label="Sidebar"
         v-if="$store.getters.getCurrentSelectedGuild"
       >
@@ -182,9 +182,9 @@ const navigation = [
   {
     items: [
       {
-        name: "AutoMod",
-        linkname: "dashboard.guild.automod",
-        icon: "shield",
+        name: "Examples",
+        linkname: "dashboard.guild.example",
+        icon: "list-check",
       },
     ],
   },

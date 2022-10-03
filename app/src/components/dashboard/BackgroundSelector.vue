@@ -68,7 +68,7 @@
           <div
             class="block w-full overflow-auto text-base rounded-md sm:text-sm bg-white border-gray-300 dark:border-secondary-light dark:bg-secondary border rounded-t-none border-t-0"
           >
-            <div class="border-b border-gray-200">
+            <div class="border-b border-gray-200 dark:border-secondary-light">
               <nav class="flex display-flex justify-evenly" aria-label="Tabs">
                 <a
                   v-for="tab in tabs"

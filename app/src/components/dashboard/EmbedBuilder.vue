@@ -62,7 +62,7 @@
           class="border-gray-300 dark:border-secondary-light rounded-md border shadow-sm rounded-t-none border-t-0"
         >
           <div class="block">
-            <div class="border-b border-gray-200">
+            <div class="border-b border-gray-200 dark:border-secondary-light">
               <nav class="flex display-flex justify-evenly" aria-label="Tabs">
                 <a
                   v-for="tab in tabs"
@@ -101,7 +101,7 @@
                     placeholder="Message Content"
                     v-model="content"
                     rows="4"
-                    @update:modelValue="updateEmbed()"
+                    @input="updateEmbed()"
                   />
                 </div>
               </div>
@@ -121,7 +121,7 @@
                     class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
                     placeholder="Embed title"
                     v-model="title"
-                    @update:modelValue="updateEmbed()"
+                    @input="updateEmbed()"
                   />
                 </div>
               </div>
@@ -141,7 +141,7 @@
                     class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
                     placeholder="Title URL"
                     v-model="url"
-                    @update:modelValue="updateEmbed()"
+                    @input="updateEmbed()"
                   />
                 </div>
               </div>
@@ -160,7 +160,7 @@
                     class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
                     placeholder="Embed description"
                     v-model="description"
-                    @update:modelValue="updateEmbed()"
+                    @input="updateEmbed()"
                   />
                 </div>
               </div>
@@ -184,7 +184,7 @@
                     :false-value="false"
                     class="focus:ring-primary h-4 w-4 text-primary border-gray-300 dark:bg-secondary-dark dark:border-secondary-light rounded mr-2"
                     v-model="use_color"
-                    @update:modelValue="updateEmbed()"
+                    @change="updateEmbed()"
                   />
                   <Listbox as="div" class="flex-1">
                     <div class="relative">
@@ -254,14 +254,14 @@
                       class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
                       placeholder="Field Name"
                       v-model="field.name"
-                      @update:modelValue="updateEmbed()"
+                      @input="updateEmbed()"
                     />
                     <input
                       type="text"
                       class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
                       placeholder="Field Value"
                       v-model="field.value"
-                      @update:modelValue="updateEmbed()"
+                      @input="updateEmbed()"
                     />
                     <div class="flex items-center">
                       <div class="flex-1">
@@ -274,7 +274,7 @@
                           :false-value="false"
                           class="focus:ring-primary h-4 w-4 text-primary border-gray-300 dark:bg-secondary-dark dark:border-secondary-light rounded"
                           v-model="field.inline"
-                          @update:modelValue="updateEmbed()"
+                          @change="updateEmbed()"
                         />
                         <span
                           class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-50 shadow-sm"
@@ -315,7 +315,7 @@
                     class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
                     placeholder="Embed Image URL"
                     v-model="image_url"
-                    @update:modelValue="updateEmbed()"
+                    @input="updateEmbed()"
                   />
                 </div>
               </div>
@@ -335,7 +335,7 @@
                     class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
                     placeholder="Thumbnail Image URL"
                     v-model="thumbnail_url"
-                    @update:modelValue="updateEmbed()"
+                    @input="updateEmbed()"
                   />
                 </div>
               </div>
@@ -355,7 +355,7 @@
                     class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
                     placeholder="Embed title"
                     v-model="footer_text"
-                    @update:modelValue="updateEmbed()"
+                    @input="updateEmbed()"
                   />
                 </div>
               </div>
@@ -375,7 +375,7 @@
                     class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
                     placeholder="Footer Icon URL"
                     v-model="footer_icon"
-                    @update:modelValue="updateEmbed()"
+                    @input="updateEmbed()"
                   />
                 </div>
               </div>
@@ -395,7 +395,7 @@
                     class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
                     placeholder="Author Name"
                     v-model="author_name"
-                    @update:modelValue="updateEmbed()"
+                    @input="updateEmbed()"
                   />
                 </div>
               </div>
@@ -415,7 +415,7 @@
                     class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
                     placeholder="Author URL"
                     v-model="author_url"
-                    @update:modelValue="updateEmbed()"
+                    @input="updateEmbed()"
                   />
                 </div>
               </div>
@@ -435,7 +435,7 @@
                     class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
                     placeholder="Author Icon URL"
                     v-model="author_icon_url"
-                    @update:modelValue="updateEmbed()"
+                    @input="updateEmbed()"
                   />
                 </div>
               </div>
@@ -534,24 +534,24 @@ export default {
   emits: ["update:modelValue"],
 
   setup() {
-    let content = "";
+    let content = ref("");
 
-    let title = "";
-    let description = "";
-    let url = "";
+    let title = ref("");
+    let description = ref("");
+    let url = ref("");
     let use_color = ref(false);
-    let color = 2450411;
+    let color = ref(2450411);
 
-    let footer_text = "";
-    let footer_icon = "";
+    let footer_text = ref("");
+    let footer_icon = ref("");
 
-    let image_url = "";
+    let image_url = ref("");
 
-    let thumbnail_url = "";
+    let thumbnail_url = ref("");
 
-    let author_name = "";
-    let author_url = "";
-    let author_icon_url = "";
+    let author_name = ref("");
+    let author_url = ref("");
+    let author_icon_url = ref("");
 
     let page = ref(1);
 
@@ -611,7 +611,7 @@ export default {
 
         this.image_url = modelValue?.image?.url || "";
 
-        this.thumbnail_url = modelValue?.thumbnail?.icon_url || "";
+        this.thumbnail_url = modelValue?.thumbnail?.url || "";
 
         this.author_name = modelValue?.author?.name || "";
         this.author_url = modelValue?.author?.url || "";
@@ -623,7 +623,7 @@ export default {
           this.fields.push({
             name: field.name,
             value: field.value,
-            inline: field.inline,
+            inline: field.inline ? true : false,
           });
         });
       }
@@ -726,7 +726,7 @@ export default {
           fields.push({
             name: field.name,
             value: field.value,
-            inline: field.inline | false,
+            inline: field.inline ? true : false,
           });
         }
       });
