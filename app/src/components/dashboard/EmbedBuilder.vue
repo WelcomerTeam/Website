@@ -6,7 +6,7 @@
           ? 'ring-red-500 border-red-500'
           : 'border-gray-300 dark:border-secondary-light',
         open ? 'rounded-b-none' : '',
-        'border p-4 rounded-md flex shadow-sm',
+        'border p-4 rounded-md flex shadow-sm text-left',
       ]"
     >
       <discord-embed
