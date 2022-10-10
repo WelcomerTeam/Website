@@ -89,14 +89,12 @@ const dummyMemberSearch = new Fuse(dummyMembers, {
   useExtendedSearch: true,
 });
 
-import { doLogin, doRequest } from "./routes";
+import { doLogin, doRequest, getRequest } from "./routes";
 
 export default {
   getGuild(guildID, callback, errorCallback) {
-    doRequest(
-      "GET",
+    getRequest(
       "/api/guild/" + guildID,
-      null,
       (response) => {
         if (response.status === 401) {
           doLogin();
@@ -104,15 +102,18 @@ export default {
         } else if (response.status == 403) {
           callback({ guild: null, hasWelcomer: false });
         } else {
-          response.json().then((res) => {
-            if (res.ok) {
-              callback({ guild: res.data, hasWelcomer: true });
-            } else {
-              errorCallback(res.error);
-            }
-          }).catch((error) => {
-            errorCallback(error);
-          });
+          response
+            .json()
+            .then((res) => {
+              if (res.ok) {
+                callback({ guild: res.data, hasWelcomer: true });
+              } else {
+                errorCallback(res.error);
+              }
+            })
+            .catch((error) => {
+              errorCallback(error);
+            });
         }
       },
       (error) => {
@@ -134,10 +135,8 @@ export default {
   },
 
   getWelcomerConfig(guildID, callback, errorCallback) {
-    doRequest(
-      "GET",
+    getRequest(
       "/api/guild/" + guildID + "/welcomer",
-      null,
       (response) => {
         if (response.status === 401) {
           doLogin();
@@ -145,15 +144,18 @@ export default {
         } else if (response.status == 403) {
           callback({ config: null });
         } else {
-          response.json().then((res) => {
-            if (res.ok) {
-              callback({ config: res.data });
-            } else {
-              errorCallback(res.error);
-            }
-          }).catch((error) => {
-            errorCallback(error);
-          });
+          response
+            .json()
+            .then((res) => {
+              if (res.ok) {
+                callback({ config: res.data });
+              } else {
+                errorCallback(res.error);
+              }
+            })
+            .catch((error) => {
+              errorCallback(error);
+            });
         }
       },
       (error) => {
@@ -162,12 +164,12 @@ export default {
     );
   },
 
-  setWelcomerConfig(guildID, data, callback, errorCallback) {
+  setWelcomerConfig(guildID, data, files, callback, errorCallback) {
     doRequest(
       "POST",
       "/api/guild/" + guildID + "/welcomer",
-
       data,
+      files,
       (response) => {
         if (response.status === 401) {
           doLogin();
@@ -175,15 +177,18 @@ export default {
         } else if (response.status == 403) {
           callback({ config: null });
         } else {
-          response.json().then((res) => {
-            if (res.ok) {
-              callback({ config: res.data });
-            } else {
-              errorCallback(res.error);
-            }
-          }).catch((error) => {
-            errorCallback(error);
-          });
+          response
+            .json()
+            .then((res) => {
+              if (res.ok) {
+                callback({ config: res.data });
+              } else {
+                errorCallback(res.error);
+              }
+            })
+            .catch((error) => {
+              errorCallback(error);
+            });
         }
       },
       (error) => {

@@ -17,16 +17,15 @@
           title="Enable Welcome Text"
           :type="FormTypeToggle"
           v-model="config.text.enabled"
-          @update:modelValue="showUnsavedChanges"
+          @update:modelValue="onValueUpdate"
           :validation="v$.text.enabled"
-          id="welcome_text_enable"
         />
 
         <form-value
           title="Welcome Channel"
           :type="FormTypeChannelListCategories"
           v-model="config.text.channel"
-          @update:modelValue="showUnsavedChanges"
+          @update:modelValue="onValueUpdate"
           :validation="v$.text.channel"
         />
 
@@ -34,7 +33,7 @@
           title="Welcome Text Message"
           :type="FormTypeEmbed"
           v-model="config.text.message_json"
-          @update:modelValue="showUnsavedChanges"
+          @update:modelValue="onValueUpdate"
           :validation="v$.text.message_json"
         >
         </form-value>
@@ -45,7 +44,7 @@
           title="Enable Welcomer Images"
           :type="FormTypeToggle"
           v-model="config.images.enabled"
-          @update:modelValue="showUnsavedChanges"
+          @update:modelValue="onValueUpdate"
           :validation="v$.images.enabled"
         />
 
@@ -53,7 +52,7 @@
           title="Image Message"
           :type="FormTypeTextArea"
           v-model="config.images.message"
-          @update:modelValue="showUnsavedChanges"
+          @update:modelValue="onValueUpdate"
           :validation="v$.images.message"
         />
 
@@ -62,7 +61,7 @@
           :type="FormTypeDropdown"
           :values="imageThemeTypes"
           v-model="config.images.image_theme"
-          @update:modelValue="showUnsavedChanges"
+          @update:modelValue="onValueUpdate"
           :validation="v$.images.image_theme"
         />
 
@@ -70,7 +69,8 @@
           title="Image Background"
           :type="FormTypeBackground"
           v-model="config.images.background"
-          @update:modelValue="showUnsavedChanges"
+          @update:modelValue="onValueUpdate"
+          @update:files="onFilesUpdate"
           :validation="v$.images.background"
         />
 
@@ -81,7 +81,7 @@
           :type="FormTypeDropdown"
           :values="imageAlignmentTypes"
           v-model="config.images.image_alignment"
-          @update:modelValue="showUnsavedChanges"
+          @update:modelValue="onValueUpdate"
           :validation="v$.images.image_alignment"
         ></form-value>
 
@@ -89,14 +89,14 @@
           title="Text Colour"
           :type="FormTypeColour"
           v-model="config.images.text_colour"
-          @update:modelValue="showUnsavedChanges"
+          @update:modelValue="onValueUpdate"
           :validation="v$.images.text_colour"
         />
         <form-value
           title="Text Border Colour"
           :type="FormTypeColour"
           v-model="config.images.text_colour_border"
-          @update:modelValue="showUnsavedChanges"
+          @update:modelValue="onValueUpdate"
           :validation="v$.images.text_colour_border"
         />
 
@@ -107,7 +107,7 @@
           :type="FormTypeDropdown"
           :values="profileBorderTypes"
           v-model="config.images.profile_border_type"
-          @update:modelValue="showUnsavedChanges"
+          @update:modelValue="onValueUpdate"
           :validation="v$.images.profile_border_type"
         />
 
@@ -115,7 +115,7 @@
           title="Profile Border Colour"
           :type="FormTypeColour"
           v-model="config.images.profile_border_colour"
-          @update:modelValue="showUnsavedChanges"
+          @update:modelValue="onValueUpdate"
           :validation="v$.images.profile_border_colour"
         />
 
@@ -125,7 +125,7 @@
           title="Enable Image Border"
           :type="FormTypeToggle"
           v-model="config.images.enable_border"
-          @update:modelValue="showUnsavedChanges"
+          @update:modelValue="onValueUpdate"
           :validation="v$.images.enable_border"
         />
         <form-value
@@ -133,7 +133,7 @@
           :type="FormTypeColour"
           v-model="config.images.border_colour"
           :disabled="!config.images.enable_border"
-          @update:modelValue="showUnsavedChanges"
+          @update:modelValue="onValueUpdate"
           :validation="v$.images.border_colour"
         />
 
@@ -143,14 +143,14 @@
           title="Enable Welcome DMs"
           :type="FormTypeToggle"
           v-model="config.dms.enabled"
-          @update:modelValue="showUnsavedChanges"
+          @update:modelValue="onValueUpdate"
           :validation="v$.dms.enabled"
         />
         <form-value
           title="Use Same Message As Welcome Text"
           v-model="config.dms.reuse_message"
           :type="FormTypeToggle"
-          @update:modelValue="showUnsavedChanges"
+          @update:modelValue="onValueUpdate"
           :validation="v$.dms.reuse_message"
           ><div class="text-gray-600 dark:text-gray-400 text-sm mt-2">
             When enabled, this will send the same message as your welcome text
@@ -162,7 +162,7 @@
           title="Include Welcome Image"
           :type="FormTypeToggle"
           v-model="config.dms.include_image"
-          @update:modelValue="showUnsavedChanges"
+          @update:modelValue="onValueUpdate"
           :validation="v$.dms.include_image"
           ><div class="text-gray-600 dark:text-gray-400 text-sm mt-2">
             When enabled, this will include your welcomer image (if enabled).
@@ -175,7 +175,7 @@
           :type="FormTypeEmbed"
           :disabled="config.dms.reuse_message"
           v-model="config.dms.message_json"
-          @update:modelValue="showUnsavedChanges"
+          @update:modelValue="onValueUpdate"
           :validation="v$.dms.message_json"
         />
 
@@ -257,6 +257,8 @@ export default {
 
     let config = ref({});
 
+    let files = ref([]);
+
     let rules = () => ({
       text: {
         enabled: {},
@@ -283,7 +285,8 @@ export default {
         profile_border_type: {},
         image_alignment: {},
         image_theme: {},
-        message: { required: requiredIf(config.value.images?.enabled) },
+        message: {},
+        // message: { required: requiredIf(config.value.images?.enabled) },
       },
       dms: {
         enabled: {},
@@ -320,6 +323,8 @@ export default {
 
       unsavedChanges,
       config,
+      files,
+
       v$,
 
       store,
@@ -352,14 +357,14 @@ export default {
       this.isDataError = false;
 
       dashboardAPI.getWelcomerConfig(
-        store.getters.getSelectedGuildID,
+        this.$store.getters.getSelectedGuildID,
         ({ config }) => {
           this.config = config;
           this.isDataFetched = true;
           this.isDataError = false;
         },
         (error) => {
-          store.dispatch("createToast", {
+          this.$store.dispatch("createToast", {
             title: error,
             icon: "xmark",
             class: "text-red-500 bg-red-100",
@@ -375,7 +380,7 @@ export default {
       const validForm = await this.v$.$validate();
 
       if (!validForm) {
-        store.dispatch("createToast", {
+        this.$store.dispatch("createToast", {
           title: "Please fix any errors before submitting",
           icon: "xmark",
           class: "text-red-500 bg-red-100",
@@ -398,10 +403,11 @@ export default {
       }
 
       dashboardAPI.setWelcomerConfig(
-        store.getters.getSelectedGuildID,
+        this.$store.getters.getSelectedGuildID,
         this.config,
+        this.files,
         ({ config }) => {
-          store.dispatch("createToast", {
+          this.$store.dispatch("createToast", {
             title: "Changes saved.",
             icon: "check",
             class: "text-green-500 bg-green-100",
@@ -411,7 +417,7 @@ export default {
           this.unsavedChanges = false;
         },
         (error) => {
-          store.dispatch("createToast", {
+          this.$store.dispatch("createToast", {
             title: error,
             icon: "xmark",
             class: "text-red-500 bg-red-100",
@@ -420,7 +426,12 @@ export default {
       );
     },
 
-    showUnsavedChanges() {
+    onFilesUpdate(event) {
+      this.files = event;
+      this.onValueUpdate();
+    },
+
+    onValueUpdate() {
       this.unsavedChanges = true;
     },
 

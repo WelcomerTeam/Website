@@ -12,13 +12,13 @@
         'border border-gray-300 dark:border-secondary-light p-4 rounded-md flex shadow-sm',
       ]"
     >
-      <discord-embed
+      <!-- <discord-embed
         class="flex-1"
         :embeds="displayEmbed.embeds"
         :content="displayEmbed.content"
         :isLight="true"
         :isBot="true"
-      />
+      /> -->
 
       <div class="flex items-end">
         <div class="relative">
@@ -103,7 +103,7 @@
                   @click="updateValue(image.id)"
                 >
                   <img
-                    :src="imageRoot(image.id)"
+                    :src="backgroundRoot(image.id)"
                     :class="[
                       $props.modelValue == image.id
                         ? 'border-primary ring-primary ring-4'
@@ -147,7 +147,7 @@
                   class="sm:flex sm:gap-4 sm:border-gray-200 mb-6 sm:mb-4 align-middle"
                 >
                   <label
-                    class="block font-semibold text-gray-700 dark:text-gray-50"
+                    class="block font-medium text-gray-700 dark:text-gray-50"
                   >
                     Use profile colour for backgrounds
                   </label>
@@ -254,12 +254,14 @@
                         <font-awesome-icon
                           icon="square"
                           class="inline w-4 h-4 mr-1 border-primary"
-                          :style="{ color: `${RGBIntToRGB(modelValue, 0)}` }"
+                          :style="{
+                            color: `${parseCSSValue(trimPrefix(modelValue))}`,
+                          }"
                         />
                       </div>
-                      <span class="block pl-10 truncate">{{
-                        RGBIntToRGB(modelValue, 0).toUpperCase()
-                      }}</span>
+                      <span class="block pl-10 truncate"
+                        >{{ parseCSSValue(trimPrefix(modelValue)) }}
+                      </span>
                       <span
                         class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none"
                       >
@@ -278,7 +280,7 @@
                       <ListboxOptions class="absolute z-10 mt-1">
                         <ColorPicker
                           theme="dark"
-                          :color="RGBIntToRGB(modelValue, 0)"
+                          :color="parseCSSValue(trimPrefix(modelValue))"
                           @changeColor="SetRGBIntToRGB"
                           :sucker-hide="true"
                         />
@@ -325,6 +327,8 @@ import DiscordEmbed from "../DiscordEmbed.vue";
 
 import { ColorPicker } from "vue-color-kit";
 import "vue-color-kit/dist/vue-color-kit.css";
+import debounce from "lodash/debounce";
+import parse from "parse-css-color";
 
 const tabs = [
   { name: "Welcomer", value: 1, enabled: true },
@@ -339,11 +343,13 @@ const images = [
   { id: "spots", animated: false },
 ];
 
-const imageRoot = (id) => `/assets/backgrounds/${id}.png`;
+const backgroundRoot = (id) => `/assets/backgrounds/${id}.png`;
 
 const solidColourPrefix = "solid:";
-const solidColourProfileBased = "profile";
 const unsplashPrefix = "unsplash:";
+const customPrefix = "prefix:";
+
+const solidColourProfileBased = "profile";
 
 const uploadStatusInitial = 0,
   uploadStatusSaving = 1,
@@ -390,9 +396,9 @@ export default {
     let displayEmbed = ref({
       embeds: [
         {
-          image: {
-            url: imageRoot(props.modelValue),
-          },
+          // image: {
+          //   url: getBackgroundName(props.modelValue),
+          // },
         },
       ],
     });
@@ -419,16 +425,24 @@ export default {
       files,
       fileStatus,
 
-      imageRoot,
+      backgroundRoot,
     };
   },
 
-  emits: ["update:modelValue"],
+  emits: ["update:modelValue", "update:files"],
 
   methods: {
+    // updateImageURL: debounce((self, value) => {
+    //   self.displayEmbed.embeds[0].image.url = getBackgroundName(value);
+    // }, 250),
+
     updateValue(value) {
-      this.displayEmbed.embeds[0].image.url = imageRoot(value);
+      // this.updateImageURL(this, value);
       this.$emit("update:modelValue", value);
+    },
+
+    updateFiles(value) {
+      this.$emit("update:files", value);
     },
 
     RGBIntToRGB(rgbInt, defaultValue) {
@@ -452,13 +466,61 @@ export default {
     },
 
     onFileUpdate(event) {
-      var files = event.target.files;
-      console.log(files);
+      this.files = event.target.files;
+
+      this.$store.dispatch("createToast", {
+        title:
+          "Your custom background will be uploaded when changes are saved.",
+        icon: "info",
+        class: "text-blue-500 bg-blue-100",
+      });
+
+      this.updateValue("custom:upload");
+      this.updateFiles(this.files);
     },
 
     SetRGBIntToRGB(color) {
-      const { r, g, b } = color.rgba;
-      this.updateValue(solidColourPrefix + ((r << 16) + (g << 8) + b));
+      var { r, g, b, a } = color.rgba;
+
+      if (a == 1) {
+        this.updateValue(solidColourPrefix + color.hex);
+      } else {
+        a = Math.round(a * 100) / 100;
+
+        this.updateValue(solidColourPrefix + `rgba(${r}, ${g}, ${b}, ${a})`);
+      }
+    },
+
+    trimPrefix(value) {
+      return value.replace(solidColourPrefix, "");
+    },
+
+    parseCSSValue(value, defaultValue) {
+      var result;
+
+      result = parse(value);
+
+      if (result == null) {
+        result = parse(defaultValue);
+      }
+
+      if (result == null) {
+        result = parse("#FFFFFF");
+      }
+
+      var [r, g, b] = result.values;
+      var a = result.alpha;
+
+      if (a == 1) {
+        return `#${r.toString(16).toUpperCase().padStart(2, "0")}${g
+          .toString(16)
+          .toUpperCase()
+          .padStart(2, "0")}${b.toString(16).toUpperCase().padStart(2, "0")}`;
+      } else {
+        a = Math.round(a * 100) / 100;
+
+        return `rgba(${r}, ${g}, ${b}, ${a})`;
+      }
     },
   },
 };

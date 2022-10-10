@@ -1,10 +1,23 @@
-export function doRequest(method, url, data, callback, errorCallback) {
+export function getRequest(url, callback, errorCallback) {
+  doRequest("GET", url, null, null, callback, errorCallback);
+}
+
+export function doRequest(method, url, data, files, callback, errorCallback) {
+  var headers = {};
+
+  if (files) {
+    var body = new FormData();
+    body.append("file", files[0]);
+    body.append("json", data ? JSON.stringify(data) : null);
+  } else {
+    headers["Content-Type"] = "application/json";
+    var body = data ? JSON.stringify(data) : null;
+  }
+
   fetch(url, {
     method: method,
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: data ? JSON.stringify(data) : null,
+    headers: headers,
+    body: body,
   })
     .then((response) => {
       callback(response);

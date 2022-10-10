@@ -2,7 +2,7 @@
   <div
     class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start dark:text-gray-50 sm:border-gray-200 mb-6 sm:mb-4 align-middle"
   >
-    <label :for="id" class="block font-medium text-gray-700 dark:text-gray-50">
+    <label class="block font-medium text-gray-700 dark:text-gray-50">
       {{ title }}
     </label>
     <div v-if="type == FormTypeBlank" class="mt-1 sm:mt-0 sm:col-span-2">
@@ -997,11 +997,11 @@
               <font-awesome-icon
                 icon="square"
                 class="inline w-4 h-4 mr-1 border-primary"
-                :style="{ color: `${parseCSSValue(modelValue, 0)}` }"
+                :style="{ color: `${parseCSSValue(modelValue)}` }"
               />
             </div>
             <span class="block pl-10 truncate">{{
-              parseCSSValue(modelValue, 0)
+              parseCSSValue(modelValue)
             }}</span>
             <span
               class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none"
@@ -1301,6 +1301,7 @@
       <background-selector
         v-model="modelValue"
         @update:modelValue="updateValue($event)"
+        @update:files="updateFiles($event)"
         @blur="blur"
         :disabled="$props.disabled"
         :invalid="$props.validation?.$invalid"
@@ -1463,7 +1464,7 @@ export default {
     },
   },
 
-  emits: ["update:modelValue", "blur"],
+  emits: ["update:modelValue", "update:files", "blur"],
 
   setup() {
     let query = "";
@@ -1559,6 +1560,13 @@ export default {
         return;
       }
       this.$emit("update:modelValue", value);
+    },
+
+    updateFiles(value) {
+      if (this.$props.disabled) {
+        return;
+      }
+      this.$emit("update:files", value);
     },
 
     blur() {

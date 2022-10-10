@@ -77,9 +77,6 @@ import Card from "../../components/dashboard/Card.vue";
 
 export default {
   components: { Card },
-  setup() {
-    return {};
-  },
   methods: {
     filterTextChannels(channels) {
       return channels.filter((c) => {

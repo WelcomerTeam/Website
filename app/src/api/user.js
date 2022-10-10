@@ -1,11 +1,9 @@
-import { doRequest, doLogin } from "./routes";
+import { doLogin, getRequest } from "./routes";
 
 export default {
   getUser(callback, errorCallback) {
-    doRequest(
-      "GET",
+    getRequest(
       "/api/users/@me",
-      null,
       (response) => {
         if (response.status === 401) {
           callback({ user: null });
@@ -28,10 +26,8 @@ export default {
   },
 
   getGuilds(callback, errorCallback) {
-    doRequest(
-      "GET",
+    getRequest(
       "/api/users/guilds",
-      null,
       (response) => {
         if (response.status === 401) {
           doLogin();
