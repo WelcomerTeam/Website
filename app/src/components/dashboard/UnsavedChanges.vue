@@ -19,6 +19,7 @@
               class="flex items-center justify-center px-4 py-2 whitespace-nowrap border border-transparent rounded-md shadow-sm text-sm font-medium text-primary bg-white hover:bg-gray-200"
               @click="this.$emit('save')"
             >
+              <loading-icon class="mr-3" v-if="$props.isChangeInProgress" />
               Save Changes
             </a>
           </div>
@@ -29,9 +30,14 @@
 </template>
 
 <script>
+import LoadingIcon from "../LoadingIcon.vue";
 export default {
+  components: { LoadingIcon },
   props: {
     unsavedChanges: {
+      type: Boolean,
+    },
+    isChangeInProgress: {
       type: Boolean,
     },
   },
