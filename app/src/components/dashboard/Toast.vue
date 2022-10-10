@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute top-28 right-6 space-y-3 z-50">
+  <div class="fixed top-6 right-6 space-y-3 z-50">
     <transition-group
       enter-active-class="transition duration-200 ease-out"
       enter-from-class="translate-x-1 opacity-0"
@@ -40,7 +40,6 @@
 
 <script>
 import { XIcon } from "@heroicons/vue/outline";
-import store from "../../store/index";
 export default {
   components: {
     XIcon,
@@ -48,7 +47,7 @@ export default {
 
   methods: {
     hideToast(toastID) {
-      store.dispatch("removeToast", toastID);
+      this.$store.dispatch("removeToast", toastID);
     },
   },
 };
