@@ -5,7 +5,7 @@ export function getRequest(url, callback, errorCallback) {
 export function doRequest(method, url, data, files, callback, errorCallback) {
   var headers = {};
 
-  if (files) {
+  if (files && files.length > 0) {
     var body = new FormData();
     body.append("file", files[0]);
     body.append("json", data ? JSON.stringify(data) : null);

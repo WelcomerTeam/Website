@@ -47,9 +47,23 @@ const actions = {
     );
   },
 
+  refreshGuilds({ commit }) {
+    commit("loadingGuilds");
+    userAPI.getGuilds(
+      true,
+      ({ guilds }) => {
+        commit("setGuilds", guilds);
+      },
+      () => {
+        commit("setGuilds", undefined);
+      }
+    );
+  },
+
   fetchGuilds({ commit }) {
     commit("loadingGuilds");
     userAPI.getGuilds(
+      false,
       ({ guilds }) => {
         commit("setGuilds", guilds);
       },

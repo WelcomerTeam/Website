@@ -98,7 +98,6 @@ export default {
       (response) => {
         if (response.status === 401) {
           doLogin();
-          callback({ guild: null, hasWelcomer: false });
         } else if (response.status == 403) {
           callback({ guild: null, hasWelcomer: false });
         } else {
@@ -140,7 +139,6 @@ export default {
       (response) => {
         if (response.status === 401) {
           doLogin();
-          callback({ config: null });
         } else if (response.status == 403) {
           callback({ config: null });
         } else {
@@ -173,7 +171,6 @@ export default {
       (response) => {
         if (response.status === 401) {
           doLogin();
-          callback({ config: null });
         } else if (response.status == 403) {
           callback({ config: null });
         } else {
