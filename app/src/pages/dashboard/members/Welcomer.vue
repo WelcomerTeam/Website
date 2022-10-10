@@ -12,177 +12,226 @@
         <div class="dashboard-title-container">
           <div class="dashboard-title">Welcomer</div>
         </div>
-        <div class="dashboard-heading">Welcomer Text</div>
-        <form-value
-          title="Enable Welcome Text"
-          :type="FormTypeToggle"
-          v-model="config.text.enabled"
-          @update:modelValue="onValueUpdate"
-          :validation="v$.text.enabled"
-        />
+        <div class="dashboard-contents">
+          <div class="dashboard-inputs">
+            <div class="dashboard-heading">Welcomer Text</div>
+            <form-value
+              title="Enable Welcomer Text"
+              :type="FormTypeToggle"
+              v-model="config.text.enabled"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.text.enabled"
+              >Welcome users when they join with a custom message. This will
+              wait until a user has completed borderwall or rule screening, if
+              enabled.</form-value
+            >
 
-        <form-value
-          title="Welcome Channel"
-          :type="FormTypeChannelListCategories"
-          v-model="config.text.channel"
-          @update:modelValue="onValueUpdate"
-          :validation="v$.text.channel"
-        />
+            <form-value
+              title="Welcome Channel"
+              :type="FormTypeChannelListCategories"
+              v-model="config.text.channel"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.text.channel"
+              :inlineSlot="true"
+              >This is the channel we sent welcome messages to.</form-value
+            >
 
-        <form-value
-          title="Welcome Text Message"
-          :type="FormTypeEmbed"
-          v-model="config.text.message_json"
-          @update:modelValue="onValueUpdate"
-          :validation="v$.text.message_json"
-        >
-        </form-value>
+            <form-value
+              title="Welcome Text Message"
+              :type="FormTypeEmbed"
+              v-model="config.text.message_json"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.text.message_json"
+              :inlineSlot="true"
+              >This is the message users will receive upon join. Click [here] to
+              view all the formatting tags you can use for custom text.
+            </form-value>
+          </div>
+          <div class="dashboard-inputs">
+            <div class="dashboard-heading">Welcomer Images</div>
+            <form-value
+              title="Enable Welcomer Images"
+              :type="FormTypeToggle"
+              v-model="config.images.enabled"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.images.enabled"
+              >Welcome users when they join with a custom image. This will wait
+              until a user has completed borderwall or rule screening, if
+              enabled.</form-value
+            >
 
-        <div class="dashboard-heading">Welcomer Images</div>
+            <form-value
+              title="Welcomer Image Message"
+              :type="FormTypeTextArea"
+              v-model="config.images.message"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.images.message"
+              :inlineSlot="true"
+              >This is the custom message that will be included in the welcome
+              image. Click [here] to view all the formatting tags you can use
+              for custom text.</form-value
+            >
 
-        <form-value
-          title="Enable Welcomer Images"
-          :type="FormTypeToggle"
-          v-model="config.images.enabled"
-          @update:modelValue="onValueUpdate"
-          :validation="v$.images.enabled"
-        />
+            <form-value
+              title="Welcomer Image Background"
+              :type="FormTypeBackground"
+              v-model="config.images.background"
+              @update:modelValue="onValueUpdate"
+              @update:files="onFilesUpdate"
+              :validation="v$.images.background"
+              :files="files"
+              :inlineSlot="true"
+              >This is the background that will be used in your welcome
+              image.</form-value
+            >
+          </div>
 
-        <form-value
-          title="Image Message"
-          :type="FormTypeTextArea"
-          v-model="config.images.message"
-          @update:modelValue="onValueUpdate"
-          :validation="v$.images.message"
-        />
+          <div class="dashboard-inputs">
+            <form-value
+              title="Image Theme"
+              :type="FormTypeDropdown"
+              :values="imageThemeTypes"
+              v-model="config.images.image_theme"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.images.image_theme"
+              :inlineSlot="true"
+              >This is the theme that will be used for your welcome image. Click
+              [here] to view all the themes you can use.</form-value
+            >
 
-        <form-value
-          title="Image Theme"
-          :type="FormTypeDropdown"
-          :values="imageThemeTypes"
-          v-model="config.images.image_theme"
-          @update:modelValue="onValueUpdate"
-          :validation="v$.images.image_theme"
-        />
+            <form-value
+              title="Image Text Alignment"
+              :type="FormTypeDropdown"
+              :values="imageAlignmentTypes"
+              v-model="config.images.image_alignment"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.images.image_alignment"
+              :inlineSlot="true"
+              >This is the alignment of text in your welcome image.</form-value
+            >
 
-        <form-value
-          title="Image Background"
-          :type="FormTypeBackground"
-          v-model="config.images.background"
-          @update:modelValue="onValueUpdate"
-          @update:files="onFilesUpdate"
-          :validation="v$.images.background"
-        />
+            <form-value
+              title="Image Text Colour"
+              :type="FormTypeColour"
+              v-model="config.images.text_colour"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.images.text_colour"
+              :inlineSlot="true"
+              >This is the colour of the text in your welcome image.</form-value
+            >
+            <form-value
+              title="Image Text Border Colour"
+              :type="FormTypeColour"
+              v-model="config.images.text_colour_border"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.images.text_colour_border"
+              :inlineSlot="true"
+              >This is the colour of the text border in your welcome
+              image.</form-value
+            >
+          </div>
+          <div class="dashboard-inputs">
+            <form-value
+              title="Image Profile Border Type"
+              :type="FormTypeDropdown"
+              :values="profileBorderTypes"
+              v-model="config.images.profile_border_type"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.images.profile_border_type"
+              :inlineSlot="true"
+              >This is the way the profile border shows on your welcome
+              image.</form-value
+            >
 
-        <div class="pt-4" />
+            <form-value
+              title="Image Profile Border Colour"
+              :type="FormTypeColour"
+              v-model="config.images.profile_border_colour"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.images.profile_border_colour"
+              :inlineSlot="true"
+              >This is the colour of the border around profile borders in your
+              welcome image.</form-value
+            >
+            <form-value
+              title="Enable Image Border"
+              :type="FormTypeToggle"
+              v-model="config.images.enable_border"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.images.enable_border"
+              :hideBorder="true"
+              :inlineSlot="true"
+              >This allows you to add a border around your welcome
+              images.</form-value
+            >
+            <form-value
+              title="Image Border Colour"
+              :type="FormTypeColour"
+              v-model="config.images.border_colour"
+              :disabled="!config.images.enable_border"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.images.border_colour"
+              :inlineSlot="true"
+              >This is the colour of the border around your welcome images, if
+              enabled.</form-value
+            >
+          </div>
 
-        <form-value
-          title="Text Alignment"
-          :type="FormTypeDropdown"
-          :values="imageAlignmentTypes"
-          v-model="config.images.image_alignment"
-          @update:modelValue="onValueUpdate"
-          :validation="v$.images.image_alignment"
-        ></form-value>
+          <div class="dashboard-inputs">
+            <div class="dashboard-heading">Welcomer DMs</div>
+            <form-value
+              title="Enable Welcome DMs"
+              :type="FormTypeToggle"
+              v-model="config.dms.enabled"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.dms.enabled"
+              >Welcome users when they join with a custom message, in their
+              direct messages. This will wait until a user has completed
+              borderwall or rule screening, if enabled.</form-value
+            >
 
-        <form-value
-          title="Text Colour"
-          :type="FormTypeColour"
-          v-model="config.images.text_colour"
-          @update:modelValue="onValueUpdate"
-          :validation="v$.images.text_colour"
-        />
-        <form-value
-          title="Text Border Colour"
-          :type="FormTypeColour"
-          v-model="config.images.text_colour_border"
-          @update:modelValue="onValueUpdate"
-          :validation="v$.images.text_colour_border"
-        />
+            <form-value
+              title="Use Same Message As Welcome Text"
+              v-model="config.dms.reuse_message"
+              :type="FormTypeToggle"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.dms.reuse_message"
+              :inlineSlot="true"
+              >This will copy the same message as your welcomer text message,
+              instead of using a seperate message.</form-value
+            >
 
-        <div class="pt-4" />
+            <form-value
+              title="Include Welcome Image"
+              :type="FormTypeToggle"
+              v-model="config.dms.include_image"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.dms.include_image"
+              :inlineSlot="true"
+              >This will include the welcomer image to your welcomer direct
+              message, if enabled.</form-value
+            >
 
-        <form-value
-          title="Profile Border Type"
-          :type="FormTypeDropdown"
-          :values="profileBorderTypes"
-          v-model="config.images.profile_border_type"
-          @update:modelValue="onValueUpdate"
-          :validation="v$.images.profile_border_type"
-        />
+            <form-value
+              title="Welcome DM Message"
+              :type="FormTypeEmbed"
+              :disabled="config.dms.reuse_message"
+              v-model="config.dms.message_json"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.dms.message_json"
+              :inlineSlot="true"
+              >This is the message users will receive in direct messages upon
+              join. Click [here] to view all the formatting tags you can use for
+              custom text.
+            </form-value>
+          </div>
 
-        <form-value
-          title="Profile Border Colour"
-          :type="FormTypeColour"
-          v-model="config.images.profile_border_colour"
-          @update:modelValue="onValueUpdate"
-          :validation="v$.images.profile_border_colour"
-        />
-
-        <div class="pt-4" />
-
-        <form-value
-          title="Enable Image Border"
-          :type="FormTypeToggle"
-          v-model="config.images.enable_border"
-          @update:modelValue="onValueUpdate"
-          :validation="v$.images.enable_border"
-        />
-        <form-value
-          title="Image Border Colour"
-          :type="FormTypeColour"
-          v-model="config.images.border_colour"
-          :disabled="!config.images.enable_border"
-          @update:modelValue="onValueUpdate"
-          :validation="v$.images.border_colour"
-        />
-
-        <div class="dashboard-heading">Welcomer DMs</div>
-
-        <form-value
-          title="Enable Welcome DMs"
-          :type="FormTypeToggle"
-          v-model="config.dms.enabled"
-          @update:modelValue="onValueUpdate"
-          :validation="v$.dms.enabled"
-        />
-        <form-value
-          title="Use Same Message As Welcome Text"
-          v-model="config.dms.reuse_message"
-          :type="FormTypeToggle"
-          @update:modelValue="onValueUpdate"
-          :validation="v$.dms.reuse_message"
-          ><div class="text-gray-600 dark:text-gray-400 text-sm mt-2">
-            When enabled, this will send the same message as your welcome text
-            message.
-          </div></form-value
-        >
-
-        <form-value
-          title="Include Welcome Image"
-          :type="FormTypeToggle"
-          v-model="config.dms.include_image"
-          @update:modelValue="onValueUpdate"
-          :validation="v$.dms.include_image"
-          ><div class="text-gray-600 dark:text-gray-400 text-sm mt-2">
-            When enabled, this will include your welcomer image (if enabled).
-            This will override your embed image URL.
-          </div></form-value
-        >
-
-        <form-value
-          title="Welcome DM Message"
-          :type="FormTypeEmbed"
-          :disabled="config.dms.reuse_message"
-          v-model="config.dms.message_json"
-          @update:modelValue="onValueUpdate"
-          :validation="v$.dms.message_json"
-        />
-
-        <unsaved-changes
-          :unsavedChanges="unsavedChanges"
-          v-on:save="saveConfig"
-        />
+          <unsaved-changes
+            :unsavedChanges="unsavedChanges"
+            :isChangeInProgress="isChangeInProgress"
+            v-on:save="saveConfig"
+          ></unsaved-changes>
+        </div>
       </div>
     </div>
   </div>
@@ -225,7 +274,7 @@ var imageAlignmentTypes = [
   { key: "Top Right", value: "topRight" },
   { key: "Bottom Left", value: "bottomLeft" },
   { key: "Bottom Center", value: "bottomCenter" },
-  { key: "BottomRight", value: "bottomRight" },
+  { key: "Bottom Right", value: "bottomRight" },
 ];
 
 var imageThemeTypes = [
@@ -254,6 +303,7 @@ export default {
     let isDataError = ref(false);
 
     let unsavedChanges = ref(false);
+    let isChangeInProgress = ref(false);
 
     let config = ref({});
 
@@ -322,6 +372,7 @@ export default {
       isDataError,
 
       unsavedChanges,
+      isChangeInProgress,
       config,
       files,
 
@@ -402,6 +453,8 @@ export default {
         return;
       }
 
+      this.isChangeInProgress = true;
+
       dashboardAPI.setWelcomerConfig(
         this.$store.getters.getSelectedGuildID,
         this.config,
@@ -414,7 +467,9 @@ export default {
           });
 
           this.config = config;
+          this.files = [];
           this.unsavedChanges = false;
+          this.isChangeInProgress = false;
         },
         (error) => {
           this.$store.dispatch("createToast", {
@@ -422,6 +477,8 @@ export default {
             icon: "xmark",
             class: "text-red-500 bg-red-100",
           });
+
+          this.isChangeInProgress = false;
         }
       );
     },
