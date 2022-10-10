@@ -29,7 +29,7 @@
               "
               class="mt-4 p-6 justify-center flex items-center dark:text-gray-50"
             >
-              <LoadingIcon />
+              <LoadingIcon class="mr-3" />
               Loading your guilds...
             </div>
             <div
@@ -63,7 +63,9 @@
                           <img
                             :alt="`Guild icon for ${guild.name}`"
                             :class="[
-                              !guild.has_welcomer ? 'saturate-0' : '',
+                              !guild.has_welcomer | !guild.has_elevation
+                                ? 'saturate-0'
+                                : '',
                               'w-10 h-10 rounded-lg',
                             ]"
                             v-lazy="{
@@ -83,8 +85,14 @@
                           <div class="flex text-sm">
                             <p class="font-bold truncate dark:text-gray-50">
                               <span
-                                v-if="guild.has_membership"
-                                class="mr-2 inline-flex items-center p-1.5 rounded-md text-xs font-medium bg-primary-light text-white"
+                                v-if="guild.has_welcomer_pro"
+                                class="mr-2 inline-flex items-center p-2 rounded-md text-xs font-medium bg-primary-light text-white"
+                              >
+                                <font-awesome-icon icon="heart" />
+                              </span>
+                              <span
+                                v-else-if="guild.has_custom_backgrounds"
+                                class="mr-2 inline-flex items-center p-2 rounded-md text-xs font-medium bg-gray-500 text-white"
                               >
                                 <font-awesome-icon icon="heart" />
                               </span>
@@ -93,7 +101,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="flex-shrink-0">
+                      <div class="flex-shrink-0" v-if="guild.has_elevation">
                         <ChevronRightIcon
                           v-if="guild.has_welcomer"
                           class="h-5 w-5 text-gray-400"
@@ -132,7 +140,7 @@ export default {
   },
   methods: {
     refreshGuildList() {
-      this.$store.dispatch("fetchGuilds");
+      this.$store.dispatch("refreshGuilds");
     },
 
     setSelectedGuild(guild) {

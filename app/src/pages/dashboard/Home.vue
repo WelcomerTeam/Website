@@ -43,6 +43,18 @@
       </div>
       <div class="dashboard-title-container">
         <div class="dashboard-title align-middle">
+          <span
+            v-if="$store.getters.guildHasWelcomerPro"
+            class="mr-2 inline-flex items-center p-2 rounded-md text-xs font-medium bg-primary-light text-white"
+          >
+            <font-awesome-icon icon="heart" />
+          </span>
+          <span
+            v-else-if="$store.getters.guildHasCustomBackgrounds"
+            class="mr-2 inline-flex items-center p-2 rounded-md text-xs font-medium bg-gray-500 text-white"
+          >
+            <font-awesome-icon icon="heart" />
+          </span>
           {{ $store.getters.getCurrentSelectedGuild?.name }}
         </div>
       </div>
