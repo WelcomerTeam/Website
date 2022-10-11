@@ -130,6 +130,7 @@
               image.</form-value
             >
           </div>
+
           <div class="dashboard-inputs">
             <form-value
               title="Image Profile Border Type"
@@ -153,6 +154,9 @@
               >This is the colour of the border around profile borders in your
               welcome image.</form-value
             >
+          </div>
+
+          <div class="dashboard-inputs">
             <form-value
               title="Enable Image Border"
               :type="FormTypeToggle"
@@ -164,6 +168,7 @@
               >This allows you to add a border around your welcome
               images.</form-value
             >
+
             <form-value
               title="Image Border Colour"
               :type="FormTypeColour"
@@ -191,17 +196,6 @@
             >
 
             <form-value
-              title="Use Same Message As Welcome Text"
-              v-model="config.dms.reuse_message"
-              :type="FormTypeToggle"
-              @update:modelValue="onValueUpdate"
-              :validation="v$.dms.reuse_message"
-              :inlineSlot="true"
-              >This will copy the same message as your welcomer text message,
-              instead of using a seperate message.</form-value
-            >
-
-            <form-value
               title="Include Welcome Image"
               :type="FormTypeToggle"
               v-model="config.dms.include_image"
@@ -210,6 +204,17 @@
               :inlineSlot="true"
               >This will include the welcomer image to your welcomer direct
               message, if enabled.</form-value
+            >
+
+            <form-value
+              title="Use Same Message As Welcome Text"
+              v-model="config.dms.reuse_message"
+              :type="FormTypeToggle"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.dms.reuse_message"
+              :inlineSlot="true"
+              >This will copy the same message as your welcomer text message,
+              instead of using a seperate message.</form-value
             >
 
             <form-value
