@@ -67,7 +67,10 @@
     </div>
     <div v-else>
       <div
-      :class="['block w-full overflow-auto text-base rounded-md sm:text-sm bg-white border-gray-300 dark:border-secondary-light dark:bg-secondary border', true ? '' : 'rounded-t-none border-t-0']"
+        :class="[
+          'block w-full overflow-auto text-base rounded-md sm:text-sm bg-white border-gray-300 dark:border-secondary-light dark:bg-secondary border',
+          true ? '' : 'rounded-t-none border-t-0',
+        ]"
       >
         <div class="border-b border-gray-200 dark:border-secondary-light">
           <nav class="flex display-flex justify-evenly" aria-label="Tabs">
@@ -141,7 +144,7 @@
                   <p class="pl-1">or drag and drop</p>
                 </div>
                 <p class="text-xs text-gray-500 dark:text-gray-100">
-                  an image up to 8MB
+                  an image up to 20MB
                 </p>
               </div>
               <div class="space-y-1 text-center" v-else>
@@ -153,7 +156,13 @@
                 <div class="flex text-sm text-gray-600 dark:text-gray-200">
                   <p>{{ $props.files[0].name }}</p>
                 </div>
-                <p>{{ formatBytes($props.files[0].size) }}MB</p>
+                <p
+                  :class="[
+                    $props.files[0].size > 20000000 ? 'text-red-500' : '',
+                  ]"
+                >
+                  {{ formatBytes($props.files[0].size) }}MB
+                </p>
               </div>
             </div>
           </div>
@@ -357,10 +366,11 @@ const images = [
 ];
 
 const backgroundRoot = (id) => `/assets/backgrounds/${id}.png`;
+const customRoot = (id) => `/api/welcomer/preview/${id}.png`;
 
 const solidColourPrefix = "solid:";
 const unsplashPrefix = "unsplash:";
-const customPrefix = "prefix:";
+const customPrefix = "custom:";
 
 const solidColourProfileBased = "profile";
 
@@ -477,12 +487,24 @@ export default {
     },
 
     onFileUpdate(event) {
-      this.$store.dispatch("createToast", {
-        title:
-          "Your custom background will be uploaded when changes are saved.",
-        icon: "info",
-        class: "text-blue-500 bg-blue-100",
-      });
+      if (event.target.files.length > 0) {
+        if (event.target.files[0].size > 20000000) {
+          this.$store.dispatch("createToast", {
+            title: "Your file is too large. It must be 20MB or less!",
+            icon: "xmark",
+            class: "text-red-500 bg-red-100",
+          });
+
+          return;
+        } else {
+          this.$store.dispatch("createToast", {
+            title:
+              "Your custom background will be uploaded when changes are saved.",
+            icon: "info",
+            class: "text-blue-500 bg-blue-100",
+          });
+        }
+      }
 
       this.updateValue("custom:upload");
       this.updateFiles(event.target.files);

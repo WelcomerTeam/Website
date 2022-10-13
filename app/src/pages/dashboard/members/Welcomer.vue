@@ -33,7 +33,8 @@
               @update:modelValue="onValueUpdate"
               :validation="v$.text.channel"
               :inlineSlot="true"
-              >This is the channel we sent welcome messages to.</form-value
+              :nullable="true"
+              >This is the channel we will send welcome messages to.</form-value
             >
 
             <form-value
@@ -43,8 +44,11 @@
               @update:modelValue="onValueUpdate"
               :validation="v$.text.message_json"
               :inlineSlot="true"
-              >This is the message users will receive upon join. Click [here] to
-              view all the formatting tags you can use for custom text.
+              >This is the message users will receive when joining.
+              <a target="_blank" href="/formatting" class="text-primary"
+                >Click here</a
+              >
+              to view all the formatting tags you can use for custom text.
             </form-value>
           </div>
           <div class="dashboard-inputs">
@@ -61,15 +65,18 @@
             >
 
             <form-value
-              title="Welcomer Image Message"
-              :type="FormTypeTextArea"
-              v-model="config.images.message"
+              title="Image Theme"
+              :type="FormTypeDropdown"
+              :values="imageThemeTypes"
+              v-model="config.images.image_theme"
               @update:modelValue="onValueUpdate"
-              :validation="v$.images.message"
+              :validation="v$.images.image_theme"
               :inlineSlot="true"
-              >This is the custom message that will be included in the welcome
-              image. Click [here] to view all the formatting tags you can use
-              for custom text.</form-value
+              >This is the theme that will be used for your welcome image.
+              <a target="_blank" href="/backgrounds" class="text-primary"
+                >Click here</a
+              >
+              to view all the themes you can use.</form-value
             >
 
             <form-value
@@ -88,15 +95,19 @@
 
           <div class="dashboard-inputs">
             <form-value
-              title="Image Theme"
-              :type="FormTypeDropdown"
-              :values="imageThemeTypes"
-              v-model="config.images.image_theme"
+              title="Welcomer Image Message"
+              :type="FormTypeTextArea"
+              v-model="config.images.message"
               @update:modelValue="onValueUpdate"
-              :validation="v$.images.image_theme"
+              :validation="v$.images.message"
               :inlineSlot="true"
-              >This is the theme that will be used for your welcome image. Click
-              [here] to view all the themes you can use.</form-value
+              >This is the custom message that will be included in the welcome
+              image.
+              <a target="_blank" href="/formatting" class="text-primary"
+                >Click here</a
+              >
+              to view all the formatting tags you can use for custom
+              text.</form-value
             >
 
             <form-value
@@ -225,9 +236,12 @@
               @update:modelValue="onValueUpdate"
               :validation="v$.dms.message_json"
               :inlineSlot="true"
-              >This is the message users will receive in direct messages upon
-              join. Click [here] to view all the formatting tags you can use for
-              custom text.
+              >This is the message users will receive in direct messages when
+              joining.
+              <a target="_blank" href="/formatting" class="text-primary"
+                >Click here</a
+              >
+              to view all the formatting tags you can use for custom text.
             </form-value>
           </div>
 
