@@ -18,7 +18,7 @@ const actions = {
     commit("addToast", toast);
     setTimeout(() => {
       commit("removeToast", toast.id);
-    }, toast.expiration || 5000);
+    }, toast.expiration || 10000);
   },
   removeToast({ commit }, toastID) {
     commit("removeToast", toastID);

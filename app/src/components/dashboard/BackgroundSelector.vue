@@ -95,11 +95,8 @@
           </nav>
         </div>
 
-        <div class="overflow-auto">
-          <div
-            class="max-h-72 grid grid-cols-2 p-4 gap-2"
-            v-if="this.page == 1"
-          >
+        <div class="overflow-auto p-4">
+          <div class="max-h-72 grid grid-cols-2 gap-2" v-if="this.page == 1">
             <button
               as="template"
               v-for="image in images"
@@ -107,7 +104,7 @@
               @click="updateValue(image.id)"
             >
               <img
-                :src="backgroundRoot(image.id)"
+                v-lazy="backgroundRoot(image.id)"
                 :class="[
                   $props.modelValue == image.id
                     ? 'border-primary ring-primary ring-4'
@@ -117,9 +114,13 @@
               />
             </button>
           </div>
-          <div class="max-h-72 p-4" v-if="this.page == 2">
+          <div v-if="this.page == 2">
             <div
-              class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-secondary-light border-dashed rounded-md relative mx-auto"
+              class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-secondary-light border-dashed rounded-md relative mx-auto mb-4"
+              v-if="
+                $store.getters.guildHasWelcomerPro ||
+                $store.getters.guildHasCustomBackgrounds
+              "
             >
               <input
                 id="file-upload"
@@ -127,7 +128,6 @@
                 type="file"
                 accept="image/*"
                 class="absolute top-0 left-0 w-full h-full opacity-0"
-                v-if="$props.files.length == 0"
                 @change="onFileUpdate"
               />
               <div
@@ -144,7 +144,12 @@
                   <p class="pl-1">or drag and drop</p>
                 </div>
                 <p class="text-xs text-gray-500 dark:text-gray-100">
-                  an image up to 20MB
+                  a
+                  <span v-if="$store.getters.guildHasWelcomerPro"
+                    ><span class="text-primary">GIF</span>, PNG or JPG</span
+                  >
+                  <span v-else>PNG or JPG</span>
+                  up to 20MB
                 </p>
               </div>
               <div class="space-y-1 text-center" v-else>
@@ -165,9 +170,47 @@
                 </p>
               </div>
             </div>
+            <div
+              v-else
+              class="border-donate border-2 p-4 grid grid-cols-6 gap-4"
+            >
+              <div class="col-span-6 items-center grid">
+                Unlock custom backgrounds on your server with Welcomer Pro.
+                Upload PNG, JPG and animated GIF backgrounds.
+              </div>
+              <router-link
+                to="/premium"
+                class="col-span-6 items-center grid"
+              >
+                <button
+                  type="button"
+                  class="cta-button bg-primary hover:bg-primary-dark w-full"
+                >
+                  Get Welcomer Pro now
+                </button></router-link
+              >
+            </div>
+            <div>
+              <button
+                as="template"
+                v-for="image in $props.customImages"
+                :key="image"
+                @click="updateValue(customPrefix + image)"
+              >
+                <img
+                  v-lazy="customRoot(image)"
+                  :class="[
+                    $props.modelValue == customPrefix + image
+                      ? 'border-primary ring-primary ring-4'
+                      : '',
+                    'hover:brightness-75 rounded-md focus:outline-none focus:ring-4 focus:ring-primary focus:border-primary',
+                  ]"
+                />
+              </button>
+            </div>
           </div>
-          <!-- <div class="max-h-72 p-4" v-if="this.page == 3">Unsplash</div> -->
-          <div class="max-h-72 p-4" v-if="this.page == 4">
+          <!-- <div v-if="this.page == 3">Unsplash</div> -->
+          <div v-if="this.page == 4">
             <div
               class="sm:flex sm:gap-4 sm:border-gray-200 mb-6 sm:mb-4 align-middle"
             >
@@ -254,7 +297,7 @@
             </div>
             <Listbox
               as="div"
-              v-model="modelValue"
+              :modelValue="modelValue"
               @update:modelValue="updateValue($event)"
               :disabled="
                 $props.modelValue == solidColourPrefix + solidColourProfileBased
@@ -366,7 +409,7 @@ const images = [
 ];
 
 const backgroundRoot = (id) => `/assets/backgrounds/${id}.png`;
-const customRoot = (id) => `/api/welcomer/preview/${id}.png`;
+const customRoot = (id) => `/api/welcomer/preview/${id}`;
 
 const solidColourPrefix = "solid:";
 const unsplashPrefix = "unsplash:";
@@ -411,10 +454,23 @@ export default {
       type: Object,
       required: false,
     },
+    customImages: {
+      type: Array,
+      required: false,
+    },
   },
 
   setup(props) {
-    let page = ref(1);
+    let initialPage = 1;
+
+    if (props.modelValue.startsWith(customPrefix)) {
+      initialPage = 2;
+    } else if (props.modelValue.startsWith(solidColourPrefix)) {
+      initialPage = 4;
+    }
+
+    let page = ref(initialPage);
+
     let displayEmbed = ref({
       embeds: [
         {
@@ -440,8 +496,10 @@ export default {
       solidColourPrefix,
       solidColourProfileBased,
       unsplashPrefix,
+      customPrefix,
 
       backgroundRoot,
+      customRoot,
     };
   },
 
@@ -561,5 +619,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

@@ -1,8 +1,14 @@
 <template>
   <div
-    :class="['sm:grid sm:grid-cols-3 sm:gap-4 dark:text-gray-50 border-gray-200 dark:border-secondary-light py-4 sm:py-6 items-center', $props.hideBorder ? '': 'border-b']"
+    :class="[
+      'sm:grid sm:grid-cols-3 sm:gap-4 dark:text-gray-50 border-gray-200 dark:border-secondary-light py-4 sm:py-6 items-center',
+      $props.hideBorder ? '' : 'border-b',
+    ]"
   >
-    <label class="block font-medium text-gray-700 dark:text-gray-50">
+    <label
+      class="block font-medium text-gray-700 dark:text-gray-50"
+      :for="componentId"
+    >
       {{ title }}
       <div v-if="$props.inlineSlot">
         <div
@@ -30,6 +36,7 @@
 
       <div v-else-if="type == FormTypeToggle">
         <Switch
+          :id="componentId"
           :modelValue="modelValue"
           @update:modelValue="updateValue($event)"
           @blur="blur"
@@ -112,8 +119,9 @@
 
       <div v-else-if="type == FormTypeChannelList">
         <Listbox
+          :id="componentId"
           as="div"
-          v-model="modelValue"
+          :modelValue="modelValue"
           @update:modelValue="updateValue($event)"
           @blur="blur"
           :disabled="$props.disabled"
@@ -274,9 +282,10 @@
 
       <div v-else-if="type == FormTypeChannelListCategories">
         <Listbox
+          :id="componentId"
           as="div"
-          v-model="modelValue"
           :disabled="$props.disabled"
+          :modelValue="modelValue"
           @update:modelValue="updateValue($event)"
           @blur="blur"
         >
@@ -446,8 +455,9 @@
 
       <div v-else-if="type == FormTypeRoleList">
         <Listbox
+          :id="componentId"
           as="div"
-          v-model="modelValue"
+          :modelValue="modelValue"
           @update:modelValue="updateValue($event)"
           @blur="blur"
           :disabled="$props.disabled"
@@ -610,8 +620,9 @@
 
       <div v-else-if="type == FormTypeMemberList">
         <Listbox
+          :id="componentId"
           as="div"
-          v-model="modelValue"
+          :modelValue="modelValue"
           @update:modelValue="updateValue($event)"
           @blur="blur"
           :disabled="$props.disabled"
@@ -815,8 +826,9 @@
 
       <div v-else-if="type == FormTypeEmojiList">
         <Listbox
+          :id="componentId"
           as="div"
-          v-model="modelValue"
+          :modelValue="modelValue"
           @update:modelValue="updateValue($event)"
           @blur="blur"
           :disabled="$props.disabled"
@@ -979,8 +991,9 @@
 
       <div v-else-if="type == FormTypeColour">
         <Listbox
+          :id="componentId"
           as="div"
-          v-model="modelValue"
+          :modelValue="modelValue"
           @update:modelValue="updateValue($event)"
           @blur="blur"
           :disabled="$props.disabled"
@@ -1039,6 +1052,7 @@
 
       <div v-else-if="type == FormTypeText">
         <input
+          :id="componentId"
           type="text"
           :class="[
             $props.validation?.$invalid
@@ -1051,7 +1065,8 @@
           ]"
           :disabled="$props.disabled"
           placeholder="Enter text here..."
-          v-model="modelValue"
+          :value="modelValue"
+          :maxlength="$props.maxLength"
           @input="updateValue($event.target.value)"
           @blur="blur"
         />
@@ -1071,6 +1086,7 @@
 
       <div v-else-if="type == FormTypeNumber">
         <input
+          :id="componentId"
           type="number"
           :class="[
             $props.validation?.$invalid
@@ -1082,7 +1098,7 @@
             'flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light rounded-md focus:ring-primary focus:border-primary sm:text-sm',
           ]"
           :disabled="$props.disabled"
-          v-model="modelValue"
+          :value="modelValue"
           @input="updateValue($event.target.value)"
           @blur="blur"
         />
@@ -1102,6 +1118,7 @@
 
       <div v-else-if="type == FormTypeTextArea">
         <textarea
+          :id="componentId"
           type="text"
           :class="[
             $props.validation?.$invalid
@@ -1115,7 +1132,7 @@
           rows="4"
           :disabled="$props.disabled"
           placeholder="Enter text here..."
-          v-model="modelValue"
+          :value="modelValue"
           @input="updateValue($event.target.value)"
           @blur="blur"
         />
@@ -1135,9 +1152,10 @@
 
       <div v-else-if="type == FormTypeDropdown">
         <Listbox
+          :id="componentId"
           as="div"
-          v-model="modelValue"
           :disabled="$props.disabled"
+          :modelValue="modelValue"
           @update:modelValue="updateValue($event)"
           @blur="blur"
         >
@@ -1170,93 +1188,87 @@
               </span>
             </ListboxButton>
 
-            <transition
-              leave-active-class="transition duration-100 ease-in"
-              leave-from-class="opacity-100"
-              leave-to-class="opacity-0"
+            <ListboxOptions
+              class="absolute z-20 w-full mt-1 overflow-auto text-base bg-white dark:bg-secondary-dark rounded-md shadow-sm max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
             >
-              <ListboxOptions
-                class="absolute z-20 w-full mt-1 overflow-auto text-base bg-white dark:bg-secondary-dark rounded-md shadow-sm max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+              <div
+                v-if="$props.isLoading"
+                class="flex py-5 w-full justify-center"
               >
-                <div
-                  v-if="$props.isLoading"
-                  class="flex py-5 w-full justify-center"
+                <LoadingIcon />
+              </div>
+              <div v-else>
+                <ListboxOption
+                  as="template"
+                  v-slot="{ active, selected }"
+                  v-if="nullable"
+                  :value="null"
                 >
-                  <LoadingIcon />
-                </div>
-                <div v-else>
-                  <ListboxOption
-                    as="template"
-                    v-slot="{ active, selected }"
-                    v-if="nullable"
-                    :value="null"
+                  <li
+                    :class="[
+                      active
+                        ? 'text-white bg-primary'
+                        : 'text-gray-900 dark:text-gray-50',
+                      'cursor-default select-none relative py-2 pl-3 pr-9',
+                    ]"
                   >
-                    <li
+                    <span
                       :class="[
-                        active
-                          ? 'text-white bg-primary'
-                          : 'text-gray-900 dark:text-gray-50',
-                        'cursor-default select-none relative py-2 pl-3 pr-9',
+                        selected ? 'font-semibold' : 'font-normal',
+                        'block truncate',
                       ]"
                     >
-                      <span
-                        :class="[
-                          selected ? 'font-semibold' : 'font-normal',
-                          'block truncate',
-                        ]"
-                      >
-                        Unselect
-                      </span>
+                      Unselect
+                    </span>
 
-                      <span
-                        v-if="selected"
-                        :class="[
-                          active ? 'text-white' : 'text-primary',
-                          'absolute inset-y-0 right-0 flex items-center pr-4',
-                        ]"
-                      >
-                        <CheckIcon class="w-5 h-5" aria-hidden="true" />
-                      </span>
-                    </li>
-                  </ListboxOption>
-                  <ListboxOption
-                    as="template"
-                    v-for="value in $props.values"
-                    :key="value"
-                    :value="value.value"
-                    v-slot="{ active, selected }"
-                  >
-                    <li
+                    <span
+                      v-if="selected"
                       :class="[
-                        active
-                          ? 'text-white bg-primary'
-                          : 'text-gray-900 dark:text-gray-50',
-                        'cursor-default select-none relative py-2 pl-3 pr-9',
+                        active ? 'text-white' : 'text-primary',
+                        'absolute inset-y-0 right-0 flex items-center pr-4',
                       ]"
                     >
-                      <span
-                        :class="[
-                          selected ? 'font-semibold' : 'font-normal',
-                          'block truncate',
-                        ]"
-                      >
-                        {{ value.key }}
-                      </span>
+                      <CheckIcon class="w-5 h-5" aria-hidden="true" />
+                    </span>
+                  </li>
+                </ListboxOption>
+                <ListboxOption
+                  as="template"
+                  v-for="value in $props.values"
+                  :key="value"
+                  :value="value.value"
+                  v-slot="{ active, selected }"
+                >
+                  <li
+                    :class="[
+                      active
+                        ? 'text-white bg-primary'
+                        : 'text-gray-900 dark:text-gray-50',
+                      'cursor-default select-none relative py-2 pl-3 pr-9',
+                    ]"
+                  >
+                    <span
+                      :class="[
+                        selected ? 'font-semibold' : 'font-normal',
+                        'block truncate',
+                      ]"
+                    >
+                      {{ value.key }}
+                    </span>
 
-                      <span
-                        v-if="selected"
-                        :class="[
-                          active ? 'text-white' : 'text-primary',
-                          'absolute inset-y-0 right-0 flex items-center pr-4',
-                        ]"
-                      >
-                        <CheckIcon class="w-5 h-5" aria-hidden="true" />
-                      </span>
-                    </li>
-                  </ListboxOption>
-                </div>
-              </ListboxOptions>
-            </transition>
+                    <span
+                      v-if="selected"
+                      :class="[
+                        active ? 'text-white' : 'text-primary',
+                        'absolute inset-y-0 right-0 flex items-center pr-4',
+                      ]"
+                    >
+                      <CheckIcon class="w-5 h-5" aria-hidden="true" />
+                    </span>
+                  </li>
+                </ListboxOption>
+              </div>
+            </ListboxOptions>
           </div>
         </Listbox>
         <div v-if="$props.validation?.$invalid" class="errors">
@@ -1275,7 +1287,8 @@
 
       <div v-else-if="type == FormTypeEmbed">
         <embed-builder
-          v-model="modelValue"
+          :id="componentId"
+          :modelValue="modelValue"
           @update:modelValue="updateValue($event)"
           @blur="blur"
           :disabled="$props.disabled"
@@ -1297,13 +1310,15 @@
 
       <div v-else-if="type == FormTypeBackground">
         <background-selector
-          v-model="modelValue"
+          :id="componentId"
+          :modelValue="modelValue"
           @update:modelValue="updateValue($event)"
           @update:files="updateFiles($event)"
           @blur="blur"
           :files="$props.files"
           :disabled="$props.disabled"
           :invalid="$props.validation?.$invalid"
+          :customImages="$props.customImages"
         />
         <div v-if="$props.validation?.$invalid" class="errors">
           <span
@@ -1355,7 +1370,7 @@
 
 <script>
 import LoadingIcon from "../LoadingIcon.vue";
-import debounce from "lodash/debounce";
+import { debounce, uniqueId } from "lodash";
 
 import {
   Listbox,
@@ -1454,6 +1469,11 @@ export default {
     invalid: {
       type: Boolean,
     },
+    maxLength: {
+      type: Number,
+      required: false,
+      default: 524288
+    },
     isLoading: {
       type: Boolean,
       required: false,
@@ -1478,18 +1498,26 @@ export default {
     hideBorder: {
       type: Boolean,
       required: false,
-    }
+    },
+    customImages: {
+      type: Array,
+      required: false,
+    },
   },
 
   emits: ["update:modelValue", "update:files", "blur"],
 
   setup() {
+    let componentId = uniqueId("formvalue_");
+
     let query = "";
     let isValidSnowflake = false;
 
     const idRegex = new RegExp("([0-9]{15,20})");
 
     return {
+      componentId,
+
       FormTypeBlank,
       FormTypeToggle,
       FormTypeChannelList,

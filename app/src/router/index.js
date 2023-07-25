@@ -2,6 +2,8 @@ import { createWebHistory, createRouter } from "vue-router";
 
 import Home from "../pages/Home.vue";
 import Premium from "../pages/Premium.vue";
+import Backgrounds from "../pages/Backgrounds.vue";
+
 import Dashboard from "../pages/Dashboard.vue";
 
 const routes = [
@@ -14,6 +16,11 @@ const routes = [
     path: "/premium",
     name: "Premium",
     component: Premium,
+  },
+  {
+    path: "/backgrounds",
+    name: "Backgrounds",
+    component: Backgrounds,
   },
   {
     path: "/dashboard",
@@ -106,7 +113,7 @@ const routes = [
       },
     ],
   },
-  
+
   {
     path: "/:catchAll(.*)",
     component: () => import("../pages/NotFound.vue"),

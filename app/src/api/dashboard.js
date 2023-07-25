@@ -133,9 +133,9 @@ export default {
     }
   },
 
-  getWelcomerConfig(guildID, callback, errorCallback) {
+  getConfig(endpoint, callback, errorCallback) {
     getRequest(
-      "/api/guild/" + guildID + "/welcomer",
+      endpoint,
       (response) => {
         if (response.status === 401) {
           doLogin();
@@ -162,10 +162,10 @@ export default {
     );
   },
 
-  setWelcomerConfig(guildID, data, files, callback, errorCallback) {
+  setConfig(endpoint, data, files, callback, errorCallback) {
     doRequest(
       "POST",
-      "/api/guild/" + guildID + "/welcomer",
+      endpoint,
       data,
       files,
       (response) => {

@@ -1,11 +1,446 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-title-container">
-      <div class="dashboard-title">Rules</div>
+    <div v-if="this.isDataError">
+      <div class="mb-4">Data Error</div>
+      <button @click="this.fetchConfig">Retry</button>
+    </div>
+    <div v-else>
+      <div v-if="!this.isDataFetched" class="flex py-5 w-full justify-center">
+        <LoadingIcon />
+      </div>
+      <div v-else>
+        <div class="dashboard-title-container">
+          <div class="dashboard-title">Rules</div>
+        </div>
+        <div class="dashboard-contents">
+          <div class="dashboard-inputs">
+            <form-value
+              title="Enable Rules"
+              :type="FormTypeToggle"
+              v-model="config.toggle_enabled"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.toggle_enabled"
+              >Send rules to users when they join your server. This also allows
+              users to view the rules by doing <code>/rules</code>.</form-value
+            >
+            <form-value
+              title="Enable Rule DMs"
+              :type="FormTypeToggle"
+              v-model="config.toggle_dms_enabled"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.toggle_dms_enabled"
+              :inlineSlot="true"
+              >When enabled, users will also receive the rules in their direct
+              messages.</form-value
+            >
+
+            <form-value title="Rules" :type="FormTypeBlank" :hideBorder="true">
+              <table class="min-w-full border-spacing-2">
+                <thead>
+                  <tr>
+                    <th scope="col" class="relative py-3.5 pr-3 text-left">
+                    </th>
+                    <th scope="col" class="relative py-3.5 pr-3 text-left">
+                      Rule
+                    </th>
+                    <th scope="col" class="relative py-3.5 text-left">
+                      Actions
+                    </th>
+                  </tr>
+                </thead>
+                <tbody
+                  class="divide-y divide-gray-200 dark:divide-secondary-light"
+                >
+                  <tr v-for="(rule, index) in this.config._rules" :key="index" :class="[this.selectedIndex != null ? 'select-none' : '', this.selectedIndex == index ? 'dark:bg-secondary-dark bg-gray-100' : '']" v-on:mousemove="this.mouseMoveHandler(index)">
+                    <td class="px-3 text-sm dark:text-gray-50 cursor-move" v-on:mousedown="this.mouseDownHandler(index)">
+                      <font-awesome-icon icon="grip-vertical" />
+                    </td>
+                    <td class="pr-3 text-sm dark:text-gray-50">
+                      <input
+                        v-if="rule.selected"
+                        type="text"
+                        class="bg-white dark:bg-secondary-dark relative w-full pl-3 pr-3 text-left border border-gray-300 dark:border-secondary-light rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
+                        v-model="rule.newValue"
+                        :maxlength="this.maxRuleLength"
+                        @keypress="this.onEditRuleKeyPress($event, index)"
+                      />
+                      <div
+                        class="break-all"
+                        v-else
+                        v-html="marked(rule.value, true)"
+                      />
+                    </td>
+                    <td
+                      class="whitespace-nowrap py-4 text-sm dark:text-gray-50 space-x-2"
+                    >
+                      <a
+                        v-if="rule.selected"
+                        @click="this.onSaveRule(index)"
+                        class="text-primary hover:text-primary-dark cursor-pointer"
+                        >Confirm</a
+                      >
+                      <a
+                        v-else
+                        @click="this.onSelectRule(index)"
+                        class="text-primary hover:text-primary-dark cursor-pointer"
+                        >Edit</a
+                      >
+                      <a
+                        v-if="rule.selected"
+                        @click="this.onCancelRule(index)"
+                        class="text-primary hover:text-primary-dark cursor-pointer"
+                        >Cancel</a
+                      >
+                      <a
+                        v-else
+                        @click="this.onDeleteRule(index)"
+                        class="text-primary hover:text-primary-dark cursor-pointer"
+                        >Delete</a
+                      >
+                    </td>
+                  </tr>
+                  <tr v-if="this.config._rules.length < this.maxRuleCount">
+                    <td
+                      class="whitespace-nowrap py-4 px-3 text-sm sm:table-cell hidden"
+                    >
+                    </td>
+                    <td class="py-4 text-sm pr-3">
+                      <input
+                        type="text"
+                        class="bg-white dark:bg-secondary-dark relative w-full pl-3 pr-10 text-left border border-gray-300 dark:border-secondary-light rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
+                        :maxlength="this.maxRuleLength"
+                        @blur="this.onRuleBlur()"
+                        @keypress="this.onRuleKeyPress($event)"
+                        v-model="rule"
+                      />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </form-value>
+          </div>
+
+          <code>{{ config }}</code>
+
+          <unsaved-changes
+            :unsavedChanges="unsavedChanges"
+            :isChangeInProgress="isChangeInProgress"
+            @save="saveConfig"
+          ></unsaved-changes>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import { ref } from "vue";
+import { XIcon } from "@heroicons/vue/outline";
+import EmbedBuilder from "../../../components/dashboard/EmbedBuilder.vue";
+import FormValue from "../../../components/dashboard/FormValue.vue";
+import {
+  FormTypeBlank,
+  FormTypeToggle,
+} from "../../../components/dashboard/FormValueEnum";
+import UnsavedChanges from "../../../components/dashboard/UnsavedChanges.vue";
+import LoadingIcon from "../../../components/LoadingIcon.vue";
+import dashboardAPI from "../../../api/dashboard";
+import endpoints from "../../../api/endpoints";
+import useVuelidate from "@vuelidate/core";
+
+import { toHTML } from "../../../components/discord-markdown";
+
+const maxRuleCount = 25;
+const maxRuleLength = 250;
+
+export default {
+  components: {
+    FormValue,
+    EmbedBuilder,
+    UnsavedChanges,
+    XIcon,
+    LoadingIcon,
+  },
+  setup() {
+    let isDataFetched = ref(false);
+    let isDataError = ref(false);
+    let unsavedChanges = ref(false);
+    let isChangeInProgress = ref(false);
+
+    let config = ref({});
+    let rules = () => ({
+      toggle_enabled: {},
+      toggle_dms_enabled: {},
+      rules: {},
+    });
+    const v$ = useVuelidate(rules, config);
+
+    let rule = ref("");
+
+    let selectedIndex = ref(null);
+
+    return {
+      FormTypeBlank,
+      FormTypeToggle,
+
+      isDataFetched,
+      isDataError,
+      unsavedChanges,
+      isChangeInProgress,
+
+      config,
+      v$,
+
+      rule,
+
+      maxRuleCount,
+      maxRuleLength,
+
+      selectedIndex,
+    };
+  },
+
+  beforeRouteLeave() {
+    return !this.confirmStayInDirtyForm();
+  },
+
+  beforeDestroy() {
+    window.removeEventListener("beforeunload", this.beforeWindowUnload);
+    window.removeEventListener("mouseup", this.mouseUpHandler);
+  },
+
+  mounted() {
+    window.addEventListener("beforeunload", this.beforeWindowUnload);
+    window.addEventListener("mouseup", this.mouseUpHandler);
+
+    this.fetchConfig();
+  },
+
+  methods: {
+    setConfig(config) {
+      this.config = config;
+
+      this.config._rules = [];
+      this.config.rules.forEach((rule) => {
+        this.config._rules.push({
+          value: rule,
+          selected: false,
+        });
+      });
+    },
+
+    fetchConfig() {
+      this.isDataFetched = false;
+      this.isDataError = false;
+
+      dashboardAPI.getConfig(
+        endpoints.EndpointGuildRules(this.$store.getters.getSelectedGuildID),
+        ({ config }) => {
+          this.setConfig(config);
+          this.isDataFetched = true;
+          this.isDataError = false;
+        },
+        (error) => {
+          this.$store.dispatch("createToast", {
+            title: error,
+            icon: "xmark",
+            class: "text-red-500 bg-red-100",
+          });
+
+          this.isDataFetched = true;
+          this.isDataError = false;
+        }
+      );
+    },
+
+    async saveConfig() {
+      const validForm = await this.v$.$validate();
+
+      if (!validForm) {
+        this.$store.dispatch("createToast", {
+          title: "Please fix any errors before submitting",
+          icon: "xmark",
+          class: "text-red-500 bg-red-100",
+        });
+
+        let error = document.querySelector(".errors");
+        if (error) {
+          error.scrollIntoView({
+            behavior: "smooth",
+            block: "end",
+            inline: "center",
+          });
+        } else {
+          console.warn(
+            "No error to scroll into view. Is there a missing error message?"
+          );
+        }
+
+        return;
+      }
+
+      this.isChangeInProgress = true;
+
+      this.config.rules = [];
+      this.config._rules.forEach((rule) => {
+        this.config.rules.push(rule.value);
+      });
+
+      dashboardAPI.setConfig(
+        endpoints.EndpointGuildRules(this.$store.getters.getSelectedGuildID),
+        this.config,
+        this.files,
+        ({ config }) => {
+          this.$store.dispatch("createToast", {
+            title: "Changes saved.",
+            icon: "check",
+            class: "text-green-500 bg-green-100",
+          });
+
+          this.setConfig(config);
+          this.unsavedChanges = false;
+          this.isChangeInProgress = false;
+        },
+        (error) => {
+          this.$store.dispatch("createToast", {
+            title: error,
+            icon: "xmark",
+            class: "text-red-500 bg-red-100",
+          });
+
+          this.isChangeInProgress = false;
+        }
+      );
+    },
+
+    onValueUpdate() {
+      this.unsavedChanges = true;
+    },
+
+    confirmStayInDirtyForm() {
+      return this.unsavedChanges && !this.confirmLeave();
+    },
+
+    confirmLeave() {
+      return window.confirm(
+        "You have unsaved changes! Are you sure you want to leave?"
+      );
+    },
+
+    beforeWindowUnload(e) {
+      if (this.confirmStayInDirtyForm()) {
+        e.preventDefault();
+        e.returnValue = "";
+      }
+    },
+
+    onSelectRule(index) {
+      this.config._rules.forEach((rule) => {
+        rule.selected = false;
+      });
+
+      this.config._rules[index].selected = true;
+      this.config._rules[index].newValue = this.config._rules[index].value;
+    },
+
+    onSaveRule(index) {
+      if (this.config._rules[index].newValue.trim() == "") {
+        this.onDeleteRule(index);
+      } else {
+        this.config._rules[index].selected = false;
+
+        if (
+          this.config._rules[index].value !== this.config._rules[index].newValue
+        ) {
+          this.onValueUpdate();
+        }
+
+        this.config._rules[index].value = this.config._rules[index].newValue;
+      }
+    },
+
+    onCancelRule(index) {
+      this.config._rules[index].selected = false;
+    },
+
+    onDeleteRule(index) {
+      this.config._rules.splice(index, 1);
+      this.onValueUpdate();
+    },
+
+    onEditRuleKeyPress(event, index) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        this.onSaveRule(index);
+      }
+    },
+
+    onRuleKeyPress(event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        this.onRuleBlur();
+      }
+    },
+
+    onRuleBlur() {
+      this.rule = this.rule.trim();
+
+      if (this.rule != "") {
+        this.config._rules.push({
+          value: this.rule,
+          selected: false,
+        });
+        this.rule = "";
+        this.onValueUpdate();
+      }
+    },
+
+    marked(input, embed) {
+      if (input) {
+        return toHTML(input, {
+          embed: embed,
+          discordCallback: {
+            user: function (user) {
+              return `Unknown user ${user.id}`;
+            },
+            channel: function (channel) {
+              return `Unknown channel ${channel.id}`;
+            },
+            role: function (role) {
+              return `Unknown role ${role.id}`;
+            },
+            everyone: function () {
+              return `@everyone`;
+            },
+            here: function () {
+              return `@here`;
+            },
+          },
+          cssModuleNames: {
+            "d-emoji": "emoji",
+          },
+        });
+      }
+      return "";
+    },
+
+    mouseDownHandler(index) {
+      this.selectedIndex = index;
+    },
+
+    mouseUpHandler() {
+      this.selectedIndex = null;
+    },
+
+    mouseMoveHandler(index) {
+      if (this.selectedIndex != null && this.selectedIndex != index) {
+        var temp = this.config._rules[index];
+        this.config._rules[index] = this.config._rules[this.selectedIndex];
+        this.config._rules[this.selectedIndex] = temp;
+        this.selectedIndex = index;
+        this.onValueUpdate();
+      }
+    },
+  },
+};
 </script>

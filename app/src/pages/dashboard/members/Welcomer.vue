@@ -45,7 +45,10 @@
               :validation="v$.text.message_json"
               :inlineSlot="true"
               >This is the message users will receive when joining.
-              <a target="_blank" href="/formatting" class="text-primary"
+              <a
+                target="_blank"
+                href="/formatting"
+                class="text-primary hover:text-primary-dark"
                 >Click here</a
               >
               to view all the formatting tags you can use for custom text.
@@ -73,7 +76,10 @@
               :validation="v$.images.image_theme"
               :inlineSlot="true"
               >This is the theme that will be used for your welcome image.
-              <a target="_blank" href="/backgrounds" class="text-primary"
+              <a
+                target="_blank"
+                href="/backgrounds"
+                class="text-primary hover:text-primary-dark"
                 >Click here</a
               >
               to view all the themes you can use.</form-value
@@ -88,6 +94,7 @@
               :validation="v$.images.background"
               :files="files"
               :inlineSlot="true"
+              :customImages="config.custom?.custom_ids"
               >This is the background that will be used in your welcome
               image.</form-value
             >
@@ -103,7 +110,10 @@
               :inlineSlot="true"
               >This is the custom message that will be included in the welcome
               image.
-              <a target="_blank" href="/formatting" class="text-primary"
+              <a
+                target="_blank"
+                href="/formatting"
+                class="text-primary hover:text-primary-dark"
                 >Click here</a
               >
               to view all the formatting tags you can use for custom
@@ -174,8 +184,6 @@
               v-model="config.images.enable_border"
               @update:modelValue="onValueUpdate"
               :validation="v$.images.enable_border"
-              :hideBorder="true"
-              :inlineSlot="true"
               >This allows you to add a border around your welcome
               images.</form-value
             >
@@ -236,9 +244,13 @@
               @update:modelValue="onValueUpdate"
               :validation="v$.dms.message_json"
               :inlineSlot="true"
+              :hideBorder="true"
               >This is the message users will receive in direct messages when
               joining.
-              <a target="_blank" href="/formatting" class="text-primary"
+              <a
+                target="_blank"
+                href="/formatting"
+                class="text-primary hover:text-primary-dark"
                 >Click here</a
               >
               to view all the formatting tags you can use for custom text.
@@ -258,31 +270,25 @@
 
 <script>
 import { ref } from "vue";
-import FormValue from "../../../components/dashboard/FormValue.vue";
-import store from "../../../store/index";
 import { XIcon } from "@heroicons/vue/outline";
 import {
-  FormTypeBlank,
   FormTypeToggle,
-  FormTypeChannelList,
   FormTypeChannelListCategories,
-  FormTypeRoleList,
-  FormTypeMemberList,
-  FormTypeEmojiList,
   FormTypeColour,
   FormTypeText,
-  FormTypeNumber,
   FormTypeTextArea,
   FormTypeDropdown,
   FormTypeEmbed,
   FormTypeBackground,
 } from "../../../components/dashboard/FormValueEnum";
 import EmbedBuilder from "../../../components/dashboard/EmbedBuilder.vue";
+import FormValue from "../../../components/dashboard/FormValue.vue";
 import UnsavedChanges from "../../../components/dashboard/UnsavedChanges.vue";
-import useVuelidate from "@vuelidate/core";
-import dashboardAPI from "../../../api/dashboard";
-import { requiredIf } from "@vuelidate/validators";
 import LoadingIcon from "../../../components/LoadingIcon.vue";
+import dashboardAPI from "../../../api/dashboard";
+import endpoints from "../../../api/endpoints";
+import useVuelidate from "@vuelidate/core";
+import { requiredIf } from "@vuelidate/validators";
 
 var imageAlignmentTypes = [
   { key: "Left", value: "left" },
@@ -320,14 +326,11 @@ export default {
   setup() {
     let isDataFetched = ref(false);
     let isDataError = ref(false);
-
     let unsavedChanges = ref(false);
     let isChangeInProgress = ref(false);
 
     let config = ref({});
-
     let files = ref([]);
-
     let rules = () => ({
       text: {
         enabled: {},
@@ -368,20 +371,13 @@ export default {
         },
       },
     });
-
     const v$ = useVuelidate(rules, config);
 
     return {
-      FormTypeBlank,
       FormTypeToggle,
-      FormTypeChannelList,
       FormTypeChannelListCategories,
-      FormTypeRoleList,
-      FormTypeMemberList,
-      FormTypeEmojiList,
       FormTypeColour,
       FormTypeText,
-      FormTypeNumber,
       FormTypeTextArea,
       FormTypeDropdown,
       FormTypeEmbed,
@@ -389,15 +385,12 @@ export default {
 
       isDataFetched,
       isDataError,
-
       unsavedChanges,
       isChangeInProgress,
+
       config,
       files,
-
       v$,
-
-      store,
 
       profileBorderTypes,
       imageAlignmentTypes,
@@ -426,8 +419,8 @@ export default {
       this.isDataFetched = false;
       this.isDataError = false;
 
-      dashboardAPI.getWelcomerConfig(
-        this.$store.getters.getSelectedGuildID,
+      dashboardAPI.getConfig(
+        endpoints.EndpointGuildWelcomer(this.$store.getters.getSelectedGuildID),
         ({ config }) => {
           this.config = config;
           this.isDataFetched = true;
@@ -474,8 +467,8 @@ export default {
 
       this.isChangeInProgress = true;
 
-      dashboardAPI.setWelcomerConfig(
-        this.$store.getters.getSelectedGuildID,
+      dashboardAPI.setConfig(
+        endpoints.EndpointGuildWelcomer(this.$store.getters.getSelectedGuildID),
         this.config,
         this.files,
         ({ config }) => {
@@ -502,11 +495,6 @@ export default {
       );
     },
 
-    onFilesUpdate(event) {
-      this.files = event;
-      this.onValueUpdate();
-    },
-
     onValueUpdate() {
       this.unsavedChanges = true;
     },
@@ -526,6 +514,11 @@ export default {
         e.preventDefault();
         e.returnValue = "";
       }
+    },
+
+    onFilesUpdate(event) {
+      this.files = event;
+      this.onValueUpdate();
     },
   },
 };

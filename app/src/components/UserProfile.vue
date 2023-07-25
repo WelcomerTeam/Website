@@ -38,11 +38,9 @@
                 'group focus:outline-none hover:text-gray-300 inline-flex items-center rounded-md text-base',
               ]"
             >
-              <span
-                >{{ $store.getters.getCurrentUser.username }}#{{
-                  $store.getters.getCurrentUser.discriminator
-                }}</span
-              >
+              <span v-if="$store.getters.getCurrentUser.discriminator == '0'">{{ $store.getters.getCurrentUser.global_name }}</span>
+              <span v-else>{{ $store.getters.getCurrentUser.username }}#{{
+                  $store.getters.getCurrentUser.discriminator}}</span>
               <ChevronDownIcon
                 :class="[
                   open ? 'text-gray-300' : 'text-white',
@@ -81,9 +79,9 @@
                     <div class="col-span-3 flex items-center">
                       <div>
                         <h2 class="font-bold text-xl">
-                          {{ $store.getters.getCurrentUser.username }}#{{
-                            $store.getters.getCurrentUser.discriminator
-                          }}
+                          <span v-if="$store.getters.getCurrentUser.discriminator == '0'">{{ $store.getters.getCurrentUser.global_name }}</span>
+                          <span v-else>{{ $store.getters.getCurrentUser.username }}#{{
+                              $store.getters.getCurrentUser.discriminator}}</span>
                         </h2>
                         <div class="space-x-2 space-y-2">
                           <font-awesome-icon

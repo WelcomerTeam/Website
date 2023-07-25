@@ -74,7 +74,7 @@
                   <router-link
                     :to="item.href"
                     v-if="item.href"
-                    class="text-primary font-semibold"
+                    class="text-primary hover:text-primary-dark font-semibold"
                   >
                     {{ item.label }}
                   </router-link>

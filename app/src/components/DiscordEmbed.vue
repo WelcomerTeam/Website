@@ -1133,13 +1133,23 @@ export default {
       if (input) {
         return toHTML(input, {
           embed: embed,
-          // discordCallback: {
-          //   user: function(id) { console.log("user mention " + id.id); },
-          //   channel: function(id) { console.log("channel mention " + id.id);},
-          //   role: function(id) { console.log("role mention " + id.id); },
-          //   everyone: function() { console.log("everyone mention"); },
-          //   here: function() { console.log("here mention"); },
-          // },
+          discordCallback: {
+            user: function (user) {
+              return `Unknown user ${user.id}`;
+            },
+            channel: function (channel) {
+              return `Unknown channel ${channel.id}`;
+            },
+            role: function (role) {
+              return `Unknown role ${role.id}`;
+            },
+            everyone: function () {
+              return `@everyone`;
+            },
+            here: function () {
+              return `@here`;
+            },
+          },
           cssModuleNames: {
             "d-emoji": "emoji",
           },

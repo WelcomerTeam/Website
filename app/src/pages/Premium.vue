@@ -80,13 +80,13 @@
               </ul>
               <a
                 href="#plans"
-                class="flex items-center justify-center w-full px-8 py-4 text-lg font-medium leading-6 bg-white border border-transparent rounded-md text-donate hover:bg-gray-200 md:px-10"
+                class="flex items-center justify-center w-full px-8 py-4 text-lg font-medium leading-6 bg-white border border-transparent rounded-md text-donate hover:text-donate-dark hover:bg-gray-200 md:px-10"
               >
                 View all plans
               </a>
               <a
                 href="#custombackgrounds"
-                class="block text-base font-medium text-center text-white hover:text-gray-200"
+                class="block text-base font-medium text-center text-white hover:text-gray-300"
               >
                 Get Custom Backgrounds only
               </a>
@@ -98,7 +98,7 @@
       <div id="plans">
         <div class="bg-white">
           <div class="hero-preview">
-            <div class="px-4 pt-8 mx-automax-w-7xl sm:px-6 lg:px-8">
+            <div class="px-4 pt-8 mx-auto max-w-7xl sm:px-6 lg:px-8">
               <div class="sm:flex sm:flex-col sm:align-center">
                 <div class="prose-lg text-center">
                   <h1
@@ -213,13 +213,13 @@
                     <a
                       v-if="durationSelected.isPatreon"
                       @click.prevent="selectPlan(plan)"
-                      class="block w-full py-2 mt-8 text-sm font-semibold text-center text-white border border-transparent rounded-md cursor-pointer bg-patreon hover:bg-patreon"
+                      class="block w-full py-2 mt-8 text-sm font-semibold text-center text-white border border-transparent rounded-md cursor-pointer bg-patreon hover:bg-patreon-dark"
                       >Become a Patreon</a
                     >
                     <a
                       v-else
                       @click.prevent="selectPlan(plan)"
-                      class="block w-full py-2 mt-8 text-sm font-semibold text-center text-white border border-transparent rounded-md cursor-pointer bg-donate hover:bg-donate"
+                      class="block w-full py-2 mt-8 text-sm font-semibold text-center text-white border border-transparent rounded-md cursor-pointer bg-donate hover:bg-donate-dark"
                       >Get {{ plan.name }}</a
                     >
                   </div>
@@ -301,7 +301,7 @@
                 </h2>
                 <p class="mt-4 text-lg text-white">
                   Can't find what you are looking for? Reach out to us on our
-                  <a class="text-white underline" href="/support"
+                  <a class="text-white hover:text-gray-300 underline" href="/support"
                     >support server</a
                   >.
                 </p>

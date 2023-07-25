@@ -82,369 +82,383 @@
             </div>
           </div>
 
-          <div class="py-8 px-4 lg:px-8">
+          <div class="py-8">
             <!-- Embed Builder -->
-            <div class="space-y-1" v-if="this.page == 1">
-              <!-- Content -->
-              <div
-                class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0 pb-7"
-              >
+            <div
+              class="divide-y divide-gray-300 dark:divide-secondary-light"
+              v-if="this.page == 1"
+            >
+              <div class="px-4 lg:px-8 space-y-2">
+                <!-- Content -->
                 <div
-                  class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
+                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
                 >
-                  <span class="embed-builder-title">Content</span>
-                </div>
-                <div class="mt-1 sm:mt-0 sm:col-span-7">
-                  <textarea
-                    type="text"
-                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
-                    placeholder="Message Content"
-                    v-model="content"
-                    rows="4"
-                    @input="updateEmbed()"
-                  />
-                </div>
-              </div>
-
-              <!-- Title -->
-              <div
-                class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
-              >
-                <div
-                  class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
-                >
-                  <span class="embed-builder-title">Title</span>
-                </div>
-                <div class="mt-1 sm:mt-0 sm:col-span-7">
-                  <input
-                    type="text"
-                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
-                    placeholder="Embed title"
-                    v-model="title"
-                    @input="updateEmbed()"
-                  />
-                </div>
-              </div>
-
-              <!-- URL -->
-              <div
-                class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
-              >
-                <div
-                  class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
-                >
-                  <span class="embed-builder-title">Title URL</span>
-                </div>
-                <div class="mt-1 sm:mt-0 sm:col-span-7">
-                  <input
-                    type="text"
-                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
-                    placeholder="Title URL"
-                    v-model="url"
-                    @input="updateEmbed()"
-                  />
-                </div>
-              </div>
-
-              <!-- Description -->
-              <div
-                class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
-              >
-                <div
-                  class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
-                >
-                  <span class="embed-builder-title">Description</span>
-                </div>
-                <div class="mt-1 sm:mt-0 sm:col-span-7">
-                  <textarea
-                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
-                    placeholder="Embed description"
-                    v-model="description"
-                    @input="updateEmbed()"
-                  />
-                </div>
-              </div>
-
-              <!-- Colour -->
-              <div
-                class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
-              >
-                <div
-                  class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
-                >
-                  <span class="embed-builder-title">Colour</span>
-                </div>
-                <div class="mt-1 sm:mt-0 sm:col-span-7 flex items-center">
-                  <input
-                    id="useColour"
-                    aria-describedby="Use custom embed colour"
-                    name="Use Custom Embed Colour"
-                    type="checkbox"
-                    :true-value="true"
-                    :false-value="false"
-                    class="focus:ring-primary h-4 w-4 text-primary border-gray-300 dark:bg-secondary-dark dark:border-secondary-light rounded mr-2"
-                    v-model="use_color"
-                    @change="updateEmbed()"
-                  />
-                  <Listbox as="div" class="flex-1">
-                    <div class="relative">
-                      <ListboxButton
-                        class="relative w-full py-2 pl-3 pr-10 text-left bg-white border border-gray-300 dark:bg-secondary dark:border-secondary-light rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
-                      >
-                        <div
-                          class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
-                        >
-                          <font-awesome-icon
-                            icon="square"
-                            class="inline w-4 h-4 mr-1 border-primary"
-                            :style="{
-                              color: `${RGBIntToRGB(color, 2450411)}`,
-                            }"
-                          />
-                        </div>
-                        <span class="block pl-10 truncate">{{
-                          RGBIntToRGB(color, 2450411).toUpperCase()
-                        }}</span>
-                        <span
-                          class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none"
-                        >
-                          <SelectorIcon
-                            class="w-5 h-5 text-gray-400"
-                            aria-hidden="true"
-                          />
-                        </span>
-                      </ListboxButton>
-
-                      <transition
-                        leave-active-class="transition duration-100 ease-in"
-                        leave-from-class="opacity-100"
-                        leave-to-class="opacity-0"
-                      >
-                        <ListboxOptions class="absolute z-10 mt-1">
-                          <ColorPicker
-                            theme="dark"
-                            :color="RGBIntToRGB(color, 2450411)"
-                            @changeColor="SetColorRGBIntToRGB"
-                            :sucker-hide="true"
-                          />
-                        </ListboxOptions>
-                      </transition>
-                    </div>
-                  </Listbox>
-                </div>
-              </div>
-
-              <!-- fields -->
-              <div
-                class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start border-gray-200 dark:border-secondary-light mb-4 sm:mb-0"
-              >
-                <div
-                  class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
-                >
-                  <span class="embed-builder-title">Fields</span>
-                </div>
-                <div class="mt-1 sm:mt-0 sm:col-span-7 space-y-2">
                   <div
-                    class="p-3 border rounded-md border-gray-300 dark:border-secondary-light shadow-sm space-y-1"
-                    :key="index"
-                    v-for="(field, index) in fields"
+                    class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
                   >
-                    <input
-                      type="text"
-                      class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
-                      placeholder="Field Name"
-                      v-model="field.name"
-                      @input="updateEmbed()"
-                    />
-                    <input
-                      type="text"
-                      class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
-                      placeholder="Field Value"
-                      v-model="field.value"
-                      @input="updateEmbed()"
-                    />
-                    <div class="flex items-center">
-                      <div class="flex-1">
-                        <input
-                          id="useInline"
-                          aria-describedby="Show embed field inline"
-                          name="Use Inline"
-                          type="checkbox"
-                          :true-value="true"
-                          :false-value="false"
-                          class="focus:ring-primary h-4 w-4 text-primary border-gray-300 dark:bg-secondary-dark dark:border-secondary-light rounded"
-                          v-model="field.inline"
-                          @change="updateEmbed()"
-                        />
-                        <span
-                          class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-50 shadow-sm"
-                          >Inline</span
-                        >
-                      </div>
-                      <button
-                        type="button"
-                        class="inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-                        @click="removeField(index)"
-                      >
-                        <font-awesome-icon icon="close" />
-                      </button>
-                    </div>
+                    <span class="embed-builder-title">Content</span>
                   </div>
-                  <button
-                    type="button"
-                    class="cta-button bg-primary hover:bg-primary-dark"
-                    @click="newField"
+                  <div class="mt-1 sm:mt-0 sm:col-span-7">
+                    <textarea
+                      type="text"
+                      class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
+                      placeholder="Message Content"
+                      rows="4"
+                      :value="content"
+                      @input="updateContent($event.target.value)"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="pt-5 mt-5 px-4 lg:px-8 space-y-2">
+                <!-- Title -->
+                <div
+                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
+                >
+                  <div
+                    class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
                   >
-                    Create New Field
-                  </button>
+                    <span class="embed-builder-title">Title</span>
+                  </div>
+                  <div class="mt-1 sm:mt-0 sm:col-span-7">
+                    <input
+                      type="text"
+                      class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
+                      placeholder="Embed title"
+                      v-model="title"
+                      @input="updateEmbed()"
+                    />
+                  </div>
+                </div>
+
+                <!-- URL -->
+                <div
+                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
+                >
+                  <div
+                    class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
+                  >
+                    <span class="embed-builder-title">Title URL</span>
+                  </div>
+                  <div class="mt-1 sm:mt-0 sm:col-span-7">
+                    <input
+                      type="text"
+                      class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
+                      placeholder="Title URL"
+                      v-model="url"
+                      @input="updateEmbed()"
+                    />
+                  </div>
+                </div>
+
+                <!-- Description -->
+                <div
+                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
+                >
+                  <div
+                    class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
+                  >
+                    <span class="embed-builder-title">Description</span>
+                  </div>
+                  <div class="mt-1 sm:mt-0 sm:col-span-7">
+                    <textarea
+                      class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
+                      placeholder="Embed description"
+                      v-model="description"
+                      @input="updateEmbed()"
+                    />
+                  </div>
+                </div>
+                <!-- Colour -->
+                <div
+                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
+                >
+                  <div
+                    class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
+                  >
+                    <span class="embed-builder-title">Colour</span>
+                  </div>
+                  <div class="mt-1 sm:mt-0 sm:col-span-7 flex items-center">
+                    <input
+                      id="useColour"
+                      aria-describedby="Use custom embed colour"
+                      name="Use Custom Embed Colour"
+                      type="checkbox"
+                      :true-value="true"
+                      :false-value="false"
+                      class="focus:ring-primary h-4 w-4 text-primary border-gray-300 dark:bg-secondary-dark dark:border-secondary-light rounded mr-2"
+                      v-model="use_color"
+                      @change="updateEmbed()"
+                    />
+                    <Listbox as="div" class="flex-1">
+                      <div class="relative">
+                        <ListboxButton
+                          class="relative w-full py-2 pl-3 pr-10 text-left bg-white border border-gray-300 dark:bg-secondary dark:border-secondary-light rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
+                        >
+                          <div
+                            class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+                          >
+                            <font-awesome-icon
+                              icon="square"
+                              class="inline w-4 h-4 mr-1 border-primary"
+                              :style="{
+                                color: `${RGBIntToRGB(color, 2450411)}`,
+                              }"
+                            />
+                          </div>
+                          <span class="block pl-10 truncate">{{
+                            RGBIntToRGB(color, 2450411).toUpperCase()
+                          }}</span>
+                          <span
+                            class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none"
+                          >
+                            <SelectorIcon
+                              class="w-5 h-5 text-gray-400"
+                              aria-hidden="true"
+                            />
+                          </span>
+                        </ListboxButton>
+
+                        <transition
+                          leave-active-class="transition duration-100 ease-in"
+                          leave-from-class="opacity-100"
+                          leave-to-class="opacity-0"
+                        >
+                          <ListboxOptions class="absolute z-10 mt-1">
+                            <ColorPicker
+                              theme="dark"
+                              :color="RGBIntToRGB(color, 2450411)"
+                              @changeColor="SetColorRGBIntToRGB"
+                              :sucker-hide="true"
+                            />
+                          </ListboxOptions>
+                        </transition>
+                      </div>
+                    </Listbox>
+                  </div>
                 </div>
               </div>
 
-              <!-- Image URL -->
-              <div
-                class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
-              >
+              <div class="pt-5 mt-5 px-4 lg:px-8 space-y-2">
+                <!-- Fields -->
                 <div
-                  class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
+                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start border-gray-200 dark:border-secondary-light mb-4 sm:mb-0"
                 >
-                  <span class="embed-builder-title">Embed Image URL</span>
-                </div>
-                <div class="mt-1 sm:mt-0 sm:col-span-7">
-                  <input
-                    type="text"
-                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
-                    placeholder="Embed Image URL"
-                    v-model="image_url"
-                    @input="updateEmbed()"
-                  />
+                  <div
+                    class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
+                  >
+                    <span class="embed-builder-title">Fields</span>
+                  </div>
+                  <div class="mt-1 sm:mt-0 sm:col-span-7 space-y-2">
+                    <div
+                      class="p-3 border rounded-md border-gray-300 dark:border-secondary-light shadow-sm space-y-2"
+                      :key="index"
+                      v-for="(field, index) in fields"
+                    >
+                      <input
+                        type="text"
+                        class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
+                        placeholder="Field Name"
+                        v-model="field.name"
+                        @input="updateEmbed()"
+                      />
+                      <input
+                        type="text"
+                        class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
+                        placeholder="Field Value"
+                        v-model="field.value"
+                        @input="updateEmbed()"
+                      />
+                      <div class="flex items-center">
+                        <div class="flex-1">
+                          <input
+                            id="useInline"
+                            aria-describedby="Show embed field inline"
+                            name="Use Inline"
+                            type="checkbox"
+                            :true-value="true"
+                            :false-value="false"
+                            class="focus:ring-primary h-4 w-4 text-primary border-gray-300 dark:bg-secondary-dark dark:border-secondary-light rounded"
+                            v-model="field.inline"
+                            @change="updateEmbed()"
+                          />
+                          <span
+                            class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-50 shadow-sm"
+                            >Inline</span
+                          >
+                        </div>
+                        <button
+                          type="button"
+                          class="inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                          @click="removeField(index)"
+                        >
+                          <font-awesome-icon icon="close" />
+                        </button>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      class="cta-button bg-primary hover:bg-primary-dark"
+                      @click="newField"
+                    >
+                      Create New Field
+                    </button>
+                  </div>
                 </div>
               </div>
 
-              <!-- Thumbnail URL -->
-              <div
-                class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
-              >
+              <div class="pt-5 mt-5 px-4 lg:px-8 space-y-2">
+                <!-- Image URL -->
                 <div
-                  class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
+                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
                 >
-                  <span class="embed-builder-title">Thumbnail Image URL</span>
+                  <div
+                    class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
+                  >
+                    <span class="embed-builder-title">Embed Image URL</span>
+                  </div>
+                  <div class="mt-1 sm:mt-0 sm:col-span-7">
+                    <input
+                      type="text"
+                      class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
+                      placeholder="Embed Image URL"
+                      v-model="image_url"
+                      @input="updateEmbed()"
+                    />
+                  </div>
                 </div>
-                <div class="mt-1 sm:mt-0 sm:col-span-7">
-                  <input
-                    type="text"
-                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
-                    placeholder="Thumbnail Image URL"
-                    v-model="thumbnail_url"
-                    @input="updateEmbed()"
-                  />
+
+                <!-- Thumbnail URL -->
+                <div
+                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
+                >
+                  <div
+                    class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
+                  >
+                    <span class="embed-builder-title">Thumbnail Image URL</span>
+                  </div>
+                  <div class="mt-1 sm:mt-0 sm:col-span-7">
+                    <input
+                      type="text"
+                      class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
+                      placeholder="Thumbnail Image URL"
+                      v-model="thumbnail_url"
+                      @input="updateEmbed()"
+                    />
+                  </div>
                 </div>
               </div>
 
-              <!-- Footer Text -->
-              <div
-                class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
-              >
+              <div class="pt-5 mt-5 px-4 lg:px-8 space-y-2">
+                <!-- Footer Text -->
                 <div
-                  class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
+                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
                 >
-                  <span class="embed-builder-title">Footer Text</span>
+                  <div
+                    class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
+                  >
+                    <span class="embed-builder-title">Footer Text</span>
+                  </div>
+                  <div class="mt-1 sm:mt-0 sm:col-span-7">
+                    <input
+                      type="text"
+                      class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
+                      placeholder="Embed title"
+                      v-model="footer_text"
+                      @input="updateEmbed()"
+                    />
+                  </div>
                 </div>
-                <div class="mt-1 sm:mt-0 sm:col-span-7">
-                  <input
-                    type="text"
-                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
-                    placeholder="Embed title"
-                    v-model="footer_text"
-                    @input="updateEmbed()"
-                  />
+
+                <!-- Footer Icon -->
+                <div
+                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
+                >
+                  <div
+                    class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
+                  >
+                    <span class="embed-builder-title">Footer Icon URL</span>
+                  </div>
+                  <div class="mt-1 sm:mt-0 sm:col-span-7">
+                    <input
+                      type="text"
+                      class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
+                      placeholder="Footer Icon URL"
+                      v-model="footer_icon"
+                      @input="updateEmbed()"
+                    />
+                  </div>
                 </div>
               </div>
 
-              <!-- Footer Icon -->
-              <div
-                class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
-              >
+              <div class="pt-5 mt-5 px-4 lg:px-8 space-y-2">
+                <!-- Author Name -->
                 <div
-                  class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
+                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
                 >
-                  <span class="embed-builder-title">Footer Icon URL</span>
+                  <div
+                    class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
+                  >
+                    <span class="embed-builder-title">Author Name</span>
+                  </div>
+                  <div class="mt-1 sm:mt-0 sm:col-span-7">
+                    <input
+                      type="text"
+                      class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
+                      placeholder="Author Name"
+                      v-model="author_name"
+                      @input="updateEmbed()"
+                    />
+                  </div>
                 </div>
-                <div class="mt-1 sm:mt-0 sm:col-span-7">
-                  <input
-                    type="text"
-                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
-                    placeholder="Footer Icon URL"
-                    v-model="footer_icon"
-                    @input="updateEmbed()"
-                  />
-                </div>
-              </div>
 
-              <!-- Author Name -->
-              <div
-                class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
-              >
+                <!-- Author URL -->
                 <div
-                  class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
+                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
                 >
-                  <span class="embed-builder-title">Author Name</span>
+                  <div
+                    class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
+                  >
+                    <span class="embed-builder-title">Author URL</span>
+                  </div>
+                  <div class="mt-1 sm:mt-0 sm:col-span-7">
+                    <input
+                      type="text"
+                      class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
+                      placeholder="Author URL"
+                      v-model="author_url"
+                      @input="updateEmbed()"
+                    />
+                  </div>
                 </div>
-                <div class="mt-1 sm:mt-0 sm:col-span-7">
-                  <input
-                    type="text"
-                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
-                    placeholder="Author Name"
-                    v-model="author_name"
-                    @input="updateEmbed()"
-                  />
-                </div>
-              </div>
 
-              <!-- Author URL -->
-              <div
-                class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
-              >
+                <!-- Author Icon URL -->
                 <div
-                  class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
+                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
                 >
-                  <span class="embed-builder-title">Author URL</span>
-                </div>
-                <div class="mt-1 sm:mt-0 sm:col-span-7">
-                  <input
-                    type="text"
-                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
-                    placeholder="Author URL"
-                    v-model="author_url"
-                    @input="updateEmbed()"
-                  />
-                </div>
-              </div>
-
-              <!-- Author Icon URL -->
-              <div
-                class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
-              >
-                <div
-                  class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
-                >
-                  <span class="embed-builder-title">Author Icon URL</span>
-                </div>
-                <div class="mt-1 sm:mt-0 sm:col-span-7">
-                  <input
-                    type="text"
-                    class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
-                    placeholder="Author Icon URL"
-                    v-model="author_icon_url"
-                    @input="updateEmbed()"
-                  />
+                  <div
+                    class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
+                  >
+                    <span class="embed-builder-title">Author Icon URL</span>
+                  </div>
+                  <div class="mt-1 sm:mt-0 sm:col-span-7">
+                    <input
+                      type="text"
+                      class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
+                      placeholder="Author Icon URL"
+                      v-model="author_icon_url"
+                      @input="updateEmbed()"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div v-if="this.page == 2">
+            <div class="px-4 lg:px-8" v-if="this.page == 2">
               <!-- Embed Code -->
               <CodeEditor
-                v-model="modelValue"
+                :modelValue="modelValue"
                 @update:modelValue="updateValue($event)"
                 :languages="[['json', 'JSON']]"
                 :wrap_code="true"
@@ -748,6 +762,11 @@ export default {
       let value = JSON.stringify(data);
 
       this.updateValue(value);
+    },
+
+    updateContent(value) {
+      this.content = value;
+      this.updateEmbed();
     },
 
     updateValue(value) {
