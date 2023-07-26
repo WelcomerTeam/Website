@@ -233,7 +233,7 @@
               :validation="v$.dms.reuse_message"
               :inlineSlot="true"
               >This will copy the same message as your welcomer text message,
-              instead of using a seperate message.</form-value
+              instead of using a separate message.</form-value
             >
 
             <form-value
@@ -331,7 +331,8 @@ export default {
 
     let config = ref({});
     let files = ref([]);
-    let rules = () => ({
+
+    let validation_rules = () => ({
       text: {
         enabled: {},
         channel: {
@@ -371,7 +372,7 @@ export default {
         },
       },
     });
-    const v$ = useVuelidate(rules, config);
+    const v$ = useVuelidate(validation_rules, config);
 
     return {
       FormTypeToggle,

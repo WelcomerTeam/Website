@@ -85,7 +85,7 @@
                 View all plans
               </a>
               <a
-                href="#custombackgrounds"
+                href="#custom-backgrounds"
                 class="block text-base font-medium text-center text-white hover:text-gray-300"
               >
                 Get Custom Backgrounds only
@@ -111,7 +111,7 @@
                   >
                     Get started with Welcomer Pro with no recurring payments.
                     Own multiple guilds? Save with a multi-guild membership
-                    instead of buying seperately.
+                    instead of buying separately.
                   </span>
                 </div>
                 <div
@@ -230,7 +230,7 @@
         </div>
       </div>
 
-      <div id="custombackgrounds">
+      <div id="custom-backgrounds">
         <div class="bg-white">
           <div class="hero-preview">
             <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -387,11 +387,11 @@ const features = [
     description: "Run Welcomer on its own donator-only bot account.",
   },
   {
-    name: "Whitelabelled Bot",
+    name: "White-labelled Bot",
     icon: "plug-circle-plus",
     soon: true,
     description:
-      "Run Welcomer on its own unique bot account with a fully customisable username and avatar, with the same uptime and reliability.",
+      "Run Welcomer on its own unique bot account with a fully customizable username and avatar, with the same uptime and reliability.",
   },
 ];
 

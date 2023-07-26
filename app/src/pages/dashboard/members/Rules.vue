@@ -35,6 +35,14 @@
             >
 
             <form-value title="Rules" :type="FormTypeBlank" :hideBorder="true">
+              <!-- <a
+                target="_blank"
+                href="/formatting"
+                class="text-primary hover:text-primary-dark"
+                >Click here</a
+              >
+              to view all the formatting tags you can use in your rules. -->
+
               <table class="min-w-full border-spacing-2">
                 <thead>
                   <tr>
@@ -51,7 +59,7 @@
                 <tbody
                   class="divide-y divide-gray-200 dark:divide-secondary-light"
                 >
-                  <tr v-for="(rule, index) in this.config._rules" :key="index" :class="[this.selectedIndex != null ? 'select-none' : '', this.selectedIndex == index ? 'dark:bg-secondary-dark bg-gray-100' : '']" v-on:mousemove="this.mouseMoveHandler(index)">
+                  <tr v-for="(rule, index) in this.rules" :key="index" :class="[this.selectedIndex != null ? 'select-none' : '', this.selectedIndex == index ? 'dark:bg-secondary-dark bg-gray-100' : '']" v-on:mousemove="this.mouseMoveHandler(index)">
                     <td class="px-3 text-sm dark:text-gray-50 cursor-move" v-on:mousedown="this.mouseDownHandler(index)">
                       <font-awesome-icon icon="grip-vertical" />
                     </td>
@@ -99,7 +107,7 @@
                       >
                     </td>
                   </tr>
-                  <tr v-if="this.config._rules.length < this.maxRuleCount">
+                  <tr v-if="this.rules.length < this.maxRuleCount">
                     <td
                       class="whitespace-nowrap py-4 px-3 text-sm sm:table-cell hidden"
                     >
@@ -119,8 +127,6 @@
               </table>
             </form-value>
           </div>
-
-          <code>{{ config }}</code>
 
           <unsaved-changes
             :unsavedChanges="unsavedChanges"
@@ -168,12 +174,14 @@ export default {
     let isChangeInProgress = ref(false);
 
     let config = ref({});
-    let rules = () => ({
+    let rules = ref([]);
+
+    let validation_rules = () => ({
       toggle_enabled: {},
       toggle_dms_enabled: {},
       rules: {},
     });
-    const v$ = useVuelidate(rules, config);
+    const v$ = useVuelidate(validation_rules, config);
 
     let rule = ref("");
 
@@ -189,6 +197,7 @@ export default {
       isChangeInProgress,
 
       config,
+      rules,
       v$,
 
       rule,
@@ -220,9 +229,9 @@ export default {
     setConfig(config) {
       this.config = config;
 
-      this.config._rules = [];
+      this.rules = [];
       this.config.rules.forEach((rule) => {
-        this.config._rules.push({
+        this.rules.push({
           value: rule,
           selected: false,
         });
@@ -282,14 +291,14 @@ export default {
       this.isChangeInProgress = true;
 
       this.config.rules = [];
-      this.config._rules.forEach((rule) => {
+      this.rules.forEach((rule) => {
         this.config.rules.push(rule.value);
       });
 
       dashboardAPI.setConfig(
         endpoints.EndpointGuildRules(this.$store.getters.getSelectedGuildID),
         this.config,
-        this.files,
+        null,
         ({ config }) => {
           this.$store.dispatch("createToast", {
             title: "Changes saved.",
@@ -335,36 +344,36 @@ export default {
     },
 
     onSelectRule(index) {
-      this.config._rules.forEach((rule) => {
+      this.rules.forEach((rule) => {
         rule.selected = false;
       });
 
-      this.config._rules[index].selected = true;
-      this.config._rules[index].newValue = this.config._rules[index].value;
+      this.rules[index].selected = true;
+      this.rules[index].newValue = this.rules[index].value;
     },
 
     onSaveRule(index) {
-      if (this.config._rules[index].newValue.trim() == "") {
+      if (this.rules[index].newValue.trim() == "") {
         this.onDeleteRule(index);
       } else {
-        this.config._rules[index].selected = false;
+        this.rules[index].selected = false;
 
         if (
-          this.config._rules[index].value !== this.config._rules[index].newValue
+          this.rules[index].value !== this.rules[index].newValue
         ) {
           this.onValueUpdate();
         }
 
-        this.config._rules[index].value = this.config._rules[index].newValue;
+        this.rules[index].value = this.rules[index].newValue;
       }
     },
 
     onCancelRule(index) {
-      this.config._rules[index].selected = false;
+      this.rules[index].selected = false;
     },
 
     onDeleteRule(index) {
-      this.config._rules.splice(index, 1);
+      this.rules.splice(index, 1);
       this.onValueUpdate();
     },
 
@@ -386,7 +395,7 @@ export default {
       this.rule = this.rule.trim();
 
       if (this.rule != "") {
-        this.config._rules.push({
+        this.rules.push({
           value: this.rule,
           selected: false,
         });
@@ -434,9 +443,9 @@ export default {
 
     mouseMoveHandler(index) {
       if (this.selectedIndex != null && this.selectedIndex != index) {
-        var temp = this.config._rules[index];
-        this.config._rules[index] = this.config._rules[this.selectedIndex];
-        this.config._rules[this.selectedIndex] = temp;
+        var temp = this.rules[index];
+        this.rules[index] = this.rules[this.selectedIndex];
+        this.rules[this.selectedIndex] = temp;
         this.selectedIndex = index;
         this.onValueUpdate();
       }
