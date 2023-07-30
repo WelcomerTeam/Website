@@ -84,7 +84,7 @@
             </div>
           </div>
           <div v-else-if="!$store.getters.guildHasWelcomer">
-            <div class="dashboard-container">Welcomer isnt here!</div>
+            <div class="dashboard-container">Welcomer isn't here!</div>
           </div>
           <router-view v-else />
         </div>
