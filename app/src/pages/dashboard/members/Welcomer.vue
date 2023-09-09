@@ -402,16 +402,14 @@ export default {
   beforeRouteLeave() {
     return !this.confirmStayInDirtyForm();
   },
-
-  created() {
-    window.addEventListener("beforeunload", this.beforeWindowUnload);
-  },
-
+  
   beforeDestroy() {
     window.removeEventListener("beforeunload", this.beforeWindowUnload);
   },
-
+  
   mounted() {
+    window.addEventListener("beforeunload", this.beforeWindowUnload);
+
     this.fetchConfig();
   },
 
