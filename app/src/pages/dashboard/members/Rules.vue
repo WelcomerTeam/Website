@@ -60,10 +60,16 @@
                   class="divide-y divide-gray-200 dark:divide-secondary-light"
                 >
                   <tr v-for="(rule, index) in this.rules" :key="index" :class="[this.selectedIndex != null ? 'select-none' : '', this.selectedIndex == index ? 'dark:bg-secondary-dark bg-gray-100' : '']" v-on:mousemove="this.mouseMoveHandler(index)">
-                    <td class="px-3 text-sm dark:text-gray-50 cursor-move" v-on:mousedown="this.mouseDownHandler(index)">
-                      <font-awesome-icon icon="grip-vertical" />
+                    <td :class="['pr-3 whitespace-nowrap py-4 text-sm dark:text-gray-50 space-x-2 grid grid-cols-2', this.isDraggable ? 'cursor-move' : '']" v-on:mousedown="this.mouseDownHandler(index)">
+                      <font-awesome-icon v-if="this.isDraggable" icon="grip-vertical" />
+                      <a v-if="!this.isDraggable" @click="this.moveRule(index, index-1)">
+                        <font-awesome-icon :class="[index > 0 ? '' : 'opacity-20 touch-none']" icon="chevron-up" />
+                      </a>
+                      <a v-if="!this.isDraggable" @click="this.moveRule(index, index+1)">
+                        <font-awesome-icon :class="[index < this.rules.length-1 ? '' : 'opacity-20 touch-none']" icon="chevron-down" />
+                      </a>
                     </td>
-                    <td class="pr-3 text-sm dark:text-gray-50">
+                    <td class="pr-3 text-sm dark:text-gray-50 w-auto" >
                       <input
                         v-if="rule.selected"
                         type="text"
@@ -107,21 +113,19 @@
                       >
                     </td>
                   </tr>
-                  <tr v-if="this.rules.length < this.maxRuleCount">
-                    <td
-                      class="whitespace-nowrap py-4 px-3 text-sm sm:table-cell hidden"
-                    >
-                    </td>
-                    <td class="py-4 text-sm pr-3">
+                  <tr>
+                    <td></td>
+                    <td>
                       <input
-                        type="text"
-                        class="bg-white dark:bg-secondary-dark relative w-full pl-3 pr-10 text-left border border-gray-300 dark:border-secondary-light rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
-                        :maxlength="this.maxRuleLength"
-                        @blur="this.onRuleBlur()"
-                        @keypress="this.onRuleKeyPress($event)"
-                        v-model="rule"
+                        v-if="this.rules.length < this.maxRuleCount"
+                          type="text"
+                          class="bg-white dark:bg-secondary-dark relative w-full pl-3 pr-10 mt-2 text-left border border-gray-300 dark:border-secondary-light rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
+                          :maxlength="this.maxRuleLength"
+                          @blur="this.onRuleBlur()"
+                          @keypress="this.onRuleKeyPress($event)"
+                          v-model="rule"
                       />
-                    </td>
+                </td>
                   </tr>
                 </tbody>
               </table>
@@ -187,6 +191,8 @@ export default {
 
     let selectedIndex = ref(null);
 
+    let isDraggable = matchMedia('(pointer:fine)').matches;
+
     return {
       FormTypeBlank,
       FormTypeToggle,
@@ -206,6 +212,8 @@ export default {
       maxRuleLength,
 
       selectedIndex,
+
+      isDraggable,
     };
   },
 
@@ -343,6 +351,35 @@ export default {
       }
     },
 
+    marked(input, embed) {
+      if (input) {
+        return toHTML(input, {
+          embed: embed,
+          discordCallback: {
+            user: function (user) {
+              return `Unknown user ${user.id}`;
+            },
+            channel: function (channel) {
+              return `Unknown channel ${channel.id}`;
+            },
+            role: function (role) {
+              return `Unknown role ${role.id}`;
+            },
+            everyone: function () {
+              return `@everyone`;
+            },
+            here: function () {
+              return `@here`;
+            },
+          },
+          cssModuleNames: {
+            "d-emoji": "emoji",
+          },
+        });
+      }
+      return "";
+    },
+
     onSelectRule(index) {
       this.rules.forEach((rule) => {
         rule.selected = false;
@@ -404,35 +441,6 @@ export default {
       }
     },
 
-    marked(input, embed) {
-      if (input) {
-        return toHTML(input, {
-          embed: embed,
-          discordCallback: {
-            user: function (user) {
-              return `Unknown user ${user.id}`;
-            },
-            channel: function (channel) {
-              return `Unknown channel ${channel.id}`;
-            },
-            role: function (role) {
-              return `Unknown role ${role.id}`;
-            },
-            everyone: function () {
-              return `@everyone`;
-            },
-            here: function () {
-              return `@here`;
-            },
-          },
-          cssModuleNames: {
-            "d-emoji": "emoji",
-          },
-        });
-      }
-      return "";
-    },
-
     mouseDownHandler(index) {
       this.selectedIndex = index;
     },
@@ -443,10 +451,16 @@ export default {
 
     mouseMoveHandler(index) {
       if (this.selectedIndex != null && this.selectedIndex != index) {
-        var temp = this.rules[index];
-        this.rules[index] = this.rules[this.selectedIndex];
-        this.rules[this.selectedIndex] = temp;
+        this.moveRule(index, this.selectedIndex);
         this.selectedIndex = index;
+      }
+    },
+
+    moveRule(index, newIndex) {
+      if (index >= 0 && index <= this.rules.length-1) {
+        var temp = this.rules[index];
+        this.rules[index] = this.rules[newIndex];
+        this.rules[newIndex] = temp;
         this.onValueUpdate();
       }
     },
