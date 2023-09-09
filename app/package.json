@@ -33,7 +33,7 @@
     "postcss-import": "^14.1.0",
     "sass": "^1.32.12",
     "simple-markdown": "^0.7.3",
-    "vue": "^3.2.33",
+    "vue": "^3.2.37",
     "vue-color-kit": "^1.0.5",
     "vue-markdown": "git+https://github.com/miaolz123/vue-markdown.git",
     "vue-router": "^4.0.8",
