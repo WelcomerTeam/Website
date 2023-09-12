@@ -44,9 +44,6 @@ import { requiredIf } from "@vuelidate/validators";
 
 import { toHTML } from "../../../components/discord-markdown";
 
-const maxRuleCount = 25;
-const maxRuleLength = 250;
-
 export default {
   components: {
     FormValue,
@@ -64,10 +61,10 @@ export default {
     let config = ref({});
 
     const validation_rules = () => ({
-      toggle_enabled: {},
+      enabled: {},
       message_verify: {
         required: requiredIf(
-          config.value.toggle_enabled,
+          config.value.enabled,
         ),
       },
       message_verified: {},
@@ -107,18 +104,6 @@ export default {
   },
 
   methods: {
-    setConfig(config) {
-      this.config = config;
-
-      this.rules = [];
-      this.config.rules.forEach((rule) => {
-        this.rules.push({
-          value: rule,
-          selected: false,
-        });
-      });
-    },
-
     fetchConfig() {
       this.isDataFetched = false;
       this.isDataError = false;
@@ -126,7 +111,7 @@ export default {
       dashboardAPI.getConfig(
         endpoints.EndpointGuildBorderwall(this.$store.getters.getSelectedGuildID),
         ({ config }) => {
-          this.setConfig(config);
+          this.config = config;
           this.isDataFetched = true;
           this.isDataError = false;
         },
@@ -171,11 +156,6 @@ export default {
 
       this.isChangeInProgress = true;
 
-      this.config.rules = [];
-      this.rules.forEach((rule) => {
-        this.config.rules.push(rule.value);
-      });
-
       dashboardAPI.setConfig(
         endpoints.EndpointGuildBorderwall(this.$store.getters.getSelectedGuildID),
         this.config,
@@ -187,7 +167,7 @@ export default {
             class: "text-green-500 bg-green-100",
           });
 
-          this.setConfig(config);
+          this.config = config;
           this.unsavedChanges = false;
           this.isChangeInProgress = false;
         },
@@ -251,91 +231,6 @@ export default {
         });
       }
       return "";
-    },
-
-    onSelectRule(index) {
-      this.rules.forEach((rule) => {
-        rule.selected = false;
-      });
-
-      this.rules[index].selected = true;
-      this.rules[index].newValue = this.rules[index].value;
-    },
-
-    onSaveRule(index) {
-      if (this.rules[index].newValue.trim() == "") {
-        this.onDeleteRule(index);
-      } else {
-        this.rules[index].selected = false;
-
-        if (
-          this.rules[index].value !== this.rules[index].newValue
-        ) {
-          this.onValueUpdate();
-        }
-
-        this.rules[index].value = this.rules[index].newValue;
-      }
-    },
-
-    onCancelRule(index) {
-      this.rules[index].selected = false;
-    },
-
-    onDeleteRule(index) {
-      this.rules.splice(index, 1);
-      this.onValueUpdate();
-    },
-
-    onEditRuleKeyPress(event, index) {
-      if (event.key === "Enter") {
-        event.preventDefault();
-        this.onSaveRule(index);
-      }
-    },
-
-    onRuleKeyPress(event) {
-      if (event.key === "Enter") {
-        event.preventDefault();
-        this.onRuleBlur();
-      }
-    },
-
-    onRuleBlur() {
-      this.rule = this.rule.trim();
-
-      if (this.rule != "") {
-        this.rules.push({
-          value: this.rule,
-          selected: false,
-        });
-        this.rule = "";
-        this.onValueUpdate();
-      }
-    },
-
-    mouseDownHandler(index) {
-      this.selectedIndex = index;
-    },
-
-    mouseUpHandler() {
-      this.selectedIndex = null;
-    },
-
-    mouseMoveHandler(index) {
-      if (this.selectedIndex != null && this.selectedIndex != index) {
-        this.moveRule(index, this.selectedIndex);
-        this.selectedIndex = index;
-      }
-    },
-
-    moveRule(index, newIndex) {
-      if (index >= 0 && index <= this.rules.length-1) {
-        var temp = this.rules[index];
-        this.rules[index] = this.rules[newIndex];
-        this.rules[newIndex] = temp;
-        this.onValueUpdate();
-      }
     },
   },
 };

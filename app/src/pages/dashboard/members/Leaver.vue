@@ -10,10 +10,46 @@
       </div>
       <div v-else>
         <div class="dashboard-title-container">
-          <div class="dashboard-title">Rules</div>
+          <div class="dashboard-title">Leaver</div>
         </div>
         <div class="dashboard-contents">
           <div class="dashboard-inputs">
+            <form-value
+              title="Enable Leaver"
+              :type="FormTypeToggle"
+              v-model="config.enabled"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.enabled"
+              >Send messages in a channel when users leave your server.</form-value
+            >
+
+            <form-value
+              title="Leaver Channel"
+              :type="FormTypeChannelListCategories"
+              v-model="config.channel"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.channel"
+              :inlineSlot="true"
+              :nullable="true"
+              >This is the channel we will send leaver messages to.</form-value
+            >
+            
+            <form-value
+              title="Leaver Message"
+              :type="FormTypeEmbed"
+              v-model="config.message_json"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.message_json"
+              :inlineSlot="true"
+              >This is the message that will be sent when users leave.
+              <a
+                target="_blank"
+                href="/formatting"
+                class="text-primary hover:text-primary-dark"
+                >Click here</a
+              >
+              to view all the formatting tags you can use for custom text.
+            </form-value>
           </div>
           <unsaved-changes
             :unsavedChanges="unsavedChanges"
@@ -33,12 +69,15 @@ import FormValue from "../../../components/dashboard/FormValue.vue";
 import {
   FormTypeBlank,
   FormTypeToggle,
+  FormTypeChannelListCategories,
+  FormTypeEmbed,
 } from "../../../components/dashboard/FormValueEnum";
 import UnsavedChanges from "../../../components/dashboard/UnsavedChanges.vue";
 import LoadingIcon from "../../../components/LoadingIcon.vue";
 import dashboardAPI from "../../../api/dashboard";
 import endpoints from "../../../api/endpoints";
 import useVuelidate from "@vuelidate/core";
+import { requiredIf } from "@vuelidate/validators";
 
 import { toHTML } from "../../../components/discord-markdown";
 
@@ -58,19 +97,21 @@ export default {
     let config = ref({});
 
     const validation_rules = () => ({
-      toggle_enabled: {},
+      enabled: {},
       channel: {
         required: requiredIf(
-          config.value.toggle_enabled
+          config.value.enabled
         )
       },
-      message_format: {},
+      message_json: {},
     })
     const v$ = useVuelidate(validation_rules, config);
 
     return {
       FormTypeBlank,
       FormTypeToggle,
+      FormTypeChannelListCategories,
+      FormTypeEmbed,
 
       isDataFetched,
       isDataError,
@@ -99,17 +140,6 @@ export default {
   },
 
   methods: {
-    setConfig(config) {
-      this.config = config;
-
-      this.rules = [];
-      this.config.rules.forEach((rule) => {
-        this.rules.push({
-          value: rule,
-          selected: false,
-        });
-      });
-    },
 
     fetchConfig() {
       this.isDataFetched = false;
@@ -118,7 +148,7 @@ export default {
       dashboardAPI.getConfig(
         endpoints.EndpointGuildLeaver(this.$store.getters.getSelectedGuildID),
         ({ config }) => {
-          this.setConfig(config);
+          this.config = config;
           this.isDataFetched = true;
           this.isDataError = false;
         },
@@ -163,11 +193,6 @@ export default {
 
       this.isChangeInProgress = true;
 
-      this.config.rules = [];
-      this.rules.forEach((rule) => {
-        this.config.rules.push(rule.value);
-      });
-
       dashboardAPI.setConfig(
         endpoints.EndpointGuildLeaver(this.$store.getters.getSelectedGuildID),
         this.config,
@@ -179,7 +204,7 @@ export default {
             class: "text-green-500 bg-green-100",
           });
 
-          this.setConfig(config);
+          this.config = config;
           this.unsavedChanges = false;
           this.isChangeInProgress = false;
         },
@@ -243,91 +268,6 @@ export default {
         });
       }
       return "";
-    },
-
-    onSelectRule(index) {
-      this.rules.forEach((rule) => {
-        rule.selected = false;
-      });
-
-      this.rules[index].selected = true;
-      this.rules[index].newValue = this.rules[index].value;
-    },
-
-    onSaveRule(index) {
-      if (this.rules[index].newValue.trim() == "") {
-        this.onDeleteRule(index);
-      } else {
-        this.rules[index].selected = false;
-
-        if (
-          this.rules[index].value !== this.rules[index].newValue
-        ) {
-          this.onValueUpdate();
-        }
-
-        this.rules[index].value = this.rules[index].newValue;
-      }
-    },
-
-    onCancelRule(index) {
-      this.rules[index].selected = false;
-    },
-
-    onDeleteRule(index) {
-      this.rules.splice(index, 1);
-      this.onValueUpdate();
-    },
-
-    onEditRuleKeyPress(event, index) {
-      if (event.key === "Enter") {
-        event.preventDefault();
-        this.onSaveRule(index);
-      }
-    },
-
-    onRuleKeyPress(event) {
-      if (event.key === "Enter") {
-        event.preventDefault();
-        this.onRuleBlur();
-      }
-    },
-
-    onRuleBlur() {
-      this.rule = this.rule.trim();
-
-      if (this.rule != "") {
-        this.rules.push({
-          value: this.rule,
-          selected: false,
-        });
-        this.rule = "";
-        this.onValueUpdate();
-      }
-    },
-
-    mouseDownHandler(index) {
-      this.selectedIndex = index;
-    },
-
-    mouseUpHandler() {
-      this.selectedIndex = null;
-    },
-
-    mouseMoveHandler(index) {
-      if (this.selectedIndex != null && this.selectedIndex != index) {
-        this.moveRule(index, this.selectedIndex);
-        this.selectedIndex = index;
-      }
-    },
-
-    moveRule(index, newIndex) {
-      if (index >= 0 && index <= this.rules.length-1) {
-        var temp = this.rules[index];
-        this.rules[index] = this.rules[newIndex];
-        this.rules[newIndex] = temp;
-        this.onValueUpdate();
-      }
     },
   },
 };

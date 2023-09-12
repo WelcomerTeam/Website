@@ -35,19 +35,10 @@
             >
 
             <form-value title="Rules" :type="FormTypeBlank" :hideBorder="true">
-              <!-- <a
-                target="_blank"
-                href="/formatting"
-                class="text-primary hover:text-primary-dark"
-                >Click here</a
-              >
-              to view all the formatting tags you can use in your rules. -->
-
               <table class="min-w-full border-spacing-2">
                 <thead>
                   <tr>
-                    <th scope="col" class="relative py-3.5 pr-3 text-left">
-                    </th>
+                    <th />
                     <th scope="col" class="relative py-3.5 pr-3 text-left">
                       Rule
                     </th>

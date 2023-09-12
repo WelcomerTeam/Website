@@ -583,7 +583,7 @@
                             active ? 'text-white' : 'text-gray-400',
                             'inline w-4 h-4 mr-1 border-primary',
                           ]"
-                          :style="{ color: `${getHexColor(role?.colour)}` }"
+                          :style="{ color: `${getHexColor(role?.color)}` }"
                         />
                         {{ role.name }}
                       </span>

@@ -1,6 +1,10 @@
 const EndpointGuilds = "/api/guild/";
 
 export default {
+  EndpointGuildAutorole(guildID) {
+    return EndpointGuilds + guildID + "/autoroles";
+  },
+
   EndpointGuildBorderwall(guildID) {
     return EndpointGuilds + guildID + "/borderwall";
   },
