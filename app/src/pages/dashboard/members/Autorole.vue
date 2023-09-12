@@ -358,6 +358,7 @@ export default {
           });
 
           this.config = config;
+          this.updateRoles();
           this.unsavedChanges = false;
           this.isChangeInProgress = false;
         },
@@ -403,12 +404,14 @@ export default {
       if (role !== undefined) {
         this.config.roles.push(role.id);
         this.updateRoles();
+      this.onValueUpdate();
       }
     },
 
     onRemoveRole(role_id) {
       this.config.roles = this.config.roles.filter((role) => { return role !== role_id })
       this.updateRoles();
+      this.onValueUpdate();
     }
   },
 };
