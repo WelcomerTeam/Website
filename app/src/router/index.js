@@ -37,15 +37,14 @@ const routes = [
         component: () => import("../pages/DashboardGuild.vue"),
         children: [
           {
-            name: "dashboard.guild.memberships",
-            path: "memberships",
-            component: () => import("../pages/dashboard/Memberships.vue"),
-          },
-
-          {
             name: "dashboard.guild.overview",
             path: "",
             component: () => import("../pages/dashboard/Home.vue"),
+          },
+          {
+            name: "dashboard.guild.memberships",
+            path: "memberships",
+            component: () => import("../pages/dashboard/Memberships.vue"),
           },
           {
             name: "dashboard.guild.settings",

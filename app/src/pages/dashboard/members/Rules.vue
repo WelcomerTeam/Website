@@ -145,8 +145,6 @@
 
 <script>
 import { ref } from "vue";
-import { XIcon } from "@heroicons/vue/outline";
-import EmbedBuilder from "../../../components/dashboard/EmbedBuilder.vue";
 import FormValue from "../../../components/dashboard/FormValue.vue";
 import {
   FormTypeBlank,
@@ -166,9 +164,7 @@ const maxRuleLength = 250;
 export default {
   components: {
     FormValue,
-    EmbedBuilder,
     UnsavedChanges,
-    XIcon,
     LoadingIcon,
   },
   setup() {
@@ -180,7 +176,7 @@ export default {
     let config = ref({});
     let rules = ref([]);
 
-    let validation_rules = () => ({
+    const validation_rules = () => ({
       toggle_enabled: {},
       toggle_dms_enabled: {},
       rules: {},

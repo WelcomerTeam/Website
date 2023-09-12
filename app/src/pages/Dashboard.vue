@@ -44,7 +44,9 @@ export default {
     store.watch(
       () => store.getters.getSelectedGuildID,
       () => {
-        store.dispatch("fillGuild");
+        if (store.getters.getSelectedGuildID !== undefined) {
+          store.dispatch("fillGuild");
+        }
       }
     );
 

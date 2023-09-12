@@ -332,7 +332,7 @@ export default {
     let config = ref({});
     let files = ref([]);
 
-    let validation_rules = () => ({
+    const validation_rules = () => ({
       text: {
         enabled: {},
         channel: {
