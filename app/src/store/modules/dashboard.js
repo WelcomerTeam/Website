@@ -90,20 +90,24 @@ const getters = {
 // actions
 const actions = {
   fillGuild({ dispatch, state }) {
-    if (state.selectedGuild != state.guild?.id) {
+    if (state.selectedGuild != state.guild?.id && state.selectedGuild) {
       dispatch("fetchGuild");
     }
   },
 
   fetchGuild({ commit, state }) {
-    commit("loadingGuild");
-    dashboardAPI.getGuild(
-      state.selectedGuild,
-      ({ guild, hasWelcomer }) => {
-        commit("setGuild", { guild, hasWelcomer });
-      },
-      () => commit("setGuild", { guild: null, hasWelcomer: false })
-    );
+    if (state.selectedGuild == undefined) {
+      commit("setGuild", { guild: null, hasWelcomer: false });
+    } else {
+      commit("loadingGuild");
+      dashboardAPI.getGuild(
+        state.selectedGuild,
+        ({ guild, hasWelcomer }) => {
+          commit("setGuild", { guild, hasWelcomer });
+        },
+        () => commit("setGuild", { guild: null, hasWelcomer: false })
+      );  
+    }
   },
 
   fetchGuildMembersByQuery({ commit, state }, query) {
