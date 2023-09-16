@@ -31,9 +31,7 @@ const mutations = {
     state.toasts.push(toastObject);
   },
   removeToast(state, toastID) {
-    state.toasts = state.toasts.filter((toast) => {
-      return toast.id !== toastID;
-    });
+    state.toasts = state.toasts.filter((toast) => toast.id !== toastID);
   },
 };
 

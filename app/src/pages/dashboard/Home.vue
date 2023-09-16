@@ -91,15 +91,11 @@ export default {
   components: { Card },
   methods: {
     filterTextChannels(channels) {
-      return channels.filter((c) => {
-        return c.type === 0;
-      });
+      return channels.filter((channel) => channel.type === 0);
     },
 
     filterVoiceChannels(channels) {
-      return channels.filter((c) => {
-        return c.type === 2;
-      });
+      return channels.filter((channel) => channel.type === 2);
     },
 
     rgbIntToRGB(rgbInt, defaultValue) {

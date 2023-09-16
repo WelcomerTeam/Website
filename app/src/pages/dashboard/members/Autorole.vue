@@ -28,10 +28,10 @@
                 <thead>
                   <tr>
                     <th scope="col" class="relative py-3.5 pr-3 text-left w-4/5">
-                      Role
+                      <!-- Role -->
                     </th>
                     <th scope="col" class="relative py-3.5">
-                      Actions
+                      <!-- Actions -->
                     </th>
                   </tr>
                 </thead>
@@ -42,10 +42,7 @@
                     <td class="pr-3 text-sm dark:text-gray-50" >
                       <font-awesome-icon
                         icon="circle"
-                        :class="[
-                          active ? 'text-white' : 'text-gray-400',
-                          'inline w-4 h-4 mr-1 border-primary',
-                        ]"
+                        class="inline w-4 h-4 mr-1 border-primary"
                         :style="{ color: `${getHexColor(role?.color)}` }"
                       />
                       {{ role.name }}
@@ -267,17 +264,13 @@ export default {
       let new_roles = [];
       let new_assigned = [];
 
-      let guild_roles = this.$store.getters.getGuildRoles;
+      let guild_roles = this.$store.getters.getAssignableGuildRoles;
 
       this.config.roles.forEach((role_id) => {
         var role = guild_roles.find((element) => { return element.id == role_id })
 
         if (role !== undefined) {
           new_assigned.push(role);
-        } else {
-          new_assigned.push({
-            id: role_id
-          })
         }
       })
 
@@ -403,13 +396,14 @@ export default {
       let role = this.$store.getters.getGuildRoleById($event);
       if (role !== undefined) {
         this.config.roles.push(role.id);
+        this.config.roles.sort((a, b) => this.$store.getters.getGuildRoleById(a)?.position - this.$store.getters.getGuildRoleById(b)?.position);
         this.updateRoles();
       this.onValueUpdate();
       }
     },
 
     onRemoveRole(role_id) {
-      this.config.roles = this.config.roles.filter((role) => { return role !== role_id })
+      this.config.roles = this.config.roles.filter((role) => role !== role_id )
       this.updateRoles();
       this.onValueUpdate();
     }

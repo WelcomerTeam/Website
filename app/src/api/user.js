@@ -40,9 +40,7 @@ export default {
             .then((res) => {
               if (res.ok) {
                 let sortedGuilds = res.data
-                  .filter((a) => {
-                    return a.has_elevation;
-                  })
+                  .filter((a) => a.has_elevation)
                   .sort((a, b) => {
                     return (
                       (a.is_owner == true) +

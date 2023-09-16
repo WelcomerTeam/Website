@@ -62,6 +62,10 @@ const getters = {
     return state.guildRoles;
   },
 
+  getAssignableGuildRoles: (state) => {
+    return state.guildRoles.filter((role) => role.is_assignable)
+  },
+
   getGuildEmojis: (state) => {
     return state.guildEmojis;
   },
@@ -71,15 +75,15 @@ const getters = {
   },
 
   getGuildChannelById: (state) => (channelID) => {
-    return state.guildChannels.find((c) => c.id == channelID);
+    return state.guildChannels.find((channel) => channel.id == channelID);
   },
 
   getGuildRoleById: (state) => (roleID) => {
-    return state.guildRoles.find((c) => c.id == roleID);
+    return state.guildRoles.find((role) => role.id == roleID);
   },
 
   getGuildEmojiById: (state) => (emojiID) => {
-    return state.guildEmojis.find((c) => c.id == emojiID);
+    return state.guildEmojis.find((emoji) => emoji.id == emojiID);
   },
 
   getGuildMemberById: (state) => (guildMemberID) => {
@@ -134,6 +138,9 @@ const mutations = {
     state.guildChannels = guild?.guild?.channels || [];
     state.guildChannelsPacked = packGuildChannels(state.guildChannels);
     state.guildRoles = guild?.guild?.roles || [];
+
+    state.guildRoles.sort((a, b) => b.position - a.position);
+
     state.guildEmojis = guild?.guild?.emojis || [];
     state.isLoadingGuild = false;
     state.guildHasWelcomer = hasWelcomer;
@@ -168,9 +175,7 @@ function packGuildChannels(channels) {
   let emptyCategory = { channels: [] };
 
   channels
-    .filter((channel) => {
-      return channel.type === 4;
-    })
+    .filter((channel) => channel.type === 4)
     .map((channel) => {
       channel = JSON.parse(JSON.stringify(channel));
       channel.channels = [];
@@ -178,9 +183,7 @@ function packGuildChannels(channels) {
     });
 
   channels
-    .filter((channel) => {
-      return channel.type !== 4;
-    })
+    .filter((channel) => channel.type !== 4)
     .map((channel) => {
       if (categories[channel.parent_id]) {
         categories[channel.parent_id].channels.push(channel);

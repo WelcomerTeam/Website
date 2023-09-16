@@ -1619,9 +1619,7 @@ export default {
     },
 
     filterTextChannels(channels) {
-      return channels.filter((c) => {
-        return c.type === 0;
-      });
+      return channels.filter((channel) => channel.type === 0);
     },
 
     getKey(value) {
