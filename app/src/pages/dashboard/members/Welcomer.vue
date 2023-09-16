@@ -301,7 +301,12 @@ import LoadingIcon from "@/components/LoadingIcon.vue";
 import dashboardAPI from "@/api/dashboard";
 import endpoints from "@/api/endpoints";
 
-import { getErrorToast, getSuccessToast } from "@/utilities";
+import {
+  getErrorToast,
+  getSuccessToast,
+  getValidationToast,
+  navigateToErrors,
+} from "@/utilities";
 
 var imageAlignmentTypes = [
   { key: "Left", value: "left" },
@@ -444,24 +449,8 @@ export default {
       const validForm = await this.v$.$validate();
 
       if (!validForm) {
-        this.$store.dispatch("createToast", {
-          title: "Please fix any errors before submitting",
-          icon: "xmark",
-          class: "text-red-500 bg-red-100",
-        });
-
-        let error = document.querySelector(".errors");
-        if (error) {
-          error.scrollIntoView({
-            behavior: "smooth",
-            block: "end",
-            inline: "center",
-          });
-        } else {
-          console.warn(
-            "No error to scroll into view. Is there a missing error message?"
-          );
-        }
+        this.$store.dispatch("createToast", getValidationToast());
+        navigateToErrors();
 
         return;
       }
