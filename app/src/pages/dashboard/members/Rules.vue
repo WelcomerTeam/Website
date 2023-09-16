@@ -255,7 +255,7 @@ export default {
           this.$store.dispatch("createToast", getErrorToast(error));
 
           this.isDataFetched = true;
-          this.isDataError = false;
+          this.isDataError = true;
         }
       );
     },
