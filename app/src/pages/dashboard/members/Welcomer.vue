@@ -34,6 +34,7 @@
               :validation="v$.text.channel"
               :inlineSlot="true"
               :nullable="true"
+              :disabled="!config.text.enabled"
               >This is the channel we will send welcome messages to.</form-value
             >
 
@@ -44,6 +45,7 @@
               @update:modelValue="onValueUpdate"
               :validation="v$.text.message_json"
               :inlineSlot="true"
+              :disabled="!config.text.enabled"
               >This is the message users will receive when joining.
               <a
                 target="_blank"
@@ -75,6 +77,7 @@
               @update:modelValue="onValueUpdate"
               :validation="v$.images.image_theme"
               :inlineSlot="true"
+              :disabled="!config.images.enabled"
               >This is the theme that will be used for your welcome image.
               <a
                 target="_blank"
@@ -95,6 +98,7 @@
               :files="files"
               :inlineSlot="true"
               :customImages="config.custom?.custom_ids"
+              :disabled="!config.images.enabled"
               >This is the background that will be used in your welcome
               image.</form-value
             >
@@ -108,6 +112,7 @@
               @update:modelValue="onValueUpdate"
               :validation="v$.images.message"
               :inlineSlot="true"
+              :disabled="!config.images.enabled"
               >This is the custom message that will be included in the welcome
               image.
               <a
@@ -128,6 +133,7 @@
               @update:modelValue="onValueUpdate"
               :validation="v$.images.image_alignment"
               :inlineSlot="true"
+              :disabled="!config.images.enabled"
               >This is the alignment of text in your welcome image.</form-value
             >
 
@@ -138,6 +144,7 @@
               @update:modelValue="onValueUpdate"
               :validation="v$.images.text_colour"
               :inlineSlot="true"
+              :disabled="!config.images.enabled"
               >This is the colour of the text in your welcome image.</form-value
             >
             <form-value
@@ -147,6 +154,7 @@
               @update:modelValue="onValueUpdate"
               :validation="v$.images.text_colour_border"
               :inlineSlot="true"
+              :disabled="!config.images.enabled"
               >This is the colour of the text border in your welcome
               image.</form-value
             >

@@ -203,35 +203,6 @@ export default {
         e.returnValue = "";
       }
     },
-
-    marked(input, embed) {
-      if (input) {
-        return toHTML(input, {
-          embed: embed,
-          discordCallback: {
-            user: function (user) {
-              return `Unknown user ${user.id}`;
-            },
-            channel: function (channel) {
-              return `Unknown channel ${channel.id}`;
-            },
-            role: function (role) {
-              return `Unknown role ${role.id}`;
-            },
-            everyone: function () {
-              return `@everyone`;
-            },
-            here: function () {
-              return `@here`;
-            },
-          },
-          cssModuleNames: {
-            "d-emoji": "emoji",
-          },
-        });
-      }
-      return "";
-    },
   },
 };
 </script>
