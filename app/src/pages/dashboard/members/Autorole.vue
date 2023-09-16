@@ -131,6 +131,8 @@ export default {
           this.config = config;
           this.isDataFetched = true;
           this.isDataError = false;
+          
+          this.updateRoles();
         },
         (error) => {
           this.$store.dispatch("createToast", getErrorToast(error));
@@ -163,6 +165,8 @@ export default {
           this.config = config;
           this.unsavedChanges = false;
           this.isChangeInProgress = false;
+
+          this.updateRoles();
         },
         (error) => {
           this.$store.dispatch("createToast", getErrorToast(error));
