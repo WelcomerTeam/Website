@@ -112,7 +112,6 @@ export default {
         endpoints.EndpointGuild(this.$store.getters.getSelectedGuildID),
         ({ config }) => {
           this.config = config;
-          this.updateRoles();
           this.isDataFetched = true;
           this.isDataError = false;
         },
@@ -145,7 +144,6 @@ export default {
           this.$store.dispatch("createToast", getSuccessToast());
 
           this.config = config;
-          this.updateRoles();
           this.unsavedChanges = false;
           this.isChangeInProgress = false;
         },
