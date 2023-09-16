@@ -53,7 +53,7 @@
         >
           <div>
             <span
-              class="text-xs font-bold uppercase text-secondary-light dark:text-gray-50"
+              class="text-xs font-bold group uppercase text-secondary-light dark:text-gray-50"
               v-if="nav.title"
               >{{ nav.title }}</span
             >
@@ -64,19 +64,24 @@
               :to="{ name: item.linkname, params: $route.params }"
               :class="[
                 $route.name === item.linkname
-                  ? 'text-primary'
-                  : 'text-secondary dark:text-white',
-                'hover:bg-gray-200 dark:hover:bg-secondary-light group flex items-center px-2 py-2 text-sm leading-6 font-semibold rounded-md',
+                  ? 'text-secondary dark:text-white bg-gray-200 dark:bg-secondary'
+                  : 'text-gray-600 dark:text-gray-400',
+                'hover:text-secondary dark:hover:text-white hover:bg-gray-200 dark:hover:bg-secondary group flex items-center px-2 py-2 text-sm leading-6 font-semibold rounded-md',
                 item.extendedClass,
               ]"
             >
-              <font-awesome-icon
-                :icon="item.icon"
+            <font-awesome-icon
+                :icon="($route.name === item.linkname ? 'fa-solid' : 'fa-regular') + ' ' + item.icon"
                 :class="[
-                  $route.name === item.linkname
-                    ? 'text-primary'
-                    : 'text-secondary-dark dark:text-gray-300',
-                  'flex-shrink-0 w-6 h-6 mr-4',
+                  'flex group-hover:hidden flex-shrink-0 w-6 h-6 mr-4',
+                  item.extendedClass,
+                ]"
+                aria-hidden="true"
+              />
+              <font-awesome-icon
+                :icon="'fa-solid ' + item.icon"
+                :class="[
+                  'hidden group-hover:flex flex-shrink-0 w-6 h-6 mr-4',
                   item.extendedClass,
                 ]"
                 aria-hidden="true"
@@ -91,19 +96,12 @@
 </template>
 
 <script>
-import { XIcon } from "@heroicons/vue/outline";
-
 import {
   Dialog,
-  DialogOverlay,
-  DialogTitle,
   Menu,
-  MenuButton,
   MenuItem,
-  MenuItems,
-  TransitionChild,
-  TransitionRoot,
 } from "@headlessui/vue";
+
 import LoadingIcon from "@/components/LoadingIcon.vue";
 
 const navigation = [
@@ -112,7 +110,7 @@ const navigation = [
       {
         name: "Memberships",
         linkname: "dashboard.guild.memberships",
-        icon: "heart",
+        icon: "fa-heart",
       },
     ],
   },
@@ -121,12 +119,12 @@ const navigation = [
       {
         name: "Guild Overview",
         linkname: "dashboard.guild.overview",
-        icon: "chart-line",
+        icon: "fa-chart-line",
       },
       {
         name: "Bot Settings",
         linkname: "dashboard.guild.settings",
-        icon: "wrench",
+        icon: "fa-wrench",
       },
     ],
   },
@@ -135,27 +133,27 @@ const navigation = [
       {
         name: "Welcomer",
         linkname: "dashboard.guild.welcomer",
-        icon: "user-plus",
+        icon: "fa-user-plus",
       },
       {
         name: "Rules",
         linkname: "dashboard.guild.rules",
-        icon: "list-ol",
+        icon: "fa-list-ol",
       },
       {
         name: "Borderwall",
         linkname: "dashboard.guild.borderwall",
-        icon: "door-closed",
+        icon: "fa-door-closed",
       },
       {
         name: "AutoRoles",
         linkname: "dashboard.guild.autoroles",
-        icon: "user-check",
+        icon: "fa-user-check",
       },
       {
         name: "Leaver",
         linkname: "dashboard.guild.leaver",
-        icon: "user-minus",
+        icon: "fa-user-minus",
       },
     ],
   },
@@ -164,17 +162,17 @@ const navigation = [
       {
         name: "FreeRoles",
         linkname: "dashboard.guild.freeroles",
-        icon: "list-check",
+        icon: "fa-list-check",
       },
       {
         name: "TimeRoles",
         linkname: "dashboard.guild.timeroles",
-        icon: "user-clock",
+        icon: "fa-user-clock",
       },
       {
         name: "TempChannels",
         linkname: "dashboard.guild.tempchannels",
-        icon: "microphone-lines",
+        icon: "fa-microphone-lines",
       },
     ],
   },
@@ -183,7 +181,7 @@ const navigation = [
       {
         name: "Examples",
         linkname: "dashboard.guild.example",
-        icon: "list-check",
+        icon: "fa-list-check",
       },
     ],
   },
@@ -192,17 +190,9 @@ const navigation = [
 export default {
   components: {
     Dialog,
-    DialogOverlay,
-    Menu,
-    MenuButton,
-    MenuItem,
-    MenuItems,
-    TransitionChild,
-    TransitionRoot,
-    DialogTitle,
-    TransitionRoot,
-    XIcon,
     LoadingIcon,
+    Menu,
+    MenuItem,
   },
   setup() {
     return {
