@@ -369,7 +369,7 @@
 </style>
 
 <script>
-import LoadingIcon from "../LoadingIcon.vue";
+import LoadingIcon from "@/components/LoadingIcon.vue";
 
 import {
   Listbox,
@@ -388,7 +388,7 @@ import { CheckIcon, SelectorIcon, ChevronDownIcon } from "@heroicons/vue/solid";
 import { XIcon } from "@heroicons/vue/outline";
 
 import { ref } from "vue";
-import DiscordEmbed from "../DiscordEmbed.vue";
+import DiscordEmbed from "@/components/DiscordEmbed.vue";
 
 import { ColorPicker } from "vue-color-kit";
 import "vue-color-kit/dist/vue-color-kit.css";

@@ -125,8 +125,8 @@
 </template>
 
 <script>
-import Header from "../components/Header.vue";
-import Footer from "../components/Footer.vue";
+import Header from "@/components/Header.vue";
+import Footer from "@/components/Footer.vue";
 
 import {
   Listbox,
@@ -138,8 +138,8 @@ import {
 
 import { SelectorIcon } from "@heroicons/vue/solid";
 
-import BackgroundCarousel from "../components/BackgroundCarousel.vue";
-import BackgroundPreview from "../components/BackgroundPreview.vue";
+import BackgroundCarousel from "@/components/BackgroundCarousel.vue";
+import BackgroundPreview from "@/components/BackgroundPreview.vue";
 
 const groups = [
   {

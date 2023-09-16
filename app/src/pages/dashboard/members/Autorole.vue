@@ -20,143 +20,16 @@
               v-model="config.enabled"
               @update:modelValue="onValueUpdate"
               :validation="v$.enabled"
-              >Automatically give users roles when they join your server.</form-value
+              >Automatically give users roles when they join your
+              server.</form-value
             >
 
-            <form-value title="Roles" :type="FormTypeBlank" :hideBorder="true">
-              <table class="min-w-full border-spacing-2">
-                <thead>
-                  <tr>
-                    <th scope="col" class="relative py-3.5 pr-3 text-left w-4/5">
-                      <!-- Role -->
-                    </th>
-                    <th scope="col" class="relative py-3.5">
-                      <!-- Actions -->
-                    </th>
-                  </tr>
-                </thead>
-                <tbody
-                  class="divide-y divide-gray-200 dark:divide-secondary-light"
-                >
-                  <tr v-for="(role, index) in this.assigned_roles" :key="index">
-                    <td class="pr-3 text-sm dark:text-gray-50" >
-                      <font-awesome-icon
-                        icon="circle"
-                        class="inline w-4 h-4 mr-1 border-primary"
-                        :style="{ color: `${getHexColor(role?.color)}` }"
-                      />
-                      {{ role.name }}
-                    </td>
-                    <td
-                      class="whitespace-nowrap py-4 text-sm text-center dark:text-gray-50 space-x-2"
-                    >
-                      <a
-                        @click="this.onRemoveRole(role.id)"
-                        class="text-primary hover:text-primary-dark cursor-pointer"
-                        >
-                        <font-awesome-icon icon="close" />
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <Listbox
-                        as="div"
-                        @update:modelValue="onRoleSelected($event)"
-                      >
-                        <div class="relative">
-                          <ListboxButton
-                            class="bg-white dark:bg-secondary-dark relative w-full mt-2 py-2 pl-3 pr-10 text-left border border-gray-300 dark:border-secondary-light rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
-                          >
-                            <div
-                              v-if="$store.getters.isLoadingGuild"
-                              class="block h-6 sm:h-5 animate-pulse bg-gray-200 w-48 rounded-md"
-                            ></div>
-                            <span v-else class="block truncate">Add role</span>
-                            <span
-                              class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none"
-                            >
-                              <SelectorIcon
-                                class="w-5 h-5 text-gray-400"
-                                aria-hidden="true"
-                              />
-                            </span>
-                          </ListboxButton>
-
-                          <transition
-                            leave-active-class="transition duration-100 ease-in"
-                            leave-from-class="opacity-100"
-                            leave-to-class="opacity-0"
-                          >
-                            <ListboxOptions
-                              class="absolute z-20 w-full mt-1 overflow-auto text-base bg-white dark:bg-secondary-dark rounded-md shadow-sm max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
-                            >
-                              <div
-                                v-if="$store.getters.isLoadingGuild"
-                                class="flex py-5 w-full justify-center"
-                              >
-                                <LoadingIcon />
-                              </div>
-                              <div v-else>
-                                <ListboxOption
-                                  as="template"
-                                  v-for="role in this.roles"
-                                  :key="role.id"
-                                  :value="role.id"
-                                  v-slot="{ active, selected }"
-                                  :disabled="!role.is_assignable"
-                                >
-                                  <li
-                                    :class="[
-                                      role.is_assignable
-                                        ? ''
-                                        : 'bg-gray-200 dark:bg-secondary-light',
-                                      active
-                                        ? 'text-white bg-primary'
-                                        : 'text-gray-900 dark:text-gray-50',
-                                      'cursor-default select-none relative py-2 pl-3 pr-9',
-                                    ]"
-                                  >
-                                    <span
-                                      :class="[
-                                        selected ? 'font-semibold' : 'font-normal',
-                                        'block truncate',
-                                      ]"
-                                    >
-                                      <font-awesome-icon
-                                        icon="circle"
-                                        :class="[
-                                          active ? 'text-white' : 'text-gray-400',
-                                          'inline w-4 h-4 mr-1 border-primary',
-                                        ]"
-                                        :style="{ color: `${getHexColor(role?.color)}` }"
-                                      />
-                                      {{ role.name }}
-                                    </span>
-
-                                    <span
-                                      v-if="selected"
-                                      :class="[
-                                        active ? 'text-white' : 'text-primary',
-                                        'absolute inset-y-0 right-0 flex items-center pr-4',
-                                      ]"
-                                    >
-                                      <CheckIcon class="w-5 h-5" aria-hidden="true" />
-                                    </span>
-                                  </li>
-                                </ListboxOption>
-                              </div>
-                            </ListboxOptions>
-                          </transition>
-                        </div>
-                      </Listbox>
-
-                    </td>
-                    <td />
-                  </tr>
-                </tbody>
-              </table>
-            </form-value>
+            <role-table
+              :roles="this.assigned_roles"
+              :selectableRoles="this.roles"
+              @removeRole="onRemoveRole"
+              @selectRole="onSelectRole"
+            ></role-table>
           </div>
           <unsaved-changes
             :unsavedChanges="unsavedChanges"
@@ -170,43 +43,34 @@
 </template>
 
 <script>
-import {
-  Listbox,
-  ListboxButton,
-  ListboxOption,
-  ListboxOptions,
-} from "@headlessui/vue";
+import { computed, ref } from "vue";
 
-import { ref } from "vue";
-import { CheckIcon, SelectorIcon } from "@heroicons/vue/solid";
-import { XIcon } from "@heroicons/vue/outline";
-import EmbedBuilder from "../../../components/dashboard/EmbedBuilder.vue";
-import FormValue from "../../../components/dashboard/FormValue.vue";
+import useVuelidate from "@vuelidate/core";
+
 import {
   FormTypeBlank,
   FormTypeToggle,
   FormTypeRoleList,
-} from "../../../components/dashboard/FormValueEnum";
-import UnsavedChanges from "../../../components/dashboard/UnsavedChanges.vue";
-import LoadingIcon from "../../../components/LoadingIcon.vue";
-import dashboardAPI from "../../../api/dashboard";
-import endpoints from "../../../api/endpoints";
-import useVuelidate from "@vuelidate/core";
+} from "@/components/dashboard/FormValueEnum";
+
+import EmbedBuilder from "@/components/dashboard/EmbedBuilder.vue";
+import FormValue from "@/components/dashboard/FormValue.vue";
+import RoleTable from "@/components/dashboard/RoleTable.vue";
+import UnsavedChanges from "@/components/dashboard/UnsavedChanges.vue";
+import LoadingIcon from "@/components/LoadingIcon.vue";
+
+import endpoints from "@/api/endpoints";
+import dashboardAPI from "@/api/dashboard";
+
+import { getErrorToast, getSuccessToast } from "@/utilities";
 
 export default {
   components: {
-    Listbox,
-    ListboxButton,
-    ListboxOption,
-    ListboxOptions,
-    
     FormValue,
     EmbedBuilder,
     UnsavedChanges,
-    XIcon,
     LoadingIcon,
-    CheckIcon,
-    SelectorIcon,
+    RoleTable,
   },
   setup() {
     let isDataFetched = ref(false);
@@ -219,10 +83,15 @@ export default {
 
     let config = ref({});
 
-    const validation_rules = () => ({
-      enabled: {},
-      roles: {},
+    const validation_rules = computed(() => {
+      const validation_rules = {
+        enabled: {},
+        roles: {},
+      };
+
+      return validation_rules;
     });
+    
     const v$ = useVuelidate(validation_rules, config);
 
     return {
@@ -242,50 +111,11 @@ export default {
       v$,
     };
   },
-
-  beforeRouteLeave() {
-    return !this.confirmStayInDirtyForm();
-  },
-
-  beforeDestroy() {
-    window.removeEventListener("beforeunload", this.beforeWindowUnload);
-    window.removeEventListener("mouseup", this.mouseUpHandler);
-  },
-
   mounted() {
-    window.addEventListener("beforeunload", this.beforeWindowUnload);
-    window.addEventListener("mouseup", this.mouseUpHandler);
-
     this.fetchConfig();
   },
 
   methods: {
-    updateRoles() {
-      let new_roles = [];
-      let new_assigned = [];
-
-      let guild_roles = this.$store.getters.getAssignableGuildRoles;
-
-      this.config.roles.forEach((role_id) => {
-        var role = guild_roles.find((element) => { return element.id == role_id })
-
-        if (role !== undefined) {
-          new_assigned.push(role);
-        }
-      })
-
-      guild_roles.forEach((role) => {
-        var assigned_roles = this.config.roles.find((element) => { return element == role.id })
-
-        if (assigned_roles === undefined) {
-          new_roles.push(role)
-        }
-      })
-
-      this.assigned_roles = new_assigned;
-      this.roles = new_roles;
-    },
-
     fetchConfig() {
       this.isDataFetched = false;
       this.isDataError = false;
@@ -299,11 +129,7 @@ export default {
           this.isDataError = false;
         },
         (error) => {
-          this.$store.dispatch("createToast", {
-            title: error,
-            icon: "xmark",
-            class: "text-red-500 bg-red-100",
-          });
+          this.$store.dispatch("createToast", getErrorToast(error));
 
           this.isDataFetched = true;
           this.isDataError = false;
@@ -344,11 +170,7 @@ export default {
         this.config,
         null,
         ({ config }) => {
-          this.$store.dispatch("createToast", {
-            title: "Changes saved.",
-            icon: "check",
-            class: "text-green-500 bg-green-100",
-          });
+          this.$store.dispatch("createToast", getSuccessToast());
 
           this.config = config;
           this.updateRoles();
@@ -356,11 +178,7 @@ export default {
           this.isChangeInProgress = false;
         },
         (error) => {
-          this.$store.dispatch("createToast", {
-            title: error,
-            icon: "xmark",
-            class: "text-red-500 bg-red-100",
-          });
+          this.$store.dispatch("createToast", getErrorToast(error));
 
           this.isChangeInProgress = false;
         }
@@ -371,42 +189,55 @@ export default {
       this.unsavedChanges = true;
     },
 
-    confirmStayInDirtyForm() {
-      return this.unsavedChanges && !this.confirmLeave();
+    updateRoles() {
+      let new_roles = [];
+      let new_assigned = [];
+
+      let guild_roles = this.$store.getters.getAssignableGuildRoles;
+
+      this.config.roles.forEach((roleID) => {
+        var role = guild_roles.find((element) => {
+          return element.id == roleID;
+        });
+
+        if (role !== undefined) {
+          new_assigned.push(role);
+        }
+      });
+
+      guild_roles.forEach((role) => {
+        var assigned_roles = this.config.roles.find((element) => {
+          return element == role.id;
+        });
+
+        if (assigned_roles === undefined) {
+          new_roles.push(role);
+        }
+      });
+
+      this.assigned_roles = new_assigned;
+      this.roles = new_roles;
     },
 
-    confirmLeave() {
-      return window.confirm(
-        "You have unsaved changes! Are you sure you want to leave?"
-      );
-    },
-
-    beforeWindowUnload(e) {
-      if (this.confirmStayInDirtyForm()) {
-        e.preventDefault();
-        e.returnValue = "";
-      }
-    },
-
-    getHexColor(number) {
-      return "#" + (number >>> 0).toString(16).slice(-6);
-    },
-
-    onRoleSelected($event) {
-      let role = this.$store.getters.getGuildRoleById($event);
+    onSelectRole(roleID) {
+      let role = this.$store.getters.getGuildRoleById(roleID);
       if (role !== undefined) {
         this.config.roles.push(role.id);
-        this.config.roles.sort((a, b) => this.$store.getters.getGuildRoleById(a)?.position - this.$store.getters.getGuildRoleById(b)?.position);
+        this.config.roles.sort(
+          (a, b) =>
+            this.$store.getters.getGuildRoleById(a)?.position -
+            this.$store.getters.getGuildRoleById(b)?.position
+        );
         this.updateRoles();
-      this.onValueUpdate();
+        this.onValueUpdate();
       }
     },
 
-    onRemoveRole(role_id) {
-      this.config.roles = this.config.roles.filter((role) => role !== role_id )
+    onRemoveRole(roleID) {
+      this.config.roles = this.config.roles.filter((role) => role !== roleID);
       this.updateRoles();
       this.onValueUpdate();
-    }
+    },
   },
 };
 </script>

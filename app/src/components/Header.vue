@@ -309,8 +309,8 @@ import {
 import { MenuIcon, XIcon } from "@heroicons/vue/outline";
 import { ChevronDownIcon } from "@heroicons/vue/solid";
 
-import UserProfile from "../components/UserProfile.vue";
-import UserProfileCompact from "../components/UserProfileCompact.vue";
+import UserProfile from "@/components/UserProfile.vue";
+import UserProfileCompact from "@/components/UserProfileCompact.vue";
 
 const navfeatures = [
   {

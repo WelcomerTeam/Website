@@ -85,7 +85,7 @@
 </template>
 
 <script>
-import Card from "../../components/dashboard/Card.vue";
+import Card from "@/components/dashboard/Card.vue";
 
 export default {
   components: { Card },

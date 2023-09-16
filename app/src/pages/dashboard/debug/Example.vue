@@ -122,8 +122,8 @@
 
 <script>
 import { ref } from "vue";
-import FormValue from "../../../components/dashboard/FormValue.vue";
-import store from "../../../store/index";
+import FormValue from "@/components/dashboard/FormValue.vue";
+import store from "@/store/index";
 
 import {
   FormTypeToggle,
@@ -138,7 +138,7 @@ import {
   FormTypeTextArea,
   FormTypeDropdown,
   FormTypeEmbed,
-} from "../../../components/dashboard/FormValueEnum";
+} from "@/components/dashboard/FormValueEnum";
 
 var config = ref({
   enabled: true,

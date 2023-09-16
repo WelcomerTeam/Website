@@ -91,7 +91,6 @@
 </template>
 
 <script>
-import { ref } from "vue";
 import { XIcon } from "@heroicons/vue/outline";
 
 import {
@@ -105,7 +104,7 @@ import {
   TransitionChild,
   TransitionRoot,
 } from "@headlessui/vue";
-import LoadingIcon from "../LoadingIcon.vue";
+import LoadingIcon from "@/components/LoadingIcon.vue";
 
 const navigation = [
   {

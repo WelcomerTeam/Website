@@ -277,8 +277,11 @@
 </template>
 
 <script>
-import { ref } from "vue";
-import { XIcon } from "@heroicons/vue/outline";
+import { computed, ref } from "vue";
+
+import useVuelidate from "@vuelidate/core";
+import { requiredIf } from "@vuelidate/validators";
+
 import {
   FormTypeToggle,
   FormTypeChannelListCategories,
@@ -288,15 +291,17 @@ import {
   FormTypeDropdown,
   FormTypeEmbed,
   FormTypeBackground,
-} from "../../../components/dashboard/FormValueEnum";
-import EmbedBuilder from "../../../components/dashboard/EmbedBuilder.vue";
-import FormValue from "../../../components/dashboard/FormValue.vue";
-import UnsavedChanges from "../../../components/dashboard/UnsavedChanges.vue";
-import LoadingIcon from "../../../components/LoadingIcon.vue";
-import dashboardAPI from "../../../api/dashboard";
-import endpoints from "../../../api/endpoints";
-import useVuelidate from "@vuelidate/core";
-import { requiredIf } from "@vuelidate/validators";
+} from "@/components/dashboard/FormValueEnum";
+
+import EmbedBuilder from "@/components/dashboard/EmbedBuilder.vue";
+import FormValue from "@/components/dashboard/FormValue.vue";
+import UnsavedChanges from "@/components/dashboard/UnsavedChanges.vue";
+import LoadingIcon from "@/components/LoadingIcon.vue";
+
+import dashboardAPI from "@/api/dashboard";
+import endpoints from "@/api/endpoints";
+
+import { getErrorToast, getSuccessToast } from "@/utilities";
 
 var imageAlignmentTypes = [
   { key: "Left", value: "left" },
@@ -328,7 +333,6 @@ export default {
     FormValue,
     EmbedBuilder,
     UnsavedChanges,
-    XIcon,
     LoadingIcon,
   },
   setup() {
@@ -340,46 +344,50 @@ export default {
     let config = ref({});
     let files = ref([]);
 
-    const validation_rules = () => ({
-      text: {
-        enabled: {},
-        channel: {
-          required: requiredIf(
-            config.value.images?.enabled || config.value.text?.enabled
-          ),
+    const validation_rules = computed(() => {
+      const validation_rules = {
+        text: {
+          enabled: {},
+          channel: {
+            required: requiredIf(
+              config.value.images?.enabled || config.value.text?.enabled
+            ),
+          },
+          message_json: {
+            required: requiredIf(
+              config.value.text?.enabled ||
+                (config.value.dms?.reuse_message && config.value.dms?.enabled)
+            ),
+          },
         },
-        message_json: {
-          required: requiredIf(
-            config.value.text?.enabled ||
-              (config.value.dms?.reuse_message && config.value.dms?.enabled)
-          ),
+        images: {
+          enabled: {},
+          enable_border: {},
+          border_colour: {},
+          background: {},
+          text_colour: {},
+          text_border_colour: {},
+          profile_border_colour: {},
+          profile_border_type: {},
+          image_alignment: {},
+          image_theme: {},
+          message: {},
         },
-      },
-      images: {
-        enabled: {},
-        enable_border: {},
-        border_colour: {},
-        background: {},
-        text_colour: {},
-        text_border_colour: {},
-        profile_border_colour: {},
-        profile_border_type: {},
-        image_alignment: {},
-        image_theme: {},
-        message: {},
-        // message: { required: requiredIf(config.value.images?.enabled) },
-      },
-      dms: {
-        enabled: {},
-        include_image: {},
-        reuse_message: {},
-        message_json: {
-          required: requiredIf(
-            config.value.dms?.enabled && !config.value.dms?.reuse_message
-          ),
+        dms: {
+          enabled: {},
+          include_image: {},
+          reuse_message: {},
+          message_json: {
+            required: requiredIf(
+              config.value.dms?.enabled && !config.value.dms?.reuse_message
+            ),
+          },
         },
-      },
+      };
+
+      return validation_rules
     });
+    
     const v$ = useVuelidate(validation_rules, config);
 
     return {
@@ -407,17 +415,7 @@ export default {
     };
   },
 
-  beforeRouteLeave() {
-    return !this.confirmStayInDirtyForm();
-  },
-  
-  beforeDestroy() {
-    window.removeEventListener("beforeunload", this.beforeWindowUnload);
-  },
-  
   mounted() {
-    window.addEventListener("beforeunload", this.beforeWindowUnload);
-
     this.fetchConfig();
   },
 
@@ -434,11 +432,7 @@ export default {
           this.isDataError = false;
         },
         (error) => {
-          this.$store.dispatch("createToast", {
-            title: error,
-            icon: "xmark",
-            class: "text-red-500 bg-red-100",
-          });
+          this.$store.dispatch("createToast", getErrorToast(error));
 
           this.isDataFetched = true;
           this.isDataError = false;
@@ -479,11 +473,7 @@ export default {
         this.config,
         this.files,
         ({ config }) => {
-          this.$store.dispatch("createToast", {
-            title: "Changes saved.",
-            icon: "check",
-            class: "text-green-500 bg-green-100",
-          });
+          this.$store.dispatch("createToast", getSuccessToast());
 
           this.config = config;
           this.files = [];
@@ -491,11 +481,7 @@ export default {
           this.isChangeInProgress = false;
         },
         (error) => {
-          this.$store.dispatch("createToast", {
-            title: error,
-            icon: "xmark",
-            class: "text-red-500 bg-red-100",
-          });
+          this.$store.dispatch("createToast", getErrorToast(error));
 
           this.isChangeInProgress = false;
         }
@@ -504,23 +490,6 @@ export default {
 
     onValueUpdate() {
       this.unsavedChanges = true;
-    },
-
-    confirmStayInDirtyForm() {
-      return this.unsavedChanges && !this.confirmLeave();
-    },
-
-    confirmLeave() {
-      return window.confirm(
-        "You have unsaved changes! Are you sure you want to leave?"
-      );
-    },
-
-    beforeWindowUnload(e) {
-      if (this.confirmStayInDirtyForm()) {
-        e.preventDefault();
-        e.returnValue = "";
-      }
     },
 
     onFilesUpdate(event) {

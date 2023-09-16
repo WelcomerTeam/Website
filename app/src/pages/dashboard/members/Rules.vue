@@ -136,19 +136,26 @@
 </template>
 
 <script>
-import { ref } from "vue";
-import FormValue from "../../../components/dashboard/FormValue.vue";
+import { computed, ref } from "vue";
+
+import useVuelidate from "@vuelidate/core";
+
+import { toHTML } from "@/components/discord-markdown";
+
 import {
   FormTypeBlank,
   FormTypeToggle,
-} from "../../../components/dashboard/FormValueEnum";
-import UnsavedChanges from "../../../components/dashboard/UnsavedChanges.vue";
-import LoadingIcon from "../../../components/LoadingIcon.vue";
-import dashboardAPI from "../../../api/dashboard";
-import endpoints from "../../../api/endpoints";
-import useVuelidate from "@vuelidate/core";
+} from "@/components/dashboard/FormValueEnum";
 
-import { toHTML } from "../../../components/discord-markdown";
+import FormValue from "@/components/dashboard/FormValue.vue";
+import UnsavedChanges from "@/components/dashboard/UnsavedChanges.vue";
+import LoadingIcon from "@/components/LoadingIcon.vue";
+
+import endpoints from "@/api/endpoints";
+import dashboardAPI from "@/api/dashboard";
+
+import { getErrorToast, getSuccessToast } from "@/utilities";
+
 
 const maxRuleCount = 25;
 const maxRuleLength = 250;
@@ -168,11 +175,16 @@ export default {
     let config = ref({});
     let rules = ref([]);
 
-    const validation_rules = () => ({
-      toggle_enabled: {},
-      toggle_dms_enabled: {},
-      rules: {},
+    const validation_rules = computed(() => {
+      const validation_rules = {
+        toggle_enabled: {},
+        toggle_dms_enabled: {},
+        rules: {},
+      }
+
+      return validation_rules;
     });
+    
     const v$ = useVuelidate(validation_rules, config);
 
     let rule = ref("");
@@ -205,17 +217,11 @@ export default {
     };
   },
 
-  beforeRouteLeave() {
-    return !this.confirmStayInDirtyForm();
-  },
-
   beforeDestroy() {
-    window.removeEventListener("beforeunload", this.beforeWindowUnload);
     window.removeEventListener("mouseup", this.mouseUpHandler);
   },
 
   mounted() {
-    window.addEventListener("beforeunload", this.beforeWindowUnload);
     window.addEventListener("mouseup", this.mouseUpHandler);
 
     this.fetchConfig();
@@ -246,11 +252,7 @@ export default {
           this.isDataError = false;
         },
         (error) => {
-          this.$store.dispatch("createToast", {
-            title: error,
-            icon: "xmark",
-            class: "text-red-500 bg-red-100",
-          });
+          this.$store.dispatch("createToast", getErrorToast(error));
 
           this.isDataFetched = true;
           this.isDataError = false;
@@ -296,22 +298,14 @@ export default {
         this.config,
         null,
         ({ config }) => {
-          this.$store.dispatch("createToast", {
-            title: "Changes saved.",
-            icon: "check",
-            class: "text-green-500 bg-green-100",
-          });
+          this.$store.dispatch("createToast", getSuccessToast());
 
           this.setConfig(config);
           this.unsavedChanges = false;
           this.isChangeInProgress = false;
         },
         (error) => {
-          this.$store.dispatch("createToast", {
-            title: error,
-            icon: "xmark",
-            class: "text-red-500 bg-red-100",
-          });
+          this.$store.dispatch("createToast", getErrorToast(error));
 
           this.isChangeInProgress = false;
         }
@@ -320,23 +314,6 @@ export default {
 
     onValueUpdate() {
       this.unsavedChanges = true;
-    },
-
-    confirmStayInDirtyForm() {
-      return this.unsavedChanges && !this.confirmLeave();
-    },
-
-    confirmLeave() {
-      return window.confirm(
-        "You have unsaved changes! Are you sure you want to leave?"
-      );
-    },
-
-    beforeWindowUnload(e) {
-      if (this.confirmStayInDirtyForm()) {
-        e.preventDefault();
-        e.returnValue = "";
-      }
     },
 
     marked(input, embed) {

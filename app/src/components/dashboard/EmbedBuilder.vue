@@ -479,8 +479,8 @@
 </style>
 
 <script>
-import LoadingIcon from "../LoadingIcon.vue";
-import CodeEditor from "../simple-code-editor/CodeEditor.vue";
+import LoadingIcon from "@/components/LoadingIcon.vue";
+import CodeEditor from "@/components/simple-code-editor/CodeEditor.vue";
 
 import {
   Listbox,
@@ -501,7 +501,7 @@ import { XIcon } from "@heroicons/vue/outline";
 import { ColorPicker } from "vue-color-kit";
 import "vue-color-kit/dist/vue-color-kit.css";
 import { ref } from "vue";
-import DiscordEmbed from "../DiscordEmbed.vue";
+import DiscordEmbed from "@/components/DiscordEmbed.vue";
 
 const tabs = [
   { name: "Build", value: 1 },

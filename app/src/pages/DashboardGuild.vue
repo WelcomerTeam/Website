@@ -96,10 +96,10 @@
 </template>
 
 <script>
-import Header from "../components/dashboard/Header.vue";
-import DashboardSidebar from "../components/dashboard/Sidebar.vue";
-import Toast from "../components/dashboard/Toast.vue";
-import HoistHeading from "../components/hoist/HoistHeading.vue";
+import Header from "@/components/dashboard/Header.vue";
+import DashboardSidebar from "@/components/dashboard/Sidebar.vue";
+import Toast from "@/components/dashboard/Toast.vue";
+import HoistHeading from "@/components/hoist/HoistHeading.vue";
 
 import { ref } from "vue";
 import {
@@ -116,8 +116,8 @@ import {
 import { BellIcon, MenuAlt1Icon, XIcon } from "@heroicons/vue/outline";
 
 import { mdiHelpRhombus } from "@mdi/js";
-import store from "../store/index";
-import LoadingIcon from "../components/LoadingIcon.vue";
+import store from "@/store/index";
+import LoadingIcon from "@/components/LoadingIcon.vue";
 
 export default {
   props: {

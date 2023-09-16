@@ -1,4 +1,4 @@
-import dashboardAPI from "../../api/dashboard";
+import dashboardAPI from "@/api/dashboard";
 
 // initial state
 const state = () => ({

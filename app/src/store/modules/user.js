@@ -1,4 +1,4 @@
-import userAPI from "../../api/user";
+import userAPI from "@/api/user";
 
 // initial state
 const state = () => ({

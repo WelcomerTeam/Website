@@ -136,10 +136,10 @@
 </template>
 
 <script>
-import Header from "../components/Header.vue";
-import Footer from "../components/Footer.vue";
-import DiscordEmbed from "../components/DiscordEmbed.vue";
-import HoistHeading from "../components/hoist/HoistHeading.vue";
+import Header from "@/components/Header.vue";
+import Footer from "@/components/Footer.vue";
+import DiscordEmbed from "@/components/DiscordEmbed.vue";
+import HoistHeading from "@/components/hoist/HoistHeading.vue";
 
 const previews = [
   {

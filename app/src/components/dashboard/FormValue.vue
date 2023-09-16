@@ -1369,7 +1369,7 @@
 </style>
 
 <script>
-import LoadingIcon from "../LoadingIcon.vue";
+import LoadingIcon from "@/components/LoadingIcon.vue";
 import { debounce, uniqueId } from "lodash";
 
 import {
@@ -1405,6 +1405,8 @@ import {
 } from "./FormValueEnum";
 import EmbedBuilder from "./EmbedBuilder.vue";
 import BackgroundSelector from "./BackgroundSelector.vue";
+
+import { getHexColor } from "@/utilities";
 
 export default {
   components: {
@@ -1541,6 +1543,8 @@ export default {
   },
 
   methods: {
+    getHexColor,
+
     refreshStore() {
       switch (props.type) {
         case FormTypeChannelList:
@@ -1582,10 +1586,6 @@ export default {
 
         return `rgba(${r}, ${g}, ${b}, ${a})`;
       }
-    },
-
-    getHexColor(number) {
-      return "#" + (number >>> 0).toString(16).slice(-6);
     },
 
     onColorChange(color) {

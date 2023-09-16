@@ -128,10 +128,10 @@
 </template>
 
 <script>
-import FormValue from "../components/dashboard/FormValue.vue";
 import { ChevronRightIcon, PlusIcon } from "@heroicons/vue/outline";
-import LoadingIcon from "../components/LoadingIcon.vue";
-import store from "../store/index";
+import FormValue from "@/components/dashboard/FormValue.vue";
+import LoadingIcon from "@/components/LoadingIcon.vue";
+import store from "@/store/index";
 
 export default {
   components: { FormValue, ChevronRightIcon, LoadingIcon, PlusIcon },

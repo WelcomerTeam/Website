@@ -14,6 +14,14 @@
         </div>
         <div class="dashboard-contents">
           <div class="dashboard-inputs">
+            <form-value
+              title="Enable Borderwall Protection"
+              :type="FormTypeToggle"
+              v-model="config.enabled"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.enabled"
+              >Borderwall protects your server from automated accounts by presenting them with a captcha for them to complete before they can continue using your server.</form-value
+            >
           </div>
           <unsaved-changes
             :unsavedChanges="unsavedChanges"
@@ -27,29 +35,31 @@
 </template>
 
 <script>
-import { ref } from "vue";
-import { XIcon } from "@heroicons/vue/outline";
-import EmbedBuilder from "../../../components/dashboard/EmbedBuilder.vue";
-import FormValue from "../../../components/dashboard/FormValue.vue";
-import {
-  FormTypeBlank,
-  FormTypeToggle,
-} from "../../../components/dashboard/FormValueEnum";
-import UnsavedChanges from "../../../components/dashboard/UnsavedChanges.vue";
-import LoadingIcon from "../../../components/LoadingIcon.vue";
-import dashboardAPI from "../../../api/dashboard";
-import endpoints from "../../../api/endpoints";
+import { computed, ref } from "vue";
+
 import useVuelidate from "@vuelidate/core";
 import { requiredIf } from "@vuelidate/validators";
 
-import { toHTML } from "../../../components/discord-markdown";
+import {
+  FormTypeBlank,
+  FormTypeToggle,
+} from "@/components/dashboard/FormValueEnum";
+
+import EmbedBuilder from "@/components/dashboard/EmbedBuilder.vue";
+import FormValue from "@/components/dashboard/FormValue.vue";
+import UnsavedChanges from "@/components/dashboard/UnsavedChanges.vue";
+import LoadingIcon from "@/components/LoadingIcon.vue";
+
+import endpoints from "@/api/endpoints";
+import dashboardAPI from "@/api/dashboard";
+
+import { getErrorToast, getSuccessToast } from "@/utilities";
 
 export default {
   components: {
     FormValue,
     EmbedBuilder,
     UnsavedChanges,
-    XIcon,
     LoadingIcon,
   },
   setup() {
@@ -60,17 +70,22 @@ export default {
 
     let config = ref({});
 
-    const validation_rules = () => ({
-      enabled: {},
-      message_verify: {
-        required: requiredIf(
-          config.value.enabled,
-        ),
-      },
-      message_verified: {},
-      roles_on_join: {},
-      roles_on_verify: {},
+    const validation_rules = computed(() => {
+      const validation_rules = {
+        enabled: {},
+        message_verify: {
+          required: requiredIf(
+            config.value.enabled,
+          ),
+        },
+        message_verified: {},
+        roles_on_join: {},
+        roles_on_verify: {},
+      };
+
+      return validation_rules;
     });
+    
     const v$ = useVuelidate(validation_rules, config);
 
     return {
@@ -87,19 +102,7 @@ export default {
     };
   },
 
-  beforeRouteLeave() {
-    return !this.confirmStayInDirtyForm();
-  },
-
-  beforeDestroy() {
-    window.removeEventListener("beforeunload", this.beforeWindowUnload);
-    window.removeEventListener("mouseup", this.mouseUpHandler);
-  },
-
   mounted() {
-    window.addEventListener("beforeunload", this.beforeWindowUnload);
-    window.addEventListener("mouseup", this.mouseUpHandler);
-
     this.fetchConfig();
   },
 
@@ -116,11 +119,7 @@ export default {
           this.isDataError = false;
         },
         (error) => {
-          this.$store.dispatch("createToast", {
-            title: error,
-            icon: "xmark",
-            class: "text-red-500 bg-red-100",
-          });
+          this.$store.dispatch("createToast", getErrorToast(error));
 
           this.isDataFetched = true;
           this.isDataError = false;
@@ -161,22 +160,14 @@ export default {
         this.config,
         null,
         ({ config }) => {
-          this.$store.dispatch("createToast", {
-            title: "Changes saved.",
-            icon: "check",
-            class: "text-green-500 bg-green-100",
-          });
+          this.$store.dispatch("createToast", getSuccessToast());
 
           this.config = config;
           this.unsavedChanges = false;
           this.isChangeInProgress = false;
         },
         (error) => {
-          this.$store.dispatch("createToast", {
-            title: error,
-            icon: "xmark",
-            class: "text-red-500 bg-red-100",
-          });
+          this.$store.dispatch("createToast", getErrorToast(error));
 
           this.isChangeInProgress = false;
         }
@@ -185,23 +176,6 @@ export default {
 
     onValueUpdate() {
       this.unsavedChanges = true;
-    },
-
-    confirmStayInDirtyForm() {
-      return this.unsavedChanges && !this.confirmLeave();
-    },
-
-    confirmLeave() {
-      return window.confirm(
-        "You have unsaved changes! Are you sure you want to leave?"
-      );
-    },
-
-    beforeWindowUnload(e) {
-      if (this.confirmStayInDirtyForm()) {
-        e.preventDefault();
-        e.returnValue = "";
-      }
     },
   },
 };
