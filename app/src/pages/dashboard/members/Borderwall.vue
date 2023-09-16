@@ -20,8 +20,45 @@
               v-model="config.enabled"
               @update:modelValue="onValueUpdate"
               :validation="v$.enabled"
-              >Borderwall protects your server from automated accounts by presenting them with a captcha for them to complete before they can continue using your server.</form-value
+              >Borderwall protects your server from automated accounts by presenting them with a captcha for them to complete before they can continue using your server. This will not stop a user from messaging certain channels by default, you must use roles to permit messaging in the channels you want to protect.</form-value
             >
+
+            <form-value
+              title="Verify Message"
+              :type="FormTypeEmbed"
+              v-model="config.message_verify"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.message_verify"
+              :inlineSlot="true"
+              :disabled="!config.enabled"
+              >This is the messages users will receive if they have not verified.
+              <a
+                target="_blank"
+                href="/formatting"
+                class="text-primary hover:text-primary-dark"
+                >Click here</a
+              >
+              to view all the formatting tags you can use for custom text.
+            </form-value>
+            
+            <form-value
+              title="Verified Message"
+              :type="FormTypeEmbed"
+              v-model="config.message_verified"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.message_verified"
+              :inlineSlot="true"
+              :disabled="!config.enabled"
+              >This is the message users will receive when completing verification.
+              <a
+                target="_blank"
+                href="/formatting"
+                class="text-primary hover:text-primary-dark"
+                >Click here</a
+              >
+              to view all the formatting tags you can use for custom text.
+            </form-value>
+
           </div>
           <unsaved-changes
             :unsavedChanges="unsavedChanges"
@@ -42,6 +79,7 @@ import { requiredIf } from "@vuelidate/validators";
 
 import {
   FormTypeBlank,
+  FormTypeEmbed,
   FormTypeToggle,
 } from "@/components/dashboard/FormValueEnum";
 
@@ -91,10 +129,11 @@ export default {
       return validation_rules;
     });
     
-    const v$ = useVuelidate(validation_rules, config);
+    const v$ = useVuelidate(validation_rules, config, { $rewardEarly: true });
 
     return {
       FormTypeBlank,
+      FormTypeEmbed,
       FormTypeToggle,
 
       isDataFetched,

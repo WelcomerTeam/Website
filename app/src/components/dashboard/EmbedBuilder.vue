@@ -82,7 +82,7 @@
             </div>
           </div>
 
-          <div class="py-8">
+          <div class="py-4">
             <!-- Embed Builder -->
             <div
               class="divide-y divide-gray-300 dark:divide-secondary-light"
@@ -119,13 +119,13 @@
                   <div
                     class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
                   >
-                    <span class="embed-builder-title">Title</span>
+                    <span class="embed-builder-title">Embed Title</span>
                   </div>
                   <div class="mt-1 sm:mt-0 sm:col-span-7">
                     <input
                       type="text"
                       class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
-                      placeholder="Embed title"
+                      placeholder="Embed Title"
                       v-model="title"
                       @input="updateEmbed()"
                     />
@@ -134,18 +134,19 @@
 
                 <!-- URL -->
                 <div
+                  v-if="this.isExpanded"
                   class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
                 >
                   <div
                     class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
                   >
-                    <span class="embed-builder-title">Title URL</span>
+                    <span class="embed-builder-title">Embed Title URL</span>
                   </div>
                   <div class="mt-1 sm:mt-0 sm:col-span-7">
                     <input
                       type="text"
                       class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
-                      placeholder="Title URL"
+                      placeholder="Embed Title URL"
                       v-model="url"
                       @input="updateEmbed()"
                     />
@@ -159,12 +160,12 @@
                   <div
                     class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
                   >
-                    <span class="embed-builder-title">Description</span>
+                    <span class="embed-builder-title">Embed Description</span>
                   </div>
                   <div class="mt-1 sm:mt-0 sm:col-span-7">
                     <textarea
                       class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
-                      placeholder="Embed description"
+                      placeholder="Embed Description"
                       v-model="description"
                       @input="updateEmbed()"
                     />
@@ -177,7 +178,7 @@
                   <div
                     class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
                   >
-                    <span class="embed-builder-title">Colour</span>
+                    <span class="embed-builder-title">Embed Colour</span>
                   </div>
                   <div class="mt-1 sm:mt-0 sm:col-span-7 flex items-center">
                     <input
@@ -240,7 +241,7 @@
                 </div>
               </div>
 
-              <div class="pt-5 mt-5 px-4 lg:px-8 space-y-2">
+              <div v-if="this.isExpanded" class="pt-5 mt-5 px-4 lg:px-8 space-y-2">
                 <!-- Fields -->
                 <div
                   class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start border-gray-200 dark:border-secondary-light mb-4 sm:mb-0"
@@ -308,7 +309,7 @@
                 </div>
               </div>
 
-              <div class="pt-5 mt-5 px-4 lg:px-8 space-y-2">
+              <div v-if="this.isExpanded" class="pt-5 mt-5 px-4 lg:px-8 space-y-2">
                 <!-- Image URL -->
                 <div
                   class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
@@ -350,7 +351,7 @@
                 </div>
               </div>
 
-              <div class="pt-5 mt-5 px-4 lg:px-8 space-y-2">
+              <div v-if="this.isExpanded" class="pt-5 mt-5 px-4 lg:px-8 space-y-2">
                 <!-- Footer Text -->
                 <div
                   class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
@@ -364,7 +365,7 @@
                     <input
                       type="text"
                       class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
-                      placeholder="Embed title"
+                      placeholder="Footer Text"
                       v-model="footer_text"
                       @input="updateEmbed()"
                     />
@@ -392,7 +393,7 @@
                 </div>
               </div>
 
-              <div class="pt-5 mt-5 px-4 lg:px-8 space-y-2">
+              <div v-if="this.isExpanded" class="pt-5 mt-5 px-4 lg:px-8 space-y-2">
                 <!-- Author Name -->
                 <div
                   class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
@@ -453,6 +454,27 @@
                   </div>
                 </div>
               </div>
+              
+              <div v-if="!this.isExpanded" class="pt-5 mt-5 px-4 lg:px-8 space-y-2">
+                <button
+                  type="button"
+                  class="cta-button w-full bg-secondary hover:bg-secondary-dark"
+                  @click="expand"
+                >
+                  Show More Options
+                </button>
+              </div>
+
+              <div v-if="this.isExpanded" class="pt-5 mt-5 px-4 lg:px-8 space-y-2">
+                <button
+                  type="button"
+                  class="cta-button w-full bg-secondary hover:bg-secondary-dark"
+                  @click="unexpand"
+                >
+                  Hide More Options
+                </button>
+              </div>
+
             </div>
 
             <div class="px-4 lg:px-8" v-if="this.page == 2">
@@ -548,6 +570,8 @@ export default {
   emits: ["update:modelValue"],
 
   setup() {
+    let isExpanded = ref(false);
+
     let content = ref("");
 
     let title = ref("");
@@ -587,6 +611,7 @@ export default {
       fields,
 
       content,
+      isExpanded,
 
       tabs,
       page,
@@ -760,6 +785,9 @@ export default {
       }
 
       let value = JSON.stringify(data);
+      if (value === "{}") {
+        value = ""
+      }
 
       this.updateValue(value);
     },
@@ -805,6 +833,14 @@ export default {
         return [];
       }
     },
+
+    expand() {
+      this.isExpanded = true;
+    },
+
+    shrink() {
+      this.isExpanded = false;
+    }
   },
 };
 </script>

@@ -190,7 +190,7 @@ export default {
       return validation_rules;
     });
     
-    const v$ = useVuelidate(validation_rules, config);
+    const v$ = useVuelidate(validation_rules, config, { $rewardEarly: true });
 
     let rule = ref("");
 
