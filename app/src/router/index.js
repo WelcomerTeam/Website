@@ -68,16 +68,21 @@ const routes = [
               import("@/pages/dashboard/members/Borderwall.vue"),
           },
           {
-            name: "dashboard.guild.autoroles",
-            path: "autorole",
-            component: () => import("@/pages/dashboard/members/Autorole.vue"),
-          },
-          {
             name: "dashboard.guild.leaver",
             path: "leaver",
             component: () => import("@/pages/dashboard/members/Leaver.vue"),
           },
+          {
+            name: "dashboard.guild.tempchannels",
+            path: "tempchannels",
+            component: () => import("@/pages/dashboard/members/Tempchannels.vue"),
+          },
 
+          {
+            name: "dashboard.guild.autoroles",
+            path: "autorole",
+            component: () => import("@/pages/dashboard/roles/Autorole.vue"),
+          },
           {
             name: "dashboard.guild.freeroles",
             path: "freeroles",
@@ -87,12 +92,6 @@ const routes = [
             name: "dashboard.guild.timeroles",
             path: "timeroles",
             component: () => import("@/pages/dashboard/roles/Timeroles.vue"),
-          },
-          {
-            name: "dashboard.guild.tempchannels",
-            path: "tempchannels",
-            component: () =>
-              import("@/pages/dashboard/roles/Tempchannels.vue"),
           },
 
           {

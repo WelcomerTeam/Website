@@ -202,7 +202,7 @@
                           'block truncate',
                         ]"
                       >
-                        Unselect channel
+                        Unselect
                       </span>
 
                       <span
@@ -218,7 +218,7 @@
                   </ListboxOption>
                   <ListboxOption
                     as="template"
-                    v-for="channel in this.filterTextChannels(
+                    v-for="channel in this.filterChannels(
                       $store.getters.getGuildChannels
                     )"
                     :key="channel.id"
@@ -365,7 +365,7 @@
                           'block truncate',
                         ]"
                       >
-                        Unselect channel
+                        Unselect
                       </span>
 
                       <span
@@ -538,7 +538,7 @@
                           'block truncate',
                         ]"
                       >
-                        Unselect role
+                        Unselect
                       </span>
 
                       <span
@@ -705,7 +705,7 @@
                           'block truncate',
                         ]"
                       >
-                        Unselect member
+                        Unselect
                       </span>
 
                       <span
@@ -912,7 +912,7 @@
                           'block truncate',
                         ]"
                       >
-                        Unselect emoji
+                        Unselect
                       </span>
 
                       <span
@@ -1505,6 +1505,10 @@ export default {
       type: Array,
       required: false,
     },
+    channelFilter: {
+      type: Number,
+      required: false,
+    }
   },
 
   emits: ["update:modelValue", "update:files", "blur"],
@@ -1618,8 +1622,12 @@ export default {
       this.$props.validation?.$touch();
     },
 
-    filterTextChannels(channels) {
-      return channels.filter((channel) => channel.type === 0);
+    filterChannels(channels) {
+      if (this.$props.channelFilter == undefined) {
+        return channels
+      }
+
+      return channels.filter((channel) => channel.type === this.$props.channelFilter);
     },
 
     getKey(value) {

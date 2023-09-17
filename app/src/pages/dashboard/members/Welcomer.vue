@@ -280,7 +280,7 @@
 import { computed, ref } from "vue";
 
 import useVuelidate from "@vuelidate/core";
-import { requiredIf } from "@vuelidate/validators";
+import { helpers, requiredIf } from "@vuelidate/validators";
 
 import {
   FormTypeToggle,
@@ -354,15 +354,15 @@ export default {
         text: {
           enabled: {},
           channel: {
-            required: requiredIf(
+            required: helpers.withMessage("The channel is required", requiredIf(
               config.value.images?.enabled || config.value.text?.enabled
-            ),
+            )),
           },
           message_json: {
-            required: requiredIf(
+            required: helpers.withMessage("The message is required", requiredIf(
               config.value.text?.enabled ||
                 (config.value.dms?.reuse_message && config.value.dms?.enabled)
-            ),
+            )),
           },
         },
         images: {
@@ -383,9 +383,9 @@ export default {
           include_image: {},
           reuse_message: {},
           message_json: {
-            required: requiredIf(
+            required: helpers.withMessage("The message is required", requiredIf(
               config.value.dms?.enabled && !config.value.dms?.reuse_message
-            ),
+            )),
           },
         },
       };

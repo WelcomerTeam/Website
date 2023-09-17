@@ -163,6 +163,7 @@
 import { computed, ref } from "vue";
 
 import useVuelidate from "@vuelidate/core";
+import { helpers, requiredIf } from "@vuelidate/validators";
 
 import { toHTML } from "@/components/discord-markdown";
 
@@ -207,7 +208,9 @@ export default {
       const validation_rules = {
         enabled: {},
         dms_enabled: {},
-        rules: {},
+        rules: {
+          required: helpers.withMessage("The rules are required", requiredIf(config.value.enabled))
+        },
       };
 
       return validation_rules;

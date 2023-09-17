@@ -66,7 +66,7 @@
 import { computed, ref } from "vue";
 
 import useVuelidate from "@vuelidate/core";
-import { requiredIf } from "@vuelidate/validators";
+import { helpers, requiredIf } from "@vuelidate/validators";
 
 import {
 FormTypeBlank,
@@ -109,11 +109,15 @@ export default {
       const validation_rules = {
         enabled: {},
         channel: {
-          required: requiredIf(
+          required: helpers.withMessage("The channel must be selected if you do not send a DM", requiredIf(
             config.value.enabled
-          )
+          ))
         },
-        message_json: {},
+        message_json: {
+          required: helpers.withMessage("The message is required", requiredIf(
+            config.value.enabled
+          ))
+        },
       };
 
       return validation_rules;

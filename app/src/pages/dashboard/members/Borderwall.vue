@@ -78,7 +78,7 @@
             </form-value>
 
 
-            <form-value title="Roles On Join" :type="FormTypeBlank" :hideBorder="true">
+            <form-value title="Roles On Join" :type="FormTypeBlank" :hideBorder="true"  :validation="v$.roleson_join">
               These roles will be given to users as soon as they join. Use this to identify users who have not yet verified.
               Any roles in this list will be removed when verifying, unless it is also in the <b>Roles On Verify</b> list.
               <role-table
@@ -90,7 +90,7 @@
               ></role-table>
             </form-value>
 
-            <form-value title="Roles On Verify" :type="FormTypeBlank" :hideBorder="true">
+            <form-value title="Roles On Verify" :type="FormTypeBlank" :hideBorder="true"  :validation="v$.roles_on_verify">
               These roles will be given to users once they verify. Use this to give users permissions to send messages in channels.
               Any roles in <b>Roles On Join</b> will be removed, unless it is also in this list.
               <role-table
@@ -117,7 +117,7 @@
 import { computed, ref } from "vue";
 
 import useVuelidate from "@vuelidate/core";
-import { requiredIf } from "@vuelidate/validators";
+import { helpers, requiredIf } from "@vuelidate/validators";
 
 import {
   FormTypeBlank,
@@ -163,9 +163,9 @@ export default {
         enabled: {},
         send_dm: {},
         channel: {
-          required: requiredIf(
+          required: helpers.withMessage("The channel must be selected if you do not send a DM", requiredIf(
             config.value.enabled && !config.value.send_dm && (config.value.message_verify !== "" || config.value.message_verified !== "")
-          )
+          ))
         },
         message_verify: {},
         message_verified: {},

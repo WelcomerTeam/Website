@@ -30,11 +30,11 @@
 import { computed, ref } from "vue";
 
 import useVuelidate from "@vuelidate/core";
+import { helpers, requiredIf } from "@vuelidate/validators";
 
 import {
   FormTypeBlank,
   FormTypeToggle,
-  FormTypeRoleList,
 } from "@/components/dashboard/FormValueEnum";
 
 import UnsavedChanges from "@/components/dashboard/UnsavedChanges.vue";
@@ -74,7 +74,9 @@ export default {
     const validation_rules = computed(() => {
       const validation_rules = {
         enabled: {},
-        roles: {},
+        roles: {
+          required: helpers.withMessage("No roles have been selected", requiredIf(config.value.enabled))
+        },
       };
 
       return validation_rules;
@@ -85,7 +87,6 @@ export default {
     return {
       FormTypeBlank,
       FormTypeToggle,
-      FormTypeRoleList,
 
       isDataFetched,
       isDataError,
@@ -110,7 +111,7 @@ export default {
       this.isDataError = false;
 
       dashboardAPI.getConfig(
-        endpoints.EndpointGuild(this.$store.getters.getSelectedGuildID),
+        endpoints.EndpointGuildTimeroles(this.$store.getters.getSelectedGuildID),
         ({ config }) => {
           this.config = config;
           this.isDataFetched = true;
@@ -138,7 +139,7 @@ export default {
       this.isChangeInProgress = true;
 
       dashboardAPI.setConfig(
-        endpoints.EndpointGuild(this.$store.getters.getSelectedGuildID),
+        endpoints.EndpointGuildTimeroles(this.$store.getters.getSelectedGuildID),
         this.config,
         null,
         ({ config }) => {

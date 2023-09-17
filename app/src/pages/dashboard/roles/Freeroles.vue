@@ -10,10 +10,27 @@
       </div>
       <div v-else>
         <div class="dashboard-title-container">
-          <div class="dashboard-title">[ ENTER TITLE ]</div>
+          <div class="dashboard-title">FreeRoles</div>
         </div>
         <div class="dashboard-contents">
           <div class="dashboard-inputs">
+            <form-value
+              title="Enable FreeRoles"
+              :type="FormTypeToggle"
+              v-model="config.enabled"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.enabled"
+              >Freeroles allow users to give themselves roles, via the <kbd class="bg-secondary-dark px-2 py-1 rounded-md">/freeroles give</kbd> command.</form-value
+            >
+
+            <form-value title="Roles" :type="FormTypeBlank" :hideBorder="true" :validation="v$.roles">
+              <role-table
+                :roles="$store.getters.getAssignableGuildRoles"
+                :selectedRoles="config.roles"
+                @removeRole="onRemoveRole"
+                @selectRole="onSelectRole"
+              ></role-table>
+            </form-value>
           </div>
           <unsaved-changes
             :unsavedChanges="unsavedChanges"
@@ -30,6 +47,7 @@
 import { computed, ref } from "vue";
 
 import useVuelidate from "@vuelidate/core";
+import { helpers, requiredIf } from "@vuelidate/validators";
 
 import {
   FormTypeBlank,
@@ -40,6 +58,7 @@ import {
 import UnsavedChanges from "@/components/dashboard/UnsavedChanges.vue";
 import EmbedBuilder from "@/components/dashboard/EmbedBuilder.vue";
 import FormValue from "@/components/dashboard/FormValue.vue";
+import RoleTable from "@/components/dashboard/RoleTable.vue";
 import LoadingIcon from "@/components/LoadingIcon.vue";
 
 import dashboardAPI from "@/api/dashboard";
@@ -56,6 +75,7 @@ export default {
   components: {
     FormValue,
     EmbedBuilder,
+    RoleTable,
     UnsavedChanges,
     LoadingIcon,
   },
@@ -73,7 +93,9 @@ export default {
     const validation_rules = computed(() => {
       const validation_rules = {
         enabled: {},
-        roles: {},
+        roles: {
+          required: helpers.withMessage("No roles have been selected", requiredIf(config.value.enabled))
+        },
       };
 
       return validation_rules;
@@ -109,7 +131,7 @@ export default {
       this.isDataError = false;
 
       dashboardAPI.getConfig(
-        endpoints.EndpointGuild(this.$store.getters.getSelectedGuildID),
+        endpoints.EndpointGuildFreeroles(this.$store.getters.getSelectedGuildID),
         ({ config }) => {
           this.config = config;
           this.isDataFetched = true;
@@ -137,7 +159,7 @@ export default {
       this.isChangeInProgress = true;
 
       dashboardAPI.setConfig(
-        endpoints.EndpointGuild(this.$store.getters.getSelectedGuildID),
+        endpoints.EndpointGuildFreeroles(this.$store.getters.getSelectedGuildID),
         this.config,
         null,
         ({ config }) => {
@@ -157,6 +179,24 @@ export default {
 
     onValueUpdate() {
       this.unsavedChanges = true;
+    },
+
+    onSelectRole(roleID) {
+      let role = this.$store.getters.getGuildRoleById(roleID);
+      if (role !== undefined) {
+        this.config.roles.push(role.id);
+        this.config.roles.sort(
+          (a, b) =>
+            this.$store.getters.getGuildRoleById(a)?.position -
+            this.$store.getters.getGuildRoleById(b)?.position
+        );
+        this.onValueUpdate();
+      }
+    },
+
+    onRemoveRole(roleID) {
+      this.config.roles = this.config.roles.filter((role) => role !== roleID);
+      this.onValueUpdate();
     },
   },
 };

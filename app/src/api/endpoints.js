@@ -9,7 +9,7 @@ export default {
     return EndpointGuilds + guildID + "/borderwall";
   },
 
-  EndpointGuildFreeRoles(guildID) {
+  EndpointGuildFreeroles(guildID) {
     return EndpointGuilds + guildID + "/freeroles";
   },
 
@@ -21,11 +21,11 @@ export default {
     return EndpointGuilds + guildID + "/rules";
   },
 
-  EndpointGuildTempChannels(guildID) {
+  EndpointGuildTempchannels(guildID) {
     return EndpointGuilds + guildID + "/tempchannels";
   },
 
-  EndpointGuildTimeRoles(guildID) {
+  EndpointGuildTimeroles(guildID) {
     return EndpointGuilds + guildID + "/timeroles";
   },
 
