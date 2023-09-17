@@ -96,13 +96,6 @@ const routes = [
           },
 
           {
-            name: "dashboard.guild.automod",
-            path: "automod",
-            component: () =>
-              import("@/pages/dashboard/moderation/Automod.vue"),
-          },
-
-          {
             path: "example",
             name: "dashboard.guild.example",
             component: () => import("@/pages/dashboard/debug/Example.vue"),
