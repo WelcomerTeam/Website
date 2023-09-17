@@ -469,7 +469,7 @@
                 <button
                   type="button"
                   class="cta-button w-full bg-secondary hover:bg-secondary-dark"
-                  @click="unexpand"
+                  @click="shrink"
                 >
                   Hide More Options
                 </button>
