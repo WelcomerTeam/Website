@@ -17,18 +17,18 @@
             <form-value
               title="Enable Rules"
               :type="FormTypeToggle"
-              v-model="config.toggle_enabled"
+              v-model="config.enabled"
               @update:modelValue="onValueUpdate"
-              :validation="v$.toggle_enabled"
+              :validation="v$.enabled"
               >Send rules to users when they join your server. This also allows
               users to view the rules by doing <code>/rules</code>.</form-value
             >
             <form-value
               title="Enable Rule DMs"
               :type="FormTypeToggle"
-              v-model="config.toggle_dms_enabled"
+              v-model="config.dms_enabled"
               @update:modelValue="onValueUpdate"
-              :validation="v$.toggle_dms_enabled"
+              :validation="v$.dms_enabled"
               :inlineSlot="true"
               >When enabled, users will also receive the rules in their direct
               messages.</form-value
@@ -205,8 +205,8 @@ export default {
 
     const validation_rules = computed(() => {
       const validation_rules = {
-        toggle_enabled: {},
-        toggle_dms_enabled: {},
+        enabled: {},
+        dms_enabled: {},
         rules: {},
       };
 

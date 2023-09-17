@@ -20,7 +20,25 @@
               v-model="config.enabled"
               @update:modelValue="onValueUpdate"
               :validation="v$.enabled"
-              >Borderwall protects your server from automated accounts by presenting them with a captcha for them to complete before they can continue using your server. This will not stop a user from messaging certain channels by default, you must use roles to permit messaging in the channels you want to protect.</form-value
+              >Borderwall protects your server from automated accounts by presenting them with a captcha for them to complete before they can continue using your server. This will not stop a user from messaging certain channels by default, you must use roles to permit messaging in the channels you want to protect.</form-value>
+
+            <form-value
+              title="Enable DMs"
+              :type="FormTypeToggle"
+              v-model="config.send_dm"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.send_dm"
+              >When enabled, users will receive their verify message in their DMs instead of being sent to a channel.</form-value>
+
+            <form-value
+              title="Welcome Channel"
+              :type="FormTypeChannelListCategories"
+              v-model="config.channel"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.channel"
+              :inlineSlot="true"
+              :nullable="true"
+              >This is the channel we will send messages to.</form-value
             >
 
             <form-value
@@ -61,20 +79,26 @@
 
 
             <form-value title="Roles On Join" :type="FormTypeBlank" :hideBorder="true">
+              These roles will be given to users as soon as they join. Use this to identify users who have not yet verified.
+              Any roles in this list will be removed when verifying, unless it is also in the <b>Roles On Verify</b> list.
               <role-table
                 :roles="$store.getters.getAssignableGuildRoles"
                 :selectedRoles="config.roles_on_join"
                 @removeRole="onRemoveJoinRole"
                 @selectRole="onSelectJoinRole"
+                class="mt-4"
               ></role-table>
             </form-value>
 
             <form-value title="Roles On Verify" :type="FormTypeBlank" :hideBorder="true">
+              These roles will be given to users once they verify. Use this to give users permissions to send messages in channels.
+              Any roles in <b>Roles On Join</b> will be removed, unless it is also in this list.
               <role-table
                 :roles="$store.getters.getAssignableGuildRoles"
                 :selectedRoles="config.roles_on_verify"
                 @removeRole="onRemoveVerifyRole"
                 @selectRole="onSelectVerifyRole"
+                class="mt-4"
               ></role-table>
             </form-value>
           </div>
@@ -99,6 +123,7 @@ import {
   FormTypeBlank,
   FormTypeEmbed,
   FormTypeToggle,
+  FormTypeChannelListCategories,
 } from "@/components/dashboard/FormValueEnum";
 
 import EmbedBuilder from "@/components/dashboard/EmbedBuilder.vue";
@@ -136,11 +161,13 @@ export default {
     const validation_rules = computed(() => {
       const validation_rules = {
         enabled: {},
-        message_verify: {
+        send_dm: {},
+        channel: {
           required: requiredIf(
-            config.value.enabled,
-          ),
+            config.value.enabled && !config.value.send_dm && (config.value.message_verify !== "" || config.value.message_verified !== "")
+          )
         },
+        message_verify: {},
         message_verified: {},
         roles_on_join: {},
         roles_on_verify: {},
@@ -155,6 +182,7 @@ export default {
       FormTypeBlank,
       FormTypeEmbed,
       FormTypeToggle,
+      FormTypeChannelListCategories,
 
       isDataFetched,
       isDataError,

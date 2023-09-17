@@ -101,22 +101,17 @@ import DashboardSidebar from "@/components/dashboard/Sidebar.vue";
 import Toast from "@/components/dashboard/Toast.vue";
 import HoistHeading from "@/components/hoist/HoistHeading.vue";
 
-import { ref } from "vue";
 import {
   Dialog,
   DialogOverlay,
   Menu,
-  MenuButton,
   MenuItem,
-  MenuItems,
   TransitionChild,
   TransitionRoot,
 } from "@headlessui/vue";
 
-import { BellIcon, MenuAlt1Icon, XIcon } from "@heroicons/vue/outline";
+import { XIcon } from "@heroicons/vue/outline";
 
-import { mdiHelpRhombus } from "@mdi/js";
-import store from "@/store/index";
 import LoadingIcon from "@/components/LoadingIcon.vue";
 
 export default {
@@ -129,22 +124,16 @@ export default {
     Dialog,
     DialogOverlay,
     Menu,
-    MenuButton,
     MenuItem,
-    MenuItems,
     TransitionChild,
     TransitionRoot,
     Toast,
-    BellIcon,
-    MenuAlt1Icon,
     XIcon,
 
     Header,
     HoistHeading,
     DashboardSidebar,
     LoadingIcon,
-
-    mdiHelpRhombus,
   },
 };
 </script>
