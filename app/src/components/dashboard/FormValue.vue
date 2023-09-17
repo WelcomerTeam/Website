@@ -1,7 +1,7 @@
 <template>
   <div
     :class="[
-      'sm:grid sm:grid-cols-3 sm:gap-4 dark:text-gray-50 border-gray-200 dark:border-secondary-light py-4 sm:py-6 items-center',
+      'sm:grid sm:grid-cols-3 sm:gap-4 dark:text-gray-50 border-gray-200 dark:border-secondary-light py-4 sm:py-6 items-start',
       $props.hideBorder ? '' : 'border-b',
     ]"
   >

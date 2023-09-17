@@ -36,31 +36,55 @@
 
             <form-value title="Rules" :type="FormTypeBlank" :hideBorder="true">
               <table class="min-w-full border-spacing-2">
-                <thead>
-                  <tr>
-                    <th />
-                    <th scope="col" class="relative py-3.5 pr-3 text-left">
-                      <!-- Rule -->
-                    </th>
-                    <th scope="col" class="relative py-3.5 text-left">
-                      <!-- Actions -->
-                    </th>
-                  </tr>
-                </thead>
                 <tbody
                   class="divide-y divide-gray-200 dark:divide-secondary-light"
                 >
-                  <tr v-for="(rule, index) in this.rules" :key="index" :class="[this.selectedIndex != null ? 'select-none' : '', this.selectedIndex == index ? 'dark:bg-secondary-dark bg-gray-100' : '']" v-on:mousemove="this.mouseMoveHandler(index)">
-                    <td :class="['pr-3 whitespace-nowrap py-4 text-sm dark:text-gray-50 space-x-2 grid grid-cols-2', this.isDraggable ? 'cursor-move' : '']" v-on:mousedown="this.mouseDownHandler(index)">
-                      <font-awesome-icon v-if="this.isDraggable" icon="grip-vertical" />
-                      <a v-if="!this.isDraggable" @click="this.moveRule(index, index-1)">
-                        <font-awesome-icon :class="[index > 0 ? '' : 'opacity-20 touch-none']" icon="chevron-up" />
+                  <tr
+                    v-for="(rule, index) in this.rules"
+                    :key="index"
+                    :class="[
+                      this.selectedIndex != null ? 'select-none' : '',
+                      this.selectedIndex == index
+                        ? 'dark:bg-secondary-dark bg-gray-100'
+                        : '',
+                    ]"
+                    v-on:mousemove="this.mouseMoveHandler(index)"
+                  >
+                    <td
+                      :class="[
+                        'pr-3 whitespace-nowrap py-4 text-sm dark:text-gray-50 space-x-2 grid grid-cols-2',
+                        this.isDraggable ? 'cursor-move' : '',
+                      ]"
+                      v-on:mousedown="this.mouseDownHandler(index)"
+                    >
+                      <font-awesome-icon
+                        v-if="this.isDraggable"
+                        icon="grip-vertical"
+                      />
+                      <a
+                        v-if="!this.isDraggable"
+                        @click="this.moveRule(index, index - 1)"
+                      >
+                        <font-awesome-icon
+                          :class="[index > 0 ? '' : 'opacity-20 touch-none']"
+                          icon="chevron-up"
+                        />
                       </a>
-                      <a v-if="!this.isDraggable" @click="this.moveRule(index, index+1)">
-                        <font-awesome-icon :class="[index < this.rules.length-1 ? '' : 'opacity-20 touch-none']" icon="chevron-down" />
+                      <a
+                        v-if="!this.isDraggable"
+                        @click="this.moveRule(index, index + 1)"
+                      >
+                        <font-awesome-icon
+                          :class="[
+                            index < this.rules.length - 1
+                              ? ''
+                              : 'opacity-20 touch-none',
+                          ]"
+                          icon="chevron-down"
+                        />
                       </a>
                     </td>
-                    <td class="pr-3 text-sm dark:text-gray-50 w-auto" >
+                    <td class="pr-3 text-sm dark:text-gray-50 w-auto">
                       <input
                         v-if="rule.selected"
                         type="text"
@@ -109,15 +133,15 @@
                     <td>
                       <input
                         v-if="this.rules.length < this.maxRuleCount"
-                          type="text"
-                          class="bg-white dark:bg-secondary-dark relative w-full pl-3 pr-10 mt-2 text-left border border-gray-300 dark:border-secondary-light rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
-                          placeholder="Add rule"
-                          :maxlength="this.maxRuleLength"
-                          @blur="this.onRuleBlur()"
-                          @keypress="this.onRuleKeyPress($event)"
-                          v-model="rule"
+                        type="text"
+                        class="bg-white dark:bg-secondary-dark relative w-full pl-3 pr-10 mt-2 text-left border border-gray-300 dark:border-secondary-light rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
+                        placeholder="Add rule"
+                        :maxlength="this.maxRuleLength"
+                        @blur="this.onRuleBlur()"
+                        @keypress="this.onRuleKeyPress($event)"
+                        v-model="rule"
                       />
-                </td>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -161,7 +185,6 @@ import {
   navigateToErrors,
 } from "@/utilities";
 
-
 const maxRuleCount = 25;
 const maxRuleLength = 250;
 
@@ -185,18 +208,18 @@ export default {
         toggle_enabled: {},
         toggle_dms_enabled: {},
         rules: {},
-      }
+      };
 
       return validation_rules;
     });
-    
+
     const v$ = useVuelidate(validation_rules, config, { $rewardEarly: true });
 
     let rule = ref("");
 
     let selectedIndex = ref(null);
 
-    let isDraggable = matchMedia('(pointer:fine)').matches;
+    let isDraggable = matchMedia("(pointer:fine)").matches;
 
     return {
       FormTypeBlank,
@@ -349,9 +372,7 @@ export default {
       } else {
         this.rules[index].selected = false;
 
-        if (
-          this.rules[index].value !== this.rules[index].newValue
-        ) {
+        if (this.rules[index].value !== this.rules[index].newValue) {
           this.onValueUpdate();
         }
 
@@ -411,7 +432,7 @@ export default {
     },
 
     moveRule(index, newIndex) {
-      if (index >= 0 && index <= this.rules.length-1) {
+      if (index >= 0 && index <= this.rules.length - 1) {
         var temp = this.rules[index];
         this.rules[index] = this.rules[newIndex];
         this.rules[newIndex] = temp;

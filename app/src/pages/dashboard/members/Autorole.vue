@@ -24,12 +24,14 @@
               server.</form-value
             >
 
-            <role-table
-              :roles="this.assigned_roles"
-              :selectableRoles="this.roles"
-              @removeRole="onRemoveRole"
-              @selectRole="onSelectRole"
-            ></role-table>
+            <form-value title="Roles" :type="FormTypeBlank" :hideBorder="true">
+              <role-table
+                :roles="$store.getters.getAssignableGuildRoles"
+                :selectedRoles="config.roles"
+                @removeRole="onRemoveRole"
+                @selectRole="onSelectRole"
+              ></role-table>
+            </form-value>
           </div>
           <unsaved-changes
             :unsavedChanges="unsavedChanges"
@@ -131,8 +133,6 @@ export default {
           this.config = config;
           this.isDataFetched = true;
           this.isDataError = false;
-          
-          this.updateRoles();
         },
         (error) => {
           this.$store.dispatch("createToast", getErrorToast(error));
@@ -165,8 +165,6 @@ export default {
           this.config = config;
           this.unsavedChanges = false;
           this.isChangeInProgress = false;
-
-          this.updateRoles();
         },
         (error) => {
           this.$store.dispatch("createToast", getErrorToast(error));
@@ -180,36 +178,6 @@ export default {
       this.unsavedChanges = true;
     },
 
-    updateRoles() {
-      let new_roles = [];
-      let new_assigned = [];
-
-      let guild_roles = this.$store.getters.getAssignableGuildRoles;
-
-      this.config.roles.forEach((roleID) => {
-        var role = guild_roles.find((element) => {
-          return element.id == roleID;
-        });
-
-        if (role !== undefined) {
-          new_assigned.push(role);
-        }
-      });
-
-      guild_roles.forEach((role) => {
-        var assigned_roles = this.config.roles.find((element) => {
-          return element == role.id;
-        });
-
-        if (assigned_roles === undefined) {
-          new_roles.push(role);
-        }
-      });
-
-      this.assigned_roles = new_assigned;
-      this.roles = new_roles;
-    },
-
     onSelectRole(roleID) {
       let role = this.$store.getters.getGuildRoleById(roleID);
       if (role !== undefined) {
@@ -219,14 +187,12 @@ export default {
             this.$store.getters.getGuildRoleById(a)?.position -
             this.$store.getters.getGuildRoleById(b)?.position
         );
-        this.updateRoles();
         this.onValueUpdate();
       }
     },
 
     onRemoveRole(roleID) {
       this.config.roles = this.config.roles.filter((role) => role !== roleID);
-      this.updateRoles();
       this.onValueUpdate();
     },
   },

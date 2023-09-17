@@ -34,7 +34,7 @@
               >This is the messages users will receive if they have not verified.
               <a
                 target="_blank"
-                href="/formatting"
+                href="/formatting#borderwall"
                 class="text-primary hover:text-primary-dark"
                 >Click here</a
               >
@@ -52,13 +52,31 @@
               >This is the message users will receive when completing verification.
               <a
                 target="_blank"
-                href="/formatting"
+                href="/formatting#borderwall"
                 class="text-primary hover:text-primary-dark"
                 >Click here</a
               >
               to view all the formatting tags you can use for custom text.
             </form-value>
 
+
+            <form-value title="Roles On Join" :type="FormTypeBlank" :hideBorder="true">
+              <role-table
+                :roles="$store.getters.getAssignableGuildRoles"
+                :selectedRoles="config.roles_on_join"
+                @removeRole="onRemoveJoinRole"
+                @selectRole="onSelectJoinRole"
+              ></role-table>
+            </form-value>
+
+            <form-value title="Roles On Verify" :type="FormTypeBlank" :hideBorder="true">
+              <role-table
+                :roles="$store.getters.getAssignableGuildRoles"
+                :selectedRoles="config.roles_on_verify"
+                @removeRole="onRemoveVerifyRole"
+                @selectRole="onSelectVerifyRole"
+              ></role-table>
+            </form-value>
           </div>
           <unsaved-changes
             :unsavedChanges="unsavedChanges"
@@ -85,6 +103,7 @@ import {
 
 import EmbedBuilder from "@/components/dashboard/EmbedBuilder.vue";
 import FormValue from "@/components/dashboard/FormValue.vue";
+import RoleTable from "@/components/dashboard/RoleTable.vue";
 import UnsavedChanges from "@/components/dashboard/UnsavedChanges.vue";
 import LoadingIcon from "@/components/LoadingIcon.vue";
 
@@ -104,6 +123,7 @@ export default {
     EmbedBuilder,
     UnsavedChanges,
     LoadingIcon,
+    RoleTable,
   },
   setup() {
     let isDataFetched = ref(false);
@@ -204,6 +224,42 @@ export default {
 
     onValueUpdate() {
       this.unsavedChanges = true;
+    },
+
+    onSelectJoinRole(roleID) {
+      let role = this.$store.getters.getGuildRoleById(roleID);
+      if (role !== undefined) {
+        this.config.roles_on_join.push(role.id);
+        this.config.roles_on_join.sort(
+          (a, b) =>
+            this.$store.getters.getGuildRoleById(a)?.position -
+            this.$store.getters.getGuildRoleById(b)?.position
+        );
+        this.onValueUpdate();
+      }
+    },
+
+    onRemoveJoinRole(roleID) {
+      this.config.roles_on_join = this.config.roles_on_join.filter((role) => role !== roleID);
+      this.onValueUpdate();
+    },
+
+    onSelectVerifyRole(roleID) {
+      let role = this.$store.getters.getGuildRoleById(roleID);
+      if (role !== undefined) {
+        this.config.roles_on_verify.push(role.id);
+        this.config.roles_on_verify.sort(
+          (a, b) =>
+            this.$store.getters.getGuildRoleById(a)?.position -
+            this.$store.getters.getGuildRoleById(b)?.position
+        );
+        this.onValueUpdate();
+      }
+    },
+
+    onRemoveVerifyRole(roleID) {
+      this.config.roles_on_verify = this.config.roles_on_verify.filter((role) => role !== roleID);
+      this.onValueUpdate();
     },
   },
 };
