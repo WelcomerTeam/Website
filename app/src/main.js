@@ -126,6 +126,10 @@ import {
   faWrench as farWrench,
 } from "@fortawesome/pro-regular-svg-icons";
 
+import {
+  faPersonDigging as fadPersonDigging
+} from "@fortawesome/pro-duotone-svg-icons";
+
 library.add(
   fasArrowsRotate,
   fasAt,
@@ -234,6 +238,8 @@ library.add(
   farUserPlus,
   farUserShield,
   farWrench,
+
+  fadPersonDigging,
 );
 
 createApp(App)

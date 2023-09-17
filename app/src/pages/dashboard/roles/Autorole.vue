@@ -10,10 +10,28 @@
       </div>
       <div v-else>
         <div class="dashboard-title-container">
-          Memberships
+          <div class="dashboard-title">AutoRoles</div>
         </div>
         <div class="dashboard-contents">
           <div class="dashboard-inputs">
+            <form-value
+              title="Enable AutoRole"
+              :type="FormTypeToggle"
+              v-model="config.enabled"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.enabled"
+              >Automatically give users roles when they join your
+              server.</form-value
+            >
+
+            <form-value title="Roles" :type="FormTypeBlank" :hideBorder="true" :validation="v$.roles">
+              <role-table
+                :roles="$store.getters.getAssignableGuildRoles"
+                :selectedRoles="config.roles"
+                @removeRole="onRemoveRole"
+                @selectRole="onSelectRole"
+              ></role-table>
+            </form-value>
           </div>
           <unsaved-changes
             :unsavedChanges="unsavedChanges"
@@ -27,9 +45,10 @@
 </template>
 
 <script>
-import {computed, ref } from "vue";
+import { computed, ref } from "vue";
 
 import useVuelidate from "@vuelidate/core";
+import { helpers, requiredIf } from "@vuelidate/validators";
 
 import {
   FormTypeBlank,
@@ -37,14 +56,14 @@ import {
   FormTypeRoleList,
 } from "@/components/dashboard/FormValueEnum";
 
-import ComingSoon from '../../components/dashboard/ComingSoon.vue';
-import UnsavedChanges from "@/components/dashboard/UnsavedChanges.vue";
 import EmbedBuilder from "@/components/dashboard/EmbedBuilder.vue";
 import FormValue from "@/components/dashboard/FormValue.vue";
+import RoleTable from "@/components/dashboard/RoleTable.vue";
+import UnsavedChanges from "@/components/dashboard/UnsavedChanges.vue";
 import LoadingIcon from "@/components/LoadingIcon.vue";
 
-import dashboardAPI from "@/api/dashboard";
 import endpoints from "@/api/endpoints";
+import dashboardAPI from "@/api/dashboard";
 
 import {
   getErrorToast,
@@ -59,7 +78,7 @@ export default {
     EmbedBuilder,
     UnsavedChanges,
     LoadingIcon,
-    ComingSoon
+    RoleTable,
   },
   setup() {
     let isDataFetched = ref(false);
@@ -75,7 +94,11 @@ export default {
     const validation_rules = computed(() => {
       const validation_rules = {
         enabled: {},
-        roles: {},
+        roles: {
+          required: helpers.withMessage("No roles have been selected", requiredIf(
+            config.value.enabled
+          ))
+        },
       };
 
       return validation_rules;
@@ -100,7 +123,6 @@ export default {
       v$,
     };
   },
-
   mounted() {
     this.fetchConfig();
   },
@@ -111,7 +133,7 @@ export default {
       this.isDataError = false;
 
       dashboardAPI.getConfig(
-        endpoints.EndpointGuild(this.$store.getters.getSelectedGuildID),
+        endpoints.EndpointGuildAutorole(this.$store.getters.getSelectedGuildID),
         ({ config }) => {
           this.config = config;
           this.isDataFetched = true;
@@ -139,7 +161,7 @@ export default {
       this.isChangeInProgress = true;
 
       dashboardAPI.setConfig(
-        endpoints.EndpointGuild(this.$store.getters.getSelectedGuildID),
+        endpoints.EndpointGuildAutorole(this.$store.getters.getSelectedGuildID),
         this.config,
         null,
         ({ config }) => {
@@ -159,6 +181,24 @@ export default {
 
     onValueUpdate() {
       this.unsavedChanges = true;
+    },
+
+    onSelectRole(roleID) {
+      let role = this.$store.getters.getGuildRoleById(roleID);
+      if (role !== undefined) {
+        this.config.roles.push(role.id);
+        this.config.roles.sort(
+          (a, b) =>
+            this.$store.getters.getGuildRoleById(a)?.position -
+            this.$store.getters.getGuildRoleById(b)?.position
+        );
+        this.onValueUpdate();
+      }
+    },
+
+    onRemoveRole(roleID) {
+      this.config.roles = this.config.roles.filter((role) => role !== roleID);
+      this.onValueUpdate();
     },
   },
 };

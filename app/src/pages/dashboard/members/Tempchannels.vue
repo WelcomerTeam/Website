@@ -10,10 +10,36 @@
       </div>
       <div v-else>
         <div class="dashboard-title-container">
-          Memberships
+          <div class="dashboard-title">TempChannels</div>
         </div>
         <div class="dashboard-contents">
           <div class="dashboard-inputs">
+            <form-value
+              title="Enable TempChannels"
+              :type="FormTypeToggle"
+              v-model="config.enabled"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.enabled"
+              >Allow users to create their own temporary voice channels in a category of your choice.</form-value
+            >
+
+            <form-value
+              title="TempChannels Category"
+              :type="FormTypeChannelList"
+              v-model="config.channel_category"
+              @update:modelValue="onValueUpdate"
+              :validation="v$.channel_category"
+              :inlineSlot="true"
+              :nullable="true"
+              :disabled="!config.enabled"
+              :channelFilter="4" 
+              >This is the category temporary channels will be created in.</form-value
+            >
+
+            <!-- "enabled": false,
+            "autopurge": false,
+            "channel_lobby": null,
+            "channel_category": null, -->
           </div>
           <unsaved-changes
             :unsavedChanges="unsavedChanges"
@@ -27,17 +53,17 @@
 </template>
 
 <script>
-import {computed, ref } from "vue";
+import { computed, ref } from "vue";
 
 import useVuelidate from "@vuelidate/core";
+import { helpers, requiredIf } from "@vuelidate/validators";
 
 import {
   FormTypeBlank,
   FormTypeToggle,
-  FormTypeRoleList,
+  FormTypeChannelList,
 } from "@/components/dashboard/FormValueEnum";
 
-import ComingSoon from '../../components/dashboard/ComingSoon.vue';
 import UnsavedChanges from "@/components/dashboard/UnsavedChanges.vue";
 import EmbedBuilder from "@/components/dashboard/EmbedBuilder.vue";
 import FormValue from "@/components/dashboard/FormValue.vue";
@@ -53,13 +79,13 @@ import {
   navigateToErrors,
 } from "@/utilities";
 
+
 export default {
   components: {
     FormValue,
     EmbedBuilder,
     UnsavedChanges,
     LoadingIcon,
-    ComingSoon
   },
   setup() {
     let isDataFetched = ref(false);
@@ -75,7 +101,12 @@ export default {
     const validation_rules = computed(() => {
       const validation_rules = {
         enabled: {},
-        roles: {},
+        autopurge: {},
+        channel_lobby: {},
+        channel_category: {
+          required: helpers.withMessage("The category is required", requiredIf(config.value.enabled))
+        },
+        default_user_count: {},
       };
 
       return validation_rules;
@@ -86,7 +117,7 @@ export default {
     return {
       FormTypeBlank,
       FormTypeToggle,
-      FormTypeRoleList,
+      FormTypeChannelList,
 
       isDataFetched,
       isDataError,
@@ -111,7 +142,7 @@ export default {
       this.isDataError = false;
 
       dashboardAPI.getConfig(
-        endpoints.EndpointGuild(this.$store.getters.getSelectedGuildID),
+        endpoints.EndpointGuildTempchannels(this.$store.getters.getSelectedGuildID),
         ({ config }) => {
           this.config = config;
           this.isDataFetched = true;
@@ -139,7 +170,7 @@ export default {
       this.isChangeInProgress = true;
 
       dashboardAPI.setConfig(
-        endpoints.EndpointGuild(this.$store.getters.getSelectedGuildID),
+        endpoints.EndpointGuildTempchannels(this.$store.getters.getSelectedGuildID),
         this.config,
         null,
         ({ config }) => {
