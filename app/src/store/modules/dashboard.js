@@ -110,7 +110,7 @@ const actions = {
           commit("setGuild", { guild, hasWelcomer });
         },
         () => commit("setGuild", { guild: null, hasWelcomer: false })
-      );  
+      );
     }
   },
 

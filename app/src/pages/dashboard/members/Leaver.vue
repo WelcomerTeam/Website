@@ -14,48 +14,23 @@
         </div>
         <div class="dashboard-contents">
           <div class="dashboard-inputs">
-            <form-value
-              title="Enable Leaver"
-              :type="FormTypeToggle"
-              v-model="config.enabled"
-              @update:modelValue="onValueUpdate"
-              :validation="v$.enabled"
-              >Send messages in a channel when users leave your server.</form-value
-            >
+            <form-value title="Enable Leaver" :type="FormTypeToggle" v-model="config.enabled"
+              @update:modelValue="onValueUpdate" :validation="v$.enabled">Send messages in a channel when users leave your
+              server.</form-value>
 
-            <form-value
-              title="Leaver Channel"
-              :type="FormTypeChannelListCategories"
-              v-model="config.channel"
-              @update:modelValue="onValueUpdate"
-              :validation="v$.channel"
-              :inlineSlot="true"
-              :nullable="true"
-              >This is the channel we will send leaver messages to.</form-value
-            >
-            
-            <form-value
-              title="Leaver Message"
-              :type="FormTypeEmbed"
-              v-model="config.message_json"
-              @update:modelValue="onValueUpdate"
-              :validation="v$.message_json"
-              :inlineSlot="true"
-              >This is the message that will be sent when users leave.
-              <a
-                target="_blank"
-                href="/formatting"
-                class="text-primary hover:text-primary-dark"
-                >Click here</a
-              >
+            <form-value title="Leaver Channel" :type="FormTypeChannelListCategories" v-model="config.channel"
+              @update:modelValue="onValueUpdate" :validation="v$.channel" :inlineSlot="true" :nullable="true">This is the
+              channel we will send leaver messages to.</form-value>
+
+            <form-value title="Leaver Message" :type="FormTypeEmbed" v-model="config.message_json"
+              @update:modelValue="onValueUpdate" :validation="v$.message_json" :inlineSlot="true">This is the message that
+              will be sent when users leave.
+              <a target="_blank" href="/formatting" class="text-primary hover:text-primary-dark">Click here</a>
               to view all the formatting tags you can use for custom text.
             </form-value>
           </div>
-          <unsaved-changes
-            :unsavedChanges="unsavedChanges"
-            :isChangeInProgress="isChangeInProgress"
-            @save="saveConfig"
-          ></unsaved-changes>
+          <unsaved-changes :unsavedChanges="unsavedChanges" :isChangeInProgress="isChangeInProgress"
+            @save="saveConfig"></unsaved-changes>
         </div>
       </div>
     </div>
@@ -69,10 +44,10 @@ import useVuelidate from "@vuelidate/core";
 import { helpers, requiredIf } from "@vuelidate/validators";
 
 import {
-FormTypeBlank,
-FormTypeToggle,
-FormTypeChannelListCategories,
-FormTypeEmbed,
+  FormTypeBlank,
+  FormTypeToggle,
+  FormTypeChannelListCategories,
+  FormTypeEmbed,
 } from "@/components/dashboard/FormValueEnum";
 
 import EmbedBuilder from "@/components/dashboard/EmbedBuilder.vue";

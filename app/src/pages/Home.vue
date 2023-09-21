@@ -23,20 +23,14 @@
         </div>
         <div class="hero-accompany">
           <div class="flex w-full h-full">
-            <DiscordEmbed
-              class="max-w-full m-auto"
-              :isBot="true"
-              :showTimestamp="true"
-              :isDark="true"
-              :embeds="[
-                {
-                  description: `Hey **ImRock**, you are the 256th member on **Welcomer Support Guild**`,
-                  image: {
-                    url: '/assets/welcomerImage.svg',
-                  },
+            <DiscordEmbed class="max-w-full m-auto" :isBot="true" :showTimestamp="true" :isDark="true" :embeds="[
+              {
+                description: `Hey **ImRock**, you are the 256th member on **Welcomer Support Guild**`,
+                image: {
+                  url: '/assets/welcomerImage.svg',
                 },
-              ]"
-            />
+              },
+            ]" />
           </div>
         </div>
       </div>
@@ -44,38 +38,25 @@
       <div class="bg-white text-secondary">
         <div class="hero-preview">
           <div class="pb-12 prose-lg text-center">
-            <h1
-              class="text-lg font-black leading-8 tracking-tighter text-gray-900"
-            >
+            <h1 class="text-lg font-black leading-8 tracking-tighter text-gray-900">
               Improve your user engagement
             </h1>
-            <span
-              class="text-lg text-gray-500 max-w-3xl mx-auto section-subtitle"
-              >See why others use Welcomer to power their discord guilds. With
+            <span class="text-lg text-gray-500 max-w-3xl mx-auto section-subtitle">See why others use Welcomer to power
+              their discord guilds. With
               many features and an easy to use dashboard, you can make whatever
               changes whenever you want.
             </span>
           </div>
 
-          <div
-            v-for="item in previews"
-            :key="item.name"
-            class="hero-preview-item"
-          >
+          <div v-for="item in previews" :key="item.name" class="hero-preview-item">
             <div class="my-auto text-center sm:text-left">
               <div>
-                <h2
-                  class="mb-4 text-3xl font-black leading-tight text-gray-900"
-                >
+                <h2 class="mb-4 text-3xl font-black leading-tight text-gray-900">
                   {{ item.name }}
                 </h2>
-                <span class="text-gray-500"
-                  >{{ item.description }}
-                  <router-link
-                    :to="item.href"
-                    v-if="item.href"
-                    class="text-primary hover:text-primary-dark font-semibold"
-                  >
+                <span class="text-gray-500">{{ item.description }}
+                  <router-link :to="item.href" v-if="item.href"
+                    class="text-primary hover:text-primary-dark font-semibold">
                     {{ item.label }}
                   </router-link>
                 </span>
@@ -91,11 +72,8 @@
       <div class="bg-primary">
         <div class="hero-features">
           <div class="hero-features-item">
-            <div
-              v-for="item in features"
-              :key="item.name"
-              class="p-4 mx-0 my-3 text-center rounded-lg sm:text-left sm:mx-2 hover:bg-primary-light"
-            >
+            <div v-for="item in features" :key="item.name"
+              class="p-4 mx-0 my-3 text-center rounded-lg sm:text-left sm:mx-2 hover:bg-primary-light">
               <h2 class="text-xl font-medium text-white">{{ item.name }}</h2>
               <p>{{ item.description }}</p>
             </div>
@@ -104,26 +82,17 @@
       </div>
 
       <div class="bg-secondary">
-        <div
-          class="px-4 py-12 mx-auto text-center max-w-prose sm:px-6 md:py-16 lg:px-7 lg:py-20"
-        >
-          <h2
-            class="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl"
-          >
+        <div class="px-4 py-12 mx-auto text-center max-w-prose sm:px-6 md:py-16 lg:px-7 lg:py-20">
+          <h2 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             <span class="block text-white">Ready to get started?</span>
-            <span class="block text-primary"
-              >Invite Welcomer today, it's free.</span
-            >
+            <span class="block text-primary">Invite Welcomer today, it's free.</span>
           </h2>
           <p class="mt-5 text-lg leading-6 text-gray-400">
             Welcomer helps assist moderation and improve user engagement, get
             started today.
           </p>
           <router-link to="/invite">
-            <button
-              type="button"
-              class="w-32 mt-4 cta-button bg-primary hover:bg-primary-dark"
-            >
+            <button type="button" class="w-32 mt-4 cta-button bg-primary hover:bg-primary-dark">
               Invite
             </button>
           </router-link>

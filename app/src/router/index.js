@@ -65,8 +65,7 @@ const routes = [
           {
             name: "dashboard.guild.borderwall",
             path: "borderwall",
-            component: () =>
-              import("@/pages/dashboard/members/Borderwall.vue"),
+            component: () => import("@/pages/dashboard/members/Borderwall.vue"),
           },
           {
             name: "dashboard.guild.leaver",
@@ -76,7 +75,8 @@ const routes = [
           {
             name: "dashboard.guild.tempchannels",
             path: "tempchannels",
-            component: () => import("@/pages/dashboard/members/Tempchannels.vue"),
+            component: () =>
+              import("@/pages/dashboard/members/Tempchannels.vue"),
           },
 
           {

@@ -2,53 +2,17 @@
   <div class="relative overflow-hidden mx-auto carousel-container top-10">
     <div class="carousel-overlay"></div>
     <div class="absolute overflow-hidden left-0 top-0 carousel">
-      <img
-        src="/assets/examples/Example.png"
-        class="carousel-item"
-        style="--color: #3bc8bf"
-      />
-      <img
-        src="/assets/examples/SkribbleExample.png"
-        class="carousel-item"
-        style="--color: #0a53d0"
-      />
-      <img
-        src="/assets/examples/WelcomerExample.png"
-        class="carousel-item"
-        style="--color: #4c2035"
-      />
+      <img src="/assets/examples/Example.png" class="carousel-item" style="--color: #3bc8bf" />
+      <img src="/assets/examples/SkribbleExample.png" class="carousel-item" style="--color: #0a53d0" />
+      <img src="/assets/examples/WelcomerExample.png" class="carousel-item" style="--color: #4c2035" />
       <!-- Set 2 -->
-      <img
-        src="/assets/examples/Example.png"
-        class="carousel-item"
-        style="--color: #3bc8bf"
-      />
-      <img
-        src="/assets/examples/SkribbleExample.png"
-        class="carousel-item"
-        style="--color: #0a53d0"
-      />
-      <img
-        src="/assets/examples/WelcomerExample.png"
-        class="carousel-item"
-        style="--color: #4c2035"
-      />
+      <img src="/assets/examples/Example.png" class="carousel-item" style="--color: #3bc8bf" />
+      <img src="/assets/examples/SkribbleExample.png" class="carousel-item" style="--color: #0a53d0" />
+      <img src="/assets/examples/WelcomerExample.png" class="carousel-item" style="--color: #4c2035" />
       <!-- Set 3 -->
-      <img
-        src="/assets/examples/Example.png"
-        class="carousel-item"
-        style="--color: #3bc8bf"
-      />
-      <img
-        src="/assets/examples/SkribbleExample.png"
-        class="carousel-item"
-        style="--color: #0a53d0"
-      />
-      <img
-        src="/assets/examples/WelcomerExample.png"
-        class="carousel-item"
-        style="--color: #4c2035"
-      />
+      <img src="/assets/examples/Example.png" class="carousel-item" style="--color: #3bc8bf" />
+      <img src="/assets/examples/SkribbleExample.png" class="carousel-item" style="--color: #0a53d0" />
+      <img src="/assets/examples/WelcomerExample.png" class="carousel-item" style="--color: #4c2035" />
     </div>
   </div>
 </template>
@@ -71,13 +35,11 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
-  background: linear-gradient(
-    90deg,
-    var(--background-tertiary) 0%,
-    transparent 20%,
-    transparent 80%,
-    var(--background-tertiary) 100%
-  );
+  background: linear-gradient(90deg,
+      var(--background-tertiary) 0%,
+      transparent 20%,
+      transparent 80%,
+      var(--background-tertiary) 100%);
   mask: linear-gradient(90deg, black 0%, white 20%, white 80%, black 100%);
   position: absolute;
   z-index: 1;
@@ -89,10 +51,7 @@
 
 .carousel {
   animation: moveSlideshow 10s linear infinite;
-  width: calc(
-    var(--carousel-item-width) * var(--carousel-item-count) *
-      var(--carousel-set-count)
-  );
+  width: calc(var(--carousel-item-width) * var(--carousel-item-count) * var(--carousel-set-count));
   height: 162px;
 }
 
@@ -108,9 +67,7 @@
 
 @keyframes moveSlideshow {
   100% {
-    transform: translateX(
-      calc(0px - (var(--carousel-item-width) * var(--carousel-item-count)))
-    );
+    transform: translateX(calc(0px - (var(--carousel-item-width) * var(--carousel-item-count))));
   }
 }
 </style>

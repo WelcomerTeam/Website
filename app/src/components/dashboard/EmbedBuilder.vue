@@ -1,81 +1,50 @@
 <template>
   <Popover as="div" v-slot="{ open }" class="relative">
-    <div
-      :class="[
-        $props.invalid
-          ? 'ring-red-500 border-red-500'
-          : 'border-gray-300 dark:border-secondary-light',
-        open ? 'rounded-b-none' : '',
-        'border p-4 rounded-md flex shadow-sm text-left',
-      ]"
-    >
-      <discord-embed
-        class="flex-1"
-        :embeds="parseDict(modelValue).embeds"
-        :content="parseDict(modelValue).content"
-        :isLight="true"
-        :isBot="true"
-      />
+    <div :class="[
+      $props.invalid
+        ? 'ring-red-500 border-red-500'
+        : 'border-gray-300 dark:border-secondary-light',
+      open ? 'rounded-b-none' : '',
+      'border p-4 rounded-md flex shadow-sm text-left',
+    ]">
+      <discord-embed class="flex-1" :embeds="parseDict(modelValue).embeds" :content="parseDict(modelValue).content"
+        :isLight="true" :isBot="true" />
 
       <div class="flex items-end">
         <div class="relative">
-          <PopoverButton
-            :class="[
-              $props.disabled
-                ? 'bg-gray-100 dark:bg-secondary-light'
-                : 'bg-white dark:bg-secondary',
-              'relative py-2 pl-3 pr-10 text-left border border-gray-300 dark:border-secondary-light rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
-            ]"
-            :disabled="$props.disabled"
-          >
+          <PopoverButton :class="[
+            $props.disabled
+              ? 'bg-gray-100 dark:bg-secondary-light'
+              : 'bg-white dark:bg-secondary',
+            'relative py-2 pl-3 pr-10 text-left border border-gray-300 dark:border-secondary-light rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
+          ]" :disabled="$props.disabled">
             <div class="">
-              <font-awesome-icon
-                icon="pen-to-square"
-                class="w-5 h-5 text-gray-400"
-                aria-hidden="true"
-              />
+              <font-awesome-icon icon="pen-to-square" class="w-5 h-5 text-gray-400" aria-hidden="true" />
             </div>
-            <span
-              class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none"
-            >
-              <ChevronDownIcon
-                :class="[
-                  open ? 'transform rotate-180' : '',
-                  'w-5 h-5 text-gray-400',
-                ]"
-                aria-hidden="true"
-              />
+            <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+              <ChevronDownIcon :class="[
+                open ? 'transform rotate-180' : '',
+                'w-5 h-5 text-gray-400',
+              ]" aria-hidden="true" />
             </span>
           </PopoverButton>
         </div>
       </div>
     </div>
-    <transition
-      leave-active-class="transition duration-100 ease-in"
-      leave-from-class="opacity-100"
-      leave-to-class="opacity-0"
-    >
+    <transition leave-active-class="transition duration-100 ease-in" leave-from-class="opacity-100"
+      leave-to-class="opacity-0">
       <PopoverPanel
-        class="block w-full overflow-auto text-base bg-white dark:bg-secondary rounded-md shadow-sm sm:text-sm rounded-t-none border-t-0"
-      >
-        <div
-          class="border-gray-300 dark:border-secondary-light rounded-md border shadow-sm rounded-t-none border-t-0"
-        >
+        class="block w-full overflow-auto text-base bg-white dark:bg-secondary rounded-md shadow-sm sm:text-sm rounded-t-none border-t-0">
+        <div class="border-gray-300 dark:border-secondary-light rounded-md border shadow-sm rounded-t-none border-t-0">
           <div class="block">
             <div class="border-b border-gray-200 dark:border-secondary-light">
               <nav class="flex display-flex justify-evenly" aria-label="Tabs">
-                <a
-                  v-for="tab in tabs"
-                  :key="tab.name"
-                  @click="this.page = tab.value"
-                  :class="[
-                    tab.value == this.page
-                      ? 'border-primary text-primary'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-primary-light dark:text-gray-50',
-                    'whitespace-nowrap flex py-4 px-1 border-b-2 font-medium text-sm cursor-pointer w-full justify-center',
-                  ]"
-                  :aria-current="tab.value == this.page ? 'page' : undefined"
-                >
+                <a v-for="tab in tabs" :key="tab.name" @click="this.page = tab.value" :class="[
+                  tab.value == this.page
+                    ? 'border-primary text-primary'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-primary-light dark:text-gray-50',
+                  'whitespace-nowrap flex py-4 px-1 border-b-2 font-medium text-sm cursor-pointer w-full justify-center',
+                ]" :aria-current="tab.value == this.page ? 'page' : undefined">
                   {{ tab.name }}
                 </a>
               </nav>
@@ -84,155 +53,91 @@
 
           <div class="py-4">
             <!-- Embed Builder -->
-            <div
-              class="divide-y divide-gray-300 dark:divide-secondary-light"
-              v-if="this.page == 1"
-            >
+            <div class="divide-y divide-gray-300 dark:divide-secondary-light" v-if="this.page == 1">
               <div class="px-4 lg:px-8 space-y-2">
                 <!-- Content -->
-                <div
-                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
-                >
-                  <div
-                    class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
-                  >
+                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0">
+                  <div class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none">
                     <span class="embed-builder-title">Content</span>
                   </div>
                   <div class="mt-1 sm:mt-0 sm:col-span-7">
-                    <textarea
-                      type="text"
+                    <textarea type="text"
                       class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
-                      placeholder="Message Content"
-                      rows="4"
-                      :value="content"
-                      @input="updateContent($event.target.value)"
-                    />
+                      placeholder="Message Content" rows="4" :value="content"
+                      @input="updateContent($event.target.value)" />
                   </div>
                 </div>
               </div>
 
               <div class="pt-5 mt-5 px-4 lg:px-8 space-y-2">
                 <!-- Title -->
-                <div
-                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
-                >
-                  <div
-                    class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
-                  >
+                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0">
+                  <div class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none">
                     <span class="embed-builder-title">Embed Title</span>
                   </div>
                   <div class="mt-1 sm:mt-0 sm:col-span-7">
-                    <input
-                      type="text"
+                    <input type="text"
                       class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
-                      placeholder="Embed Title"
-                      v-model="title"
-                      @input="updateEmbed()"
-                    />
+                      placeholder="Embed Title" v-model="title" @input="updateEmbed()" />
                   </div>
                 </div>
 
                 <!-- URL -->
-                <div
-                  v-if="this.isExpanded"
-                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
-                >
-                  <div
-                    class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
-                  >
+                <div v-if="this.isExpanded"
+                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0">
+                  <div class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none">
                     <span class="embed-builder-title">Embed Title URL</span>
                   </div>
                   <div class="mt-1 sm:mt-0 sm:col-span-7">
-                    <input
-                      type="text"
+                    <input type="text"
                       class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
-                      placeholder="Embed Title URL"
-                      v-model="url"
-                      @input="updateEmbed()"
-                    />
+                      placeholder="Embed Title URL" v-model="url" @input="updateEmbed()" />
                   </div>
                 </div>
 
                 <!-- Description -->
-                <div
-                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
-                >
-                  <div
-                    class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
-                  >
+                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0">
+                  <div class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none">
                     <span class="embed-builder-title">Embed Description</span>
                   </div>
                   <div class="mt-1 sm:mt-0 sm:col-span-7">
                     <textarea
                       class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
-                      placeholder="Embed Description"
-                      v-model="description"
-                      @input="updateEmbed()"
-                    />
+                      placeholder="Embed Description" v-model="description" @input="updateEmbed()" />
                   </div>
                 </div>
                 <!-- Colour -->
-                <div
-                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
-                >
-                  <div
-                    class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
-                  >
+                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0">
+                  <div class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none">
                     <span class="embed-builder-title">Embed Colour</span>
                   </div>
                   <div class="mt-1 sm:mt-0 sm:col-span-7 flex items-center">
-                    <input
-                      id="useColour"
-                      aria-describedby="Use custom embed colour"
-                      name="Use Custom Embed Colour"
-                      type="checkbox"
-                      :true-value="true"
-                      :false-value="false"
+                    <input id="useColour" aria-describedby="Use custom embed colour" name="Use Custom Embed Colour"
+                      type="checkbox" :true-value="true" :false-value="false"
                       class="focus:ring-primary h-4 w-4 text-primary border-gray-300 dark:bg-secondary-dark dark:border-secondary-light rounded mr-2"
-                      v-model="use_color"
-                      @change="updateEmbed()"
-                    />
+                      v-model="use_color" @change="updateEmbed()" />
                     <Listbox as="div" class="flex-1">
                       <div class="relative">
                         <ListboxButton
-                          class="relative w-full py-2 pl-3 pr-10 text-left bg-white border border-gray-300 dark:bg-secondary dark:border-secondary-light rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
-                        >
-                          <div
-                            class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
-                          >
-                            <font-awesome-icon
-                              icon="square"
-                              class="inline w-4 h-4 mr-1 border-primary"
-                              :style="{
-                                color: `${RGBIntToRGB(color, 2450411)}`,
-                              }"
-                            />
+                          class="relative w-full py-2 pl-3 pr-10 text-left bg-white border border-gray-300 dark:bg-secondary dark:border-secondary-light rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm">
+                          <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <font-awesome-icon icon="square" class="inline w-4 h-4 mr-1 border-primary" :style="{
+                              color: `${RGBIntToRGB(color, 2450411)}`,
+                            }" />
                           </div>
                           <span class="block pl-10 truncate">{{
                             RGBIntToRGB(color, 2450411).toUpperCase()
                           }}</span>
-                          <span
-                            class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none"
-                          >
-                            <SelectorIcon
-                              class="w-5 h-5 text-gray-400"
-                              aria-hidden="true"
-                            />
+                          <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                            <SelectorIcon class="w-5 h-5 text-gray-400" aria-hidden="true" />
                           </span>
                         </ListboxButton>
 
-                        <transition
-                          leave-active-class="transition duration-100 ease-in"
-                          leave-from-class="opacity-100"
-                          leave-to-class="opacity-0"
-                        >
+                        <transition leave-active-class="transition duration-100 ease-in" leave-from-class="opacity-100"
+                          leave-to-class="opacity-0">
                           <ListboxOptions class="absolute z-10 mt-1">
-                            <ColorPicker
-                              theme="dark"
-                              :color="RGBIntToRGB(color, 2450411)"
-                              @changeColor="SetColorRGBIntToRGB"
-                              :sucker-hide="true"
-                            />
+                            <ColorPicker theme="dark" :color="RGBIntToRGB(color, 2450411)"
+                              @changeColor="SetColorRGBIntToRGB" :sucker-hide="true" />
                           </ListboxOptions>
                         </transition>
                       </div>
@@ -244,65 +149,35 @@
               <div v-if="this.isExpanded" class="pt-5 mt-5 px-4 lg:px-8 space-y-2">
                 <!-- Fields -->
                 <div
-                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start border-gray-200 dark:border-secondary-light mb-4 sm:mb-0"
-                >
-                  <div
-                    class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
-                  >
+                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start border-gray-200 dark:border-secondary-light mb-4 sm:mb-0">
+                  <div class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none">
                     <span class="embed-builder-title">Fields</span>
                   </div>
                   <div class="mt-1 sm:mt-0 sm:col-span-7 space-y-2">
-                    <div
-                      class="p-3 border rounded-md border-gray-300 dark:border-secondary-light shadow-sm space-y-2"
-                      :key="index"
-                      v-for="(field, index) in fields"
-                    >
-                      <input
-                        type="text"
+                    <div class="p-3 border rounded-md border-gray-300 dark:border-secondary-light shadow-sm space-y-2"
+                      :key="index" v-for="(field, index) in fields">
+                      <input type="text"
                         class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
-                        placeholder="Field Name"
-                        v-model="field.name"
-                        @input="updateEmbed()"
-                      />
-                      <input
-                        type="text"
+                        placeholder="Field Name" v-model="field.name" @input="updateEmbed()" />
+                      <input type="text"
                         class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
-                        placeholder="Field Value"
-                        v-model="field.value"
-                        @input="updateEmbed()"
-                      />
+                        placeholder="Field Value" v-model="field.value" @input="updateEmbed()" />
                       <div class="flex items-center">
                         <div class="flex-1">
-                          <input
-                            id="useInline"
-                            aria-describedby="Show embed field inline"
-                            name="Use Inline"
-                            type="checkbox"
-                            :true-value="true"
-                            :false-value="false"
+                          <input id="useInline" aria-describedby="Show embed field inline" name="Use Inline"
+                            type="checkbox" :true-value="true" :false-value="false"
                             class="focus:ring-primary h-4 w-4 text-primary border-gray-300 dark:bg-secondary-dark dark:border-secondary-light rounded"
-                            v-model="field.inline"
-                            @change="updateEmbed()"
-                          />
-                          <span
-                            class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-50 shadow-sm"
-                            >Inline</span
-                          >
+                            v-model="field.inline" @change="updateEmbed()" />
+                          <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-50 shadow-sm">Inline</span>
                         </div>
-                        <button
-                          type="button"
+                        <button type="button"
                           class="inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-                          @click="removeField(index)"
-                        >
+                          @click="removeField(index)">
                           <font-awesome-icon icon="close" />
                         </button>
                       </div>
                     </div>
-                    <button
-                      type="button"
-                      class="cta-button bg-primary hover:bg-primary-dark"
-                      @click="newField"
-                    >
+                    <button type="button" class="cta-button bg-primary hover:bg-primary-dark" @click="newField">
                       Create New Field
                     </button>
                   </div>
@@ -311,166 +186,102 @@
 
               <div v-if="this.isExpanded" class="pt-5 mt-5 px-4 lg:px-8 space-y-2">
                 <!-- Image URL -->
-                <div
-                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
-                >
-                  <div
-                    class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
-                  >
+                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0">
+                  <div class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none">
                     <span class="embed-builder-title">Embed Image URL</span>
                   </div>
                   <div class="mt-1 sm:mt-0 sm:col-span-7">
-                    <input
-                      type="text"
+                    <input type="text"
                       class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
-                      placeholder="Embed Image URL"
-                      v-model="image_url"
-                      @input="updateEmbed()"
-                    />
+                      placeholder="Embed Image URL" v-model="image_url" @input="updateEmbed()" />
                   </div>
                 </div>
 
                 <!-- Thumbnail URL -->
-                <div
-                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
-                >
-                  <div
-                    class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
-                  >
+                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0">
+                  <div class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none">
                     <span class="embed-builder-title">Thumbnail Image URL</span>
                   </div>
                   <div class="mt-1 sm:mt-0 sm:col-span-7">
-                    <input
-                      type="text"
+                    <input type="text"
                       class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
-                      placeholder="Thumbnail Image URL"
-                      v-model="thumbnail_url"
-                      @input="updateEmbed()"
-                    />
+                      placeholder="Thumbnail Image URL" v-model="thumbnail_url" @input="updateEmbed()" />
                   </div>
                 </div>
               </div>
 
               <div v-if="this.isExpanded" class="pt-5 mt-5 px-4 lg:px-8 space-y-2">
                 <!-- Footer Text -->
-                <div
-                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
-                >
-                  <div
-                    class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
-                  >
+                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0">
+                  <div class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none">
                     <span class="embed-builder-title">Footer Text</span>
                   </div>
                   <div class="mt-1 sm:mt-0 sm:col-span-7">
-                    <input
-                      type="text"
+                    <input type="text"
                       class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
-                      placeholder="Footer Text"
-                      v-model="footer_text"
-                      @input="updateEmbed()"
-                    />
+                      placeholder="Footer Text" v-model="footer_text" @input="updateEmbed()" />
                   </div>
                 </div>
 
                 <!-- Footer Icon -->
-                <div
-                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
-                >
-                  <div
-                    class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
-                  >
+                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0">
+                  <div class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none">
                     <span class="embed-builder-title">Footer Icon URL</span>
                   </div>
                   <div class="mt-1 sm:mt-0 sm:col-span-7">
-                    <input
-                      type="text"
+                    <input type="text"
                       class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
-                      placeholder="Footer Icon URL"
-                      v-model="footer_icon"
-                      @input="updateEmbed()"
-                    />
+                      placeholder="Footer Icon URL" v-model="footer_icon" @input="updateEmbed()" />
                   </div>
                 </div>
               </div>
 
               <div v-if="this.isExpanded" class="pt-5 mt-5 px-4 lg:px-8 space-y-2">
                 <!-- Author Name -->
-                <div
-                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
-                >
-                  <div
-                    class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
-                  >
+                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0">
+                  <div class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none">
                     <span class="embed-builder-title">Author Name</span>
                   </div>
                   <div class="mt-1 sm:mt-0 sm:col-span-7">
-                    <input
-                      type="text"
+                    <input type="text"
                       class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
-                      placeholder="Author Name"
-                      v-model="author_name"
-                      @input="updateEmbed()"
-                    />
+                      placeholder="Author Name" v-model="author_name" @input="updateEmbed()" />
                   </div>
                 </div>
 
                 <!-- Author URL -->
-                <div
-                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
-                >
-                  <div
-                    class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
-                  >
+                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0">
+                  <div class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none">
                     <span class="embed-builder-title">Author URL</span>
                   </div>
                   <div class="mt-1 sm:mt-0 sm:col-span-7">
-                    <input
-                      type="text"
+                    <input type="text"
                       class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
-                      placeholder="Author URL"
-                      v-model="author_url"
-                      @input="updateEmbed()"
-                    />
+                      placeholder="Author URL" v-model="author_url" @input="updateEmbed()" />
                   </div>
                 </div>
 
                 <!-- Author Icon URL -->
-                <div
-                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0"
-                >
-                  <div
-                    class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none"
-                  >
+                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0">
+                  <div class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none">
                     <span class="embed-builder-title">Author Icon URL</span>
                   </div>
                   <div class="mt-1 sm:mt-0 sm:col-span-7">
-                    <input
-                      type="text"
+                    <input type="text"
                       class="flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light dark:bg-secondary-dark rounded-md focus:ring-primary focus:border-primary sm:text-sm"
-                      placeholder="Author Icon URL"
-                      v-model="author_icon_url"
-                      @input="updateEmbed()"
-                    />
+                      placeholder="Author Icon URL" v-model="author_icon_url" @input="updateEmbed()" />
                   </div>
                 </div>
               </div>
-              
+
               <div v-if="!this.isExpanded" class="pt-5 mt-5 px-4 lg:px-8 space-y-2">
-                <button
-                  type="button"
-                  class="cta-button w-full bg-secondary hover:bg-secondary-dark"
-                  @click="expand"
-                >
+                <button type="button" class="cta-button w-full bg-secondary hover:bg-secondary-dark" @click="expand">
                   Show More Options
                 </button>
               </div>
 
               <div v-if="this.isExpanded" class="pt-5 mt-5 px-4 lg:px-8 space-y-2">
-                <button
-                  type="button"
-                  class="cta-button w-full bg-secondary hover:bg-secondary-dark"
-                  @click="shrink"
-                >
+                <button type="button" class="cta-button w-full bg-secondary hover:bg-secondary-dark" @click="shrink">
                   Hide More Options
                 </button>
               </div>
@@ -479,13 +290,8 @@
 
             <div class="px-4 lg:px-8" v-if="this.page == 2">
               <!-- Embed Code -->
-              <CodeEditor
-                :modelValue="modelValue"
-                @update:modelValue="updateValue($event)"
-                :languages="[['json', 'JSON']]"
-                :wrap_code="true"
-                width="100%"
-              />
+              <CodeEditor :modelValue="modelValue" @update:modelValue="updateValue($event)"
+                :languages="[['json', 'JSON']]" :wrap_code="true" width="100%" />
             </div>
           </div>
         </div>

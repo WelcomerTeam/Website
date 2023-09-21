@@ -2,11 +2,8 @@
   <div>
     <Header>
       <div class="lg:hidden">
-        <button
-          v-if="$route.name != 'dashboard.guilds'"
-          class="text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset"
-          @click="sidebarOpen = true"
-        >
+        <button v-if="$route.name != 'dashboard.guilds'"
+          class="text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset" @click="sidebarOpen = true">
           <span class="sr-only">Open sidebar</span>
           <MenuAlt1Icon class="w-6 h-6" aria-hidden="true" />
         </button>

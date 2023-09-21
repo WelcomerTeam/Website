@@ -1,58 +1,39 @@
 <template>
   <div>
     <div class="relative">
-      <img
-        v-if="$store.getters.getCurrentSelectedGuild?.banner"
-        :src="`https://cdn.discordapp.com/banners/${
-          $store.getters.getCurrentSelectedGuild?.id
-        }/${$store.getters.getCurrentSelectedGuild?.banner}.${
-          $store.getters.getCurrentSelectedGuild?.banner.startsWith('a_')
-            ? 'gif'
-            : 'png'
-        }?size=1024`"
-        class="w-full aspect-video object-cover max-h-64"
-      />
-      <div
-        v-else
-        :style="
-          getBackgroundGradient(
-            rgbIntToRGB(
-              $store.getters.getCurrentSelectedGuild?.embedColour
-                ? $store.getters.getCurrentSelectedGuild?.embedColour
-                : getDefaultGuildColour(
-                    $store.getters.getCurrentSelectedGuild?.id
-                  )
+      <img v-if="$store.getters.getCurrentSelectedGuild?.banner" :src="`https://cdn.discordapp.com/banners/${$store.getters.getCurrentSelectedGuild?.id
+        }/${$store.getters.getCurrentSelectedGuild?.banner}.${$store.getters.getCurrentSelectedGuild?.banner.startsWith('a_')
+          ? 'gif'
+          : 'png'
+        }?size=1024`" class="w-full aspect-video object-cover max-h-64" />
+      <div v-else :style="getBackgroundGradient(
+        rgbIntToRGB(
+          $store.getters.getCurrentSelectedGuild?.embedColour
+            ? $store.getters.getCurrentSelectedGuild?.embedColour
+            : getDefaultGuildColour(
+              $store.getters.getCurrentSelectedGuild?.id
             )
-          )
-        "
-        class="w-full aspect-video object-cover max-h-64"
-      />
+        )
+      )
+        " class="w-full aspect-video object-cover max-h-64" />
     </div>
     <div class="dashboard-container">
       <div class="pb-14">
-        <img
-          v-if="$store.getters.getCurrentSelectedGuild"
+        <img v-if="$store.getters.getCurrentSelectedGuild"
           class="w-32 h-32 rounded-full translate -translate-y-24 border-8 border-white bg-white dark:border-secondary dark:bg-secondary absolute"
-          :src="
-            $store.getters.getCurrentSelectedGuild?.icon !== ''
+          :src="$store.getters.getCurrentSelectedGuild?.icon !== ''
               ? `https://cdn.discordapp.com/icons/${$store.getters.getCurrentSelectedGuild?.id}/${$store.getters.getCurrentSelectedGuild?.icon}.webp?size=128`
               : '/assets/discordServer.svg'
-          "
-          alt="Guild icon"
-        />
+            " alt="Guild icon" />
       </div>
       <div class="dashboard-title-container">
         <div class="dashboard-title align-middle">
-          <span
-            v-if="$store.getters.guildHasWelcomerPro"
-            class="mr-2 inline-flex items-center p-2 rounded-md text-xs font-medium bg-primary-light text-white"
-          >
+          <span v-if="$store.getters.guildHasWelcomerPro"
+            class="mr-2 inline-flex items-center p-2 rounded-md text-xs font-medium bg-primary-light text-white">
             <font-awesome-icon icon="heart" />
           </span>
-          <span
-            v-else-if="$store.getters.guildHasCustomBackgrounds"
-            class="mr-2 inline-flex items-center p-2 rounded-md text-xs font-medium bg-gray-500 text-white"
-          >
+          <span v-else-if="$store.getters.guildHasCustomBackgrounds"
+            class="mr-2 inline-flex items-center p-2 rounded-md text-xs font-medium bg-gray-500 text-white">
             <font-awesome-icon icon="heart" />
           </span>
           {{ $store.getters.getCurrentSelectedGuild?.name }}
@@ -61,23 +42,11 @@
       <div class="dashboard-content">
         <div class="grid grid-cols-1 gap-5 mt-2 sm:grid-cols-2 lg:grid-cols-3">
           <!-- Card -->
-          <Card
-            name="Guild Members"
-            icon="user-group"
-            :amount="$store.getters.getCurrentSelectedGuild?.member_count"
-          />
-          <Card
-            name="Text Channels"
-            icon="user-group"
-            :amount="filterTextChannels($store.getters.getGuildChannels).length"
-          />
-          <Card
-            name="Voice Channels"
-            icon="user-group"
-            :amount="
-              filterVoiceChannels($store.getters.getGuildChannels).length
-            "
-          />
+          <Card name="Guild Members" icon="user-group" :amount="$store.getters.getCurrentSelectedGuild?.member_count" />
+          <Card name="Text Channels" icon="user-group"
+            :amount="filterTextChannels($store.getters.getGuildChannels).length" />
+          <Card name="Voice Channels" icon="user-group" :amount="filterVoiceChannels($store.getters.getGuildChannels).length
+            " />
         </div>
       </div>
     </div>

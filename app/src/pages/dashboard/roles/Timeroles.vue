@@ -15,11 +15,8 @@
         <div class="dashboard-contents">
           <div class="dashboard-inputs">
           </div>
-          <unsaved-changes
-            :unsavedChanges="unsavedChanges"
-            :isChangeInProgress="isChangeInProgress"
-            @save="saveConfig"
-          ></unsaved-changes>
+          <unsaved-changes :unsavedChanges="unsavedChanges" :isChangeInProgress="isChangeInProgress"
+            @save="saveConfig"></unsaved-changes>
         </div>
       </div>
     </div>
@@ -81,7 +78,7 @@ export default {
 
       return validation_rules;
     });
-    
+
     const v$ = useVuelidate(validation_rules, config, { $rewardEarly: true });
 
     return {

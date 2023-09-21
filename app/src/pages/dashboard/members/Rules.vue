@@ -14,133 +14,65 @@
         </div>
         <div class="dashboard-contents">
           <div class="dashboard-inputs">
-            <form-value
-              title="Enable Rules"
-              :type="FormTypeToggle"
-              v-model="config.enabled"
-              @update:modelValue="onValueUpdate"
-              :validation="v$.enabled"
-              >Send rules to users when they join your server. This also allows
-              users to view the rules by doing <code>/rules</code>.</form-value
-            >
-            <form-value
-              title="Enable Rule DMs"
-              :type="FormTypeToggle"
-              v-model="config.dms_enabled"
-              @update:modelValue="onValueUpdate"
-              :validation="v$.dms_enabled"
-              :inlineSlot="true"
-              >When enabled, users will also receive the rules in their direct
-              messages.</form-value
-            >
+            <form-value title="Enable Rules" :type="FormTypeToggle" v-model="config.enabled"
+              @update:modelValue="onValueUpdate" :validation="v$.enabled">Send rules to users when they join your server.
+              This also allows
+              users to view the rules by doing <code>/rules</code>.</form-value>
+            <form-value title="Enable Rule DMs" :type="FormTypeToggle" v-model="config.dms_enabled"
+              @update:modelValue="onValueUpdate" :validation="v$.dms_enabled" :inlineSlot="true">When enabled, users will
+              also receive the rules in their direct
+              messages.</form-value>
 
             <form-value title="Rules" :type="FormTypeBlank" :hideBorder="true">
               <table class="min-w-full border-spacing-2">
-                <tbody
-                  class="divide-y divide-gray-200 dark:divide-secondary-light"
-                >
-                  <tr
-                    v-for="(rule, index) in this.rules"
-                    :key="index"
-                    :class="[
-                      this.selectedIndex != null ? 'select-none' : '',
-                      this.selectedIndex == index
-                        ? 'dark:bg-secondary-dark bg-gray-100'
-                        : '',
-                    ]"
-                    v-on:mousemove="this.mouseMoveHandler(index)"
-                  >
-                    <td
-                      :class="[
-                        'pr-3 whitespace-nowrap py-4 text-sm dark:text-gray-50 space-x-2 grid grid-cols-2',
-                        this.isDraggable ? 'cursor-move' : '',
-                      ]"
-                      v-on:mousedown="this.mouseDownHandler(index)"
-                    >
-                      <font-awesome-icon
-                        v-if="this.isDraggable"
-                        icon="grip-vertical"
-                      />
-                      <a
-                        v-if="!this.isDraggable"
-                        @click="this.moveRule(index, index - 1)"
-                      >
-                        <font-awesome-icon
-                          :class="[index > 0 ? '' : 'opacity-20 touch-none']"
-                          icon="chevron-up"
-                        />
+                <tbody class="divide-y divide-gray-200 dark:divide-secondary-light">
+                  <tr v-for="(rule, index) in this.rules" :key="index" :class="[
+                    this.selectedIndex != null ? 'select-none' : '',
+                    this.selectedIndex == index
+                      ? 'dark:bg-secondary-dark bg-gray-100'
+                      : '',
+                  ]" v-on:mousemove="this.mouseMoveHandler(index)">
+                    <td :class="[
+                      'pr-3 whitespace-nowrap py-4 text-sm dark:text-gray-50 space-x-2 grid grid-cols-2',
+                      this.isDraggable ? 'cursor-move' : '',
+                    ]" v-on:mousedown="this.mouseDownHandler(index)">
+                      <font-awesome-icon v-if="this.isDraggable" icon="grip-vertical" />
+                      <a v-if="!this.isDraggable" @click="this.moveRule(index, index - 1)">
+                        <font-awesome-icon :class="[index > 0 ? '' : 'opacity-20 touch-none']" icon="chevron-up" />
                       </a>
-                      <a
-                        v-if="!this.isDraggable"
-                        @click="this.moveRule(index, index + 1)"
-                      >
-                        <font-awesome-icon
-                          :class="[
-                            index < this.rules.length - 1
-                              ? ''
-                              : 'opacity-20 touch-none',
-                          ]"
-                          icon="chevron-down"
-                        />
+                      <a v-if="!this.isDraggable" @click="this.moveRule(index, index + 1)">
+                        <font-awesome-icon :class="[
+                          index < this.rules.length - 1
+                            ? ''
+                            : 'opacity-20 touch-none',
+                        ]" icon="chevron-down" />
                       </a>
                     </td>
                     <td class="pr-3 text-sm dark:text-gray-50 w-auto">
-                      <input
-                        v-if="rule.selected"
-                        type="text"
+                      <input v-if="rule.selected" type="text"
                         class="bg-white dark:bg-secondary-dark relative w-full pl-3 pr-3 text-left border border-gray-300 dark:border-secondary-light rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
-                        v-model="rule.newValue"
-                        :maxlength="this.maxRuleLength"
-                        @keypress="this.onEditRuleKeyPress($event, index)"
-                      />
-                      <div
-                        class="break-all"
-                        v-else
-                        v-html="marked(rule.value, true)"
-                      />
+                        v-model="rule.newValue" :maxlength="this.maxRuleLength"
+                        @keypress="this.onEditRuleKeyPress($event, index)" />
+                      <div class="break-all" v-else v-html="marked(rule.value, true)" />
                     </td>
-                    <td
-                      class="whitespace-nowrap py-4 text-sm dark:text-gray-50 space-x-2"
-                    >
-                      <a
-                        v-if="rule.selected"
-                        @click="this.onSaveRule(index)"
-                        class="text-primary hover:text-primary-dark cursor-pointer"
-                        >Confirm</a
-                      >
-                      <a
-                        v-else
-                        @click="this.onSelectRule(index)"
-                        class="text-primary hover:text-primary-dark cursor-pointer"
-                        >Edit</a
-                      >
-                      <a
-                        v-if="rule.selected"
-                        @click="this.onCancelRule(index)"
-                        class="text-primary hover:text-primary-dark cursor-pointer"
-                        >Cancel</a
-                      >
-                      <a
-                        v-else
-                        @click="this.onDeleteRule(index)"
-                        class="text-primary hover:text-primary-dark cursor-pointer"
-                        >Delete</a
-                      >
+                    <td class="whitespace-nowrap py-4 text-sm dark:text-gray-50 space-x-2">
+                      <a v-if="rule.selected" @click="this.onSaveRule(index)"
+                        class="text-primary hover:text-primary-dark cursor-pointer">Confirm</a>
+                      <a v-else @click="this.onSelectRule(index)"
+                        class="text-primary hover:text-primary-dark cursor-pointer">Edit</a>
+                      <a v-if="rule.selected" @click="this.onCancelRule(index)"
+                        class="text-primary hover:text-primary-dark cursor-pointer">Cancel</a>
+                      <a v-else @click="this.onDeleteRule(index)"
+                        class="text-primary hover:text-primary-dark cursor-pointer">Delete</a>
                     </td>
                   </tr>
                   <tr>
                     <td></td>
                     <td>
-                      <input
-                        v-if="this.rules.length < this.maxRuleCount"
-                        type="text"
+                      <input v-if="this.rules.length < this.maxRuleCount" type="text"
                         class="bg-white dark:bg-secondary-dark relative w-full pl-3 pr-10 mt-2 text-left border border-gray-300 dark:border-secondary-light rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
-                        placeholder="Add rule"
-                        :maxlength="this.maxRuleLength"
-                        @blur="this.onRuleBlur()"
-                        @keypress="this.onRuleKeyPress($event)"
-                        v-model="rule"
-                      />
+                        placeholder="Add rule" :maxlength="this.maxRuleLength" @blur="this.onRuleBlur()"
+                        @keypress="this.onRuleKeyPress($event)" v-model="rule" />
                     </td>
                   </tr>
                 </tbody>
@@ -148,11 +80,8 @@
             </form-value>
           </div>
 
-          <unsaved-changes
-            :unsavedChanges="unsavedChanges"
-            :isChangeInProgress="isChangeInProgress"
-            @save="saveConfig"
-          ></unsaved-changes>
+          <unsaved-changes :unsavedChanges="unsavedChanges" :isChangeInProgress="isChangeInProgress"
+            @save="saveConfig"></unsaved-changes>
         </div>
       </div>
     </div>
@@ -209,7 +138,10 @@ export default {
         enabled: {},
         dms_enabled: {},
         rules: {
-          required: helpers.withMessage("The rules are required", requiredIf(config.value.enabled))
+          required: helpers.withMessage(
+            "The rules are required",
+            requiredIf(config.value.enabled)
+          ),
         },
       };
 

@@ -1,26 +1,10 @@
 <template>
-  <div
-    class="dropdown"
-    :class="{ disabled: disabled }"
-    @click="toggleDropdown"
-    @focusout="hideDropdown"
-    tabindex="0"
-  >
+  <div class="dropdown" :class="{ disabled: disabled }" @click="toggleDropdown" @focusout="hideDropdown" tabindex="0">
     <div class="mark">
-      <div :style="{color: color}">{{ mark }}</div>
-      <svg
-        v-if="showArrow"
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        :stroke="color"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="feather feather-chevron-down"
-      >
+      <div :style="{ color: color }">{{ mark }}</div>
+      <svg v-if="showArrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+        :stroke="color" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="feather feather-chevron-down">
         <polyline points="6 9 12 15 18 9"></polyline>
       </svg>
     </div>
@@ -89,45 +73,55 @@ export default {
 .fade-leave-active {
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
   transform: translateY(-10px);
 }
+
 .dropdown {
   cursor: pointer;
   position: relative;
 }
+
 .dropdown:focus {
   outline: none;
 }
+
 .disabled {
   cursor: default;
 }
-.disabled:hover > .mark {
+
+.disabled:hover>.mark {
   opacity: 0.5 !important;
 }
-.dropdown:hover > .mark {
+
+.dropdown:hover>.mark {
   opacity: 1;
 }
-.dropdown > .mark {
+
+.dropdown>.mark {
   transition: opacity 0.2s ease;
   opacity: 0.5;
   display: flex;
   align-items: center;
   user-select: none;
 }
-.dropdown > .mark > div {
+
+.dropdown>.mark>div {
   white-space: nowrap;
   font-family: sans-serif;
   font-size: 12px;
   line-height: 16px;
 }
-.dropdown > .mark > svg {
+
+.dropdown>.mark>svg {
   margin-left: 3px;
   margin-top: 1px;
 }
-.dropdown > .panel {
+
+.dropdown>.panel {
   position: absolute;
   border-radius: 6px;
   overflow: hidden;

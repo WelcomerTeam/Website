@@ -14,29 +14,17 @@
         </div>
         <div class="dashboard-contents">
           <div class="dashboard-inputs">
-            <form-value
-              title="Enable FreeRoles"
-              :type="FormTypeToggle"
-              v-model="config.enabled"
-              @update:modelValue="onValueUpdate"
-              :validation="v$.enabled"
-              >Freeroles allow users to give themselves roles, via the <kbd class="bg-secondary-dark px-2 py-1 rounded-md">/freeroles give</kbd> command.</form-value
-            >
+            <form-value title="Enable FreeRoles" :type="FormTypeToggle" v-model="config.enabled"
+              @update:modelValue="onValueUpdate" :validation="v$.enabled">Freeroles allow users to give themselves roles,
+              via the <kbd class="bg-secondary-dark px-2 py-1 rounded-md">/freeroles give</kbd> command.</form-value>
 
             <form-value title="Roles" :type="FormTypeBlank" :hideBorder="true" :validation="v$.roles">
-              <role-table
-                :roles="$store.getters.getAssignableGuildRoles"
-                :selectedRoles="config.roles"
-                @removeRole="onRemoveRole"
-                @selectRole="onSelectRole"
-              ></role-table>
+              <role-table :roles="$store.getters.getAssignableGuildRoles" :selectedRoles="config.roles"
+                @removeRole="onRemoveRole" @selectRole="onSelectRole"></role-table>
             </form-value>
           </div>
-          <unsaved-changes
-            :unsavedChanges="unsavedChanges"
-            :isChangeInProgress="isChangeInProgress"
-            @save="saveConfig"
-          ></unsaved-changes>
+          <unsaved-changes :unsavedChanges="unsavedChanges" :isChangeInProgress="isChangeInProgress"
+            @save="saveConfig"></unsaved-changes>
         </div>
       </div>
     </div>
@@ -100,7 +88,7 @@ export default {
 
       return validation_rules;
     });
-    
+
     const v$ = useVuelidate(validation_rules, config, { $rewardEarly: true });
 
     return {

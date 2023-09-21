@@ -14,106 +14,33 @@
         <a>Form Types</a>
       </div>
 
-      <form-value
-        title="Form Type Toggle"
-        v-model="config.enabled"
-        :type="FormTypeToggle"
-        :nullable="nullable"
-        :disabled="disabled"
-        :invalid="invalid"
-      />
+      <form-value title="Form Type Toggle" v-model="config.enabled" :type="FormTypeToggle" :nullable="nullable"
+        :disabled="disabled" :invalid="invalid" />
 
-      <form-value
-        title="Form Type Channel List"
-        v-model="config.channel"
-        :type="FormTypeChannelList"
-        :nullable="nullable"
-        :disabled="disabled"
-        :invalid="invalid"
-      />
-      <form-value
-        title="Form Type Channel List Categories"
-        v-model="config.channelTwo"
-        :type="FormTypeChannelListCategories"
-        :nullable="nullable"
-        :disabled="disabled"
-        :invalid="invalid"
-      />
-      <form-value
-        title="Form Type Role List"
-        v-model="config.role"
-        :type="FormTypeRoleList"
-        :nullable="nullable"
-        :disabled="disabled"
-        :invalid="invalid"
-      />
-      <form-value
-        title="Form Type Member List"
-        v-model="config.member"
-        :type="FormTypeMemberList"
-        :nullable="nullable"
-        :disabled="disabled"
-        :invalid="invalid"
-      />
-      <form-value
-        title="Form Type Emoji List"
-        v-model="config.emoji"
-        :type="FormTypeEmojiList"
-        :nullable="nullable"
-        :disabled="disabled"
-        :invalid="invalid"
-      />
-      <form-value
-        title="Form Type Colour"
-        v-model="config.colour"
-        :type="FormTypeColour"
-        :nullable="nullable"
-        :disabled="disabled"
-        :invalid="invalid"
-      />
-      <form-value
-        title="Form Type Text"
-        v-model="config.message"
-        :type="FormTypeText"
-        :nullable="nullable"
-        :disabled="disabled"
-        :invalid="invalid"
-      />
-      <form-value
-        title="Form Type Number"
-        v-model="config.count"
-        :type="FormTypeNumber"
-        :nullable="nullable"
-        :disabled="disabled"
-        :invalid="invalid"
-      />
-      <form-value
-        title="Form Type TextArea"
-        v-model="config.rules"
-        :type="FormTypeTextArea"
-        :nullable="nullable"
-        :disabled="disabled"
-        :invalid="invalid"
-      />
+      <form-value title="Form Type Channel List" v-model="config.channel" :type="FormTypeChannelList" :nullable="nullable"
+        :disabled="disabled" :invalid="invalid" />
+      <form-value title="Form Type Channel List Categories" v-model="config.channelTwo"
+        :type="FormTypeChannelListCategories" :nullable="nullable" :disabled="disabled" :invalid="invalid" />
+      <form-value title="Form Type Role List" v-model="config.role" :type="FormTypeRoleList" :nullable="nullable"
+        :disabled="disabled" :invalid="invalid" />
+      <form-value title="Form Type Member List" v-model="config.member" :type="FormTypeMemberList" :nullable="nullable"
+        :disabled="disabled" :invalid="invalid" />
+      <form-value title="Form Type Emoji List" v-model="config.emoji" :type="FormTypeEmojiList" :nullable="nullable"
+        :disabled="disabled" :invalid="invalid" />
+      <form-value title="Form Type Colour" v-model="config.colour" :type="FormTypeColour" :nullable="nullable"
+        :disabled="disabled" :invalid="invalid" />
+      <form-value title="Form Type Text" v-model="config.message" :type="FormTypeText" :nullable="nullable"
+        :disabled="disabled" :invalid="invalid" />
+      <form-value title="Form Type Number" v-model="config.count" :type="FormTypeNumber" :nullable="nullable"
+        :disabled="disabled" :invalid="invalid" />
+      <form-value title="Form Type TextArea" v-model="config.rules" :type="FormTypeTextArea" :nullable="nullable"
+        :disabled="disabled" :invalid="invalid" />
 
-      <form-value
-        title="Form Type Dropdown"
-        v-model="config.select"
-        :type="FormTypeDropdown"
-        :values="['a', 'b', 'c']"
-        :nullable="nullable"
-        :disabled="disabled"
-        :invalid="invalid"
-      />
+      <form-value title="Form Type Dropdown" v-model="config.select" :type="FormTypeDropdown" :values="['a', 'b', 'c']"
+        :nullable="nullable" :disabled="disabled" :invalid="invalid" />
 
-      <form-value
-        title="Form Type Embed"
-        v-model="config.rich_message"
-        :type="FormTypeEmbed"
-        :nullable="nullable"
-        :disabled="disabled"
-        :invalid="invalid"
-      />
+      <form-value title="Form Type Embed" v-model="config.rich_message" :type="FormTypeEmbed" :nullable="nullable"
+        :disabled="disabled" :invalid="invalid" />
     </div>
 
     <pre class="mt-12">{{ config }}</pre>
