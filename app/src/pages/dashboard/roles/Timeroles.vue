@@ -10,10 +10,24 @@
       </div>
       <div v-else>
         <div class="dashboard-title-container">
-          <div class="dashboard-title">[ ENTER TITLE ]</div>
+          <div class="dashboard-title">TimeRoles</div>
         </div>
         <div class="dashboard-contents">
           <div class="dashboard-inputs">
+            <form-value title="Enable TimeRoles" :type="FormTypeToggle" v-model="config.enabled"
+              @update:modelValue="onValueUpdate" :validation="v$.enabled">TimeRoles allow you to reward users for being in your server for a period of time, by giving them roles.</form-value>
+
+            <form-value title="Roles" :type="FormTypeBlank" :hideBorder="true" :validation="v$.roles">
+              <role-table-time-roles :roles="$store.getters.getAssignableGuildRoles" :selectedRoles="config.roles"
+                @removeRole="onRemoveRole" @selectRole="onSelectRole"></role-table-time-roles>
+            </form-value>
+
+            <!-- 
+              enabled
+              roles
+                role id
+                seconds
+             -->
           </div>
           <unsaved-changes :unsavedChanges="unsavedChanges" :isChangeInProgress="isChangeInProgress"
             @save="saveConfig"></unsaved-changes>
@@ -38,6 +52,7 @@ import UnsavedChanges from "@/components/dashboard/UnsavedChanges.vue";
 import EmbedBuilder from "@/components/dashboard/EmbedBuilder.vue";
 import FormValue from "@/components/dashboard/FormValue.vue";
 import LoadingIcon from "@/components/LoadingIcon.vue";
+import RoleTableTimeRoles from "@/components/dashboard/RoleTableTimeRoles.vue";
 
 import dashboardAPI from "@/api/dashboard";
 import endpoints from "@/api/endpoints";
@@ -56,6 +71,7 @@ export default {
     EmbedBuilder,
     UnsavedChanges,
     LoadingIcon,
+    RoleTableTimeRoles,
   },
   setup() {
     let isDataFetched = ref(false);
@@ -156,6 +172,27 @@ export default {
 
     onValueUpdate() {
       this.unsavedChanges = true;
+    },
+
+    onSelectRole(roleID) {
+      let role = this.$store.getters.getGuildRoleById(roleID);
+      if (role !== undefined) {
+        this.config.roles.push({
+          role_id: role.id,
+          seconds: 0
+        });
+        this.config.roles.sort(
+          (a, b) =>
+            this.$store.getters.getGuildRoleById(a)?.position -
+            this.$store.getters.getGuildRoleById(b)?.position
+        );
+        this.onValueUpdate();
+      }
+    },
+
+    onRemoveRole(roleID) {
+      this.config.roles = this.config.roles.filter((role) => role.role_id !== roleID);
+      this.onValueUpdate();
     },
   },
 };

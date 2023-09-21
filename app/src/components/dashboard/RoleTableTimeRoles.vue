@@ -1,17 +1,20 @@
 <template>
   <table class="min-w-full border-spacing-2">
     <tbody class="divide-y divide-gray-200 dark:divide-secondary-light">
-      <tr v-for="(role_id, index) in this.$props.selectedRoles" :key="index">
+      <tr v-for="(role, index) in this.$props.selectedRoles" :key="index">
         <td class="pr-3 text-sm dark:text-gray-50 py-3.5 text-left w-4/5">
-          <font-awesome-icon icon="circle" class="text-gray-400 inline w-4 h-4 mr-1 border-primary" :style="$store.getters.getGuildRoleById(role_id)?.color ? {
+          <font-awesome-icon icon="circle" class="text-gray-400 inline w-4 h-4 mr-1 border-primary" :style="$store.getters.getGuildRoleById(role.role_id)?.color ? {
             color: `${getHexColor(
-              $store.getters.getGuildRoleById(role_id)?.color
+              $store.getters.getGuildRoleById(role.role_id)?.color
             )}`,
           } : {}" />
-          {{ $store.getters.getGuildRoleById(role_id)?.name }}
+          {{ $store.getters.getGuildRoleById(role.role_id)?.name }}
+        </td>
+        <td class="pr-3 text-sm dark:text-gray-50 py-3.5 text-left w-4/5">
+          <input class="bg-transparent" type="number" min="0" v-model="role.seconds" />
         </td>
         <td class="whitespace-nowrap py-4 text-sm text-center dark:text-gray-50 space-x-2">
-          <a @click="this.onRemoveRole(role_id)" class="text-primary hover:text-primary-dark cursor-pointer">
+          <a @click="this.onRemoveRole(role.role_id)" class="text-primary hover:text-primary-dark cursor-pointer">
             <font-awesome-icon icon="close" />
           </a>
         </td>
@@ -164,7 +167,7 @@ export default {
 
       this.$props.roles.forEach((role) => {
         var assigned_roles = this.$props.selectedRoles.find((element) => {
-          return element == role.id;
+          return element == role.role_id;
         });
 
         if (assigned_roles === undefined) {
