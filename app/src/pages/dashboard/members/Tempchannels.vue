@@ -14,38 +14,29 @@
         </div>
         <div class="dashboard-contents">
           <div class="dashboard-inputs">
-            <form-value
-              title="Enable TempChannels"
-              :type="FormTypeToggle"
-              v-model="config.enabled"
-              @update:modelValue="onValueUpdate"
-              :validation="v$.enabled"
-              >Allow users to create their own temporary voice channels in a category of your choice.</form-value
-            >
+            <form-value title="Enable TempChannels" :type="FormTypeToggle" v-model="config.enabled"
+              @update:modelValue="onValueUpdate" :validation="v$.enabled">Allow users to create their own temporary voice
+              channels in a category of your choice.</form-value>
 
-            <form-value
-              title="TempChannels Category"
-              :type="FormTypeChannelList"
-              v-model="config.channel_category"
-              @update:modelValue="onValueUpdate"
-              :validation="v$.channel_category"
-              :inlineSlot="true"
-              :nullable="true"
-              :disabled="!config.enabled"
-              :channelFilter="4" 
-              >This is the category temporary channels will be created in.</form-value
-            >
+            <form-value title="TempChannels Category" :type="FormTypeChannelList" v-model="config.channel_category"
+              @update:modelValue="onValueUpdate" :validation="v$.channel_category" :inlineSlot="true" :nullable="true"
+              :disabled="!config.enabled" :channelFilter="4">This is the category temporary channels will be created
+              in.</form-value>
 
-            <!-- "enabled": false,
-            "autopurge": false,
-            "channel_lobby": null,
-            "channel_category": null, -->
+            <form-value title="Enable AutoPurge" :type="FormTypeToggle" v-model="config.autopurge"
+              @update:modelValue="onValueUpdate" :validation="v$.autopurge">When enabled, empty temporary channels will be
+              automatically removed. When disabled, empty temporary channels will be repurposed for the next user instead
+              of creating a new channel.</form-value>
+
+            <form-value title="Lobby Channel" :type="FormTypeChannelList" v-model="config.channel_lobby"
+              @update:modelValue="onValueUpdate" :validation="v$.channel_lobby" :inlineSlot="true" :nullable="true"
+              :disabled="!config.enabled" :channelFilter="2">If a lobby channel is set, users will be able to join the
+              lobby channel and get automatically moved to a temporary channel without having to run a
+              command.</form-value>
+
           </div>
-          <unsaved-changes
-            :unsavedChanges="unsavedChanges"
-            :isChangeInProgress="isChangeInProgress"
-            @save="saveConfig"
-          ></unsaved-changes>
+          <unsaved-changes :unsavedChanges="unsavedChanges" :isChangeInProgress="isChangeInProgress"
+            @save="saveConfig"></unsaved-changes>
         </div>
       </div>
     </div>
@@ -111,7 +102,7 @@ export default {
 
       return validation_rules;
     });
-    
+
     const v$ = useVuelidate(validation_rules, config, { $rewardEarly: true });
 
     return {
