@@ -190,8 +190,8 @@ export default {
 
     onUpdateRole({roleID, seconds}) {
       this.config.roles.forEach((role) => {
-        if (role.role_id == roleID) {
-          role.seconds = seconds;
+        if (role.seconds == "") {
+          role.seconds = 0;
         }
       })
       this.onValueUpdate();

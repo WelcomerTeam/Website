@@ -163,6 +163,7 @@ export default {
     },
 
     onUpdateRoleSeconds(roleID, seconds) {
+      console.log(seconds, seconds == "", seconds == "" ? 0 : seconds);
       this.$emit("updateRole", (roleID, seconds == "" ? 0 : seconds));
     },
 
