@@ -19,15 +19,8 @@
 
             <form-value title="Roles" :type="FormTypeBlank" :hideBorder="true" :validation="v$.roles">
               <role-table-time-roles :roles="$store.getters.getAssignableGuildRoles" :selectedRoles="config.roles"
-                @removeRole="onRemoveRole" @selectRole="onSelectRole"></role-table-time-roles>
+                @removeRole="onRemoveRole" @selectRole="onSelectRole" @updateRole="onUpdateRole"></role-table-time-roles>
             </form-value>
-
-            <!-- 
-              enabled
-              roles
-                role id
-                seconds
-             -->
           </div>
           <unsaved-changes :unsavedChanges="unsavedChanges" :isChangeInProgress="isChangeInProgress"
             @save="saveConfig"></unsaved-changes>
@@ -194,6 +187,15 @@ export default {
       this.config.roles = this.config.roles.filter((role) => role.role_id !== roleID);
       this.onValueUpdate();
     },
+
+    onUpdateRole({roleID, seconds}) {
+      this.config.roles.forEach((role) => {
+        if (role.role_id == roleID) {
+          role.seconds = seconds;
+        }
+      })
+      this.onValueUpdate();
+    }
   },
 };
 </script>

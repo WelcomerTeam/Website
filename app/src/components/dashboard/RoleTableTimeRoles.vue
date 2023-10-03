@@ -2,7 +2,7 @@
   <table class="min-w-full border-spacing-2">
     <tbody class="divide-y divide-gray-200 dark:divide-secondary-light">
       <tr v-for="(role, index) in this.$props.selectedRoles" :key="index">
-        <td class="pr-3 text-sm dark:text-gray-50 py-3.5 text-left w-4/5">
+        <td class="pr-3 text-sm dark:text-gray-50 py-3.5 text-left w-3/5">
           <font-awesome-icon icon="circle" class="text-gray-400 inline w-4 h-4 mr-1 border-primary" :style="$store.getters.getGuildRoleById(role.role_id)?.color ? {
             color: `${getHexColor(
               $store.getters.getGuildRoleById(role.role_id)?.color
@@ -10,8 +10,8 @@
           } : {}" />
           {{ $store.getters.getGuildRoleById(role.role_id)?.name }}
         </td>
-        <td class="pr-3 text-sm dark:text-gray-50 py-3.5 text-left w-4/5">
-          <input class="bg-transparent" type="number" min="0" v-model="role.seconds" />
+        <td class="pr-3 text-sm dark:text-gray-50 py-3.5 text-left w-2/5">
+          <input type="number" min="0" placeholder="Seconds" class="bg-white dark:bg-secondary-dark flex-1 shadow-sm block w-full min-w-0 border-gray-300 dark:border-secondary-light rounded-md focus:ring-primary focus:border-primary sm:text-sm'," v-model="role.seconds" @input="onUpdateRoleSeconds(role.role_id, role.seconds)" />
         </td>
         <td class="whitespace-nowrap py-4 text-sm text-center dark:text-gray-50 space-x-2">
           <a @click="this.onRemoveRole(role.role_id)" class="text-primary hover:text-primary-dark cursor-pointer">
@@ -160,6 +160,10 @@ export default {
 
     onRemoveRole(roleID) {
       this.$emit("removeRole", roleID);
+    },
+
+    onUpdateRoleSeconds(roleID, seconds) {
+      this.$emit("updateRole", (roleID, seconds == "" ? 0 : seconds));
     },
 
     parseSelectedRoles() {
