@@ -1,40 +1,42 @@
-const EndpointGuilds = "/api/guild/";
-
 export default {
+  EndpointGuild(guildID) {
+    return `/api/guild/${guildID}`
+  },
+
   EndpointGuildAutorole(guildID) {
-    return EndpointGuilds + guildID + "/autoroles";
+    return `${EndpointGuilds(guildID)}/autoroles`;
   },
 
   EndpointGuildBorderwall(guildID) {
-    return EndpointGuilds + guildID + "/borderwall";
+    return `${EndpointGuilds(guildID)}/borderwall`;
   },
 
   EndpointGuildFreeroles(guildID) {
-    return EndpointGuilds + guildID + "/freeroles";
+    return `${EndpointGuilds(guildID)}/freeroles`;
   },
 
   EndpointGuildLeaver(guildID) {
-    return EndpointGuilds + guildID + "/leaver";
+    return `${EndpointGuilds(guildID)}/leaver`;
   },
 
   EndpointGuildRules(guildID) {
-    return EndpointGuilds + guildID + "/rules";
+    return `${EndpointGuilds(guildID)}/rules`;
   },
 
   EndpointGuildTempchannels(guildID) {
-    return EndpointGuilds + guildID + "/tempchannels";
+    return `${EndpointGuilds(guildID)}/tempchannels`;
   },
 
   EndpointGuildTimeroles(guildID) {
-    return EndpointGuilds + guildID + "/timeroles";
+    return `${EndpointGuilds(guildID)}/timeroles`;
   },
 
   EndpointGuildWelcomer(guildID) {
-    return EndpointGuilds + guildID + "/welcomer";
+    return `${EndpointGuilds(guildID)}/welcomer`;
   },
 
   EndpointGuildSettings(guildID) {
-    return EndpointGuilds + guildID + "/settings";
+    return `${EndpointGuilds(guildID)}/settings`;
   },
 
 };
