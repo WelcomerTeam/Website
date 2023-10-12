@@ -18,8 +18,8 @@
               @update:modelValue="onValueUpdate" :validation="v$.enabled">Send rules to users when they join your server.
               This also allows
               users to view the rules by doing <code>/rules</code>.</form-value>
-            <form-value title="Enable Rule DMs" :type="FormTypeToggle" v-model="config.dms_enabled"
-              @update:modelValue="onValueUpdate" :validation="v$.dms_enabled" :inlineSlot="true">When enabled, users will
+            <form-value title="Enable DMs" :type="FormTypeToggle" v-model="config.dms_enabled"
+              @update:modelValue="onValueUpdate" :validation="v$.dms_enabled">When enabled, users will
               also receive the rules in their direct
               messages.</form-value>
 
