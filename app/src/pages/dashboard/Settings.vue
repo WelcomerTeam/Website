@@ -10,10 +10,23 @@
       </div>
       <div v-else>
         <div class="dashboard-title-container">
-          <div class="dashboard-title">[ ENTER TITLE ]</div>
+          <div class="dashboard-title">Bot Settings</div>
         </div>
         <div class="dashboard-contents">
           <div class="dashboard-inputs">
+            <form-value title="Embed Colour" :type="FormTypeColour" v-model="config.embed_colour"
+            @update:modelValue="onValueUpdate" :validation="v$.embed_colour">This changes the embed colour accent on any commands you run with Welcomer</form-value>
+          </div>
+          <div class="dashboard-inputs">
+            <div class="dashboard-heading">Guild Web Page</div>
+            <form-value title="Show Guild on Website" :type="FormTypeToggle" v-model="config.site_guild_visible"
+            @update:modelValue="onValueUpdate" :validation="v$.site_guild_visible">When enabled, users will be able to publicly see your guild information on the website.</form-value>
+
+            <form-value title="Show Staff on Website" :type="FormTypeToggle" v-model="config.site_staff_visible"
+            @update:modelValue="onValueUpdate" :validation="v$.site_staff_visible" :disabled="!config.site_guild_visible">When enabled, your staff will be shown on your guild's page on the website.</form-value>
+
+            <form-value title="Allow Users to Join on Website" :type="FormTypeToggle" v-model="config.site_allow_invites"
+            @update:modelValue="onValueUpdate" :validation="v$.site_allow_invites" :disabled="!config.site_guild_visible">When enabled, users will be able to use Welcomer to get an invite for your guild through the website. If you have a vanity invite, this will be used instead.</form-value>
           </div>
           <unsaved-changes :unsavedChanges="unsavedChanges" :isChangeInProgress="isChangeInProgress"
             @save="saveConfig"></unsaved-changes>
@@ -29,9 +42,8 @@ import { computed, ref } from "vue";
 import useVuelidate from "@vuelidate/core";
 
 import {
-  FormTypeBlank,
+  FormTypeColour,
   FormTypeToggle,
-  FormTypeRoleList,
 } from "@/components/dashboard/FormValueEnum";
 
 import UnsavedChanges from "@/components/dashboard/UnsavedChanges.vue";
@@ -69,8 +81,11 @@ export default {
 
     const validation_rules = computed(() => {
       const validation_rules = {
-        enabled: {},
-        roles: {},
+        embed_colour: {},
+        site_splash_url: {},
+        site_staff_visible: {},
+        site_guild_visible: {},
+        site_allow_invites: {}
       };
 
       return validation_rules;
@@ -79,9 +94,8 @@ export default {
     const v$ = useVuelidate(validation_rules, config, { $rewardEarly: true });
 
     return {
-      FormTypeBlank,
+      FormTypeColour,
       FormTypeToggle,
-      FormTypeRoleList,
 
       isDataFetched,
       isDataError,
@@ -106,7 +120,7 @@ export default {
       this.isDataError = false;
 
       dashboardAPI.getConfig(
-        endpoints.EndpointGuild(this.$store.getters.getSelectedGuildID),
+        endpoints.EndpointGuildSettings(this.$store.getters.getSelectedGuildID),
         ({ config }) => {
           this.config = config;
           this.isDataFetched = true;
@@ -134,7 +148,7 @@ export default {
       this.isChangeInProgress = true;
 
       dashboardAPI.setConfig(
-        endpoints.EndpointGuild(this.$store.getters.getSelectedGuildID),
+        endpoints.EndpointGuildSettings(this.$store.getters.getSelectedGuildID),
         this.config,
         null,
         ({ config }) => {
