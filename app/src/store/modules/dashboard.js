@@ -6,8 +6,8 @@ const state = () => ({
   guild: null,
   guildHasWelcomer: false,
 
-  guildHasWelcomerPro: false,
-  guildHasCustomBackgrounds: false,
+  guildHasWelcomerPro: false, // TODO
+  guildHasCustomBackgrounds: false, // TODO
 
   isLoadingGuild: false,
 
@@ -16,8 +16,8 @@ const state = () => ({
   guildRoles: [],
   guildEmojis: [],
 
-  isLoadingGuildMembers: false,
-  guildMemberResults: {},
+  isLoadingGuildMembers: false, // TODO
+  guildMemberResults: {}, // TODO
 });
 
 // getters

@@ -140,15 +140,15 @@ const navigation = [
       },
     ],
   },
-  {
-    items: [
-      {
-        name: "Examples",
-        linkname: "dashboard.guild.example",
-        icon: "fa-list-check",
-      },
-    ],
-  },
+  // {
+  //   items: [
+  //     {
+  //       name: "Examples",
+  //       linkname: "dashboard.guild.example",
+  //       icon: "fa-list-check",
+  //     },
+  //   ],
+  // },
 ];
 
 export default {

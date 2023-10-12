@@ -98,7 +98,7 @@
               ]" />
             </button>
           </div>
-          <div v-if="this.page == 2">
+          <div v-if="this.page == 2" class="space-y-4">
             <div
               class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-secondary-light border-dashed rounded-md relative mx-auto mb-4"
               v-if="$store.getters.guildHasWelcomerPro ||
@@ -139,13 +139,14 @@
             </div>
             <div v-else class="border-donate border-2 p-4 grid grid-cols-6 gap-4">
               <div class="col-span-6 items-center grid">
-                Unlock custom backgrounds on your server with Welcomer Pro.
-                Upload PNG, JPG and animated GIF backgrounds.
+                <span class="font-bold leading-6">Looking for more?</span>
+                With Welcomer Pro, you can unlock custom backgrounds on your server. You can upload PNG, JPG and even animated GIFs!
               </div>
-              <router-link to="/premium" class="col-span-6 items-center grid">
+              <a href="/premium" target="_blank" class="col-span-6 items-center grid">
                 <button type="button" class="cta-button bg-primary hover:bg-primary-dark w-full">
                   Get Welcomer Pro now
-                </button></router-link>
+                </button>
+              </a>
             </div>
             <div>
               <button as="template" v-for="image in $props.customImages" :key="image"

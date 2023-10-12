@@ -1,42 +1,52 @@
+let EndpointGuild = function(guildID) {
+  return `/api/guild/${guildID}`
+}
+
+let EndpointGuildAutorole = function(guildID) {
+  return `${EndpointGuild(guildID)}/autoroles`;
+}
+
+let EndpointGuildBorderwall = function(guildID) {
+  return `${EndpointGuild(guildID)}/borderwall`;
+}
+
+let EndpointGuildFreeroles = function(guildID) {
+  return `${EndpointGuild(guildID)}/freeroles`;
+}
+
+let EndpointGuildLeaver = function(guildID) {
+  return `${EndpointGuild(guildID)}/leaver`;
+}
+
+let EndpointGuildRules = function(guildID) {
+  return `${EndpointGuild(guildID)}/rules`;
+}
+
+let EndpointGuildTempchannels = function(guildID) {
+  return `${EndpointGuild(guildID)}/tempchannels`;
+}
+
+let EndpointGuildTimeroles = function(guildID) {
+  return `${EndpointGuild(guildID)}/timeroles`;
+}
+
+let EndpointGuildWelcomer = function(guildID) {
+  return `${EndpointGuild(guildID)}/welcomer`;
+}
+
+let EndpointGuildSettings = function(guildID) {
+  return `${EndpointGuild(guildID)}/settings`;
+}
+
 export default {
-  EndpointGuild(guildID) {
-    return `/api/guild/${guildID}`
-  },
-
-  EndpointGuildAutorole(guildID) {
-    return `${EndpointGuilds(guildID)}/autoroles`;
-  },
-
-  EndpointGuildBorderwall(guildID) {
-    return `${EndpointGuilds(guildID)}/borderwall`;
-  },
-
-  EndpointGuildFreeroles(guildID) {
-    return `${EndpointGuilds(guildID)}/freeroles`;
-  },
-
-  EndpointGuildLeaver(guildID) {
-    return `${EndpointGuilds(guildID)}/leaver`;
-  },
-
-  EndpointGuildRules(guildID) {
-    return `${EndpointGuilds(guildID)}/rules`;
-  },
-
-  EndpointGuildTempchannels(guildID) {
-    return `${EndpointGuilds(guildID)}/tempchannels`;
-  },
-
-  EndpointGuildTimeroles(guildID) {
-    return `${EndpointGuilds(guildID)}/timeroles`;
-  },
-
-  EndpointGuildWelcomer(guildID) {
-    return `${EndpointGuilds(guildID)}/welcomer`;
-  },
-
-  EndpointGuildSettings(guildID) {
-    return `${EndpointGuilds(guildID)}/settings`;
-  },
-
+  EndpointGuild,
+  EndpointGuildAutorole,
+  EndpointGuildBorderwall,
+  EndpointGuildFreeroles,
+  EndpointGuildLeaver,
+  EndpointGuildRules,
+  EndpointGuildTempchannels,
+  EndpointGuildTimeroles,
+  EndpointGuildWelcomer,
+  EndpointGuildSettings
 };
