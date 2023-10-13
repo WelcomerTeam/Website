@@ -79,7 +79,7 @@
                     Choose the plan you want
                   </h1>
                   <span class="mt-3 text-lg text-gray-500 section-subtitle max-w-prose mx-auto">
-                    Get started with Welcomer Pro with no recurring payments.
+                    Get started with Welcomer Pro without any recurring payments.
                     Own multiple guilds? Save with a multi-guild membership
                     instead of buying separately.
                   </span>
@@ -132,7 +132,7 @@
                       {{ plan.footer }}
                     </p>
                     <p class="mt-8">
-                      <span class="text-4xl font-bold text-gray-900">{{ currency }}
+                      <span class="text-4xl font-bold text-gray-900">{{ durationSelected.isPatreon ? patreonCurrency : currency }}
                         {{
                           (durationSelected.isPatreon
                             ? plan.patreonPrice
@@ -145,7 +145,7 @@
                     <p>
                       <span v-if="durationSelected.isPatreon" class="text-base font-medium text-gray-500">
                         / month</span>
-                      <span v-else class="text-base font-medium text-gray-500">({{ currency }}
+                      <span v-else class="text-base font-medium text-gray-500">({{ durationSelected.isPatreon ? patreonCurrency : currency }}
                         {{
                           (plan.price * durationSelected.multiplier).toFixed(2)
                         }}
@@ -159,6 +159,9 @@
                       {{ plan.name }}</a>
                   </div>
                 </div>
+              </div>
+              <div v-if="!durationSelected.isPatreon" class="text-gray-500 text-center mt-4">
+                *This is not a recurring payment. You will have to manually renew if your membership expires.
               </div>
             </div>
           </div>
@@ -298,29 +301,30 @@ const features = [
       "Sometimes you don't want to give users a role immediately. Use timeroles to give them roles automatically when the time comes, it could be 10 minutes or in a year.",
   },
   {
-    name: "Dedicated Donator Bot",
+    name: "Dedicated Pro Bot",
     icon: "plug-circle-bolt",
-    description: "Run Welcomer on its own donator-only bot account.",
+    description: "Use Welcomer with its own pro-only bot account.",
   },
   {
-    name: "White-labelled Bot",
+    name: "Custom Bot",
     icon: "plug-circle-plus",
     soon: true,
     description:
-      "Run Welcomer on its own unique bot account with a fully customizable username and avatar, with the same uptime and reliability.",
+      "Run Welcomer with it's own unique account with a customizable username and avatar, all with the same reliability and uptime."
   },
 ];
 
 const checklist = [
   "Custom Backgrounds",
-  "Dedicated Donator Bot",
+  "Dedicated Pro Bot",
   "Flexible plans",
-  "No recurring payments",
+  "No Recurring Payments",
 ];
 
 // Data below will be fetched from API
 
 const currency = "£";
+const patreonCurrency = "$";
 
 const durations = [
   {
@@ -407,6 +411,7 @@ export default {
 
       customBackgroundPrice,
       currency,
+      patreonCurrency,
       fromPrice,
 
       faqs,
