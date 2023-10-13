@@ -16,20 +16,19 @@
             </button>
           </div>
           <div class="dashboard-content">
-            <div v-if="$store.getters.isLoadingGuilds &&
-              $store.getters.getGuilds.length === 0
-              " class="mt-4 p-6 justify-center flex items-center dark:text-gray-50">
+            <!-- <div v-if="$store.getters.isLoadingGuilds && $store.getters.getGuilds.length === 0"
+              class="mt-4 p-6 justify-center flex items-center dark:text-gray-50">
               <LoadingIcon class="mr-3" />
               Loading your guilds...
-            </div>
-            <div v-else
+            </div> -->
+            <div v-if="!$store.getters.isLoadingGuilds"
               class="mt-4 bg-white dark:bg-secondary-dark shadow-sm overflow-hidden rounded-md border-gray-300 dark:border-secondary-light border">
               <ul role="list" class="divide-y divide-gray-200 dark:divide-secondary-light">
                 <li v-if="$store.getters.getGuilds.length === 0">
                   <div class="p-4">
                     <p class="font-medium text-center max-w-xl mx-auto">
                       Failed to get a list of your guilds. Please allow Welcomer
-                      to view all your guilds or try refreshing
+                      to view all your guilds or try refreshing.
                     </p>
                   </div>
                 </li>
@@ -44,12 +43,12 @@
                               : '',
                             'w-10 h-10 rounded-lg',
                           ]" v-lazy="{
-  src:
-    guild.icon !== ''
-      ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.webp?size=256`
-      : '/assets/discordServer.svg',
-  error: '/assets/discordServer.svg',
-}" />
+                            src:
+                              guild.icon !== ''
+                                ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.webp?size=128`
+                                : '/assets/discordServer.svg',
+                            error: '/assets/discordServer.svg',
+                          }" />
                         </div>
                       </div>
                       <div class="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
