@@ -29,6 +29,12 @@ export default {
   },
 
   getGuilds(doRefresh, callback, errorCallback) {
+    function cmp(a, b) {
+      if (a > b) return +1;
+      if (a < b) return -1;
+      return 0;
+    }
+
     getRequest(
       "/api/users/guilds" + (doRefresh ? "?refresh=1" : ""),
       (response) => {
@@ -42,18 +48,7 @@ export default {
                 let sortedGuilds = res.data
                   .filter((a) => a.has_elevation)
                   .sort((a, b) => {
-                    return (
-                      (a.is_owner == true) +
-                      (a.has_elevation == true) +
-                      (a.has_welcomer_pro == true) +
-                      (a.has_custom_backgrounds == true) +
-                      (a.has_welcomer == true) -
-                      ((b.is_owner == true) +
-                        (b.has_elevation == true) +
-                        (b.has_welcomer_pro == true) +
-                        (b.has_custom_backgrounds == true) +
-                        (b.has_welcomer == true))
-                    );
+                    return cmp(a.is_owner, b.is_owner) || cmp(a.has_welcomer, b.has_welcomer) || a.name.localeCompare(b.name)
                   });
                 sortedGuilds.reverse();
                 callback({ guilds: sortedGuilds });
