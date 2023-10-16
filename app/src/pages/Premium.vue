@@ -58,11 +58,11 @@
               </ul>
               <a href="#plans"
                 class="flex items-center justify-center w-full px-8 py-4 text-lg font-medium leading-6 bg-white border border-transparent rounded-md text-donate hover:text-donate-dark hover:bg-gray-200 md:px-10">
-                View all plans
+                View all Plans
               </a>
               <a href="#custom-backgrounds"
                 class="block text-base font-medium text-center text-white hover:text-gray-300">
-                Get Custom Backgrounds only
+                Get Custom Backgrounds Only
               </a>
             </div>
           </div>

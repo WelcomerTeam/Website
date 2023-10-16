@@ -18,7 +18,7 @@
           </div>
           <PopoverGroup as="nav" class="hidden space-x-6 md:flex">
             <div class="inline-flex my-auto space-x-4">
-              <Popover class="relative" v-slot="{ open }">
+              <!-- <Popover class="relative" v-slot="{ open }">
                 <PopoverButton :class="[
                   open ? 'text-gray-300' : 'text-white',
                   'group focus:outline-none hover:text-gray-300 inline-flex items-center rounded-md text-base',
@@ -60,7 +60,7 @@
                     </div>
                   </PopoverPanel>
                 </transition>
-              </Popover>
+              </Popover> -->
 
               <Popover class="relative" v-slot="{ open }">
                 <PopoverButton :class="[
@@ -281,13 +281,13 @@ const navresources = [
     description: "Check out our FAQ, your question may already be answered",
     icon: "person-circle-question",
   },
-  {
-    name: "Video Tutorials",
-    href: "/tutorials",
-    description:
-      "View some of our video tutorials to get a better idea of how to setup the bot",
-    icon: ["fab", "youtube"],
-  },
+  // {
+  //   name: "Video Tutorials",
+  //   href: "/tutorials",
+  //   description:
+  //     "View some of our video tutorials to get a better idea of how to setup the bot",
+  //   icon: ["fab", "youtube"],
+  // },
   {
     name: "Welcome Image Backgrounds",
     href: "/backgrounds",

@@ -3,6 +3,10 @@
 @tailwind utilities;
 @tailwind components;
 
+html {
+  scroll-behavior: smooth;
+}
+
 @layer components {
   .custom-scroll::-webkit-scrollbar {
     @apply w-3;
