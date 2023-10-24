@@ -956,6 +956,10 @@ export default {
     channelFilter: {
       type: Number,
       required: false,
+    },
+    allowAlpha: {
+      type: Boolean,
+      required: false,
     }
   },
 
@@ -1028,7 +1032,7 @@ export default {
       var [r, g, b] = result.values;
       var a = result.alpha;
 
-      if (a == 1) {
+      if (a == 1 || !this.$props.allowAlpha) {
         return `#${r.toString(16).toUpperCase().padStart(2, "0")}${g
           .toString(16)
           .toUpperCase()

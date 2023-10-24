@@ -7,8 +7,8 @@
         <div class="absolute inset-0" aria-hidden="true">
           <div class="absolute inset-y-0 right-0 w-1/2 bg-donate" />
         </div>
-        <div class="relative mx-auto max-w-7xl lg:px-8 lg:grid lg:grid-cols-2">
-          <div class="px-4 py-12 bg-secondary sm:px-6 lg:px-0 lg:pr-8">
+        <div class="relative mx-auto max-w-7xl lg:px-6 lg:grid lg:grid-cols-2">
+          <div class="px-6 pt-6 pb-12 bg-secondary lg:pt-12 lg:px-0 lg:pr-6">
             <div class="max-w-lg mx-auto lg:mx-0">
               <h2 class="text-base font-semibold tracking-wide text-primary">
                 Welcomer Pro
@@ -39,7 +39,7 @@
             </div>
           </div>
           <div class="px-4 py-12 bg-donate sm:px-6 lg:bg-none lg:px-0 lg:pl-8 lg:flex lg:items-center lg:justify-end">
-            <div class="w-full max-w-lg mx-auto space-y-8 lg:mx-0">
+            <div class="w-full lg:max-w-lg mx-auto space-y-8 lg:mx-0">
               <div>
                 <h2 class="sr-only">Price</h2>
                 <p class="relative">
@@ -51,7 +51,7 @@
               </div>
               <ul class="grid gap-0.5 overflow-hidden rounded sm:grid-cols-2">
                 <li v-for="item in checklist" :key="item"
-                  class="flex items-center px-4 py-4 space-x-3 text-base text-white bg-opacity-50 bg-donate-light">
+                  class="flex items-center px-4 py-4 space-x-3 text-base text-white bg-opacity-50">
                   <CheckIcon class="w-6 h-6 text-white" aria-hidden="true" />
                   <span>{{ item }}</span>
                 </li>
@@ -72,7 +72,7 @@
       <div id="plans">
         <div class="bg-white">
           <div class="hero-preview">
-            <div class="px-4 pt-8 mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div class="px-12 pt-8 mx-auto max-w-7xl">
               <div class="sm:flex sm:flex-col sm:align-center">
                 <div class="prose-lg text-center">
                   <h1 class="font-black leading-8 tracking-tighter text-gray-900">
@@ -181,7 +181,7 @@
                 <div class="relative">
                   <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div
-                      class="max-w-lg mx-auto overflow-hidden border border-gray-300 rounded-lg shadow-sm lg:max-w-none lg:flex">
+                      class="lg:max-w-lg mx-auto overflow-hidden border border-gray-300 rounded-lg shadow-sm lg:max-w-none lg:flex">
                       <div class="flex-1 px-6 py-8 my-auto bg-white lg:p-12">
                         <h3 class="text-2xl font-bold text-gray-900 sm:text-3xl">
                           Custom Welcomer Backgrounds

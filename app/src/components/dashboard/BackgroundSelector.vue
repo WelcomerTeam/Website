@@ -100,7 +100,7 @@
           </div>
           <div v-if="this.page == 2" class="space-y-4">
             <div
-              class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-secondary-light border-dashed rounded-md relative mx-auto mb-4"
+              class="lg:max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-secondary-light border-dashed rounded-md relative mx-auto mb-4"
               v-if="$store.getters.guildHasWelcomerPro ||
                 $store.getters.guildHasCustomBackgrounds
                 ">

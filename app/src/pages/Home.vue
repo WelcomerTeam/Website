@@ -5,7 +5,7 @@
     <main>
       <div class="mx-auto my-4 lg:relative max-w-7xl">
         <div class="hero">
-          <div class="px-4 my-auto lg:w-1/2 sm:px-8 xl:pr-16">
+          <div class="px-6 my-auto lg:w-1/2 sm:px-8 xl:pr-16">
             <h1 class="hero-title">The go-to bot for your discord server</h1>
             <p class="hero-subtitle">
               Providing tools to let you manage your server. Join the more than

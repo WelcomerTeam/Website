@@ -40,8 +40,10 @@
               <PopoverPanel
                 class="absolute bg-secondary-dark max-w-md mt-3 px-2 rounded-md sm:px-0 transform w-screen z-10 left-full -translate-x-full">
                 <div class="popover-container">
-                  <router-link to="/profile"
-                    class="gap-6 px-5 py-6 relative rounded-lg sm:gap-8 sm:p-6 group bg-primary hover:bg-primary-dark text-white rounded-b-none grid grid-cols-4">
+                  <!-- <router-link to="/profile" -->
+                  <div
+                    class="gap-6 px-5 py-6 relative rounded-lg sm:gap-8 sm:p-6 group bg-primary text-white rounded-b-none grid grid-cols-4">
+                    <!-- class="gap-6 px-5 py-6 relative rounded-lg sm:gap-8 sm:p-6 group bg-primary hover:bg-primary-dark text-white rounded-b-none grid grid-cols-4"> -->
                     <img class="object-cover col-span-1 aspect-square" :src="`https://cdn.discordapp.com/avatars/${$store.getters.getCurrentUser.id
                       }/${$store.getters.getCurrentUser.avatar}.${$store.getters.getCurrentUser.avatar.startsWith('a_')
                         ? 'gif'
@@ -62,7 +64,7 @@
                         </div>
                       </div>
                     </div>
-                  </router-link>
+                  </div>
                   <div class="gap-6 grid px-5 py-6 relative rounded-lg sm:gap-6 sm:p-8 bg-secondary-dark">
                     <router-link to="/premium" class="group -m-3 flex hover:bg-secondary items-start p-2 rounded-lg">
                       <div class="flex-shrink-0">

@@ -9,8 +9,10 @@
       </a>
     </div>
     <div v-else>
-      <router-link to="/profile"
-        class="gap-6 px-5 py-6 relative rounded-lg sm:gap-8 sm:p-6 group bg-primary hover:bg-primary-dark text-white grid grid-cols-4">
+      <!-- <router-link to="/profile" -->
+      <div
+        class="gap-6 px-5 py-6 relative rounded-lg sm:gap-8 sm:p-6 group bg-primary text-white grid grid-cols-4">
+        <!-- class="gap-6 px-5 py-6 relative rounded-lg sm:gap-8 sm:p-6 group bg-primary hover:bg-primary-dark text-white grid grid-cols-4"> -->
         <img class="object-cover col-span-1 aspect-square" :src="`https://cdn.discordapp.com/avatars/${$store.getters.getCurrentUser.id
           }/${$store.getters.getCurrentUser.avatar}.${$store.getters.getCurrentUser.avatar.startsWith('a_')
             ? 'gif'
@@ -30,7 +32,7 @@
             </div>
           </div>
         </div>
-      </router-link>
+      </div>
       <div class="gap-6 grid px-5 py-6 relative rounded-lg sm:gap-6 sm:p-8">
         <div class="flex justify-between items-center">
           <a href="/logout" class="text-white hover:text-gray-300 underline">Logout</a>

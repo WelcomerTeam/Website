@@ -92,6 +92,11 @@ import FormValue from "@/components/dashboard/FormValue.vue";
 import LoadingIcon from "@/components/LoadingIcon.vue";
 import store from "@/store/index";
 
+import {
+  OpenBotInvite,
+  PrimaryBotId
+} from "@/constants";
+
 export default {
   components: { FormValue, ChevronRightIcon, LoadingIcon, PlusIcon },
   setup() {
@@ -112,7 +117,7 @@ export default {
           },
         });
       } else {
-        alert("Invite prompt for " + guild.id);
+        OpenBotInvite(PrimaryBotId, guild.id, this.refreshGuildList);
       }
     },
   },

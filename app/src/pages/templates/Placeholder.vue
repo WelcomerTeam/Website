@@ -7,9 +7,9 @@
         <div class="absolute inset-0" aria-hidden="true">
           <div class="absolute inset-y-0 right-0 w-1/2 bg-donate" />
         </div>
-        <div class="relative mx-auto max-w-7xl lg:px-8 lg:grid lg:grid-cols-2">
-          <div class="px-4 py-12 bg-secondary sm:px-6 lg:px-0 lg:pr-8">
-            <div class="max-w-lg mx-auto lg:mx-0">
+        <div class="relative mx-auto max-w-7xl lg:px-6 lg:grid lg:grid-cols-2">
+          <div class="px-6 py-12 bg-secondary sm:px-6 lg:px-0 lg:pr-8">
+            <div class="lg:max-w-lg mx-auto lg:mx-0">
               <h2 class="text-base font-semibold tracking-wide text-primary">
                 Header
               </h2>
@@ -24,7 +24,7 @@
           <div
             class="px-4 py-12 bg-donate sm:px-6 lg:bg-none lg:px-0 lg:pl-8 lg:flex lg:items-center lg:justify-end"
           >
-            <div class="w-full max-w-lg mx-auto space-y-8 lg:mx-0">B</div>
+            <div class="w-full lg:max-w-lg mx-auto space-y-8 lg:mx-0">B</div>
           </div>
         </div>
       </div>
@@ -32,7 +32,7 @@
       <div id="plans">
         <div class="bg-white">
           <div class="hero-preview">
-            <div class="px-4 pt-8 mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div class="px-4 pt-8 mx-auto max-w-7xl sm:px-6">
               <div class="sm:flex sm:flex-col sm:align-center">
                 <div class="prose-lg text-center">
                   <h1

@@ -1,7 +1,7 @@
 <template>
   <header>
     <Popover class="relative w-full shadow bg-secondary-dark">
-      <div class="px-4 mx-auto max-w-7xl max-w-10xl sm:px-6">
+      <div class="px-6 mx-auto max-w-7xl max-w-10xl sm:px-6">
         <div class="flex items-center justify-between md:justify-start md:space-x-10 py-6">
           <router-link to="/">
             <div class="flex justify-start">
@@ -18,7 +18,7 @@
           </div>
           <PopoverGroup as="nav" class="hidden space-x-6 md:flex">
             <div class="inline-flex my-auto space-x-4">
-              <!-- <Popover class="relative" v-slot="{ open }">
+              <Popover class="relative" v-slot="{ open }" v-if="Toggle_ShowFeaturesOnPrimaryNavigation">
                 <PopoverButton :class="[
                   open ? 'text-gray-300' : 'text-white',
                   'group focus:outline-none hover:text-gray-300 inline-flex items-center rounded-md text-base',
@@ -38,7 +38,7 @@
                     class="absolute bg-secondary-dark lg:max-w-lg max-w-md mt-3 px-2 rounded-md sm:px-0 transform w-screen z-10 left-1/2 -translate-x-1/2">
                     <div class="popover-container">
                       <div class="gap-6 grid px-5 py-6 relative rounded-lg sm:gap-8 sm:p-8 bg-secondary-dark">
-                        <router-link v-for="item in navfeatures" :key="item.name" :to="item.href"
+                        <router-link v-for="item in NavigationFeatures" :key="item.name" :to="item.href"
                           class="group -m-3 flex hover:bg-secondary items-start p-2 rounded-lg">
                           <div class="flex-shrink-0">
                             <div class="popover-panel-icon">
@@ -60,7 +60,7 @@
                     </div>
                   </PopoverPanel>
                 </transition>
-              </Popover> -->
+              </Popover>
 
               <Popover class="relative" v-slot="{ open }">
                 <PopoverButton :class="[
@@ -82,7 +82,7 @@
                     class="absolute bg-secondary-dark lg:max-w-lg max-w-md mt-3 px-2 rounded-md sm:px-0 transform w-screen z-10 left-1/2 -translate-x-1/2">
                     <div class="popover-container">
                       <div class="gap-6 grid px-5 py-6 relative rounded-lg sm:gap-8 sm:p-8 bg-secondary-dark">
-                        <router-link v-for="item in navresources" :key="item.name" :to="item.href"
+                        <router-link v-for="item in NavigationResources" :key="item.name" :to="item.href"
                           class="group -m-3 flex hover:bg-secondary items-start p-2 rounded-lg">
                           <div class="flex-shrink-0">
                             <div class="popover-panel-icon">
@@ -165,10 +165,10 @@
               </div>
             </div>
 
-            <div class="px-4 py-4">
+            <div class="px-4 py-4" v-if="Toggle_ShowFeaturesOnPrimaryNavigation">
               <span class="pl-3 font-bold uppercase text-gray-200">Features</span>
               <nav class="grid grid-cols-2">
-                <router-link v-for="item in navfeatures" :key="item.name" :to="item.href" class="navbar-mobile-menu-item">
+                <router-link v-for="item in NavigationFeatures" :key="item.name" :to="item.href" class="navbar-mobile-menu-item">
                   <div class="popover-panel-icon">
                     <font-awesome-icon :icon="item.icon" class="navbar-mobile-menu-item-icon" aria-hidden="true" />
                   </div>
@@ -182,7 +182,7 @@
             <div class="px-4 py-4">
               <span class="pl-3 font-bold uppercase text-gray-200">Help</span>
               <nav class="grid grid-cols-2">
-                <router-link v-for="item in navresources" :key="item.name" :to="item.href"
+                <router-link v-for="item in NavigationResources" :key="item.name" :to="item.href"
                   class="navbar-mobile-menu-item">
                   <div class="popover-panel-icon">
                     <font-awesome-icon :icon="item.icon" class="navbar-mobile-menu-item-icon" aria-hidden="true" />
@@ -213,102 +213,11 @@ import { ChevronDownIcon } from "@heroicons/vue/solid";
 import UserProfile from "@/components/UserProfile.vue";
 import UserProfileCompact from "@/components/UserProfileCompact.vue";
 
-const navfeatures = [
-  {
-    name: "Welcome Images",
-    href: "/features#welcomer",
-    description: "Welcome users to your servers with customizable images",
-    icon: "image",
-  },
-  {
-    name: "Reaction Roles",
-    href: "/features#reactionroles",
-    description: "Allow users to control what roles they receive",
-    icon: "face-laugh",
-  },
-  {
-    name: "Moderation",
-    href: "/features#moderation",
-    description:
-      "Easily moderate your guilds and have easy access to who has done what",
-    icon: "user-shield",
-  },
-  {
-    name: "Logging",
-    href: "/features#logging",
-    description:
-      "Have easy access to all interactions with your guild both online and in guilds",
-    icon: "boxes-packing",
-  },
-  {
-    name: "Temporary Channels",
-    href: "/features#tempchannels",
-    description: "Allow users to make temporary voice channels in your server",
-    icon: "microphone-lines",
-  },
-  {
-    name: "Guild Analytics",
-    href: "/features#analytics",
-    description: "View information about your server such as user joins",
-    icon: "chart-line",
-  },
-  {
-    name: "Borderwall",
-    href: "/features#borderwall",
-    description:
-      "Secure your server by making them manually verify their identity",
-    icon: "door-open",
-  },
-];
-
-const navresources = [
-  {
-    name: "Status",
-    href: "/status",
-    description: "View the current status of the bot",
-    icon: "heart-pulse",
-  },
-  {
-    name: "Support Server",
-    href: "/support",
-    description:
-      "Join our support server for extra support, make new suggestions and more",
-    icon: "life-ring",
-  },
-  {
-    name: "FAQ",
-    href: "/faq",
-    description: "Check out our FAQ, your question may already be answered",
-    icon: "person-circle-question",
-  },
-  // {
-  //   name: "Video Tutorials",
-  //   href: "/tutorials",
-  //   description:
-  //     "View some of our video tutorials to get a better idea of how to setup the bot",
-  //   icon: ["fab", "youtube"],
-  // },
-  {
-    name: "Welcome Image Backgrounds",
-    href: "/backgrounds",
-    description:
-      "View our list of image backgrounds you can use with welcome images",
-    icon: "images",
-  },
-  {
-    name: "Custom Embed Builder",
-    href: "/builder",
-    description: "View our custom embed builder to see how embeds may look",
-    icon: "tachograph-digital",
-  },
-  {
-    name: "Text Formatting",
-    href: "/formatting",
-    description:
-      "View how to format your text with information about the user and more",
-    icon: "paint-roller",
-  },
-];
+import {
+  NavigationFeatures,
+  NavigationResources,
+  Toggle_ShowFeaturesOnPrimaryNavigation
+} from "@/constants";
 
 export default {
   components: {
@@ -324,8 +233,9 @@ export default {
   },
   setup() {
     return {
-      navfeatures,
-      navresources,
+      NavigationFeatures,
+      NavigationResources,
+      Toggle_ShowFeaturesOnPrimaryNavigation,
     };
   },
 };

@@ -23,10 +23,10 @@
             @update:modelValue="onValueUpdate" :validation="v$.site_guild_visible">When enabled, users will be able to publicly see your guild information on the website.</form-value>
 
             <form-value title="Show Staff on Website" :type="FormTypeToggle" v-model="config.site_staff_visible"
-            @update:modelValue="onValueUpdate" :validation="v$.site_staff_visible" :disabled="!config.site_guild_visible">When enabled, your staff will be shown on your guild's page on the website.</form-value>
+            @update:modelValue="onValueUpdate" :validation="v$.site_staff_visible">When enabled, your staff will be shown on your guild's page on the website.</form-value>
 
             <form-value title="Allow Users to Join on Website" :type="FormTypeToggle" v-model="config.site_allow_invites"
-            @update:modelValue="onValueUpdate" :validation="v$.site_allow_invites" :disabled="!config.site_guild_visible">When enabled, users will be able to use Welcomer to get an invite for your guild through the website. If you have a vanity invite, this will be used instead.</form-value>
+            @update:modelValue="onValueUpdate" :validation="v$.site_allow_invites">When enabled, users will be able to use Welcomer to get an invite for your guild through the website. If you have a vanity invite, this will be used instead.</form-value>
           </div>
           <unsaved-changes :unsavedChanges="unsavedChanges" :isChangeInProgress="isChangeInProgress"
             @save="saveConfig"></unsaved-changes>

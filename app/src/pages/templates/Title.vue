@@ -4,7 +4,7 @@
 
     <main>
       <div id="overview" class="relative bg-secondary">
-        <div class="px-4 py-12 bg-secondary w-full max-w-7xl mx-auto">
+        <div class="px-6 py-12 bg-secondary w-full max-w-7xl mx-auto">
           <p
             class="text-3xl font-bold text-left text-white flex tracking-tight"
           >
@@ -16,7 +16,7 @@
       <div id="plans">
         <div class="bg-white">
           <div class="hero-preview">
-            <div class="px-4 pt-8 mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div class="px-4 pt-8 mx-auto max-w-7xl sm:px-6">
               <div class="sm:flex sm:flex-col sm:align-center">
                 <div class="prose-lg text-center">
                   <h1

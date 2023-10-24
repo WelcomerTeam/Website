@@ -1,7 +1,7 @@
 <template>
   <header>
     <Popover class="relative w-full shadow bg-secondary-dark">
-      <div class="min-h-full px-4 mx-auto sm:px-6">
+      <div class="min-h-full px-6 mx-auto sm:px-6">
         <div class="flex items-center justify-between md:justify-start md:space-x-10 py-6">
           <slot />
           <router-link to="/">
@@ -19,6 +19,50 @@
           </div>
           <PopoverGroup as="nav" class="hidden space-x-6 md:flex">
             <div class="inline-flex my-auto space-x-4">
+              <Popover class="relative" v-slot="{ open }" v-if="Toggle_ShowFeaturesOnDashboard">
+                <PopoverButton :class="[
+                  open ? 'text-gray-300' : 'text-white',
+                  'group focus:outline-none hover:text-gray-300 inline-flex items-center rounded-md text-base',
+                ]">
+                  <span>Features</span>
+                  <ChevronDownIcon :class="[
+                    open ? 'text-gray-300' : 'text-white',
+                    'group-hover:text-gray-300 h-5 ml-1 w-5',
+                  ]" aria-hidden="true" />
+                </PopoverButton>
+
+                <transition enter-active-class="transition duration-200 ease-out"
+                  enter-from-class="translate-y-1 opacity-0" enter-to-class="translate-y-0 opacity-100"
+                  leave-active-class="transition duration-150 ease-in" leave-from-class="translate-y-0 opacity-100"
+                  leave-to-class="translate-y-1 opacity-0">
+                  <PopoverPanel
+                    class="absolute bg-secondary-dark lg:max-w-lg max-w-md mt-3 px-2 rounded-md sm:px-0 transform w-screen z-10 left-1/2 -translate-x-1/2">
+                    <div class="popover-container">
+                      <div class="gap-6 grid px-5 py-6 relative rounded-lg sm:gap-8 sm:p-8 bg-secondary-dark">
+                        <router-link v-for="item in NavigationFeatures" :key="item.name" :to="item.href"
+                          class="group -m-3 flex hover:bg-secondary items-start p-2 rounded-lg">
+                          <div class="flex-shrink-0">
+                            <div class="popover-panel-icon">
+                              <font-awesome-icon :icon="item.icon" class="w-6 h-6" aria-hidden="true" />
+                            </div>
+                          </div>
+                          <div class="my-auto ml-4 leading-none">
+                            <p class="text-lg font-medium text-white">
+                              {{ item.name }}
+                            </p>
+                            <p class="text-sm text-gray-300">
+                              {{ item.description }}
+                            </p>
+                          </div>
+                        </router-link>
+                        <router-link class="text-white underline hover:text-gray-300" to="/features">View all
+                          features</router-link>
+                      </div>
+                    </div>
+                  </PopoverPanel>
+                </transition>
+              </Popover>
+
               <Popover class="relative z-40" v-slot="{ open }">
                 <PopoverButton :class="[
                   open ? 'text-gray-300' : 'text-white',
@@ -39,7 +83,7 @@
                     class="absolute bg-secondary-dark lg:max-w-lg max-w-md mt-3 px-2 rounded-md sm:px-0 transform w-screen z-10 left-1/2 -translate-x-1/2">
                     <div class="popover-container">
                       <div class="gap-6 grid px-5 py-6 relative rounded-lg sm:gap-8 sm:p-8 bg-secondary-dark">
-                        <router-link v-for="item in navresources" :key="item.name" :to="item.href"
+                        <router-link v-for="item in NavigationResources" :key="item.name" :to="item.href"
                           class="group -m-3 flex hover:bg-secondary items-start p-2 rounded-lg">
                           <div class="flex-shrink-0">
                             <div class="popover-panel-icon">
@@ -117,10 +161,24 @@
               </div>
             </div>
 
+            <div class="px-4 py-4" v-if="Toggle_ShowFeaturesOnDashboard">
+              <span class="pl-3 font-bold uppercase text-gray-200">Features</span>
+              <nav class="grid grid-cols-2">
+                <router-link v-for="item in NavigationFeatures" :key="item.name" :to="item.href" class="navbar-mobile-menu-item">
+                  <div class="popover-panel-icon">
+                    <font-awesome-icon :icon="item.icon" class="navbar-mobile-menu-item-icon" aria-hidden="true" />
+                  </div>
+                  <span class="navbar-mobile-menu-item-text">
+                    {{ item.name }}
+                  </span>
+                </router-link>
+              </nav>
+            </div>
+
             <div class="px-4 py-4">
               <span class="pl-3 font-bold uppercase text-gray-200">Help</span>
               <nav class="grid grid-cols-2">
-                <router-link v-for="item in navresources" :key="item.name" :to="item.href"
+                <router-link v-for="item in NavigationResources" :key="item.name" :to="item.href"
                   class="navbar-mobile-menu-item">
                   <div class="popover-panel-icon">
                     <font-awesome-icon :icon="item.icon" class="navbar-mobile-menu-item-icon" aria-hidden="true" />
@@ -151,54 +209,11 @@ import { ChevronDownIcon } from "@heroicons/vue/solid";
 import UserProfile from "@/components/UserProfile.vue";
 import UserProfileCompact from "@/components/UserProfileCompact.vue";
 
-const navresources = [
-  {
-    name: "Status",
-    href: "/status",
-    description: "View the current status of the bot",
-    icon: "heart-pulse",
-  },
-  {
-    name: "Support Server",
-    href: "/support",
-    description:
-      "Join our support server for extra support, make new suggestions and more",
-    icon: "life-ring",
-  },
-  {
-    name: "FAQ",
-    href: "/faq",
-    description: "Check out our FAQ, your question may already be answered",
-    icon: "person-circle-question",
-  },
-  {
-    name: "Video Tutorials",
-    href: "/tutorials",
-    description:
-      "View some of our video tutorials to get a better idea of how to setup the bot",
-    icon: ["fab", "youtube"],
-  },
-  {
-    name: "Welcome Image Backgrounds",
-    href: "/backgrounds",
-    description:
-      "View our list of image backgrounds you can use with welcome images",
-    icon: "images",
-  },
-  {
-    name: "Custom Embed Builder",
-    href: "/builder",
-    description: "View our custom embed builder to see how embeds may look",
-    icon: "tachograph-digital",
-  },
-  {
-    name: "Text Formatting",
-    href: "/formatting",
-    description:
-      "View how to format your text with information about the user and more",
-    icon: "paint-roller",
-  },
-];
+import {
+  NavigationFeatures,
+  NavigationResources,
+  Toggle_ShowFeaturesOnDashboard
+} from "@/constants";
 
 export default {
   components: {
@@ -214,7 +229,9 @@ export default {
   },
   setup() {
     return {
-      navresources,
+      NavigationFeatures,
+      NavigationResources,
+      Toggle_ShowFeaturesOnDashboard,
     };
   },
 };
