@@ -1,1 +1,1 @@
-yarn build
+yarn build --mode production --outDir dist
