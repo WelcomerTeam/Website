@@ -24,9 +24,8 @@
               @update:modelValue="onValueUpdate" :validation="v$.send_dm">When enabled, users will receive their verify
               message in their DMs instead of being sent to a channel.</form-value>
 
-            <form-value title="Welcome Channel" :type="FormTypeChannelListCategories" v-model="config.channel"
-              @update:modelValue="onValueUpdate" :validation="v$.channel" :inlineSlot="true" :nullable="true">This is the
-              channel we will send messages to.</form-value>
+            <form-value title="Borderwall Channel" :type="FormTypeChannelListCategories" v-model="config.channel"
+              @update:modelValue="onValueUpdate" :validation="v$.channel" :inlineSlot="true" :nullable="true">This is the channel we will send borderwall messages to.</form-value>
 
             <form-value title="Verify Message" :type="FormTypeEmbed" v-model="config.message_verify"
               @update:modelValue="onValueUpdate" :validation="v$.message_verify" :inlineSlot="true"
