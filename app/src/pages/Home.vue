@@ -13,7 +13,9 @@
             </p>
             <div class="hero-buttons">
               <div class="hero-primary">
-                <router-link to="/invite">Invite Welcomer</router-link>
+                <router-link :to="{ name: 'invite' }">
+                  Invite Welcomer
+                </router-link>
               </div>
               <div class="hero-secondary">
                 <a href="#features">Features</a>
@@ -91,7 +93,7 @@
             Welcomer helps assist moderation and improve user engagement, get
             started today.
           </p>
-          <router-link to="/invite">
+          <router-link :to="{ name: 'invite' }">
             <button type="button" class="w-32 mt-4 cta-button bg-primary hover:bg-primary-dark">
               Invite
             </button>

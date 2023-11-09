@@ -4,7 +4,7 @@
       <LoadingIcon class="text-white" />
     </div>
     <div v-else-if="!$store.getters.isLoggedIn" class="space-x-4 flex">
-      <router-link to="/invite">
+      <router-link :to="{ name: 'invite' }">
         <button type="button" class="cta-button bg-primary hover:bg-primary-dark">
           Invite Welcomer
         </button>
@@ -97,6 +97,7 @@
 </template>
 
 <script>
+
 import {
   Popover,
   PopoverButton,
@@ -116,7 +117,7 @@ export default {
     ChevronDownIcon,
     LoadingIcon,
     ThemeToggle,
-  },
+  }
 };
 </script>
 
