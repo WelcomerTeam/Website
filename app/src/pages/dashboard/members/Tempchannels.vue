@@ -20,7 +20,7 @@
 
             <form-value title="TempChannels Category" :type="FormTypeChannelList" v-model="config.channel_category"
               @update:modelValue="onValueUpdate" :validation="v$.channel_category" :inlineSlot="true" :nullable="true"
-              :disabled="!config.enabled" :channelFilter="4">This is the category temporary channels will be created
+              :channelFilter="4">This is the category temporary channels will be created
               in.</form-value>
 
             <form-value title="Enable AutoPurge" :type="FormTypeToggle" v-model="config.autopurge"
@@ -30,7 +30,7 @@
 
             <form-value title="Lobby Channel" :type="FormTypeChannelList" v-model="config.channel_lobby"
               @update:modelValue="onValueUpdate" :validation="v$.channel_lobby" :inlineSlot="true" :nullable="true"
-              :disabled="!config.enabled" :channelFilter="2">If a lobby channel is set, users will be able to join the
+              :channelFilter="2">If a lobby channel is set, users will be able to join the
               lobby channel and get automatically moved to a temporary channel without having to run a
               command.</form-value>
 
