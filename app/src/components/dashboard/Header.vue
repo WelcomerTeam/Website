@@ -135,7 +135,7 @@
 
             <div class="px-4 py-4">
               <div class="grid grid-cols-2">
-                <router-link to="/invite" v-if="!$store.getters.isLoggedIn" class="navbar-mobile-menu-item">
+                <router-link :to="{ name: 'invite' }" v-if="!$store.getters.isLoggedIn" class="navbar-mobile-menu-item">
                   <div class="popover-panel-icon bg-primary">
                     <font-awesome-icon icon="plus" class="navbar-mobile-menu-item-icon" aria-hidden="true" />
                   </div>
@@ -233,6 +233,6 @@ export default {
       NavigationResources,
       Toggle_ShowFeaturesOnDashboard,
     };
-  },
-};
+  }
+}
 </script>
