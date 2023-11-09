@@ -3,23 +3,29 @@ import { createWebHistory, createRouter } from "vue-router";
 import Home from "@/pages/Home.vue";
 import Premium from "@/pages/Premium.vue";
 import Backgrounds from "@/pages/Backgrounds.vue";
+import Invite from "@/pages/Invite.vue";
 import Dashboard from "@/pages/Dashboard.vue";
 
 const routes = [
   {
     path: "/",
-    name: "Home",
+    name: "home",
     component: Home,
   },
   {
     path: "/premium",
-    name: "Premium",
+    name: "premium",
     component: Premium,
   },
   {
     path: "/backgrounds",
-    name: "Backgrounds",
+    name: "backgrounds",
     component: Backgrounds,
+  },
+  {
+    path: "/invite",
+    name: "invite",
+    component: Invite,
   },
   {
     path: "/dashboard",
@@ -104,7 +110,16 @@ const routes = [
       },
     ],
   },
-
+  {
+    path: "/template1",
+    name: "dashboard.guild.template1",
+    component: () => import("@/pages/templates/Placeholder.vue"),
+  },
+  {
+    path: "/template2",
+    name: "dashboard.guild.template2",
+    component: () => import("@/pages/templates/Title.vue"),
+  },
   {
     path: "/:catchAll(.*)",
     component: () => import("@/pages/NotFound.vue"),

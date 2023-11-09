@@ -13,10 +13,10 @@ export const DonatorBotId = donatorBotId;
 export const Toggle_ShowFeaturesOnPrimaryNavigation = false;
 export const Toggle_ShowFeaturesOnDashboard = false;
 
-export const BotPermissions = 0;
+export const BotPermissions = 399397809407; // Temporary catch-all permissions
 
 export const GetBotInvite = (bot_id, guild_id) => {
-    return `https://discord.com/oauth2/authorize?client_id=${bot_id}&scope=bot%20applications.commands&permissions=${BotPermissions}&guild_id=${guild_id}`
+    return `https://discord.com/oauth2/authorize?client_id=${bot_id}&scope=bot%20applications.commands&permissions=${BotPermissions}${guild_id ? '&guild_id='+guild_id : ''}`
 }
 
 export const OpenBotInvite = (bot_id, guild_id, callback) => {
@@ -28,8 +28,8 @@ export const TryOpenURLInPopup = (url, callback) => {
 
     const width = Math.min(550, window.outerWidth-(padding*2));
     const height = Math.min(800, window.outerHeight-(padding*2));
-    const left = (window.outerWidth - width) / 2;
-    const top = (window.outerHeight - height) / 2;
+    const left = window.screenX + (window.outerWidth - width) / 2;
+    const top = window.screenY + (window.outerHeight - height) / 2;
 
     var popup;
 
