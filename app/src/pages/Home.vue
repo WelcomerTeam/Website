@@ -41,12 +41,9 @@
         <div class="hero-preview">
           <div class="pb-12 prose-lg text-center">
             <h1 class="text-lg font-black leading-8 tracking-tighter text-gray-900">
-              Improve your user engagement
+              Elevate Your User Engagement
             </h1>
-            <span class="text-lg text-gray-500 max-w-3xl mx-auto section-subtitle">See why others use Welcomer to power
-              their discord guilds. With
-              many features and an easy to use dashboard, you can make whatever
-              changes whenever you want.
+            <span class="text-lg text-gray-700 max-w-3xl mx-auto section-subtitle">Explore the reasons why Welcomer is the go-to choice for empowering Discord guilds. Packed with numerous features and boasting a user-friendly dashboard, you have the flexibility to make changes whenever you desire.
             </span>
           </div>
 
@@ -56,7 +53,7 @@
                 <h2 class="mb-4 text-3xl font-black leading-tight text-gray-900">
                   {{ item.name }}
                 </h2>
-                <span class="text-gray-500">{{ item.description }}
+                <span class="text-gray-700">{{ item.description }}
                   <router-link :to="item.href" v-if="item.href"
                     class="text-primary hover:text-primary-dark font-semibold">
                     {{ item.label }}
@@ -90,12 +87,11 @@
             <span class="block text-primary">Invite Welcomer today, it's free.</span>
           </h2>
           <p class="mt-5 text-lg leading-6 text-gray-400">
-            Welcomer helps assist moderation and improve user engagement, get
-            started today.
+            Elevate Moderation, Enhance Engagement: Welcomer is your key to a thriving community. Start today!
           </p>
-          <router-link :to="{ name: 'invite' }">
+          <router-link :to="{ name: 'dashboard.guilds' }">
             <button type="button" class="w-32 mt-4 cta-button bg-primary hover:bg-primary-dark">
-              Invite
+              Dashboard
             </button>
           </router-link>
         </div>
@@ -114,110 +110,73 @@ import HoistHeading from "@/components/hoist/HoistHeading.vue";
 
 const previews = [
   {
-    name: "Get started in seconds",
-    description:
-      "In a few clicks you can greet new users to your server, without any previous knowledge.",
-    src: "/assets/placeholder.png",
-    href: "/",
-    label: "text",
-  },
-  {
-    name: "Secure your server easily",
-    description:
-      "Ensure only real users are able to send messages by providing a challenge when they join with Borderwall enabled.",
+    name: "Empower your Welcome Messages",
+    description: "Tailor your welcome messages with Welcomer, offering personalized customization for text, direct messages, and images, ensuring a unique and engaging experience for every Discord user.",
     src: "/assets/placeholder.png",
   },
   {
-    name: "Increase user engagement",
+    name: "Reinforce Your Server's Defenses with Borderwall",
     description:
-      "Reward users with XP for conversing on your server and let them compete against each other with a public leaderboard.",
+      "With Borderwall enabled, ensure only authentic users can send messages by presenting a challenge upon joining, guaranteeing a secure and spam-resistant community.",
     src: "/assets/placeholder.png",
   },
-  {
-    name: "Reduce moderation burden",
-    description:
-      "AutoMod scans your users messages for rules that you have defined to reduce the requirements for manual moderation.",
-    src: "/assets/placeholder.png",
-  },
-  {
-    name: "Automate your server",
-    description:
-      "Automation allows you to create tasks that execute on events in a zero-code environment. Want to give roles to anybody who sends “pog”? You can do that without any knowledge of programming.",
-    src: "/assets/placeholder.png",
-  },
+  // {
+  //   name: "Increase user engagement",
+  //   description:
+  //     "Reward users with XP for conversing on your server and let them compete against each other with a public leaderboard.",
+  //   src: "/assets/placeholder.png",
+  // },
+  // {
+  //   name: "Automate your server",
+  //   description:
+  //     "Automation allows you to create tasks that execute on events in a zero-code environment. Want to give roles to anybody who sends “pog”? You can do that without any knowledge of programming.",
+  //   src: "/assets/placeholder.png",
+  // },
 ];
 
 const features = [
+  // AutoReminders
   {
-    name: "XP",
-    description:
-      "Allow users to collect chat experience by being active within your community",
+    name: "AutoRoles",
+    description: "Automatically give users roles when they join your server.",
   },
   {
-    name: "AutoRole",
-    description: "Automatically assign users roles when they join your server",
-  },
-  {
-    name: "ReactionRoles",
-    description:
-      "Allow users to give themselves roles when they react to a message",
-  },
-  {
-    name: "InviteRoles",
-    description: "Give users roles when joining specific invites",
-  },
-  {
-    name: "InviteRewards",
-    description: "Want to reward users for inviting X users? You can now",
-  },
-  {
-    name: "TimeRoles",
-    description:
-      "Reward users for staying on your server for a period of time with a special role",
+    name: "Borderwall",
+    description: "Secure your server from automated accounts with a challenge when joining.",
   },
   {
     name: "FreeRoles",
-    description:
-      "Allow users to give themselves specific roles through a command",
+    description: "Allow users to easily give and remove certain roles from themselves through a command.",
   },
+  // InviteRoles
   {
-    name: "AutoReminders",
-    description: "Automatically send messages at predefined times in channels",
+    name: "Leaver",
+    description: "Send a message when users leave your server, wishing them farewell.",
   },
+  // LevelRoles
+  // Lockdown
+  // Polls
+  // ReactionRoles
   {
-    name: "StickyRoles",
-    description:
-      "Enforce roles on users that stay even when they leave and rejoin",
+    name: "Rules",
+    description: "Provide a list of rules for users to see, and send them when a user joins your server.",
   },
-  {
-    name: "Lockdown",
-    description:
-      "Allow moderators to run a command that stops users from sending messages in specific channels.",
-  },
+  // Starboard
+  // StickyRoles
+  // Suggestions
   {
     name: "TempChannels",
-    description:
-      "Allow users to create temporary voice channels and optionally let them have control over it.",
+    description: "Allow users to create temporary voice channels, freeing up space.",
   },
   {
-    name: "Polls",
-    description:
-      "Easily create polls for users that can last for a period of time or last forever",
+    name: "TimeRoles",
+    description: "Reward users for staying in your server for a period of time, with special roles.",
   },
   {
-    name: "Starboard",
-    description:
-      "Allows users to react to a message with a star (or custom emoji) and showcase these messages in a dedicated channel",
+    name: "Welcomer",
+    description: "Welcome new users to your servers to your server with fancy images and text or send them a direct message.",
   },
-  {
-    name: "Suggestions",
-    description:
-      "Allow users to create suggestions and let users provide feedback on them",
-  },
-  {
-    name: "LevelRoles",
-    description: "Reward users who reach certain XP levels with special roles",
-  },
+  // XP
 ];
 
 export default {

@@ -5,6 +5,11 @@ import Premium from "@/pages/Premium.vue";
 import Backgrounds from "@/pages/Backgrounds.vue";
 import Invite from "@/pages/Invite.vue";
 import Dashboard from "@/pages/Dashboard.vue";
+import Status from "@/pages/Status.vue";
+import Support from "@/pages/Support.vue";
+import FAQ from "@/pages/FAQ.vue";
+import Formatting from "@/pages/Formatting.vue";
+
 
 const routes = [
   {
@@ -26,6 +31,26 @@ const routes = [
     path: "/invite",
     name: "invite",
     component: Invite,
+  },
+  {
+    path: "/status",
+    name: "status",
+    component: Status,
+  },
+  {
+    path: "/support",
+    name: "support",
+    component: Support,
+  },
+  {
+    path: "/faq",
+    name: "faq",
+    component: FAQ,
+  },
+  {
+    path: "/formatting",
+    name: "formatting",
+    component: Formatting,
   },
   {
     path: "/dashboard",

@@ -138,12 +138,12 @@ export const NavigationResources = [
             "View our list of image backgrounds you can use with welcome images",
         icon: "images",
     },
-    {
-        name: "Custom Embed Builder",
-        href: "/builder",
-        description: "View our custom embed builder to see how embeds may look",
-        icon: "tachograph-digital",
-    },
+    // {
+    //     name: "Custom Embed Builder",
+    //     href: "/builder",
+    //     description: "View our custom embed builder to see how embeds may look",
+    //     icon: "tachograph-digital",
+    // },
     {
         name: "Text Formatting",
         href: "/formatting",
