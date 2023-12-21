@@ -112,10 +112,12 @@
               direct messages. This will wait until a user has completed
               borderwall or rule screening, if enabled.</form-value>
 
+            <!--
             <form-value title="Include Welcome Image" :type="FormTypeToggle" v-model="config.dms.include_image"
               @update:modelValue="onValueUpdate" :validation="v$.dms.include_image" :inlineSlot="true">This will include
               the welcomer image to your welcomer direct
               message, if enabled.</form-value>
+            -->
 
             <form-value title="Use Same Message As Welcome Text" v-model="config.dms.reuse_message" :type="FormTypeToggle"
               @update:modelValue="onValueUpdate" :validation="v$.dms.reuse_message" :inlineSlot="true">This will copy the
@@ -193,7 +195,7 @@ var profileBorderTypes = [
   { key: "Circular", value: "circular" },
   { key: "Rounded", value: "rounded" },
   { key: "Squared", value: "squared" },
-  { key: "Hexagonal", value: "hexagonal" },
+  // { key: "Hexagonal", value: "hexagonal" },
 ];
 
 export default {
