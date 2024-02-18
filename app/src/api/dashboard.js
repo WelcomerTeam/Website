@@ -193,4 +193,61 @@ export default {
       }
     );
   },
+
+  getBorderwall(borderwallId, callback, errorCallback) {
+    getRequest(
+      "/api/borderwall/" + borderwallId,
+      (response) => {
+        if (response.status === 401) {
+          doLogin();
+        } else {
+          response
+            .json()
+            .then((res) => {
+              if (res.ok) {
+                callback(res.data);
+              } else {
+                errorCallback(res.error);
+              }
+            })
+            .catch((error) => {
+              errorCallback(error);
+            });
+        }
+      },
+      (error) => {
+        errorCallback(error);
+      }
+    );
+  },
+
+  submitBorderwall(borderwallId, response, callback, errorCallback) {
+    doRequest(
+      "POST",
+      "/api/borderwall/" + borderwallId,
+      { response },
+      null, 
+      (response) => {
+        if (response.status === 401) {
+          doLogin();
+        } else {
+          response
+            .json()
+            .then((res) => {
+              if (res.ok) {
+                callback(res.data);
+              } else {
+                errorCallback(res.error);
+              }
+            })
+            .catch((error) => {
+              errorCallback(error);
+            });
+        }
+      },
+      (error) => {
+        errorCallback(error);
+      }
+    );
+  },
 };

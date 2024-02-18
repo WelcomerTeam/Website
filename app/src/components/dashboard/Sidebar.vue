@@ -8,7 +8,7 @@
         <img v-if="$store.getters.getCurrentSelectedGuild" class="w-10 h-10 rounded-lg" :src="$store.getters.getCurrentSelectedGuild?.icon !== ''
             ? `https://cdn.discordapp.com/icons/${$store.getters.getCurrentSelectedGuild?.id}/${$store.getters.getCurrentSelectedGuild?.icon}.webp?size=128`
             : '/assets/discordServer.svg'
-          " alt="Guild icon" />
+          " alt="Server icon" />
         <div class="pl-2 overflow-hidden dark:text-gray-50">
           <router-link @click="$emit('onTabClick')" :to="{ name: 'dashboard.guild.overview', params: $route.params }"
             v-if="$store.getters.getCurrentSelectedGuild">
@@ -17,11 +17,11 @@
             </h3>
           </router-link>
           <h3 v-else class="truncate font-bold leading-none">
-            No Guild Selected
+            No Server Selected
           </h3>
           <router-link @click="$emit('onTabClick')"
             class="text-xs leading-none font-semibold text-gray-600 dark:text-gray-300 hover:underline"
-            :to="{ name: 'dashboard.guilds', params: $route.params }">Change Guild</router-link>
+            :to="{ name: 'dashboard.guilds', params: $route.params }">Change Server</router-link>
         </div>
       </div>
 
@@ -81,7 +81,7 @@ const navigation = [
   {
     items: [
       {
-        name: "Guild Overview",
+        name: "Server Overview",
         linkname: "dashboard.guild.overview",
         icon: "fa-chart-line",
       },

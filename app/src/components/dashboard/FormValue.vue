@@ -474,7 +474,7 @@
                           selected ? 'font-semibold' : 'font-normal',
                           'block truncate',
                         ]">
-                          <img :alt="`Guild member ${member.display_name}`" v-lazy="`https://cdn.discordapp.com/avatars/${member.id}/${member.avatar}.webp?size=32`
+                          <img :alt="`Member ${member.display_name}`" v-lazy="`https://cdn.discordapp.com/avatars/${member.id}/${member.avatar}.webp?size=32`
                             " class="flex-shrink-0 inline w-4 h-4 mr-1 rounded-full object-contain" />
                           {{ member.display_name }}
                         </span>
@@ -573,7 +573,7 @@
                         selected ? 'font-semibold' : 'font-normal',
                         'block truncate',
                       ]">
-                        <img :alt="`Guild emoji ${emoji.name}`" v-lazy="`https://cdn.discordapp.com/emojis/${emoji.id}.${emoji.is_animated ? 'gif' : 'png'
+                        <img :alt="`Emoji ${emoji.name}`" v-lazy="`https://cdn.discordapp.com/emojis/${emoji.id}.${emoji.is_animated ? 'gif' : 'png'
                           }`
                           " class="flex-shrink-0 inline w-4 h-4 mr-1 object-contain" />
                         {{ emoji.name }}

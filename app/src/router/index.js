@@ -2,14 +2,9 @@ import { createWebHistory, createRouter } from "vue-router";
 
 import Home from "@/pages/Home.vue";
 import Premium from "@/pages/Premium.vue";
-import Backgrounds from "@/pages/Backgrounds.vue";
 import Invite from "@/pages/Invite.vue";
 import Dashboard from "@/pages/Dashboard.vue";
-import Status from "@/pages/Status.vue";
 import Support from "@/pages/Support.vue";
-import FAQ from "@/pages/FAQ.vue";
-import Formatting from "@/pages/Formatting.vue";
-
 
 const routes = [
   {
@@ -23,19 +18,9 @@ const routes = [
     component: Premium,
   },
   {
-    path: "/backgrounds",
-    name: "backgrounds",
-    component: Backgrounds,
-  },
-  {
     path: "/invite",
     name: "invite",
     component: Invite,
-  },
-  {
-    path: "/status",
-    name: "status",
-    component: Status,
   },
   {
     path: "/support",
@@ -43,14 +28,29 @@ const routes = [
     component: Support,
   },
   {
+    path: "/backgrounds",
+    name: "backgrounds",
+    component: () => import("@/pages/Backgrounds.vue"),
+  },
+  {
+    path: "/status",
+    name: "status",
+    component: () => import("@/pages/Status.vue"),
+  },
+  {
     path: "/faq",
     name: "faq",
-    component: FAQ,
+    component: () => import("@/pages/FAQ.vue"),
   },
   {
     path: "/formatting",
     name: "formatting",
-    component: Formatting,
+    component: () => import("@/pages/Formatting.vue"),
+  },
+  {
+    path: "/borderwall/:key?",
+    name: "borderwall",
+    component: () => import("@/pages/Borderwall.vue"),
   },
   {
     path: "/dashboard",

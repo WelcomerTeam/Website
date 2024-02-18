@@ -4,7 +4,7 @@
   >
     <div class="text-center">
       <p class="mb-2">
-        <b>10:15 GMT</b> - There is currently an outage affecting guilds. This
+        <b>10:15 GMT</b> - There is currently an outage affecting servers. This
         will affect the discord bot however the site will remain up
       </p>
       <a

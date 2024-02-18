@@ -14,7 +14,7 @@
                 Welcomer Pro
               </h2>
               <p class="text-3xl font-bold text-left text-white flex justify-center tracking-tight">
-                Everything you need to boost your guild's engagement
+                Everything you need to boost your server's engagement
               </p>
               <div class="mt-12 space-y-8">
                 <div v-for="feature in features" :key="feature.name" class="relative">
@@ -80,8 +80,6 @@
                   </h1>
                   <span class="mt-3 text-lg text-gray-500 section-subtitle max-w-prose mx-auto">
                     Get started with Welcomer Pro without any recurring payments.
-                    Own multiple guilds? Save with a multi-guild membership
-                    instead of buying separately.
                   </span>
                 </div>
                 <div class="relative mt-6 bg-gray-100 rounded-lg p-0.5 flex flex-wrap self-center sm:mt-8 shadow-sm">

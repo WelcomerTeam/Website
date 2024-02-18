@@ -86,6 +86,10 @@ import {
 } from "@fortawesome/pro-regular-svg-icons";
 
 import {
+  faBadgeCheck as falBadgeCheck,
+} from "@fortawesome/sharp-light-svg-icons";
+
+import {
   faPersonDigging as fadPersonDigging
 } from "@fortawesome/pro-duotone-svg-icons";
 
@@ -158,6 +162,8 @@ library.add(
   farWrench,
 
   fadPersonDigging,
+
+  falBadgeCheck,
 );
 
 createApp(App)
