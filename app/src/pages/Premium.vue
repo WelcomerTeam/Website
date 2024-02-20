@@ -179,7 +179,7 @@
                 <div class="relative">
                   <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div
-                      class="lg:max-w-lg mx-auto overflow-hidden border border-gray-300 rounded-lg shadow-sm lg:max-w-none lg:flex">
+                      class="lg:max-w-lg mx-auto overflow-hidden border border-gray-300 rounded-lg shadow-sm lg:flex">
                       <div class="flex-1 px-6 py-8 my-auto bg-white lg:p-12">
                         <h3 class="text-2xl font-bold text-gray-900 sm:text-3xl">
                           Custom Welcomer Backgrounds

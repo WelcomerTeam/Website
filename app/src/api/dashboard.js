@@ -225,7 +225,7 @@ export default {
     doRequest(
       "POST",
       "/api/borderwall/" + borderwallId,
-      { response },
+      response,
       null, 
       (response) => {
         if (response.status === 401) {

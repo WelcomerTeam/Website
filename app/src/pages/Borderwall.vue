@@ -131,8 +131,6 @@ export default {
       this.isDataFetched = false;
       this.isDataError = false;
 
-      console.log(this.$route);
-
       dashboardAPI.getBorderwall(
         this.$route.params.key,
         (response) => {
@@ -150,12 +148,24 @@ export default {
       );
     },
 
-    sendResponse() {
+    async getPlatformVersion() {
+      try {
+        let entropyValues = await navigator.userAgentData.getHighEntropyValues(["platformVersion"]);
+        return entropyValues.platformVersion;
+      } catch (error) {
+        return undefined;
+      }
+    },
+
+    async sendResponse() {
       this.isExecuting = true;
 
       dashboardAPI.submitBorderwall(
         this.$route.params.key,
-        this.response,
+        {
+          response: this.response,
+          platform_version: await this.getPlatformVersion(),
+        },
         () => {
           this.isCompleted = true;
         },
