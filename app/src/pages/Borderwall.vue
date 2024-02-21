@@ -1,5 +1,5 @@
 <template>
-  <div class="relative min-h-screen bg-white">
+  <div class="relative min-h-screen">
     <Header />
 
     <main>
@@ -8,7 +8,7 @@
           <div class="sm:flex sm:flex-col sm:align-center">
             <div class="prose-lg text-center">
               <img src="/assets/peek.png" alt="" class="mx-auto w-24 h-24 mb-4 select-none" />
-              <h1 class="font-black leading-8 tracking-tighter text-gray-900">
+              <h1 class="font-black leading-8 tracking-tighter">
                 This server is protected by Borderwall
               </h1>
               <div v-if="this.$route.params.key == ''">
@@ -18,24 +18,23 @@
                 <div class="mb-4">Data Error</div>
                 <button @click="this.fetchBorderwall">Retry</button>
               </div>
-              <div v-else-if="!this.isDataFetched" class="flex py-5 w-full justify-center text-secondary">
+              <div v-else-if="!this.isDataFetched" class="flex py-5 w-full justify-center">
                 <LoadingIcon />
               </div>
-              <span v-else-if="this.isValidKey" class="mt-3 text-lg text-gray-700 section-subtitle max-w-prose mx-auto">
-                You are authenticating into <b> {{ guildName }} </b> for
-                <b> {{ displayName }} </b>. Please verify below.
+              <span v-else-if="this.isValidKey" class="mt-3 text-lg section-subtitle max-w-prose mx-auto">
+                You are verifying for <b> {{ guildName }} </b>. Please verify below.
               </span>
-              <span v-else class="mt-3 text-lg text-gray-700 section-subtitle max-w-prose mx-auto">
-                Your borderwall key has expired or already been used.
+              <span v-else class="mt-3 text-lg section-subtitle max-w-prose mx-auto">
+                Your BorderWall link has expired or already been used.
               </span>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="pb-20">
+      <div class="pb-48">
         <div v-if="this.isDataFetched && this.isValidKey"
-          :class="['text-white px-6 py-8 rounded-lg p-4 mx-4 mt-12 mb-2 text-center shadow-sm transition-all duration-500 h-52 flex items-center justify-center', this.isCompleted ? 'bg-green-600' : 'bg-secondary']">
+          :class="['text-white px-6 py-8 rounded-lg p-4 mx-4 mt-12 mb-2 text-center shadow-sm transition-all duration-500 h-52 flex items-center justify-center', this.isCompleted ? 'bg-green-600' : 'bg-secondary dark:bg-secondary-dark']">
           <div v-if="this.isCompleted" class="text-center space-y-4">
             <font-awesome-icon icon="fa-sharp fa-light fa-badge-check" class="W-24 h-24" aria-hidden="" />
             <h2 class="text-2xl font-semibold">
@@ -63,7 +62,7 @@
           </div>
         </div>
         <div class="text-center font-semibold">
-          Welcomer or Borderwall will never ask you to scan QR codes. <a href="https://welcomer.gg/phishing" target="_blank" class="font-semibold underline hover:text-gray-700">Learn More</a>.
+          Welcomer or Borderwall will never ask you to scan any QR codes. <a href="https://welcomer.gg/phishing" target="_blank" class="font-semibold underline hover:text-gray-700 dark:hover:text-gray-300">Learn More</a>.
         </div>
       </div>
     </main>
@@ -105,7 +104,6 @@ export default {
     let isExecuting = ref(false);
     let isValidKey = ref(false);
     let guildName = ref("");
-    let displayName = ref("");
     let response = ref(null);
 
     return {
@@ -115,7 +113,6 @@ export default {
       isExecuting,
       isValidKey,
       guildName,
-      displayName: displayName,
       response,
     };
   },
@@ -137,7 +134,6 @@ export default {
           this.isDataFetched = true;
           this.isValidKey = response.valid;
           this.guildName = response.guild_name;
-          this.displayName = response.display_name;
         },
         (error) => {
           this.$store.dispatch("createToast", getErrorToast(error));
