@@ -70,7 +70,7 @@
         'block w-full overflow-auto text-base rounded-md sm:text-sm bg-white border-gray-300 dark:border-secondary-light dark:bg-secondary border',
         true ? '' : 'rounded-t-none border-t-0',
       ]">
-        <div class="border-b border-gray-200 dark:border-secondary-light">
+        <div class="border-b border-gray-300 dark:border-secondary-light">
           <nav class="flex display-flex justify-evenly" aria-label="Tabs">
             <a v-for="tab in tabs" :key="tab.name" @click="this.page = tab.enabled ? tab.value : this.page" :class="[
               tab.enabled ? '' : ' bg-gray-100',
@@ -162,7 +162,7 @@
           </div>
           <!-- <div v-if="this.page == 3">Unsplash</div> -->
           <div v-if="this.page == 4">
-            <div class="sm:flex sm:gap-4 sm:border-gray-200 mb-6 sm:mb-4 align-middle">
+            <div class="sm:flex sm:gap-4 sm:border-gray-300 mb-6 sm:mb-4 align-middle">
               <label class="block font-medium text-gray-700 dark:text-gray-50">
                 Use profile colour for backgrounds
               </label>

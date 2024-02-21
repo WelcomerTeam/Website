@@ -1,6 +1,6 @@
 <template>
   <div
-    class="overflow-hidden bg-white dark:bg-secondary-dark dark:border-secondary-light rounded-lg shadow-sm border border-gray-200">
+    class="overflow-hidden bg-white dark:bg-secondary-dark dark:border-secondary-light rounded-lg shadow-sm border border-gray-300">
     <div class="p-5">
       <div class="flex items-center">
         <div class="flex-shrink-0">

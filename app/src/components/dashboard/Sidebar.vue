@@ -38,7 +38,7 @@
                 $route.name === item.linkname
                   ? 'text-secondary dark:text-white bg-gray-200 dark:bg-secondary'
                   : 'text-gray-600 dark:text-gray-400',
-                'hover:text-secondary dark:hover:text-white hover:bg-gray-200 dark:hover:bg-secondary group flex items-center px-2 py-2 text-sm leading-6 font-semibold rounded-md',
+                'hover:text-secondary dark:hover:text-gray-300 hover:bg-gray-200 dark:hover:bg-secondary group flex items-center px-2 py-2 text-sm leading-6 font-semibold rounded-md',
                 item.extendedClass,
               ]">
               <font-awesome-icon :icon="($route.name === item.linkname ? 'fa-solid' : 'fa-regular') + ' ' + item.icon"

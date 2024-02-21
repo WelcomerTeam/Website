@@ -1,5 +1,5 @@
 <template>
-  <div class="relative min-h-screen bg-secondary">
+  <div class="relative min-h-screen">
     <Header />
 
     <main>
@@ -85,7 +85,7 @@
                 <div class="relative mt-6 bg-gray-100 rounded-lg p-0.5 flex flex-wrap self-center sm:mt-8 shadow-sm">
                   <button type="button" @click="selectDuration(durations[0])" :class="[
                     durationSelected.name === durations[0].name
-                      ? 'bg-white border-gray-200 text-gray-900 shadow-sm'
+                      ? 'bg-white border-gray-300 text-gray-900 shadow-sm'
                       : 'border-transparent text-gray-700',
                     'relative border rounded-md py-2 w-full text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-donate focus:z-10 lg:w-auto lg:px-8',
                   ]">
@@ -94,7 +94,7 @@
                   <button type="button" @click="selectDuration(durations[1])" :class="[
                     'ml-0.5',
                     durationSelected.name === durations[1].name
-                      ? 'bg-white border-gray-200 text-gray-900 shadow-sm'
+                      ? 'bg-white border-gray-300 text-gray-900 shadow-sm'
                       : 'border-transparent text-gray-700',
                     'relative border rounded-md py-2 w-full text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-donate focus:z-10 lg:w-auto lg:px-8',
                   ]">
@@ -107,7 +107,7 @@
                   <button type="button" @click="selectDuration(durations[2])" :class="[
                     'ml-0.5',
                     durationSelected.name === durations[2].name
-                      ? 'bg-white border-gray-200 text-gray-900 shadow-sm'
+                      ? 'bg-white border-gray-300 text-gray-900 shadow-sm'
                       : 'border-transparent text-gray-700',
                     'relative border rounded-md py-2 w-full text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-patreon focus:z-10 lg:w-auto lg:px-8',
                   ]">
@@ -121,7 +121,7 @@
               </div>
               <div class="grid-cols-1 mt-8 space-y-4 sm:space-y-0 sm:grid sm:gap-6 lg:max-w-none lg:mx-0 lg:grid-cols-3">
                 <div v-for="plan in plans" :key="plan.name"
-                  class="border border-gray-200 divide-y divide-gray-200 rounded-lg shadow-sm">
+                  class="border border-gray-300 divide-y divide-gray-200 rounded-lg shadow-sm">
                   <div class="p-6">
                     <h2 class="text-lg font-bold leading-6 text-gray-900">
                       {{ plan.name }}
@@ -179,7 +179,7 @@
                 <div class="relative">
                   <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div
-                      class="lg:max-w-lg mx-auto overflow-hidden border border-gray-300 rounded-lg shadow-sm lg:flex">
+                      class="mx-auto overflow-hidden border border-gray-300 rounded-lg shadow-sm lg:flex">
                       <div class="flex-1 px-6 py-8 my-auto bg-white lg:p-12">
                         <h3 class="text-2xl font-bold text-gray-900 sm:text-3xl">
                           Custom Welcomer Backgrounds

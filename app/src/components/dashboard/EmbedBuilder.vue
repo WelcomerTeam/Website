@@ -37,7 +37,7 @@
         class="block w-full overflow-auto text-base bg-white dark:bg-secondary rounded-md shadow-sm sm:text-sm rounded-t-none border-t-0">
         <div class="border-gray-300 dark:border-secondary-light rounded-md border shadow-sm rounded-t-none border-t-0">
           <div class="block">
-            <div class="border-b border-gray-200 dark:border-secondary-light">
+            <div class="border-b border-gray-300 dark:border-secondary-light">
               <nav class="flex display-flex justify-evenly" aria-label="Tabs">
                 <a v-for="tab in tabs" :key="tab.name" @click="this.page = tab.value" :class="[
                   tab.value == this.page
@@ -56,7 +56,7 @@
             <div class="divide-y divide-gray-300 dark:divide-secondary-light" v-if="this.page == 1">
               <div class="px-4 lg:px-8 space-y-2">
                 <!-- Content -->
-                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0">
+                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-300 mb-4 sm:mb-0">
                   <div class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none">
                     <span class="embed-builder-title">Content</span>
                   </div>
@@ -71,7 +71,7 @@
 
               <div class="pt-5 mt-5 px-4 lg:px-8 space-y-2">
                 <!-- Title -->
-                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0">
+                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-300 mb-4 sm:mb-0">
                   <div class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none">
                     <span class="embed-builder-title">Embed Title</span>
                   </div>
@@ -84,7 +84,7 @@
 
                 <!-- URL -->
                 <div v-if="this.isExpanded"
-                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0">
+                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-300 mb-4 sm:mb-0">
                   <div class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none">
                     <span class="embed-builder-title">Embed Title URL</span>
                   </div>
@@ -96,7 +96,7 @@
                 </div>
 
                 <!-- Description -->
-                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0">
+                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-300 mb-4 sm:mb-0">
                   <div class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none">
                     <span class="embed-builder-title">Embed Description</span>
                   </div>
@@ -107,7 +107,7 @@
                   </div>
                 </div>
                 <!-- Colour -->
-                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0">
+                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-300 mb-4 sm:mb-0">
                   <div class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none">
                     <span class="embed-builder-title">Embed Colour</span>
                   </div>
@@ -149,7 +149,7 @@
               <div v-if="this.isExpanded" class="pt-5 mt-5 px-4 lg:px-8 space-y-2">
                 <!-- Fields -->
                 <div
-                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start border-gray-200 dark:border-secondary-light mb-4 sm:mb-0">
+                  class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start border-gray-300 dark:border-secondary-light mb-4 sm:mb-0">
                   <div class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none">
                     <span class="embed-builder-title">Fields</span>
                   </div>
@@ -186,7 +186,7 @@
 
               <div v-if="this.isExpanded" class="pt-5 mt-5 px-4 lg:px-8 space-y-2">
                 <!-- Image URL -->
-                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0">
+                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-300 mb-4 sm:mb-0">
                   <div class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none">
                     <span class="embed-builder-title">Embed Image URL</span>
                   </div>
@@ -198,7 +198,7 @@
                 </div>
 
                 <!-- Thumbnail URL -->
-                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0">
+                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-300 mb-4 sm:mb-0">
                   <div class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none">
                     <span class="embed-builder-title">Thumbnail Image URL</span>
                   </div>
@@ -212,7 +212,7 @@
 
               <div v-if="this.isExpanded" class="pt-5 mt-5 px-4 lg:px-8 space-y-2">
                 <!-- Footer Text -->
-                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0">
+                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-300 mb-4 sm:mb-0">
                   <div class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none">
                     <span class="embed-builder-title">Footer Text</span>
                   </div>
@@ -224,7 +224,7 @@
                 </div>
 
                 <!-- Footer Icon -->
-                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0">
+                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-300 mb-4 sm:mb-0">
                   <div class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none">
                     <span class="embed-builder-title">Footer Icon URL</span>
                   </div>
@@ -238,7 +238,7 @@
 
               <div v-if="this.isExpanded" class="pt-5 mt-5 px-4 lg:px-8 space-y-2">
                 <!-- Author Name -->
-                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0">
+                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-300 mb-4 sm:mb-0">
                   <div class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none">
                     <span class="embed-builder-title">Author Name</span>
                   </div>
@@ -250,7 +250,7 @@
                 </div>
 
                 <!-- Author URL -->
-                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0">
+                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-300 mb-4 sm:mb-0">
                   <div class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none">
                     <span class="embed-builder-title">Author URL</span>
                   </div>
@@ -262,7 +262,7 @@
                 </div>
 
                 <!-- Author Icon URL -->
-                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-200 mb-4 sm:mb-0">
+                <div class="sm:grid sm:grid-cols-10 sm:gap-2 sm:items-start sm:border-gray-300 mb-4 sm:mb-0">
                   <div class="block font-semibold text-gray-700 sm:col-span-3 sm:text-right leading-none">
                     <span class="embed-builder-title">Author Icon URL</span>
                   </div>
