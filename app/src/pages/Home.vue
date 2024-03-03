@@ -40,7 +40,7 @@
       <div class="bg-white text-secondary">
         <div class="hero-preview">
           <div class="pb-12 prose-lg text-center">
-            <h1 class="text-lg font-black leading-8 tracking-tighter text-gray-900">
+            <h1 class="text-lg font-black leading-8 tracking-tight text-gray-900">
               Elevate Your User Engagement
             </h1>
             <span class="text-lg text-gray-700 max-w-3xl mx-auto section-subtitle">Explore the reasons why Welcomer is the go-to choice for empowering Discord guilds. Packed with numerous features and boasting a user-friendly dashboard, you have the flexibility to make changes whenever you desire.

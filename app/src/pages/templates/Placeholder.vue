@@ -36,7 +36,7 @@
               <div class="sm:flex sm:flex-col sm:align-center">
                 <div class="prose-lg text-center">
                   <h1
-                    class="font-black leading-8 tracking-tighter text-gray-900"
+                    class="font-black leading-8 tracking-tight text-gray-900"
                   >
                     Title
                   </h1>

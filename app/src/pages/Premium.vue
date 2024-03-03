@@ -75,7 +75,7 @@
             <div class="px-12 pt-8 mx-auto max-w-7xl">
               <div class="sm:flex sm:flex-col sm:align-center">
                 <div class="prose-lg text-center">
-                  <h1 class="font-black leading-8 tracking-tighter text-gray-900">
+                  <h1 class="font-black leading-8 tracking-tight text-gray-900">
                     Choose the plan you want
                   </h1>
                   <span class="mt-3 text-lg text-gray-500 section-subtitle max-w-prose mx-auto">
@@ -171,7 +171,7 @@
           <div class="hero-preview">
             <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
               <div class="prose-lg text-center">
-                <h1 class="font-black leading-8 tracking-tighter text-gray-900">
+                <h1 class="font-black leading-8 tracking-tight text-gray-900">
                   Just want backgrounds?
                 </h1>
               </div>

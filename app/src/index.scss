@@ -38,7 +38,7 @@ html {
   }
 
   .hero-preview {
-    @apply max-w-7xl mx-auto py-16 px-6 lg:px-7 lg:py-20;
+    @apply max-w-7xl mx-auto py-6 px-6 lg:px-7 lg:py-20;
   }
   .hero-preview-item {
     @apply grid grid-cols-1 my-4 sm:grid-cols-2 space-y-4;
