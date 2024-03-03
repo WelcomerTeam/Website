@@ -34,7 +34,7 @@
 
       <div class="pb-48 max-w-7xl mx-auto px-6 lg:px-7">
         <div v-if="this.isDataFetched && this.isValidKey"
-          :class="['text-white px-6 py-8 rounded-lg p-4 mb-4 text-center shadow-sm transition-all duration-500 h-52 flex items-center justify-center', this.isCompleted ? 'bg-green-600' : 'bg-secondary dark:bg-secondary-dark']">
+          :class="['text-white px-6 py-8 rounded-lg p-4 mb-4 text-center shadow-sm transition-all duration-500 min-h-52 flex items-center justify-center', this.isCompleted ? 'bg-green-600' : 'bg-secondary dark:bg-secondary-dark']">
           <div v-if="this.isCompleted" class="text-center space-y-4">
             <font-awesome-icon icon="fa-sharp fa-light fa-badge-check" class="W-24 h-24" aria-hidden="" />
             <h2 class="text-2xl font-semibold">

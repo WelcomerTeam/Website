@@ -18,11 +18,33 @@ export default {
   },
 
   mounted() {
-    const script = document.createElement('script');
-    script.src = "https://www.google.com/recaptcha/api.js?render=6Le9GXcpAAAAAEjWrdGSRTq-thN0X8-yNiz4dy71";
-    script.async = true;
-    script.defer = true;
-    document.head.append(script);
+    const elem = document.querySelector(`script[data-identifier="recaptcha-script"]`);
+
+    if (!elem) {
+      const script = document.createElement('script');
+      script.src = `https://www.google.com/recaptcha/api.js?render=${this.sitekey}`;
+      script.async = true;
+      script.defer = true;
+      script.setAttribute('data-identifier', 'recaptcha-script');
+      document.head.append(script);
+    }
+  },
+
+  beforeUnmount() {
+    var elem = document.querySelector(`script[data-identifier="recaptcha-script"]`);
+    if (elem) {
+      elem.remove();
+    }
+
+    elem = document.querySelector(`.grecaptcha-badge`);
+    if (elem) {
+      elem.parentElement.remove();
+    }
+
+    elem = document.querySelector(`meta[http-equiv="origin-trial"]`);
+    if (elem) {
+      elem.remove();
+    }
   },
 
   methods: {
@@ -31,7 +53,7 @@ export default {
       var sitekey = this.sitekey;
       var emit = this.$emit;
 
-      grecaptcha.ready(function() {
+      grecaptcha.ready(function () {
         grecaptcha.execute(sitekey, { action: action }).then((token) => {
           emit('verify', token);
         });
