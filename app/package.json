@@ -28,7 +28,7 @@
     "@tailwindcss/typography": "^0.5.10",
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.4",
-    "axios": "^0.26.1",
+    "axios": "^1.6.3",
     "babel-runtime": "^6.26.0",
     "discord-markdown": "^2.5.0",
     "fuse.js": "^6.4.6",
