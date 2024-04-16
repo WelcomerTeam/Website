@@ -1,10 +1,9 @@
 {
-  "name": "app",
-  "version": "0.0.0",
+  "name": "welcomer-website",
+  "version": "0.0.1",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview"
+    "dev": "vite build --mode development --watch --outDir /home/rock/Welcomer-Devops/data/nginx/website-dev --emptyOutDir false",
+    "build": "vite build --mode production --outDir /home/rock/Welcomer-Devops/data/nginx/website"
   },
   "dependencies": {
     "@adapttive/vue-markdown": "git+https://github.com/adapttive/vue-markdown.git",
