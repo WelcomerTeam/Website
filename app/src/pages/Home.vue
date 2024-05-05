@@ -9,7 +9,7 @@
             <h1 class="hero-title">The go-to bot for your discord server</h1>
             <p class="hero-subtitle">
               Providing tools to let you manage your server. Join the more than
-              <b>277,000</b> Discord guilds using Welcomer.
+              <b>521,473</b> Discord guilds using Welcomer.
             </p>
             <div class="hero-buttons">
               <div class="hero-primary">

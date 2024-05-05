@@ -67,7 +67,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td></td>
+                    <td />
                     <td>
                       <input v-if="this.rules.length < this.maxRuleCount" type="text"
                         class="bg-white dark:bg-secondary-dark relative w-full pl-3 pr-10 mt-2 text-left border border-gray-300 dark:border-secondary-light rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"

@@ -818,7 +818,6 @@
 
 <script>
 import LoadingIcon from "@/components/LoadingIcon.vue";
-import { debounce, uniqueId } from "lodash";
 
 import {
   Listbox,
@@ -966,7 +965,7 @@ export default {
   emits: ["update:modelValue", "update:files", "blur"],
 
   setup() {
-    let componentId = uniqueId("formvalue_");
+    let componentId = "formvalue_" + Math.random().toString(16).slice(2);
 
     let query = "";
     let isValidSnowflake = false;
@@ -1099,10 +1098,10 @@ export default {
       this.fetchGuildMemberByQuery(this);
     },
 
-    fetchGuildMemberByQuery: debounce((self) => {
+    fetchGuildMemberByQuery: (self) => {
       // TODO: Move into component.
       self.$store.dispatch("fetchGuildMembersByQuery", self.query);
-    }, 500),
+    },
   },
 };
 </script>

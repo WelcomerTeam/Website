@@ -287,7 +287,6 @@ import DiscordEmbed from "@/components/DiscordEmbed.vue";
 
 import { ColorPicker } from "vue-color-kit";
 import "vue-color-kit/dist/vue-color-kit.css";
-import debounce from "lodash/debounce";
 import parse from "parse-css-color";
 
 const tabs = [
@@ -450,12 +449,7 @@ export default {
   emits: ["update:modelValue", "update:files"],
 
   methods: {
-    // updateImageURL: debounce((self, value) => {
-    //   self.displayEmbed.embeds[0].image.url = getBackgroundName(value);
-    // }, 250),
-
     updateValue(value) {
-      // this.updateImageURL(this, value);
       this.$emit("update:modelValue", value);
     },
 

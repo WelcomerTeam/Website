@@ -50,5 +50,3 @@ export default {
   components: { ThemeToggle },
 };
 </script>
-
-<style></style>

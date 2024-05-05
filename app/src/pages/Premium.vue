@@ -10,12 +10,12 @@
         <div class="relative mx-auto max-w-7xl lg:px-6 lg:grid lg:grid-cols-2">
           <div class="px-6 pt-6 pb-12 bg-secondary lg:pt-12 lg:px-0 lg:pr-6">
             <div class="max-w-lg mx-auto lg:mx-0">
-              <h2 class="text-base font-semibold tracking-wide text-primary">
+              <h1 class="text-base font-semibold tracking-wide text-primary">
                 Welcomer Pro
-              </h2>
-              <p class="text-3xl font-bold text-left text-white flex justify-center tracking-tight">
+              </h1>
+              <h2 class="text-3xl font-bold text-left text-white flex justify-center tracking-tight">
                 Everything you need to boost your server's engagement
-              </p>
+              </h2>
               <div class="mt-12 space-y-8">
                 <div v-for="feature in features" :key="feature.name" class="relative">
                   <dt>
@@ -41,10 +41,11 @@
           <div class="px-4 py-12 bg-donate sm:px-6 lg:bg-none lg:px-0 lg:pl-8 lg:flex lg:items-center lg:justify-end">
             <div class="w-full lg:max-w-lg mx-auto space-y-8 lg:mx-0">
               <div>
-                <h2 class="sr-only">Price</h2>
+                <span class="sr-only">Price</span>
                 <p class="relative">
-                  <span class="flex flex-col text-center">
-                    <span class="text-5xl font-bold text-white">from {{ currency }} {{ fromPrice.toFixed(2) }}</span>
+                  <span class="flex flex-col text-center" v-if="isDataFetched">
+                    <span class="text-5xl font-bold text-white">from {{ formatCurrency(this.currency,
+                      this.getFromPrice()) }}</span>
                     <span class="mt-2 text-base font-medium text-gray-100">per month</span>
                   </span>
                 </p>
@@ -58,7 +59,7 @@
               </ul>
               <a href="#plans"
                 class="flex items-center justify-center w-full px-8 py-4 text-lg font-medium leading-6 bg-white border border-transparent rounded-md text-donate hover:text-donate-dark hover:bg-gray-200 md:px-10">
-                View all Plans
+                Get Welcomer Pro
               </a>
               <a href="#custom-backgrounds"
                 class="block text-base font-medium text-center text-white hover:text-gray-300">
@@ -69,208 +70,235 @@
         </div>
       </div>
 
-      <div id="plans">
-        <div class="bg-white">
-          <div class="hero-preview">
-            <div class="px-12 pt-8 mx-auto max-w-7xl">
-              <div class="sm:flex sm:flex-col sm:align-center">
-                <div class="prose-lg text-center">
-                  <h1 class="font-black leading-8 tracking-tight text-gray-900">
-                    Choose the plan you want
-                  </h1>
-                  <span class="mt-3 text-lg text-gray-500 section-subtitle max-w-prose mx-auto">
-                    Get started with Welcomer Pro without any recurring payments.
+      <div class="bg-white" id="plans">
+        <div class="hero-preview">
+          <div class="sm:flex sm:flex-col sm:align-center">
+            <div class="prose-lg text-center">
+              <h1 class="font-black leading-8 tracking-tight text-gray-900">
+                Choose the plan you want
+              </h1>
+              <p class="text-lg text-gray-500 section-subtitle max-w-prose mx-auto">
+                Get started with Welcomer Pro without any recurring payments.
+              </p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-6 gap-6 mt-8">
+              <div class="col-span-1 lg:col-span-5 w-full lg:w-fit relative bg-gray-100 rounded-lg p-0.5 flex flex-wrap self-center shadow-sm">
+                <button type="button" @click="selectDuration(durationMonthly)" :class="[
+                  durationSelected === durationMonthly
+                    ? 'bg-white border-gray-300 text-gray-900 shadow-sm'
+                    : 'border-transparent text-gray-700',
+                  'relative border rounded-md py-2 w-full text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-donate focus:z-10 lg:w-auto lg:px-8',
+                ]">
+                  Monthly
+                </button>
+                <button type="button" @click="selectDuration(durationBiAnnually)" :class="[
+                  'ml-0.5',
+                  durationSelected === durationBiAnnually
+                    ? 'bg-white border-gray-300 text-gray-900 shadow-sm'
+                    : 'border-transparent text-gray-700',
+                  'relative border rounded-md py-2 w-full text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-donate focus:z-10 lg:w-auto lg:px-8',
+                ]">
+                  Biannual
+                  <span
+                    class="inline-flex items-center ml-2 px-2.5 py-0.5 rounded-full text-xs font-medium bg-donate text-white">
+                    20% off
                   </span>
-                </div>
-                <div class="relative mt-6 bg-gray-100 rounded-lg p-0.5 flex flex-wrap self-center sm:mt-8 shadow-sm">
-                  <button type="button" @click="selectDuration(durations[0])" :class="[
-                    durationSelected.name === durations[0].name
-                      ? 'bg-white border-gray-300 text-gray-900 shadow-sm'
-                      : 'border-transparent text-gray-700',
-                    'relative border rounded-md py-2 w-full text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-donate focus:z-10 lg:w-auto lg:px-8',
-                  ]">
-                    Monthly
-                  </button>
-                  <button type="button" @click="selectDuration(durations[1])" :class="[
-                    'ml-0.5',
-                    durationSelected.name === durations[1].name
-                      ? 'bg-white border-gray-300 text-gray-900 shadow-sm'
-                      : 'border-transparent text-gray-700',
-                    'relative border rounded-md py-2 w-full text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-donate focus:z-10 lg:w-auto lg:px-8',
-                  ]">
-                    Yearly
-                    <span
-                      class="inline-flex items-center ml-2 px-2.5 py-0.5 rounded-full text-xs font-medium bg-donate text-white">
-                      20% off
-                    </span>
-                  </button>
-                  <button type="button" @click="selectDuration(durations[2])" :class="[
-                    'ml-0.5',
-                    durationSelected.name === durations[2].name
-                      ? 'bg-white border-gray-300 text-gray-900 shadow-sm'
-                      : 'border-transparent text-gray-700',
-                    'relative border rounded-md py-2 w-full text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-patreon focus:z-10 lg:w-auto lg:px-8',
-                  ]">
-                    Patreon
-                    <span
-                      class="inline-flex items-center ml-2 px-2.5 py-0.5 rounded-full text-xs font-medium bg-patreon text-white">
-                      Recurring
-                    </span>
-                  </button>
-                </div>
+                </button>
+                <button type="button" @click="selectDuration(durationAnnually)" :class="[
+                  'ml-0.5',
+                  durationSelected === durationAnnually
+                    ? 'bg-white border-gray-300 text-gray-900 shadow-sm'
+                    : 'border-transparent text-gray-700',
+                  'relative border rounded-md py-2 w-full text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-donate focus:z-10 lg:w-auto lg:px-8',
+                ]">
+                  Yearly
+                  <span
+                    class="inline-flex items-center ml-2 px-2.5 py-0.5 rounded-full text-xs font-medium bg-donate text-white">
+                    20% off
+                  </span>
+                </button>
+                <button type="button" @click="selectDuration(durationPatreon)" :class="[
+                  'ml-0.5',
+                  durationSelected === durationPatreon
+                    ? 'bg-white border-gray-300 text-gray-900 shadow-sm'
+                    : 'border-transparent text-gray-700',
+                  'relative border rounded-md py-2 w-full text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-patreon focus:z-10 lg:w-auto lg:px-8',
+                ]">
+                  Patreon
+                  <span
+                    class="inline-flex items-center ml-2 px-2.5 py-0.5 rounded-full text-xs font-medium bg-patreon text-white">
+                    Recurring
+                  </span>
+                </button>
               </div>
-              <div class="grid-cols-1 mt-8 space-y-4 sm:space-y-0 sm:grid sm:gap-6 lg:max-w-none lg:mx-0 lg:grid-cols-3">
-                <div v-for="plan in plans" :key="plan.name"
-                  class="border border-gray-300 divide-y divide-gray-200 rounded-lg shadow-sm">
-                  <div class="p-6">
-                    <h2 class="text-lg font-bold leading-6 text-gray-900">
-                      {{ plan.name }}
-                    </h2>
-                    <p class="mt-4 text-gray-600">
-                      {{ plan.footer }}
-                    </p>
-                    <p class="mt-8">
-                      <span class="text-4xl font-bold text-gray-900">{{ durationSelected.isPatreon ? patreonCurrency : currency }}
-                        {{
-                          (durationSelected.isPatreon
-                            ? plan.patreonPrice
-                            : plan.price *
-                            durationSelected.months *
-                            durationSelected.multiplier
-                          ).toFixed(2)
-                        }}</span>
-                    </p>
-                    <p>
-                      <span v-if="durationSelected.isPatreon" class="text-base font-medium text-gray-500">
-                        / month</span>
-                      <span v-else class="text-base font-medium text-gray-500">({{ durationSelected.isPatreon ? patreonCurrency : currency }}
-                        {{
-                          (plan.price * durationSelected.multiplier).toFixed(2)
-                        }}
-                        / month)</span>
-                    </p>
-                    <a v-if="durationSelected.isPatreon" @click.prevent="selectPlan(plan)"
-                      class="block w-full py-2 mt-8 text-sm font-semibold text-center text-white border border-transparent rounded-md cursor-pointer bg-patreon hover:bg-patreon-dark">Become
-                      a Patreon</a>
-                    <a v-else @click.prevent="selectPlan(plan)"
-                      class="block w-full py-2 mt-8 text-sm font-semibold text-center text-white border border-transparent rounded-md cursor-pointer bg-donate hover:bg-donate-dark">Get
-                      {{ plan.name }}</a>
-                  </div>
-                </div>
-              </div>
-              <div v-if="!durationSelected.isPatreon" class="text-gray-500 text-center mt-4">
-                *This is not a recurring payment. You will have to manually renew if your membership expires.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+              <Menu as="div" class="relative inline-block col-span-1 text-right align-middle">
+                <MenuButton
+                  class="inline-flex w-fit justify-right gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                  {{ getCurrencySymbol(currency) + ' – ' + currency }}
+                  <ChevronDownIcon class="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
+                </MenuButton>
 
-      <div id="custom-backgrounds">
-        <div class="bg-white">
-          <div class="hero-preview">
-            <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-              <div class="prose-lg text-center">
-                <h1 class="font-black leading-8 tracking-tight text-gray-900">
-                  Just want backgrounds?
-                </h1>
-              </div>
-              <div class="pb-16 mt-8 bg-white sm:mt-12 sm:pb-20 lg:pb-28">
-                <div class="relative">
-                  <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    <div
-                      class="mx-auto overflow-hidden border border-gray-300 rounded-lg shadow-sm lg:flex">
-                      <div class="flex-1 px-6 py-8 my-auto bg-white lg:p-12">
-                        <h3 class="text-2xl font-bold text-gray-900 sm:text-3xl">
-                          Custom Welcomer Backgrounds
-                        </h3>
-                        <p class="mt-6 text-base text-gray-500">
-                          Get unlimited custom Welcomer backgrounds on any
-                          server you choose, no need for monthly commitments,
-                          this plan lasts forever.
-                        </p>
-                      </div>
-                      <div
-                        class="px-6 py-8 text-center shadow-sm bg-secondary lg:flex-shrink-0 lg:flex lg:flex-col lg:justify-center lg:p-12">
-                        <p class="text-lg font-medium leading-6 text-gray-100">
-                          Pay once, own it forever
-                        </p>
-                        <div class="flex items-center justify-center mt-4 text-5xl font-bold text-white">
-                          <span>
-                            {{ currency }}
-                            {{ customBackgroundPrice.toFixed(2) }}
-                          </span>
+                <transition enter-active-class="transition ease-out duration-100"
+                  enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100"
+                  leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100"
+                  leave-to-class="transform opacity-0 scale-95">
+                  <MenuItems
+                    class="absolute right-0 z-10 mt-2 w-24 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <div class="py-1">
+                      <MenuItem v-for="currency in currencies" :key="currency" as="template" v-slot="{ active }">
+                        <div @click="selectCurrency(currency)"
+                          :class="[(active || this.currency === currency) ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm cursor-pointer']">
+                          {{ getCurrencySymbol(currency) + ' – ' + currency }}
                         </div>
-                        <div class="mt-6">
-                          <div class="rounded-md shadow">
-                            <a @click.prevent="handleCustomBackgroundClick"
-                              class="flex items-center justify-center px-5 py-3 text-base font-medium text-white border border-transparent rounded-md cursor-pointer bg-secondary-light hover:bg-secondary-dark">
-                              Get it now
-                            </a>
-                          </div>
-                        </div>
-                      </div>
+                      </MenuItem>
                     </div>
-                  </div>
-                </div>
-              </div>
+                  </MenuItems>
+                </transition>
+              </Menu>
             </div>
-          </div>
-        </div>
-      </div>
 
-      <div>
-        <div class="bg-donate">
-          <div class="hero-features">
-            <div class="mx-4 my-12 lg:grid lg:grid-cols-3 lg:gap-8">
-              <div class="mt-16">
-                <h2 class="text-3xl font-bold text-white">
-                  Frequently asked questions
-                </h2>
-                <p class="mt-4 text-lg text-white">
-                  Can't find what you are looking for? Reach out to us on our
-                  <a class="text-white hover:text-gray-300 underline" href="/support">support server</a>.
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-8">
+              <div class="border-gray-300 border p-6 lg:p-12 rounded-lg shadow-sm bg-white text-gray-900 h-fit">
+                <h3 class="text-2xl font-bold sm:text-3xl">
+                  Welcomer Basic
+                </h3>
+                <p class="mt-4 text-sm leading-6 text-gray-600">Includes all the essentials for your discord server.</p>
+                <p class="mt-6 flex items-baseline gap-x-1">
+                  <span class="text-xl font-bold tracking-tight text-gray-900">Free</span>
+                </p>
+                
+                <router-link :to="{ name: 'invite' }"><button type="button" class="border-gray-300 hover:bg-gray-300 text-gray-900 border flex items-center justify-center px-5 py-3 mt-8 text-base font-medium rounded-md cursor-pointer w-full">Invite Welcomer</button></router-link>
+              </div>
+              <div class="-order-1 lg:order-1">
+                <div
+                  :class="['border-primary bg-primary text-white', 'border p-6 lg:p-12 rounded-lg shadow-sm h-fit']">
+                  <h3 class="text-2xl font-bold sm:text-3xl">
+                    Welcomer Pro
+                  </h3>
+                  <p class="mt-4 text-sm leading-6">Unlock more Welcomer features. Aimed at emerging or
+                    well-established communities.</p>
+                  <p class="mt-4 flex items-baseline gap-x-1" v-if="isDataFetched">
+                    <span class="text-xl font-bold tracking-tight">{{ formatCurrency(this.currency,
+                      (this.getSKU(this.getRelativeSKU())?.costs[this.currency] /
+                        this.getSKU(this.getRelativeSKU())?.month_count)) }}</span>
+                    <span class="text-sm font-semibold leading-6">{{
+                      this.getSKU(this.getRelativeSKU())?.month_count > 1 ? '/ month*' : '/ month' }}</span>
+                  </p>
+
+                  <button type="button" @click.prevent="selectSKU(this.getRelativeSKU())"
+                    :class="['bg-donate-light hover:bg-donate-dark', 'flex items-center justify-center px-5 py-3 mt-8 text-base font-medium text-white border border-transparent rounded-md cursor-pointer w-full']">
+                    <loading-icon class="mr-3" v-if="isCreatePaymentInProgress" />{{ durationSelected == durationPatreon ? 'Become a Patron' : 'Get Started' }}</button>
+                </div>
+                <p v-if="this.getSKU(this.getRelativeSKU())?.month_count > 1" class="mt-2 text-center">
+                  <span class="text-sm font-medium leading-6 text-gray-500">*Billed as {{ formatCurrency(this.currency,
+                    this.getSKU(this.getRelativeSKU())?.costs[this.currency]) }}</span>
                 </p>
               </div>
-              <div class="mt-12 lg:mt-0 lg:col-span-2">
-                <dl class="space-y-10">
-                  <Disclosure as="div" v-for="faq in faqs" :key="faq.question" v-slot="{ open }">
-                    <dt class="text-lg">
-                      <DisclosureButton class="flex items-start justify-between w-full text-left">
-                        <span :class="[open ? 'font-bold' : '', 'text-white']">
-                          {{ faq.question }}
-                        </span>
-                        <span class="flex items-center h-6 ml-6">
-                          <ChevronDownIcon :class="[
-                            open ? '-rotate-180' : 'rotate-0',
-                            'h-6 w-6 transform',
-                          ]" aria-hidden="true" />
-                        </span>
-                      </DisclosureButton>
-                    </dt>
-                    <DisclosurePanel as="dd" class="pr-12 mt-2">
-                      <p class="text-base text-gray-100">
-                        {{ faq.answer }}
-                      </p>
-                    </DisclosurePanel>
-                  </Disclosure>
-                </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white" id="custom-backgrounds">
+        <div class="hero-preview">
+          <div class="prose-lg text-center">
+            <h1 class="font-black leading-8 tracking-tight text-gray-900">
+              Just want backgrounds?
+            </h1>
+          </div>
+          <div class="pb-16 mt-8 bg-white sm:mt-12 sm:pb-20 lg:pb-28">
+            <div class="relative">
+              <div class="mx-auto overflow-hidden border border-gray-300 rounded-lg shadow-sm lg:flex">
+                <div class="flex-1 px-6 py-8 my-auto bg-white lg:p-12">
+                  <h2 class="text-2xl font-bold text-gray-900 sm:text-3xl">
+                    Custom Welcomer Backgrounds
+                  </h2>
+                  <p class="mt-6 text-base leading-7 text-gray-600">
+                    Get unlimited custom Welcomer backgrounds on any
+                    server you choose, no need for monthly commitments,
+                    this plan lasts forever.
+                  </p>
+                </div>
+                <div
+                  class="px-6 py-8 text-center shadow-sm bg-secondary lg:flex-shrink-0 lg:flex lg:flex-col lg:justify-center lg:p-12">
+                  <p class="text-lg font-medium leading-6 text-gray-100">
+                    Pay once, own it forever
+                  </p>
+                  <div class="flex items-center justify-center mt-4 text-5xl font-bold text-white">
+                    <span v-if="this.getSKU(skuCustomBackgrounds)">
+                      {{ formatCurrency(this.currency, this.getSKU(skuCustomBackgrounds)?.costs[this.currency]) }}
+                    </span>
+                  </div>
+                  <button type="button" @click.prevent="selectSKU(skuCustomBackgrounds)"
+                    class="flex items-center justify-center px-5 py-3 mt-8 text-base font-medium text-white border border-transparent rounded-md cursor-pointer bg-secondary-light hover:bg-secondary-dark w-full">
+                    <loading-icon class="mr-3" v-if="isCreatePaymentInProgress" />
+                    Get Started
+                  </button>
+                </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-donate" id="faqs">
+        <div class="hero-features">
+          <div class="lg:grid lg:grid-cols-3 lg:gap-8">
+            <div>
+              <h1 class="text-3xl font-bold text-white">
+                Frequently asked questions
+              </h1>
+              <p class="mt-4 text-lg text-white">
+                Can't find what you are looking for? Reach out to us on our
+                <a class="text-white hover:text-gray-300 underline" href="/support">support server</a>.
+              </p>
+            </div>
+            <div class="mt-12 lg:mt-0 lg:col-span-2">
+              <dl class="space-y-10">
+                <Disclosure as="div" v-for="faq in faqs" :key="faq.question" v-slot="{ open }">
+                  <dt class="text-lg">
+                    <DisclosureButton class="flex items-start justify-between w-full text-left">
+                      <span :class="[open ? 'font-bold' : '', 'text-white']">
+                        {{ faq.question }}
+                      </span>
+                      <span class="flex items-center h-6 ml-6">
+                        <ChevronDownIcon :class="[
+                          open ? '-rotate-180' : 'rotate-0',
+                          'h-6 w-6 transform',
+                        ]" aria-hidden="true" />
+                      </span>
+                    </DisclosureButton>
+                  </dt>
+                  <DisclosurePanel as="dd" class="pr-12 mt-2">
+                    <p class="text-base text-gray-100">
+                      {{ faq.answer }}
+                    </p>
+                  </DisclosurePanel>
+                </Disclosure>
+              </dl>
             </div>
           </div>
         </div>
       </div>
     </main>
 
+    <Toast />
+
     <Footer />
   </div>
 </template>
 
 <script>
+import { ref } from "vue";
+
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
+import Toast from "@/components/dashboard/Toast.vue";
+import LoadingIcon from "@/components/LoadingIcon.vue";
 
-import { ref } from "vue";
+import billingAPI from "@/api/billing";
+
+import { getErrorToast } from "@/utilities";
 
 import {
   Disclosure,
@@ -280,6 +308,10 @@ import {
   RadioGroupDescription,
   RadioGroupLabel,
   RadioGroupOption,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
 } from "@headlessui/vue";
 
 import { CheckIcon } from "@heroicons/vue/solid";
@@ -319,54 +351,6 @@ const checklist = [
   "No Recurring Payments",
 ];
 
-// Data below will be fetched from API
-
-const currency = "£";
-const patreonCurrency = "$";
-
-const durations = [
-  {
-    name: "Monthly",
-    months: 1,
-    multiplier: 1,
-  },
-  {
-    name: "Annually",
-    months: 12,
-    multiplier: 0.8,
-  },
-  {
-    name: "Patreon",
-    months: 1,
-    multiplier: 1,
-    isPatreon: true,
-  },
-];
-
-const plans = [
-  {
-    name: "Welcomer x1",
-    price: 5,
-    footer: "Welcomer Pro for 1 server.",
-    patreonPrice: 5,
-    patreonCheckout: 3744919,
-  },
-  {
-    name: "Welcomer x3",
-    price: 10,
-    footer: "Welcomer Pro for 3 servers.",
-    patreonPrice: 10,
-    patreonCheckout: 3744921,
-  },
-  {
-    name: "Welcomer x5",
-    price: 15,
-    footer: "Welcomer Pro for 5 servers.",
-    patreonPrice: 15,
-    patreonCheckout: 3744926,
-  },
-];
-
 const faqs = [
   {
     question: "TODO",
@@ -374,71 +358,162 @@ const faqs = [
   },
 ];
 
-const customBackgroundPrice = 5;
-const fromPrice = 5;
+const durationMonthly = 0;
+const durationBiAnnually = 1;
+const durationAnnually = 2;
+const durationPatreon = 3;
+
+const skuCustomBackgrounds = "WEL/CBG";
+const skuWelcomerPro = "WEL/1P1";
+const skuWelcomerProBiAnnual = "WEL/1P6";
+const skuWelcomerProAnnual = "WEL/1P12";
 
 export default {
   components: {
+    CheckIcon,
+    ChevronDownIcon,
     Disclosure,
     DisclosureButton,
     DisclosurePanel,
+    LoadingIcon,
+    Footer,
+    Header,
+    Menu,
+    MenuButton,
+    MenuItem,
+    MenuItems,
     RadioGroup,
     RadioGroupDescription,
     RadioGroupLabel,
     RadioGroupOption,
-
-    CheckIcon,
-    ChevronDownIcon,
-
-    Header,
-    Footer,
+    Toast,
   },
   setup() {
-    const durationSelected = ref(durations[0]);
-    const planSelected = ref(plans[0]);
+    let durationSelected = ref(durationMonthly);
+    let skus = ref([]);
+    let currency = ref("USD");
+    let currencies = ref([]);
+
+    let isDataFetched = ref(false);
+    let isDataError = ref(false);
+    let isCreatePaymentInProgress = ref(false);
 
     return {
       features,
       checklist,
-
-      durationSelected,
-      durations,
-
-      planSelected,
-      plans,
-
-      customBackgroundPrice,
-      currency,
-      patreonCurrency,
-      fromPrice,
-
       faqs,
+
+      currencies,
+      currency,
+      durationSelected,
+      skus,
+
+      isDataFetched,
+      isDataError,
+
+      isCreatePaymentInProgress,
+
+      durationMonthly,
+      durationBiAnnually,
+      durationAnnually,
+      durationPatreon,
+      skuCustomBackgrounds,
+      skuWelcomerPro,
+      skuWelcomerProBiAnnual,
+      skuWelcomerProAnnual,
     };
   },
+
+  mounted() {
+    this.fetchSKUs();
+  },
+
   methods: {
-    selectPlan(plan) {
-      this.planSelected = plan;
-      this.handleClick();
+    getLocale() {
+      return (navigator.languages && navigator.languages.length) ? navigator.languages[0] : navigator.language;
+    },
+    formatCurrency(currency, value) {
+      return new Intl.NumberFormat(this.getLocale(), {
+        style: "currency",
+        currency: currency,
+      }).format(value);
+    },
+    getCurrencySymbol(currency) {
+      return new Intl.NumberFormat(this.getLocale(), {
+        style: 'currency',
+        currency: currency
+      }).formatToParts().filter((i) => i.type == 'currency')[0].value;
+    },
+    getFromPrice() {
+      let minimumPrice = Number.MAX_SAFE_INTEGER;
+      this.skus.forEach(sku => {
+        const price = sku.costs[this.currency];
+        if (price < minimumPrice) {
+          minimumPrice = price;
+        }
+      });
+
+      return minimumPrice == Number.MAX_SAFE_INTEGER ? 0 : minimumPrice;
+    },
+    getRelativeSKU() {
+      if (this.durationSelected == durationMonthly) {
+        return this.skuWelcomerPro;
+      } else if (this.durationSelected == durationBiAnnually) {
+        return this.skuWelcomerProBiAnnual;
+      } else if (this.durationSelected == durationAnnually) {
+        return this.skuWelcomerProAnnual;
+      } else if (this.durationSelected == durationPatreon) {
+        return this.skuWelcomerPro;
+      }
+    },
+    getSKU(skuName) {
+      return this.skus.find((sku) => sku.id === skuName);
+    },
+    fetchSKUs() {
+      this.isDataFetched = false;
+      this.isDataError = false;
+
+      billingAPI.getSKUs(
+        (response) => {
+          this.isDataFetched = true;
+          this.skus = response.skus;
+          this.currency = response.default_currency;
+          this.currencies = response.available_currencies;
+        },
+        (error) => {
+          this.$store.dispatch("createToast", getErrorToast(error));
+
+          this.isDataFetched = true;
+          this.isDataError = true;
+        }
+      )
+    },
+    selectCurrency(currency) {
+      this.currency = currency;
     },
     selectDuration(duration) {
       this.durationSelected = duration;
     },
-    handleCustomBackgroundClick() {
-      alert("handle cbg");
-      // Open the donate page
-    },
+    selectSKU(skuName) {
+      const sku = this.getSKU(skuName);
 
-    handleClick() {
-      if (this.durationSelected.isPatreon) {
+      if (this.durationSelected === durationPatreon) {
         return window.open(
-          `https://www.patreon.com/join/Welcomer/checkout?rid=${this.planSelected.patreonCheckout}`,
+          `https://www.patreon.com/join/Welcomer/checkout?rid=${sku.patreon_checkout_id}`,
           "_blank"
         );
       }
 
-      alert(`handle ${this.durationSelected.name} ${this.planSelected.name}`);
-      // Open the donate page
-    },
-  },
+      this.isCreatePaymentInProgress = true;
+
+      billingAPI.createPayment(sku.id, this.currency, (response) => {
+        this.isCreatePaymentInProgress = false;
+        window.location.href = response.url;
+      }, (error) => {
+        this.isCreatePaymentInProgress = false;
+        this.$store.dispatch("createToast", getErrorToast(error));
+      });
+    }
+  }
 };
 </script>
