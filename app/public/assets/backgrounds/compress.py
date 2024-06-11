@@ -1,8 +1,12 @@
+import json
 import os
+from thumbhash import image_to_thumbhash
 from PIL import Image, ImageOps
 
 # Define the directory where the PNG files are located
 directory = '/home/rock/Website/app/public/assets/backgrounds'
+
+output = []
 
 # Loop through all files in the directory
 for filename in os.listdir(directory):
@@ -10,17 +14,19 @@ for filename in os.listdir(directory):
         # Open the PNG file
         image = Image.open(os.path.join(directory, filename))
 
-        # Resize the image to fit within 500x200
-        ImageOps.fit(image, (500, 200), method=Image.LANCZOS, centering=(0.5, 0.5))
+        new_size = (1000, 400)
 
-        # Check if the image is larger than 500x200
-        if image.size[0] > 500 or image.size[1] > 200:
-            # Crop the image to 500x200
-            left = (image.size[0] - 500) // 2
-            top = (image.size[1] - 200) // 2
-            right = left + 500
-            bottom = top + 200
-            image = image.crop((left, top, right, bottom))
+        # Resize the image to fit within 500x200
+        image = ImageOps.fit(image, new_size, method=Image.LANCZOS, centering=(0.5, 0.5))
+
+        path = os.path.join(directory, f'{filename[:-4]}.webp')
 
         # Save the image as JPEG with quality 75
-        image.save(os.path.join(directory, f'{filename[:-4]}.webp'), quality=75)
+        image.save(path, quality=75)
+
+        output.append({
+            "id": filename[:-4],
+            "thumbhash": image_to_thumbhash(path)
+        })
+
+print(json.dumps(output, indent=4))

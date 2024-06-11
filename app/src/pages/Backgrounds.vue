@@ -19,16 +19,7 @@
           <div class="hero-preview">
             <div class="px-4 pt-8 mx-auto max-w-7xl sm:px-6">
               <div class="sm:flex sm:flex-col sm:align-center">
-                <div class="prose-lg text-center mb-12">
-                  <h1 class="font-black leading-8 tracking-tight text-gray-900">
-                    Title
-                  </h1>
-                  <span class="mt-3 text-lg text-gray-500 section-subtitle max-w-prose mx-auto">
-                    Subheading
-                  </span>
-                </div>
-
-                <div class="mb-4 grid grid-cols-4 gap-4">
+                <!-- <div class="mb-4 grid grid-cols-4 gap-4">
                   <input type="text"
                     class="col-span-4 sm:col-span-3 border-gray-300 dark:border-secondary-light bg-white dark:bg-secondary-dark rounded-md sm:text-sm"
                     placeholder="" v-model="query" @input="onQueryChange()" />
@@ -58,20 +49,22 @@
                       </transition>
                     </div>
                   </Listbox>
-                </div>
+                </div> -->
 
-                <div class="gap-4">
+                <div class="space-y-12">
                   <div v-for="group in groups" :key="group" :id="group.id">
                     <div class="text-xs font-bold uppercase my-4 text-gray-900">
                       {{ group.name }}
                     </div>
                     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
                       <button as="template" v-for="image in group.images" :key="image">
-                        <img v-lazy="backgroundRoot(image.id)" :class="[
+                        <img :title="image.id" v-lazy="{
+                          src: `/assets/backgrounds/${image.id}.webp`,
+                        }" :class="[
                           $props.modelValue == image.id
                             ? 'border-primary ring-primary ring-4'
                             : '',
-                          'hover:brightness-75 rounded-md focus:outline-none focus:ring-4 focus:ring-primary focus:border-primary',
+                          'hover:brightness-75 rounded-md focus:outline-none focus:ring-4 focus:ring-primary focus:border-primary aspect-[5/2] w-full',
                         ]" />
                       </button>
                     </div>
@@ -93,6 +86,8 @@
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
 
+import { rgbaToDataURL, thumbHashToRGBA } from "thumbhash";
+
 import {
   Listbox,
   ListboxButton,
@@ -108,56 +103,198 @@ import BackgroundPreview from "@/components/BackgroundPreview.vue";
 
 const groups = [
   {
-    id: "welcomer",
-    name: "Welcomer Backgrounds",
+    id: "misc",
+    name: "Miscellaneous",
     images: [
-    { id: "aesthetics", animated: false },
-      { id: "afterwork", animated: false },
-      { id: "airship", animated: false },
-      { id: "alone", animated: false },
-      { id: "autumn", animated: false },
-      { id: "clouds", animated: false },
-      { id: "collision", animated: false },
-      { id: "cybergeek", animated: false },
-      { id: "fall", animated: false },
-      { id: "garden", animated: false },
-      { id: "glare", animated: false },
-      { id: "lodge", animated: false },
-      { id: "meteorshower", animated: false },
-      { id: "midnightride", animated: false },
-      { id: "mountains", animated: false },
-      { id: "neko", animated: false },
-      { id: "nightview", animated: false },
-      { id: "paint", animated: false },
-      { id: "peace", animated: false },
-      { id: "pika", animated: false },
-      { id: "rainbow", animated: false },
-      { id: "rem", animated: false },
-      { id: "ribbons", animated: false },
-      { id: "riot", animated: false },
-      { id: "riversource", animated: false },
-      { id: "sea", animated: false },
-      { id: "shards", animated: false },
-      { id: "solarglare", animated: false },
-      { id: "spots", animated: false },
-      { id: "squares", animated: false },
-      { id: "stacks", animated: false },
-      { id: "summer", animated: false },
-      { id: "sun", animated: false },
-      { id: "sunrise", animated: false },
-      { id: "sunset", animated: false },
-      { id: "tanya", animated: false },
-      { id: "unova", animated: false },
-      { id: "upland", animated: false },
-      { id: "utopia", animated: false },
-      { id: "vampire", animated: false },
-      { id: "vectors", animated: false },
-      { id: "wood", animated: false },
+      {
+        "id": "solarglare",
+        "thumbhash": "xRcGA4JgDps9maSl8k0I15M="
+      },
+      {
+        "id": "unova",
+        "thumbhash": "jxcGE4QqBpc29DqHblD4BmU="
+      },
+      {
+        "id": "nightview",
+        "thumbhash": "yAcGA4ADvnKUaFe4+XxlMKg="
+      },
+      {
+        "id": "collision",
+        "thumbhash": "jRgKI4QJtlp2hmmXCHiWYGc="
+      },
+      {
+        "id": "midnightride",
+        "thumbhash": "XccJA4AKeWZmhUl4DGOhgAc="
+      },
+      {
+        "id": "paint",
+        "thumbhash": "VCcOO5Q/lnhndkiGcJoJoZk="
+      },
+      {
+        "id": "utopia",
+        "thumbhash": "prYJC4KJZ3ifd3h3u3ClWgY="
+      },
+      {
+        "id": "riot",
+        "thumbhash": "GwgaA4BwaodqeHiHAZVpMHg="
+      },
+      {
+        "id": "alone",
+        "thumbhash": "6geOAoAPUHh4eHc/hz8M31eIF3hwdQI="
+      },
+      {
+        "id": "cybergeek",
+        "thumbhash": "TScGC4QGdEiKh2iI70f5iYc="
+      },
     ],
   },
+  {
+    id: "nature",
+    name: "Nature",
+    images: [
+      {
+        "id": "sunset",
+        "thumbhash": "H2gOO4h0aHePdxeJc4lQVgk="
+      },
+      {
+        "id": "garden",
+        "thumbhash": "5iUJI4SvdIhfaEmVmHAHdkc="
+      },
+      {
+        "id": "sea",
+        "thumbhash": "UYWFCoIPhlpwZ4Nsvp/32A8P8PDwAA8="
+      },
+      {
+        "id": "clouds",
+        "thumbhash": "I/YNM4hvmHd3mDh3f3P1N3Y="
+      },
+      {
+        "id": "mountains",
+        "thumbhash": "4heKGoQPYIiPd4OBpxB3CgYGh3d4iHg="
+      },
+      {
+        "id": "lodge",
+        "thumbhash": "Z2gKC4QHZ4h7iEeXBoB2Cpg="
+      },
+      {
+        "id": "riversource",
+        "thumbhash": "ZocNG4Yod3h/iWeYN49h9Tg="
+      },
+      {
+        "id": "wood",
+        "thumbhash": "HXsGC4ICaHeFeHeIEHbEr3c="
+      },
+      {
+        "id": "summer",
+        "thumbhash": "7XUJG4T3ZHWDWCZkxnDDCgs="
+      },
+      {
+        "id": "peace",
+        "thumbhash": "k4gKG4Z4hGrlZwhnordQWQ8="
+      },
+      {
+        "id": "autumn",
+        "thumbhash": "HEoKG4RveIbviOdoMCEFBUM="
+      },
+      {
+        "id": "upland",
+        "thumbhash": "H7cZC4R4eIh/d3eHdYFvB6g="
+      },
+    ],
+  },
+  {
+    id: "patterns",
+    name: "Patterns",
+    images: [
+      {
+        "id": "rainbow",
+        "thumbhash": "ETkOO5AKlnhohziGCkgCoVY="
+      },
+      {
+        "id": "shards",
+        "thumbhash": "5WUJI4SPeYh/d3iHrn8qf/c="
+      },
+      {
+        "id": "stacks",
+        "thumbhash": "IUcOI46ZiXifhrdYgH0HmFc="
+      },
+      {
+        "id": "sun",
+        "thumbhash": "4PsKQ5Bwdndyh3iHYHL21nU="
+      },
+      {
+        "id": "glare",
+        "thumbhash": "GbcJK5oGZVxWmFd0/Vn4enY="
+      },
+      {
+        "id": "vectors",
+        "thumbhash": "UDUOK4h3d3iAiLh3d49mA8k="
+      },
+      {
+        "id": "aesthetics",
+        "thumbhash": "WvYBA5aHh4d/eEh4eH95CHg="
+      },
+      {
+        "id": "squares",
+        "thumbhash": "lnUFC4IHR2iHd3d3+Hl5j4Y="
+      },
+      {
+        "id": "fall",
+        "thumbhash": "imgKM45Wh3d/d4iHL7o4wIY="
+      },
+      {
+        "id": "spots",
+        "thumbhash": "2ueFEoYPwGh8Y25AXArBlQ8PiId4iHg="
+      },
+      {
+        "id": "sunrise",
+        "thumbhash": "WusOE4QYZ3hwiXiHKIKAqQg="
+      },
+      {
+        "id": "ribbons",
+        "thumbhash": "V2cOO4wGiHeXlziXj6j5s6k="
+      },
+    ]
+  },
+  {
+    id: "anime",
+    name: "Anime",
+    images: [
+      {
+        "id": "neko",
+        "thumbhash": "xQcKA4DQlHeWhnd4H8MGnXY="
+      },
+      {
+        "id": "tanya",
+        "thumbhash": "0ygGE4Ik6DlfiLTXNn9K8qg="
+      },
+      {
+        "id": "afterwork",
+        "thumbhash": "WhgGE4I7x2BITamWBWZKoJU="
+      },
+      {
+        "id": "rem",
+        "thumbhash": "uvcFC4A/aWmWh4eHL5X2IB0="
+      },
+      {
+        "id": "vampire",
+        "thumbhash": "2vkGG46wOh0ZiEKoj2n4hIg="
+      },
+      {
+        "id": "pika",
+        "thumbhash": "craBIoQPT3hpp3fQlQVNag8P8PDwES4="
+      },
+      {
+        "id": "meteorshower",
+        "thumbhash": "2KgGE4b8eGgOeIdmwQEIKXI="
+      },
+      {
+        "id": "airship",
+        "thumbhash": "CggKA4CgdoeWZ6l3kIRNZvc="
+      },
+    ]
+  },
 ];
-
-const backgroundRoot = (id) => `/assets/backgrounds/${id}.webp`;
 
 export default {
   components: {
@@ -177,7 +314,6 @@ export default {
   setup() {
     return {
       groups,
-      backgroundRoot,
     };
   },
   methods: {
