@@ -64,7 +64,7 @@
                           $props.modelValue == image.id
                             ? 'border-primary ring-primary ring-4'
                             : '',
-                          'hover:brightness-75 rounded-md focus:outline-none focus:ring-4 focus:ring-primary focus:border-primary aspect-[5/2] w-full',
+                          'hover:brightness-75 rounded-md focus:outline-none focus:ring-4 focus:ring-primary focus:border-primary aspect-[10/3] w-full',
                         ]" />
                       </button>
                     </div>
@@ -108,43 +108,33 @@ const groups = [
     images: [
       {
         "id": "solarglare",
-        "thumbhash": "xRcGA4JgDps9maSl8k0I15M="
       },
       {
         "id": "unova",
-        "thumbhash": "jxcGE4QqBpc29DqHblD4BmU="
       },
       {
         "id": "nightview",
-        "thumbhash": "yAcGA4ADvnKUaFe4+XxlMKg="
       },
       {
         "id": "collision",
-        "thumbhash": "jRgKI4QJtlp2hmmXCHiWYGc="
       },
       {
         "id": "midnightride",
-        "thumbhash": "XccJA4AKeWZmhUl4DGOhgAc="
       },
       {
         "id": "paint",
-        "thumbhash": "VCcOO5Q/lnhndkiGcJoJoZk="
       },
       {
         "id": "utopia",
-        "thumbhash": "prYJC4KJZ3ifd3h3u3ClWgY="
       },
       {
         "id": "riot",
-        "thumbhash": "GwgaA4BwaodqeHiHAZVpMHg="
       },
       {
         "id": "alone",
-        "thumbhash": "6geOAoAPUHh4eHc/hz8M31eIF3hwdQI="
       },
       {
         "id": "cybergeek",
-        "thumbhash": "TScGC4QGdEiKh2iI70f5iYc="
       },
     ],
   },
@@ -154,51 +144,39 @@ const groups = [
     images: [
       {
         "id": "sunset",
-        "thumbhash": "H2gOO4h0aHePdxeJc4lQVgk="
       },
       {
         "id": "garden",
-        "thumbhash": "5iUJI4SvdIhfaEmVmHAHdkc="
       },
       {
         "id": "sea",
-        "thumbhash": "UYWFCoIPhlpwZ4Nsvp/32A8P8PDwAA8="
       },
       {
         "id": "clouds",
-        "thumbhash": "I/YNM4hvmHd3mDh3f3P1N3Y="
       },
       {
         "id": "mountains",
-        "thumbhash": "4heKGoQPYIiPd4OBpxB3CgYGh3d4iHg="
       },
       {
         "id": "lodge",
-        "thumbhash": "Z2gKC4QHZ4h7iEeXBoB2Cpg="
       },
       {
         "id": "riversource",
-        "thumbhash": "ZocNG4Yod3h/iWeYN49h9Tg="
       },
       {
         "id": "wood",
-        "thumbhash": "HXsGC4ICaHeFeHeIEHbEr3c="
       },
       {
         "id": "summer",
-        "thumbhash": "7XUJG4T3ZHWDWCZkxnDDCgs="
       },
       {
         "id": "peace",
-        "thumbhash": "k4gKG4Z4hGrlZwhnordQWQ8="
       },
       {
         "id": "autumn",
-        "thumbhash": "HEoKG4RveIbviOdoMCEFBUM="
       },
       {
         "id": "upland",
-        "thumbhash": "H7cZC4R4eIh/d3eHdYFvB6g="
       },
     ],
   },
@@ -208,51 +186,39 @@ const groups = [
     images: [
       {
         "id": "rainbow",
-        "thumbhash": "ETkOO5AKlnhohziGCkgCoVY="
       },
       {
         "id": "shards",
-        "thumbhash": "5WUJI4SPeYh/d3iHrn8qf/c="
       },
       {
         "id": "stacks",
-        "thumbhash": "IUcOI46ZiXifhrdYgH0HmFc="
       },
       {
         "id": "sun",
-        "thumbhash": "4PsKQ5Bwdndyh3iHYHL21nU="
       },
       {
         "id": "glare",
-        "thumbhash": "GbcJK5oGZVxWmFd0/Vn4enY="
       },
       {
         "id": "vectors",
-        "thumbhash": "UDUOK4h3d3iAiLh3d49mA8k="
       },
       {
         "id": "aesthetics",
-        "thumbhash": "WvYBA5aHh4d/eEh4eH95CHg="
       },
       {
         "id": "squares",
-        "thumbhash": "lnUFC4IHR2iHd3d3+Hl5j4Y="
       },
       {
         "id": "fall",
-        "thumbhash": "imgKM45Wh3d/d4iHL7o4wIY="
       },
       {
         "id": "spots",
-        "thumbhash": "2ueFEoYPwGh8Y25AXArBlQ8PiId4iHg="
       },
       {
         "id": "sunrise",
-        "thumbhash": "WusOE4QYZ3hwiXiHKIKAqQg="
       },
       {
         "id": "ribbons",
-        "thumbhash": "V2cOO4wGiHeXlziXj6j5s6k="
       },
     ]
   },
@@ -262,35 +228,27 @@ const groups = [
     images: [
       {
         "id": "neko",
-        "thumbhash": "xQcKA4DQlHeWhnd4H8MGnXY="
       },
       {
         "id": "tanya",
-        "thumbhash": "0ygGE4Ik6DlfiLTXNn9K8qg="
       },
       {
         "id": "afterwork",
-        "thumbhash": "WhgGE4I7x2BITamWBWZKoJU="
       },
       {
         "id": "rem",
-        "thumbhash": "uvcFC4A/aWmWh4eHL5X2IB0="
       },
       {
         "id": "vampire",
-        "thumbhash": "2vkGG46wOh0ZiEKoj2n4hIg="
       },
       {
         "id": "pika",
-        "thumbhash": "craBIoQPT3hpp3fQlQVNag8P8PDwES4="
       },
       {
         "id": "meteorshower",
-        "thumbhash": "2KgGE4b8eGgOeIdmwQEIKXI="
       },
       {
         "id": "airship",
-        "thumbhash": "CggKA4CgdoeWZ6l3kIRNZvc="
       },
     ]
   },

@@ -50,7 +50,7 @@
 }
 
 .carousel {
-  animation: moveSlideshow 10s linear infinite;
+  animation: moveSlideshow 20s linear infinite;
   width: calc(var(--carousel-item-width) * var(--carousel-item-count) * var(--carousel-set-count));
   height: 162px;
 }

@@ -1,5 +1,5 @@
 <template>
-  <div>Background Preview</div>
+  <div></div>
 </template>
 
 <script>
