@@ -116,18 +116,12 @@ const groups = [
       { id: "airship", animated: false },
       { id: "alone", animated: false },
       { id: "autumn", animated: false },
-      { id: "blue", animated: false },
-      { id: "blurple", animated: false },
       { id: "clouds", animated: false },
       { id: "collision", animated: false },
-      { id: "cyan", animated: false },
       { id: "cybergeek", animated: false },
-      { id: "default", animated: false },
       { id: "fall", animated: false },
       { id: "garden", animated: false },
       { id: "glare", animated: false },
-      { id: "green", animated: false },
-      { id: "lime", animated: false },
       { id: "lodge", animated: false },
       { id: "meteorshower", animated: false },
       { id: "midnightride", animated: false },
@@ -137,10 +131,7 @@ const groups = [
       { id: "paint", animated: false },
       { id: "peace", animated: false },
       { id: "pika", animated: false },
-      { id: "pink", animated: false },
-      { id: "purple", animated: false },
       { id: "rainbow", animated: false },
-      { id: "red", animated: false },
       { id: "rem", animated: false },
       { id: "ribbons", animated: false },
       { id: "riot", animated: false },
@@ -162,12 +153,11 @@ const groups = [
       { id: "vampire", animated: false },
       { id: "vectors", animated: false },
       { id: "wood", animated: false },
-      { id: "yellow", animated: false },
     ],
   },
 ];
 
-const backgroundRoot = (id) => `/assets/backgrounds/${id}.png`;
+const backgroundRoot = (id) => `/assets/backgrounds/${id}.webp`;
 
 export default {
   components: {

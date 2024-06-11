@@ -514,7 +514,7 @@
               'relative w-full py-2 pl-3 pr-10 text-left border border-gray-300 dark:border-secondary-light rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm',
             ]">
               <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <img v-if="modelValue != undefined" :src="`https://cdn.discordapp.com/emojis/${modelValue}.png`"
+                <img v-if="modelValue != undefined" :src="`https://cdn.discordapp.com/emojis/${modelValue}.webp`"
                   class="w-5 h-5 object-contain" />
                 <font-awesome-icon v-else icon="face-laugh" class="w-5 h-5 text-gray-400" aria-hidden="true" />
               </div>

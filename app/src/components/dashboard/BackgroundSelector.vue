@@ -351,7 +351,7 @@ const images = [
   { id: "yellow", animated: false },
 ];
 
-const backgroundRoot = (id) => `/assets/backgrounds/${id}.png`;
+const backgroundRoot = (id) => `/assets/backgrounds/${id}.webp`;
 const customRoot = (id) => `/api/welcomer/preview/${id}`;
 
 const solidColourPrefix = "solid:";
