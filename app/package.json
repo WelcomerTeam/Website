@@ -38,7 +38,7 @@
     "one-colorpicker": "^1.0.12",
     "parse-css-color": "^0.2.1",
     "postcss-import": "^14.1.0",
-    "sass": "^1.66.1",
+    "sass": "^1.79.0",
     "simple-markdown": "^0.7.3",
     "thumbhash": "^0.1.1",
     "volar-service-vetur": "^0.0.30",
