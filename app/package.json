@@ -42,7 +42,7 @@
     "simple-markdown": "^0.7.3",
     "thumbhash": "^0.1.1",
     "volar-service-vetur": "^0.0.30",
-    "vue": "^3.3.4",
+    "vue": "^3.5.14",
     "vue-color-kit": "^1.0.6",
     "vue-markdown": "git+https://github.com/miaolz123/vue-markdown.git",
     "vue-router": "^4.2.4",
